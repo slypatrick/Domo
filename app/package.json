@@ -1,0 +1,19 @@
+{
+  "name": "wsel",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build:pages": "rm -rf dist && cp -r public dist && cp src/worker.js dist/_worker.js",
+    "dev:pages": "npm run build:pages && cd pages && wrangler d1 migrations apply wsel --local --persist-to .wrangler/state && wrangler pages dev --port 8788 --persist-to .wrangler/state",
+    "deploy:pages": "npm run build:pages && cd pages && wrangler pages deploy --project-name patricksly --branch main --commit-dirty=true"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "wrangler": "^4.162.0"
+  },
+  "private": true
+}

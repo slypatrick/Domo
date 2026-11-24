@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Domo — vos commandes confirmées sur WhatsApp, vos clients connus</title>
+<meta name="description" content="Domo aide les vendeurs Instagram et Facebook en Tunisie : confirmation des commandes sur WhatsApp, score de confiance des clients, vitrine en ligne et livreurs Domo. Gratuit pendant le lancement.">
+<meta name="theme-color" content="#1d3fd1">
+<link rel="canonical" href="https://domo.tn/">
+<meta property="og:title" content="Domo — moins de colis refusés">
+<meta property="og:description" content="Le client confirme sa commande en un clic sur WhatsApp. Vous voyez s’il a déjà refusé des colis avant d’expédier.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://domo.tn/">
+<meta property="og:locale" content="fr_TN">
+<meta name="twitter:card" content="summary_large_image">
+<meta property="og:image" content="https://domo.tn/img/hero-seller.webp?v=3">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","name":"Domo","url":"https://domo.tn/","logo":"https://domo.tn/icon-192.png","email":"support@domo.tn","areaServed":"TN"},{"@type":"WebSite","name":"Domo","url":"https://domo.tn/","inLanguage":"fr"}]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Mon client doit-il installer l’application ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Il reçoit un message WhatsApp avec un lien et confirme en un clic, sans compte ni téléchargement. Le compte client est un plus : il sert à suivre ses colis et à construire son score de confiance."}}, {"@type": "Question", "name": "J’ai déjà un site, un livreur et des habitudes. Qu’est-ce que je change ?", "acceptedAnswer": {"@type": "Answer", "text": "Rien d’obligatoire. Vous gardez votre site, votre page et votre livreur. Vous ajoutez seulement l’étape de confirmation Domo avant d’expédier, à la main ou automatiquement depuis votre site."}}, {"@type": "Question", "name": "Combien ça coûte ?", "acceptedAnswer": {"@type": "Answer", "text": "L’utilisation de Domo est gratuite pendant le lancement, sans carte bancaire. Les livreurs Domo coûtent 8 DT par colis, déduits du versement. Domo Boost, la gestion de vos réseaux, est un service payant en option. Si un tarif change un jour, vous serez prévenu au moins 30 jours avant, et vous gardez vos données."}}, {"@type": "Question", "name": "Que voient les autres boutiques sur mes clients ?", "acceptedAnswer": {"@type": "Answer", "text": "Des faits : colis acceptés, refus du client, refus contestés. Jamais le nom de votre boutique, ni l’adresse du client, ni le détail de ses commandes chez vous."}}, {"@type": "Question", "name": "Et si le client refuse quand même le colis ?", "acceptedAnswer": {"@type": "Answer", "text": "Le livreur ou la boutique enregistre la raison. Seul un vrai refus du client compte dans son historique : une adresse introuvable, une erreur de la boutique ou un colis abîmé ne comptent pas. Le client peut contester, et l’équipe Domo tranche. La prochaine fois, vous voyez ces faits avant d’expédier."}}, {"@type": "Question", "name": "En combien de temps je démarre ?", "acceptedAnswer": {"@type": "Answer", "text": "Une minute : votre numéro de téléphone, le nom de votre boutique, et vous pouvez envoyer votre première demande de confirmation."}}]}</script>
+<style>
+:root{
+  --blue:#1d3fd1;--blue-2:#2a50e8;--blue-deep:#142c9c;--sky:#e8edff;--navy:#0e1630;--ink:#26304d;--muted:#5b6582;
+  --paper:#f5f7fc;--line:#dde2f0;--coral:#ff5a3c;--wa:#d9fdd3;--green:#16a34a;--white:#fff;
+  --display:'Bricolage Grotesque',system-ui,sans-serif;--body:'Instrument Sans',system-ui,sans-serif;
+  --wrap:1160px;--ease:cubic-bezier(.2,.8,.2,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;font:400 17px/1.6 var(--body);color:var(--ink);background:var(--white);overflow-x:hidden}
+img,svg{display:block;max-width:100%}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:3px;border-radius:8px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);color:var(--navy);margin:0;letter-spacing:-.02em;text-wrap:balance}
+.lead,.tile p,.steps p{text-wrap:pretty}
+h2{font-size:clamp(32px,4.4vw,52px);line-height:1.02;font-weight:800;letter-spacing:-.03em}
+h3{font-size:21px;line-height:1.2;font-weight:700}
+p{margin:0}
+.lead{font-size:clamp(17px,1.6vw,19.5px);color:var(--muted);max-width:56ch}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:54px;padding:0 26px;border-radius:999px;font:600 16px/1 var(--body);text-decoration:none;border:2px solid transparent;cursor:pointer;transition:background .15s,color .15s,border-color .15s,transform .15s}
+.btn:active{transform:scale(.98)}
+.btn-white{background:var(--white);color:var(--blue);box-shadow:0 10px 30px -10px rgba(5,14,60,.5)}
+.btn-white:hover{background:#eef2ff}
+.btn-blue{background:var(--blue);color:var(--white);box-shadow:0 12px 30px -12px rgba(29,63,209,.7)}
+.btn-blue:hover{background:var(--blue-2)}
+.btn-line{border-color:rgba(255,255,255,.45);color:var(--white)}
+.btn-line:hover{border-color:var(--white);background:rgba(255,255,255,.06)}
+.knob{width:9px;height:9px;border-radius:50%;background:var(--coral);flex:none;box-shadow:0 0 0 3px rgba(255,90,60,.18)}
+
+/* header */
+.top{position:absolute;inset:0 0 auto;z-index:10}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--white);font:800 24px/1 var(--display);letter-spacing:-.02em}
+.logo img{width:34px;height:34px;border-radius:9px;box-shadow:0 0 0 2px rgba(255,255,255,.22)}
+.top nav{display:flex;align-items:center;gap:24px}
+.top nav a{color:rgba(255,255,255,.86);text-decoration:none;font-weight:500;font-size:15px}
+.top nav a:hover{color:var(--white)}
+.top nav .btn{min-height:42px;padding:0 18px;font-size:15px;color:var(--blue);box-shadow:none}
+@media(max-width:760px){.top nav .hide-m{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;color:var(--white);padding:140px 0 0;overflow:hidden;isolation:isolate;
+  background:radial-gradient(900px 600px at 78% 18%,#3a5cf0 0%,rgba(58,92,240,0) 60%),radial-gradient(700px 500px at 10% 100%,#1530b0 0%,rgba(21,48,176,0) 70%),var(--blue)}
+.arches{position:absolute;z-index:-1;right:-140px;top:40px;width:820px;opacity:.16;pointer-events:none}
+.hero .wrap{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:end}
+.hero h1{color:var(--white);font-size:clamp(50px,7.6vw,100px);line-height:.93;font-weight:800;letter-spacing:-.032em}
+.hero h1 span{display:block}
+.hero h1 .soft{color:#b9c8ff}
+.hero .lead{color:rgba(255,255,255,.84);margin-top:26px}
+.hero .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.hero .note{margin-top:20px;font-size:14.5px;color:rgba(255,255,255,.72);display:flex;align-items:center;gap:8px}
+.hero .note svg{width:18px;height:18px;color:#9fe0b4}
+.hero-copy{padding-bottom:130px;position:relative;z-index:2}
+.stage{position:relative;justify-self:end;width:min(540px,100%);height:620px}
+.arch{position:absolute;right:0;top:0;width:74%;height:86%;margin:0;border-radius:999px 999px 34px 34px;overflow:hidden;box-shadow:0 0 0 8px rgba(255,255,255,.1),0 40px 80px -30px rgba(3,9,40,.7)}
+.arch img{width:100%;height:100%;object-fit:cover;object-position:50% 30%}
+
+/* phone with chat */
+.phone{position:absolute;left:0;bottom:0;z-index:2;width:58%;max-width:310px;margin:0;background:#0b1433;border-radius:46px 46px 0 0;padding:12px 12px 0;box-shadow:0 50px 90px -30px rgba(3,9,40,.75),inset 0 0 0 1px rgba(255,255,255,.08)}
+.phone::before{content:"";position:absolute;top:22px;left:50%;width:92px;height:24px;margin-left:-46px;background:#0b1433;border-radius:20px;z-index:3}
+.screen{background:#efe7dc;border-radius:36px 36px 0 0;overflow:hidden;min-height:500px;display:flex;flex-direction:column;
+  background-image:radial-gradient(rgba(0,0,0,.035) 1px,transparent 1px);background-size:14px 14px}
+.chathead{background:#075e54;color:#fff;display:flex;align-items:center;gap:10px;padding:46px 16px 12px}
+.chathead .av{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:none;background:#7a1f3d;color:#f5d7a1;display:grid;place-items:center;font:800 14px var(--display)}
+.chathead b{display:block;font-size:15px;line-height:1.2}
+.chathead small{font-size:12px;opacity:.8}
+.msgs{padding:14px 10px 24px;display:flex;flex-direction:column;gap:8px;flex:1}
+.b{max-width:88%;padding:7px 10px 5px;border-radius:12px;font-size:13.5px;line-height:1.42;color:#111b21;box-shadow:0 1px 1px rgba(0,0,0,.08)}
+.b time{display:block;text-align:right;font-size:11px;color:#667781;margin-top:2px}
+.b.in{background:var(--white);align-self:flex-start;border-top-left-radius:4px}
+.b.out{background:var(--wa);align-self:flex-end;border-top-right-radius:4px}
+.b .link{color:#027eb5;text-decoration:underline;white-space:nowrap}
+.confirm{align-self:stretch;background:var(--white);border-radius:16px;padding:12px;box-shadow:0 1px 2px rgba(0,0,0,.1);font-size:13px}
+.confirm .shop{display:flex;align-items:center;gap:8px;font-weight:700;color:var(--navy);margin-bottom:10px}
+.confirm .shop i{width:22px;height:22px;border-radius:7px;background:var(--blue);display:grid;place-items:center}
+.confirm .shop i img{width:22px;height:22px;border-radius:7px}
+.confirm .row{display:flex;justify-content:space-between;gap:8px;color:#3b4252}
+.confirm .row b{color:#111b21}
+.confirm .tot{border-top:1px solid #eceff4;margin-top:8px;padding-top:8px}
+.confirm .yes{margin-top:12px;width:100%;min-height:44px;border-radius:12px;background:var(--blue);color:#fff;font:600 15px var(--body);display:flex;align-items:center;justify-content:center;gap:8px;transition:background .35s}
+.confirm.done .yes{background:var(--green)}
+.confirm .yes svg{width:18px;height:18px}
+
+/* floating cards around the phone */
+.float{position:absolute;z-index:3;background:var(--white);color:var(--ink);border-radius:18px;box-shadow:0 24px 50px -18px rgba(3,9,40,.55);font-size:14px}
+.f-trust{right:-14px;bottom:150px;padding:12px 16px 12px 12px;display:flex;align-items:center;gap:12px}
+.f-trust .ring{width:50px;height:50px;border-radius:50%;flex:none;display:grid;place-items:center;background:conic-gradient(var(--green) 0 92%,#e3e8f7 92%)}
+.f-trust .ring span{width:40px;height:40px;border-radius:50%;background:var(--white);display:grid;place-items:center;font:800 17px var(--display);color:var(--navy)}
+.f-trust b{display:block;color:var(--navy);font-size:14.5px}
+.f-trust small{color:var(--green);font-weight:600;white-space:nowrap}
+.f-drv{right:-22px;top:250px;padding:10px 14px 10px 10px;display:flex;align-items:center;gap:10px}
+.f-drv .ic{width:36px;height:36px;border-radius:11px;background:#efe9ff;color:#6d3df5;display:grid;place-items:center}
+.f-drv .ic svg{width:20px;height:20px}
+.f-drv b{display:block;color:var(--navy);font-size:14px;line-height:1.2}
+.f-drv small{color:var(--muted);font-size:12.5px}
+
+/* single orchestrated entrance */
+@media (prefers-reduced-motion:no-preference){
+  .seq,.float{opacity:0;transform:translateY(12px);animation:pop .5s var(--ease) forwards}
+  .msgs>.seq:nth-child(1){animation-delay:.5s}.msgs>.seq:nth-child(2){animation-delay:1.3s}.msgs>.seq:nth-child(3){animation-delay:2.1s}.msgs>.seq:nth-child(4){animation-delay:3.7s}
+  .f-trust{animation-delay:4.3s}.f-drv{animation-delay:4.9s}
+  @keyframes pop{to{opacity:1;transform:none}}
+}
+
+/* platforms strip */
+.strip{border-bottom:1px solid var(--line)}
+.strip .wrap{display:flex;align-items:center;gap:14px 34px;flex-wrap:wrap;justify-content:center;padding-top:30px;padding-bottom:30px}
+.strip p{color:var(--muted);font-size:15px}
+.strip ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.strip li{display:inline-flex;align-items:center;gap:9px;font:700 16px/1 var(--display);color:var(--navy);padding:10px 16px;border-radius:999px;background:var(--paper);letter-spacing:-.01em}
+
+.strip li svg{width:20px;height:20px;flex:none}
+
+/* sections */
+.sec{padding:110px 0}
+.sec-head{max-width:680px;margin-bottom:56px}
+.sec-head .lead{margin-top:18px}
+.center{text-align:center;margin-left:auto;margin-right:auto}
+.center .lead{margin-left:auto;margin-right:auto}
+
+/* steps with mini visuals (a real sequence) */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;counter-reset:s}
+.steps li{counter-increment:s;background:var(--paper);border-radius:28px;padding:22px 22px 28px;display:flex;flex-direction:column}
+.viz{height:190px;border-radius:20px;background:var(--white);border:1px solid var(--line);margin-bottom:24px;position:relative;overflow:hidden;display:grid;place-items:center;padding:18px}
+.steps h3{display:flex;align-items:baseline;gap:12px}
+.steps h3::before{content:counter(s);font:800 15px/1 var(--display);color:var(--white);background:var(--blue);width:30px;height:30px;border-radius:50%;display:inline-grid;place-items:center;flex:none;transform:translateY(-3px)}
+.steps p{color:var(--muted);margin-top:10px}
+/* viz 1: order form */
+.mform{width:100%;max-width:250px;display:grid;gap:8px;font-size:13px}
+.mform .f{border:1px solid var(--line);border-radius:10px;padding:7px 10px;display:flex;justify-content:space-between;color:var(--muted)}
+.mform .f b{color:var(--navy);font-weight:600}
+.mform .go{background:var(--blue);color:#fff;border-radius:10px;text-align:center;padding:9px;font-weight:600}
+/* viz 2: whatsapp */
+.mwa{width:100%;max-width:250px;background:#efe7dc;border-radius:16px;padding:12px;display:grid;gap:7px;font-size:13px}
+.mwa .b{font-size:13px;max-width:92%}
+.mwa .ok{background:var(--green);color:#fff;border-radius:10px;padding:8px;text-align:center;font-weight:600;display:flex;gap:6px;justify-content:center;align-items:center}
+.mwa .ok svg{width:16px;height:16px}
+/* viz 3: progress */
+.mprog{width:100%;max-width:260px;display:grid;gap:10px}
+.mprog .st{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:600;color:var(--navy)}
+.mprog .st i{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--sky);color:var(--blue);flex:none}
+.mprog .st i svg{width:15px;height:15px}
+.mprog .st.on i{background:var(--green);color:#fff}
+.mprog .st small{margin-left:auto;color:var(--muted);font-weight:500}
+.mprog .bar{height:6px;border-radius:3px;background:var(--sky);overflow:hidden;margin-top:4px}
+.mprog .bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,var(--blue),var(--green))}
+
+/* showcase with real screenshots */
+.show{background:var(--navy);color:var(--white);position:relative;overflow:hidden;isolation:isolate}
+.show h2{color:var(--white)}
+.show .lead{color:rgba(255,255,255,.72)}
+.show .arches2{position:absolute;z-index:-1;left:50%;bottom:-260px;width:1100px;transform:translateX(-50%);opacity:.08}
+.phones{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;align-items:start;margin-top:10px}
+.shot{margin:0}
+.duo{position:relative;max-width:340px;margin:0 auto 58px;padding-top:110px}
+.person{width:68%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:999px 999px 26px 26px;display:block}
+.duo .frame{position:absolute;right:0;bottom:-46px;width:57%;background:#050a1f;border-radius:28px;padding:6px;box-shadow:0 30px 60px -20px rgba(0,0,0,.85),inset 0 0 0 1px rgba(255,255,255,.12)}
+.frame img{border-radius:22px;width:100%;height:auto;aspect-ratio:585/1266;object-fit:cover;object-position:top;background:#f5f7fc}
+.shot figcaption{max-width:340px;margin:0 auto}
+.shot h3{color:var(--white);margin-top:6px}
+.shot p{color:rgba(255,255,255,.68);margin:8px 0 0;max-width:32ch;font-size:15.5px}
+
+/* trust */
+.split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.ticks{list-style:none;padding:0;margin:30px 0 0;display:grid;gap:16px}
+.ticks li{display:flex;gap:12px;align-items:flex-start}
+.ticks .t{width:26px;height:26px;border-radius:50%;background:var(--sky);color:var(--blue);display:grid;place-items:center;flex:none;margin-top:1px}
+.ticks .t svg{width:15px;height:15px}
+.profile-wrap{position:relative;justify-self:center;width:100%;max-width:540px;padding:110px 0 0 90px}
+.tphoto{position:absolute;left:0;top:0;width:58%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:999px 999px 26px 26px}
+.profile-wrap .profile{position:relative}
+.profile{background:var(--white);border-radius:26px;padding:28px;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(14,22,48,.25)}
+.ph{display:flex;align-items:center;gap:16px}
+.ring{width:84px;height:84px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--blue) 0 92%,#e3e8f7 92% 100%);flex:none}
+.ring span{width:68px;height:68px;border-radius:50%;background:var(--white);display:grid;place-items:center;font:800 26px/1 var(--display);color:var(--navy)}
+.ph b{font:700 21px/1.2 var(--display);color:var(--navy);display:block}
+.ph small{color:var(--green);font-weight:600;font-size:14px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);margin-top:22px;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.nums div{padding:12px;text-align:center}
+.nums div+div{border-left:1px solid var(--line)}
+.nums b{display:block;font:800 24px/1.1 var(--display);color:var(--navy)}
+.nums span{font-size:13px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:30px;padding:0 12px;border-radius:999px;background:var(--sky);color:var(--blue);font-size:13.5px;font-weight:600}
+.chip svg{width:15px;height:15px}
+.verdict{margin-top:18px;padding:12px 14px;border-radius:12px;background:#ecfdf3;color:#14532d;font-size:14.5px;display:flex;gap:10px;align-items:flex-start}
+.verdict svg{width:18px;height:18px;flex:none;margin-top:2px;color:var(--green)}
+
+/* features bento */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:20px}
+.tile{background:var(--paper);border-radius:28px;padding:28px;display:flex;flex-direction:column;overflow:hidden;position:relative}
+.tile p{color:var(--muted);margin-top:8px;max-width:44ch}
+.t-wide{grid-column:span 4}.t-narrow{grid-column:span 2}.t-half{grid-column:span 3}
+.tile .demo{margin-top:24px;flex:1;display:flex;align-items:flex-end}
+/* route demo */
+.route{width:100%;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:18px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:6px 14px;align-items:center}
+.route .dot{width:14px;height:14px;border-radius:50%;border:3px solid var(--blue);background:var(--white)}
+.route .dot.end{background:var(--green);border-color:var(--green)}
+.route .path{grid-column:1;justify-self:center;width:2px;height:26px;background:repeating-linear-gradient(var(--line) 0 4px,transparent 4px 8px)}
+.route b{color:var(--navy);font-size:15px}.route small{color:var(--muted);font-size:13px;display:block}
+.route .amt{font:800 22px/1 var(--display);color:var(--navy);text-align:right}
+.route .amt small{font:500 12.5px var(--body);color:var(--muted)}
+/* products demo */
+.prods{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;width:100%}
+.prods figure{margin:0;position:relative;aspect-ratio:1;border-radius:14px;overflow:hidden;background:var(--white)}
+.prods img{width:100%;height:100%;object-fit:cover}
+.prods figcaption{position:absolute;left:6px;bottom:6px;background:rgba(255,255,255,.92);color:var(--navy);font:700 11.5px/1 var(--body);padding:5px 7px;border-radius:999px}
+/* chat demo */
+.mchat{width:100%;display:grid;gap:8px;font-size:14px}
+.mchat .m{padding:9px 12px;border-radius:14px;max-width:85%}
+.mchat .m.a{background:var(--white);border:1px solid var(--line);justify-self:start;border-bottom-left-radius:4px}
+.mchat .m.b2{background:var(--blue);color:#fff;justify-self:end;border-bottom-right-radius:4px}
+.mchat .call{justify-self:center;display:flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--line);padding:7px 14px;border-radius:999px;font-size:13px;color:var(--muted)}
+.mchat .call svg{width:15px;height:15px;color:var(--green)}
+/* secure demo */
+.sec-card{width:100%;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:18px;display:flex;gap:14px;align-items:center}
+.sec-card .sh{width:48px;height:48px;border-radius:14px;background:#ecfdf3;color:var(--green);display:grid;place-items:center;flex:none}
+.sec-card .sh svg{width:26px;height:26px}
+.sec-card b{color:var(--navy);display:block}.sec-card small{color:var(--muted)}
+.tile .ic{width:46px;height:46px;border-radius:14px;background:var(--white);color:var(--blue);display:grid;place-items:center;margin-bottom:18px;box-shadow:0 1px 0 var(--line)}
+.tile .ic svg{width:23px;height:23px}
+
+
+/* Domo Boost */
+.boost .sec-head{max-width:760px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+.plan{position:relative;background:var(--paper);border-radius:28px;padding:30px 28px;display:flex;flex-direction:column}
+.plan h3{font-size:24px}
+.plan .tg{color:var(--muted);margin-top:6px;font-size:15.5px}
+.plan .pr{margin:22px 0 4px;font:800 46px/1 var(--display);color:var(--navy);letter-spacing:-.03em}
+.plan .pr small{font:500 16px var(--body);color:var(--muted);letter-spacing:0}
+.plan ul{list-style:none;margin:20px 0 26px;padding:0;display:grid;gap:12px;flex:1;align-content:start}
+.plan li{display:flex;gap:10px;align-items:flex-start;font-size:15.5px;line-height:1.45;color:var(--ink)}
+.plan li svg{width:20px;height:20px;flex:none;color:var(--green);margin-top:2px}
+.plan .btn{align-self:stretch}
+.plan.rec{background:var(--blue);color:var(--white)}
+.plan.rec h3,.plan.rec .pr{color:var(--white)}.plan.rec .tg,.plan.rec .pr small{color:rgba(255,255,255,.78)}.plan.rec li{color:rgba(255,255,255,.94)}.plan.rec li svg{color:#9fe0b4}
+.plan .rb{position:absolute;top:-13px;left:28px;background:var(--coral);color:#fff;font:700 13px/1 var(--body);padding:7px 12px;border-radius:999px}
+.carte{margin-top:20px;background:var(--white);border:1px solid var(--line);border-radius:28px;padding:26px 28px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:18px 30px;align-items:center}
+.carte h3{font-size:21px}.carte p{color:var(--muted);margin-top:6px}
+.carte ul{grid-column:1/-1;list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px}
+.carte li{background:var(--paper);border-radius:999px;padding:9px 15px;font-size:14.5px;color:var(--ink)}.carte li b{color:var(--navy)}
+.boost .fine{margin-top:16px;font-size:14px;color:var(--muted)}
+@media(max-width:980px){.plans{grid-template-columns:1fr;max-width:560px}.carte{grid-template-columns:1fr}}
+
+/* track + drivers band */
+.band{background:var(--navy);color:var(--white);border-radius:32px;display:grid;grid-template-columns:1fr 1.1fr;overflow:hidden;position:relative}
+.band>div{padding:46px}
+.band>div:first-child{display:flex;flex-direction:column;justify-content:center}
+.band h3{color:var(--white);font-size:28px}
+.band p{color:rgba(255,255,255,.72);margin-top:10px}
+.track{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.track input{flex:1;min-width:180px;min-height:54px;border-radius:999px;border:2px solid rgba(255,255,255,.22);background:rgba(255,255,255,.06);color:var(--white);padding:0 22px;font:600 16px var(--body);letter-spacing:.06em;text-transform:uppercase}
+.track input::placeholder{color:rgba(255,255,255,.45);letter-spacing:.02em;text-transform:none;font-weight:500}
+.track input:focus{border-color:var(--white);outline:none}
+.track .err{flex-basis:100%;color:#ffb4a6;font-size:14px;min-height:1.2em}
+.band .drv{display:grid;grid-template-columns:1fr;align-content:end;min-height:420px;background:linear-gradient(180deg,rgba(14,22,48,.38) 0%,rgba(14,22,48,.55) 45%,rgba(14,22,48,.94) 100%),url(/img/ride.webp?v=3) center 40%/cover}
+.band .drv .btn{margin-top:22px;justify-self:start}
+
+/* final */
+.final{padding:30px 0 110px}
+.final-box{position:relative;overflow:hidden;isolation:isolate;border-radius:40px;padding:96px 64px;color:var(--white);
+  background:linear-gradient(90deg,rgba(29,63,209,.97) 0%,rgba(29,63,209,.9) 46%,rgba(29,63,209,.25) 78%,rgba(29,63,209,.1) 100%),url(/img/carthage.webp?v=3) right 30%/cover}
+.final-box .arches3{position:absolute;z-index:-1;left:50%;top:40px;width:900px;transform:translateX(-50%);opacity:.14}
+.final h2{color:var(--white);font-size:clamp(36px,5.4vw,66px);max-width:13ch;margin:0}
+.final .lead{color:rgba(255,255,255,.86);margin:20px 0 0;max-width:40ch}
+.final .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:36px}
+.credits{font-size:13px;color:var(--muted);flex-basis:100%}
+
+footer{padding:10px 0 44px;font-size:14.5px;color:var(--muted)}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:28px}
+footer nav{display:flex;flex-wrap:wrap;gap:8px 22px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--navy);text-decoration:underline}
+
+@media(max-width:980px){
+  .hero{padding-top:118px}
+  .hero .wrap,.split,.band{grid-template-columns:1fr}
+  .hero-copy{padding-bottom:30px}
+  .stage{margin:20px auto 0;justify-self:center;height:600px}
+  .steps{grid-template-columns:1fr;max-width:560px}
+  .phones{grid-template-columns:1fr;gap:60px}
+  .duo{margin-bottom:80px}
+  .bento{grid-template-columns:1fr}
+  .t-wide,.t-narrow,.t-half{grid-column:auto}
+  .profile-wrap{max-width:520px;padding:90px 0 0 60px}
+}
+@media(max-width:640px){
+  body{font-size:16px}
+  .sec{padding:80px 0}
+  .hero .ctas .btn{flex:1 1 100%}
+  .f-trust{right:-4px;top:-8px;bottom:auto;padding:9px 12px 9px 9px;gap:9px}
+  .f-trust .ring{width:42px;height:42px}.f-trust .ring span{width:34px;height:34px;font-size:15px}
+  .f-drv{display:none}
+  .stage{height:590px}
+  .arch{width:62%;height:78%}
+  .phone{width:80%;max-width:300px;border-radius:40px 40px 0 0;padding:10px 10px 0}
+  .b{font-size:12.5px}.confirm{font-size:12.5px}
+  .screen{min-height:430px}
+  .chathead{padding-top:40px}
+  .profile-wrap{padding:80px 0 0 28px}
+  .route .amt{order:9;grid-column:1/-1;grid-row:auto!important;text-align:left;display:flex;align-items:baseline;gap:8px;margin-top:8px;padding-top:12px;border-top:1px solid var(--line)}
+  .band>div{padding:32px 26px}
+  .final-box{background:linear-gradient(180deg,rgba(29,63,209,.94) 0%,rgba(29,63,209,.86) 60%,rgba(29,63,209,.55) 100%),url(/img/carthage.webp?v=3) center/cover}
+  .band>div{padding:30px 24px}
+  .band{border-radius:24px}
+  .final-box{border-radius:28px;padding:64px 24px}
+  .tile{padding:22px;border-radius:24px}
+  .route{grid-template-columns:auto 1fr;}.route .amt{grid-column:1/-1;text-align:left;margin-top:8px}
+}
+
+/* sticky bar after the hero */
+.top.stuck{position:fixed;background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);box-shadow:0 1px 0 var(--line);animation:drop .25s var(--ease)}
+.top.stuck .wrap{height:64px}
+.top.stuck .logo{color:var(--navy);font-size:21px}.top.stuck .logo img{width:30px;height:30px;box-shadow:none}
+.top.stuck nav a{color:var(--ink)}.top.stuck nav a:hover{color:var(--blue)}
+.top.stuck nav .btn{background:var(--blue);color:var(--white)}
+.top nav .login{font-weight:600;padding:10px 6px;min-height:44px;display:inline-flex;align-items:center}
+@media(max-width:520px){.top nav .login{display:none}}
+@keyframes drop{from{transform:translateY(-100%)}to{transform:none}}
+@media(prefers-reduced-motion:reduce){.top.stuck{animation:none}}
+/* already have a site */
+.keep{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.keep article{border:1px solid var(--line);border-radius:28px;padding:28px;background:var(--white)}
+.keep .ic{width:44px;height:44px;border-radius:14px;background:var(--sky);color:var(--blue);display:grid;place-items:center;margin-bottom:16px}
+.keep .ic svg{width:22px;height:22px}
+.keep p{color:var(--muted);margin-top:8px}
+.keep code{display:block;margin-top:16px;padding:12px 14px;border-radius:14px;background:var(--navy);color:#c9d4ff;font:500 13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;overflow-wrap:anywhere}
+.keep .mini{margin-top:16px;display:flex;flex-wrap:wrap;gap:8px}
+.keep .mini span{padding:7px 12px;border-radius:999px;background:var(--paper);font-size:14px;font-weight:600;color:var(--navy)}
+/* questions */
+.faq{max-width:820px}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 0;font:700 19px/1.3 var(--display);color:var(--navy)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:12px;height:12px;border-right:2.5px solid var(--blue);border-bottom:2.5px solid var(--blue);transform:rotate(45deg);transition:transform .2s var(--ease);margin-right:6px}
+.faq details[open] summary::after{transform:rotate(-135deg)}
+.faq details p{color:var(--muted);padding:0 0 22px;max-width:64ch}
+@media(max-width:980px){.keep{grid-template-columns:1fr;max-width:560px}}
+@media(max-width:640px){
+  /* plans and the three apps become swipeable rows: the page is a third shorter */
+  .plans,.phones{display:flex;max-width:none;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -24px;padding:14px 24px 18px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .plans::-webkit-scrollbar,.phones::-webkit-scrollbar{display:none}
+  .plans>.plan{flex:0 0 84%;scroll-snap-align:center}
+  .phones>.shot{flex:0 0 82%;scroll-snap-align:center;margin:0}
+  .phones .duo{margin-bottom:64px}
+  .swipe{display:flex;justify-content:center;gap:6px;margin-top:4px;color:var(--muted);font-size:13.5px}
+  .show .swipe{color:rgba(255,255,255,.7)}
+  .faq summary{font-size:17px;padding:18px 0}
+}
+@media(min-width:641px){.swipe{display:none}}
+/* live shops from the app */
+.shops-sec{background:var(--paper)}
+.shops-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:28px}
+.shops-head .sec-head{margin:0}
+.ssearch{position:relative;flex:1 1 320px;max-width:420px}
+.ssearch input{width:100%;min-height:54px;border-radius:999px;border:1.5px solid var(--line);background:var(--white);padding:0 120px 0 22px;font:500 16px var(--body);color:var(--navy)}
+.ssearch input:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(29,63,209,.14)}
+.ssearch button{position:absolute;right:6px;top:6px;bottom:6px;border:0;border-radius:999px;background:var(--blue);color:#fff;font:600 15px var(--body);padding:0 18px;cursor:pointer}
+.sgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.scard{display:block;text-decoration:none;color:inherit;background:var(--white);border-radius:24px;overflow:hidden;border:1px solid var(--line);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+@media(hover:hover){.scard:hover{transform:translateY(-3px);box-shadow:0 22px 40px -24px rgba(14,22,48,.35)}}
+.scard .cv{height:120px;background:linear-gradient(135deg,#2a50e8,#142c9c) center/cover;position:relative}
+.scard .lg{position:absolute;left:18px;bottom:-26px;width:56px;height:56px;border-radius:16px;border:3px solid #fff;background:var(--sky) center/cover;display:grid;place-items:center;font:800 20px var(--display);color:var(--blue)}
+.scard .bd{padding:36px 18px 18px}
+.scard h3{font-size:19px}
+.scard .mt{color:var(--muted);font-size:14.5px;margin-top:4px}
+.scard .th{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:14px}
+.scard .th span{aspect-ratio:1;border-radius:10px;background:var(--paper) center/cover}
+.scard .go{display:inline-flex;margin-top:14px;font-weight:700;color:var(--blue)}
+.scard .sp{position:absolute;right:12px;top:12px;background:rgba(14,22,48,.72);color:#fff;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px}
+.shops-foot{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin-top:30px;color:var(--muted)}
+.shops-empty{background:var(--white);border:1px dashed var(--line);border-radius:24px;padding:34px;text-align:center;color:var(--muted)}
+.skel{height:300px;border-radius:24px;background:linear-gradient(90deg,#eef1f8,#f7f8fc,#eef1f8);background-size:200% 100%;animation:sk 1.4s infinite}
+@keyframes sk{to{background-position:-200% 0}}
+@media(prefers-reduced-motion:reduce){.skel{animation:none}}
+@media(max-width:980px){.sgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.sgrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;margin:0 -24px;padding:4px 24px 14px;scrollbar-width:none}.sgrid::-webkit-scrollbar{display:none}.sgrid>*{flex:0 0 82%;scroll-snap-align:center}.ssearch{max-width:none}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+  <symbol id="shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+  <symbol id="box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5 12 3l9 4.5v9L12 21l-9-4.5z"/><path d="M3 7.5 12 12l9-4.5M12 12v9"/></symbol>
+  <symbol id="store" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5V20h16V9.5"/><path d="M3 9.5 5 4h14l2 5.5a3 3 0 0 1-6 0 3 3 0 0 1-6 0 3 3 0 0 1-6 0z"/><path d="M10 20v-5h4v5"/></symbol>
+  <symbol id="truck" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h11v10H2zM13 9h4.5L21 12.5V16h-8z"/><circle cx="6" cy="17.5" r="1.8"/><circle cx="17" cy="17.5" r="1.8"/></symbol>
+  <symbol id="chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></symbol>
+  <symbol id="phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+  <!-- the arched door from the Domo logo, repeated as concentric outlines -->
+  <symbol id="arches" viewBox="0 0 800 800" fill="none" stroke="#fff" stroke-width="2"><path d="M300 800V420a100 100 0 0 1 200 0v380"/><path d="M240 800V420a160 160 0 0 1 320 0v380"/><path d="M180 800V420a220 220 0 0 1 440 0v380"/><path d="M120 800V420a280 280 0 0 1 560 0v380"/><path d="M60 800V420a340 340 0 0 1 680 0v380"/><path d="M0 800V420a400 400 0 0 1 800 0v380"/></symbol>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="Domo, accueil"><img src="/icon.svg" alt="" width="34" height="34">Domo</a>
+    <nav aria-label="Principal">
+      <a class="hide-m" href="#comment">Comment ça marche</a>
+      <a class="hide-m" href="#faq">Questions</a>
+      <a class="hide-m" data-app="/?explore" href="#">Vous achetez ?</a>
+      <a class="login" data-app="/" href="#">Se connecter</a>
+      <a class="btn btn-white" data-app="/?start=seller" href="#">Créer ma boutique</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <svg class="arches" aria-hidden="true"><use href="#arches"/></svg>
+    <div class="wrap">
+      <div class="hero-copy">
+        <h1><span>Moins de colis</span> <span class="soft">refusés.</span></h1>
+        <p class="lead">Votre client confirme sa commande en un clic sur WhatsApp, avant que vous payiez le livreur. Et vous voyez s’il a déjà refusé des colis chez d’autres boutiques.</p>
+        <div class="ctas">
+          <a class="btn btn-white" data-app="/?start=seller" href="#"><span class="knob" aria-hidden="true"></span>Créer ma boutique</a>
+          <a class="btn btn-line" href="#comment">Voir comment ça marche</a>
+        </div>
+        <p class="note"><svg><use href="#check"/></svg>Gratuit pendant le lancement, sans carte bancaire.</p>
+      </div>
+      <div class="stage">
+        <figure class="arch"><img src="/img/hero-seller.webp?v=3" width="880" height="1100" alt="Une vendeuse en ligne souriante, entourée de ses colis prêts à partir" fetchpriority="high"></figure>
+        <div class="phone" role="img" aria-label="Exemple : la cliente Amira confirme sa commande de caftan en un clic sur WhatsApp">
+          <div class="screen">
+            <div class="chathead"><img class="av" src="/img/dar-yasmine.webp?v=3" width="80" height="80" alt=""><div><b>Dar Yasmine</b><small>Compte professionnel</small></div></div>
+            <div class="msgs" aria-hidden="true">
+              <div class="b in seq">Aslema Amira 👋 Ici Dar Yasmine. Commande mte3ek DM-B27RPM : caftan bordeaux, taille M.<time>10:42</time></div>
+              <div class="b in seq">Confirmi b click 👉 <span class="link">domo.tn/c/B27RPM</span><time>10:42</time></div>
+              <div class="confirm seq" id="confirm">
+                <div class="shop"><i><img src="/icon.svg" alt=""></i>Commande chez Dar Yasmine</div>
+                <div class="row"><span>Caftan bordeaux ×1</span><b>260 DT</b></div>
+                <div class="row"><span>Livraison Sousse</span><b>7 DT</b></div>
+                <div class="row tot"><span>À payer au livreur</span><b>267 DT</b></div>
+                <div class="yes"><svg><use href="#check"/></svg><span id="yesTxt">Je confirme ma commande</span></div>
+              </div>
+              <div class="b out seq">Mrigel, confirmé ✅ Merci !<time>10:44</time></div>
+            </div>
+          </div>
+        </div>
+        <div class="float f-trust" aria-hidden="true"><span class="ring"><span>92</span></span><div><b>Amira B.</b><small>Client fiable · 14 colis</small></div></div>
+        <div class="float f-drv" aria-hidden="true"><span class="ic"><svg><use href="#truck"/></svg></span><div><b>Livreur Domo</b><small>Ramassage à 14 h</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip" aria-label="Plateformes">
+    <div class="wrap">
+      <p>Pour les boutiques qui vendent sur</p>
+      <ul><li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#FF0069" d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"/></svg>Instagram</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0866FF" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>Facebook</li><li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#0866FF" stroke-width="1.9" stroke-linejoin="round"><path d="M4 9.5 5.5 4h13L20 9.5M4 9.5V20h16V9.5M4 9.5c0 1.6 1.3 2.5 2.7 2.5S9.3 11 9.3 9.5c0 1.5 1.2 2.5 2.7 2.5s2.7-1 2.7-2.5c0 1.5 1.2 2.5 2.6 2.5S20 11 20 9.5M10 20v-5h4v5"/></svg>Marketplace</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#000000" d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>TikTok</li><li><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#25D366" d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>WhatsApp</li><li><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="#14213d" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/></svg>leur site web</li></ul>
+    </div>
+  </section>
+
+  <section class="sec" id="comment">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Trois étapes, zéro appel de confirmation</h2>
+        <p class="lead">Vous gardez vos clients sur Instagram et Facebook. Domo s’occupe de la partie qui vous fait perdre de l’argent.</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <div class="viz" aria-hidden="true"><div class="mform"><div class="f">Client <b>Amira Ben Salem</b></div><div class="f">Produit <b>Caftan bordeaux</b></div><div class="f">Total <b>267 DT</b></div><div class="go">Créer la commande</div></div></div>
+          <h3>Vous ajoutez la commande</h3><p>À la main en 20 secondes, depuis votre vitrine Domo, ou automatiquement depuis votre site.</p>
+        </li>
+        <li>
+          <div class="viz" aria-hidden="true"><div class="mwa"><div class="b in">Confirmi b click 👉 <span class="link" style="color:#027eb5;text-decoration:underline;white-space:nowrap;word-break:normal">domo.tn/c/B27…</span></div><div class="ok"><svg><use href="#check"/></svg>Commande confirmée</div></div></div>
+          <h3>Le client confirme sur WhatsApp</h3><p>Il reçoit un message prêt à envoyer avec un lien. Un clic : il confirme les articles, le prix et l’adresse, depuis le numéro de la commande.</p>
+        </li>
+        <li>
+          <div class="viz" aria-hidden="true"><div class="mprog"><div class="st on"><i><svg><use href="#check"/></svg></i>Confirmée<small>10:44</small></div><div class="st on"><i><svg><use href="#truck"/></svg></i>En route<small>14:10</small></div><div class="st on"><i><svg><use href="#box"/></svg></i>Livrée · 267 DT<small>17:32</small></div><div class="bar"><i></i></div></div></div>
+          <h3>Vous expédiez sans crainte</h3><p>Avec votre livreur habituel ou un livreur Domo qui encaisse pour vous. Chaque livraison met à jour la réputation du client.</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="sec show" id="app">
+    <svg class="arches2" aria-hidden="true"><use href="#arches"/></svg>
+    <div class="wrap">
+      <div class="sec-head center">
+        <h2>Une app pour chaque côté du colis</h2>
+        <p class="lead">Le vendeur, le client et le livreur voient la même commande, chacun avec ce dont il a besoin.</p>
+      </div>
+      <p class="swipe" aria-hidden="true">Glissez pour voir les trois écrans</p>
+      <div class="phones">
+        <figure class="shot">
+          <div class="duo"><img class="person" src="/img/seller.webp?v=3" width="620" height="775" alt="Une vendeuse prépare des commandes dans son atelier" loading="lazy" decoding="async">
+          <div class="frame"><img src="/img/orders.webp?v=3" width="585" height="1266" alt="Écran Commandes du vendeur : une commande de 267 DT avec le badge Client fiable et les boutons Confirmer et WhatsApp" loading="lazy" decoding="async"></div></div>
+          <figcaption><h3>Le vendeur</h3><p>Ses commandes par étape, la fiabilité de chaque client, la confirmation en un geste.</p></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="duo"><img class="person" src="/img/client.webp?v=3" width="620" height="775" alt="Une cliente reçoit son colis à sa porte" loading="lazy" decoding="async">
+          <div class="frame"><img src="/img/shop.webp?v=3" width="585" height="1266" alt="Vitrine de la boutique Dar Yasmine avec couverture, logo, catégories et produits" loading="lazy" decoding="async"></div></div>
+          <figcaption><h3>Le client</h3><p>Une vitrine pour commander, le suivi du colis et son propre score de confiance.</p></figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="duo"><img class="person" src="/img/courier.webp?v=3" width="620" height="775" alt="Un livreur à moto consulte sa prochaine course sur son téléphone" loading="lazy" decoding="async">
+          <div class="frame"><img src="/img/driver.webp?v=3" width="585" height="1266" alt="Écran Tournée du livreur : un ramassage chez Dar Yasmine avec boutons Appeler, WhatsApp et Itinéraire" loading="lazy" decoding="async"></div></div>
+          <figcaption><h3>Le livreur</h3><p>Sa tournée, l’itinéraire en un geste et l’argent encaissé, suivi à la course.</p></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="wrap split">
+      <div>
+        <h2>Sachez à qui vous expédiez</h2>
+        <p class="lead" style="margin-top:18px">Chaque client a un score de confiance construit sur ses vraies commandes, dans toutes les boutiques Domo. Les vendeurs aussi sont notés : la confiance va dans les deux sens.</p>
+        <ul class="ticks">
+          <li><span class="t"><svg><use href="#check"/></svg></span><span>Colis acceptés et refusés, toutes boutiques confondues</span></li>
+          <li><span class="t"><svg><use href="#check"/></svg></span><span>Avis croisés après chaque livraison, publiés seulement quand les deux ont répondu</span></li>
+          <li><span class="t"><svg><use href="#check"/></svg></span><span>Badge « Vendeur vérifié » après contrôle de l’identité par l’équipe Domo</span></li>
+        </ul>
+      </div>
+      <div class="profile-wrap">
+        <img class="tphoto" src="/img/shopper.webp?v=3" width="620" height="775" alt="Une cliente choisit une robe sur son téléphone" loading="lazy" decoding="async">
+        <div class="profile" role="img" aria-label="Exemple de profil client : score 92 sur 100, 14 colis acceptés, aucun refus, note 4,9">
+          <div class="ph"><div class="ring"><span>92</span></div><div><b>Amira B.</b><small>Client fiable</small></div></div>
+          <div class="nums"><div><b>14</b><span>acceptés</span></div><div><b>0</b><span>refus</span></div><div><b>4,9</b><span>note</span></div></div>
+          <div class="chips"><span class="chip"><svg><use href="#check"/></svg>Numéro confirmé</span><span class="chip"><svg><use href="#shield"/></svg>Client fiable</span><span class="chip"><svg><use href="#box"/></svg>10 colis acceptés</span></div>
+          <p class="verdict"><svg><use href="#check"/></svg>Expédiez sans acompte : cliente sérieuse dans 6 boutiques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><h2>Tout ce qu’il faut pour vendre en ligne</h2></div>
+      <div class="bento">
+        <article class="tile t-wide">
+          <span class="ic"><svg><use href="#truck"/></svg></span>
+          <h3>Livreurs Domo</h3><p>Un livreur passe récupérer le colis, encaisse auprès du client et Domo vous verse le montant. Frais Domo : 8 DT par colis, déduits du versement. Les frais de livraison payés par le client sont fixés par chaque boutique.</p>
+          <div class="demo" aria-hidden="true"><div class="route">
+            <span class="dot"></span><div><b>Dar Yasmine</b><small>Ramassage · Av. Habib Bourguiba, Sousse</small></div><div class="amt" style="grid-row:span 3">267 DT<small>encaissés pour vous</small></div>
+            <span class="path"></span><span></span>
+            <span class="dot end"></span><div><b>Amira Ben Salem</b><small>Livrée · Khezama, Sousse</small></div>
+          </div></div>
+        </article>
+        <article class="tile t-narrow">
+          <span class="ic"><svg><use href="#store"/></svg></span>
+          <h3>Une vitrine à votre nom</h3><p>Vos produits en photo, à mettre en bio Instagram.</p>
+          <div class="demo"><div class="prods">
+            <figure><img src="/img/p/caftan.webp?v=3" width="360" height="360" alt="Caftan bordeaux brodé" loading="lazy" decoding="async"><figcaption>260 DT</figcaption></figure>
+            <figure><img src="/img/p/robe.webp?v=3" width="360" height="360" alt="Robe brodée bleu nuit" loading="lazy" decoding="async"><figcaption>320 DT</figcaption></figure>
+            <figure><img src="/img/p/tunique.webp?v=3" width="360" height="360" alt="Tuniques en lin sur un portant" loading="lazy" decoding="async"><figcaption>95 DT</figcaption></figure>
+            <figure><img src="/img/p/sac.webp?v=3" width="360" height="360" alt="Sac en cuir camel" loading="lazy" decoding="async"><figcaption>89 DT</figcaption></figure>
+            <figure><img src="/img/p/sandales.webp?v=3" width="360" height="360" alt="Sandales en cuir" loading="lazy" decoding="async"><figcaption>65 DT</figcaption></figure>
+            <figure><img src="/img/p/bague.webp?v=3" width="360" height="360" alt="Bague en argent" loading="lazy" decoding="async"><figcaption>38 DT</figcaption></figure>
+          </div></div>
+        </article>
+        <article class="tile t-half">
+          <span class="ic"><svg><use href="#chat"/></svg></span>
+          <h3>Messages et appels gratuits</h3><p>Parlez à vos clients dans l’app, sans donner votre numéro personnel.</p>
+          <div class="demo" aria-hidden="true"><div class="mchat"><div class="m a">Salam, le caftan existe en L ?</div><div class="m b2">Oui ! Je vous l’envoie demain 🙏</div><span class="call"><svg><use href="#phone"/></svg>Appel Domo · 01:24</span></div></div>
+        </article>
+        <article class="tile t-half">
+          <span class="ic"><svg><use href="#check"/></svg></span>
+          <h3>Votre vrai bénéfice</h3><p>Coûts, frais de livraison et retours déduits : vous voyez ce que vous gagnez vraiment, et ce que les refus vous coûtent.</p>
+          <div class="demo" aria-hidden="true"><div class="sec-card"><span class="sh"><svg><use href="#check"/></svg></span><div><b>Bénéfice net : 455 DT</b><small>Après 3 retours · 30 derniers jours</small></div></div></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec shops-sec" id="boutiques">
+    <div class="wrap">
+      <div class="shops-head">
+        <div class="sec-head"><h2>Ils vendent déjà avec Domo</h2><p class="lead">Des boutiques tunisiennes où vous payez à la livraison, avec des avis de vrais clients.</p></div>
+        <form class="ssearch" id="shopSearch" role="search"><label class="vh" for="sq">Chercher une boutique ou un produit</label><input id="sq" type="search" placeholder="Caftan, sac, Sousse…" autocomplete="off"><button type="submit">Chercher</button></form>
+      </div>
+      <div class="sgrid" id="shopGrid" aria-live="polite"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+      <div class="shops-foot"><a class="btn btn-blue" data-app="/?explore" href="#">Voir toutes les boutiques</a><span>Vous vendez aussi ? <a data-app="/?start=seller" href="#" style="color:var(--blue);font-weight:600">Ajoutez votre boutique</a></span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="site" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Vous avez déjà un site ? Gardez-le.</h2>
+        <p class="lead">Domo ne remplace ni votre site, ni votre page Instagram, ni votre livreur. Il s’ajoute à ce qui marche déjà, là où vous perdez de l’argent : la confirmation et les colis refusés.</p>
+      </div>
+      <div class="keep">
+        <article>
+          <span class="ic"><svg><use href="#store"/></svg></span>
+          <h3>Votre site continue de vendre</h3>
+          <p>Collez un formulaire ou un bouton Domo sur votre page. Ou connectez votre boutique par API : chaque commande arrive toute seule dans Domo.</p>
+          <code>POST /api/v1/orders</code>
+        </article>
+        <article>
+          <span class="ic"><svg><use href="#truck"/></svg></span>
+          <h3>Votre livreur reste le vôtre</h3>
+          <p>Les livreurs Domo sont une option. Avec votre société de livraison habituelle, Domo sert à confirmer avant l’expédition et à suivre le colis.</p>
+          <div class="mini"><span>Confirmation</span><span>Score client</span><span>Suivi</span></div>
+        </article>
+        <article>
+          <span class="ic"><svg><use href="#check"/></svg></span>
+          <h3>Essayez sur dix commandes</h3>
+          <p>Rien à migrer. Ajoutez vos dix prochaines commandes à la main, 20 secondes chacune, et comparez vos refus. Si rien ne change, vous n’avez rien perdu.</p>
+          <div class="mini"><span>Sans engagement</span><span>Sans carte</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec boost" id="boost" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Vous vendez. Domo s’occupe de vos réseaux.</h2>
+        <p class="lead">Selon le plan choisi, l’équipe Domo prend en charge tout votre marketing digital : publications, stories et Reels, réponses aux clients, publicité. Le budget publicitaire reste à vous, et vous le validez avant chaque campagne.</p>
+      </div>
+      <p class="swipe" aria-hidden="true">Glissez pour comparer les plans</p>
+      <div class="plans">
+        <article class="plan">
+          <h3>Essentiel</h3><p class="tg">On gère votre Instagram ou votre Facebook</p>
+          <div class="pr">149 DT <small>par mois</small></div>
+          <ul><li><svg aria-hidden="true"><use href="#check"/></svg><span>1 réseau géré : Instagram ou Facebook</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>8 publications et 4 stories par mois</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>Profil optimisé et 10 photos produit retouchées</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>À la une sur Domo 1 semaine par mois</span></li></ul>
+          <a class="btn btn-blue" data-app="/#boost" href="#">Choisir Essentiel</a>
+        </article>
+        <article class="plan rec"><span class="rb">Recommandé</span>
+          <h3>Croissance</h3><p class="tg">Instagram et Facebook, publicité comprise</p>
+          <div class="pr">299 DT <small>par mois</small></div>
+          <ul><li><svg aria-hidden="true"><use href="#check"/></svg><span>Instagram et Facebook gérés</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>12 publications, 8 stories et 2 Reels par mois</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>Réponses aux commentaires et messages</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>1 campagne publicitaire par mois</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>À la une 2 semaines par mois</span></li></ul>
+          <a class="btn btn-white" data-app="/#boost" href="#">Choisir Croissance</a>
+        </article>
+        <article class="plan">
+          <h3>Premium</h3><p class="tg">Tout votre marketing digital, de A à Z</p>
+          <div class="pr">549 DT <small>par mois</small></div>
+          <ul><li><svg aria-hidden="true"><use href="#check"/></svg><span>Instagram, Facebook et TikTok gérés</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>20 publications, 15 stories et 4 Reels par mois</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>Messages chaque jour, commandes saisies dans Domo</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>Jusqu’à 3 campagnes et une stratégie mensuelle</span></li><li><svg aria-hidden="true"><use href="#check"/></svg><span>À la une tout le mois, appel bilan mensuel</span></li></ul>
+          <a class="btn btn-blue" data-app="/#boost" href="#">Choisir Premium</a>
+        </article>
+      </div>
+      <div class="carte">
+        <div><h3>Ou composez votre formule</h3><p>Prenez seulement ce qu’il vous faut, seul ou en plus d’un plan.</p></div>
+        <a class="btn btn-blue" data-app="/#boost" href="#">Composer ma formule</a>
+        <ul>
+          <li>Publication <b>25 DT</b></li><li>Reel <b>60 DT</b></li><li>Retouche photo <b>3 DT</b></li><li>Création de page <b>120 DT</b></li><li>Campagne pub <b>80 DT</b></li><li>À la une, 1 semaine <b>40 DT</b></li>
+        </ul>
+      </div>
+      <p class="fine">Tous les plans incluent Domo Pro. Rien à payer en ligne : l’équipe vous contacte sur WhatsApp pour démarrer. Les places À la une sont signalées « Sponsorisé » et ne changent jamais votre score de confiance.</p>
+    </div>
+  </section>
+
+  
+
+  <section class="sec" id="faq" style="padding-top:20px">
+    <div class="wrap">
+      <div class="sec-head"><h2>Les questions qu’on nous pose</h2></div>
+      <div class="faq">
+        <details><summary>Mon client doit-il installer l’application ?</summary><p>Non. Il reçoit un message WhatsApp avec un lien et confirme en un clic, sans compte ni téléchargement. Le compte client est un plus : il sert à suivre ses colis et à construire son score de confiance.</p></details>
+        <details><summary>J’ai déjà un site, un livreur et des habitudes. Qu’est-ce que je change ?</summary><p>Rien d’obligatoire. Vous gardez votre site, votre page et votre livreur. Vous ajoutez seulement l’étape de confirmation Domo avant d’expédier, à la main ou automatiquement depuis votre site.</p></details>
+        <details><summary>Combien ça coûte ?</summary><p>L’utilisation de Domo est gratuite pendant le lancement, sans carte bancaire. Les livreurs Domo coûtent 8 DT par colis, déduits du versement. Domo Boost, la gestion de vos réseaux, est un service payant en option. Si un tarif change un jour, vous serez prévenu au moins 30 jours avant, et vous gardez vos données.</p></details>
+        <details><summary>Que voient les autres boutiques sur mes clients ?</summary><p>Des faits : colis acceptés, refus du client, refus contestés. Jamais le nom de votre boutique, ni l’adresse du client, ni le détail de ses commandes chez vous.</p></details>
+        <details><summary>Et si le client refuse quand même le colis ?</summary><p>Le livreur ou la boutique enregistre la raison. Seul un vrai refus du client compte dans son historique : une adresse introuvable, une erreur de la boutique ou un colis abîmé ne comptent pas. Le client peut contester, et l’équipe Domo tranche. La prochaine fois, vous voyez ces faits avant d’expédier.</p></details>
+        <details><summary>En combien de temps je démarre ?</summary><p>Une minute : votre numéro de téléphone, le nom de votre boutique, et vous pouvez envoyer votre première demande de confirmation.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final">
+    <div class="wrap">
+      <div class="final-box">
+        <h2>Votre prochaine commande, déjà confirmée</h2>
+        <p class="lead">Créez votre boutique en une minute avec votre numéro de téléphone.</p>
+        <div class="ctas">
+          <a class="btn btn-white" data-app="/?start=seller" href="#"><span class="knob" aria-hidden="true"></span>Créer ma boutique</a>
+          <a class="btn btn-line" data-app="/?start=customer" href="#">Créer un compte client</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" style="color:var(--navy);font-size:20px"><img src="/icon.svg" alt="" width="28" height="28" style="width:28px;height:28px;box-shadow:none">Domo</a>
+    <nav aria-label="Pied de page">
+      <a data-app="/" href="#">Se connecter</a>
+      <a data-app="/?explore" href="#">Explorer les boutiques</a>
+      <a data-app="/?start=driver" href="#">Devenir livreur</a>
+      <a href="#boost">Domo Boost</a>
+      <a href="/suivi/">Suivre un colis</a>
+      <a href="/confidentialite/">Confidentialité</a>
+      <a href="/conditions/">Conditions</a>
+      <a href="/mentions-legales/">Mentions légales</a>
+      <a href="mailto:support@domo.tn">support@domo.tn</a>
+    </nav>
+    <span>© <span id="yr">2026</span> Domo, Tunisie</span>
+    <p class="credits">Photos libres de droits via Pexels : Kampus Production, Mizuno K, Kindel Media, Duc Nguyen, Anete Lusina, Burcin Sahin (Carthage), Kaftan Bindallı, pedro furtado, Diana, Kaboompics. Logos des plateformes : Simple Icons (CC0).</p>
+  </div>
+</footer>
+
+<script>
+// One place to change the app address.
+const APP='https://app.domo.tn';
+document.querySelectorAll('[data-app]').forEach(a=>{a.href=APP+a.dataset.app});
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+// Live shops, straight from the app: visitors see real shops here before entering the app.
+(async()=>{
+  const grid=document.getElementById('shopGrid'),esc=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  const media=k=>k?APP+'/media/'+k:'';
+  try{
+    const r=await fetch(APP+'/api/stores');if(!r.ok)throw 0;const d=await r.json();const st=(d.stores||[]).slice(0,6);
+    if(!st.length){grid.outerHTML='<div class="shops-empty">Les premières boutiques arrivent. <a href="'+APP+'/?start=seller" style="color:var(--blue);font-weight:600">Soyez parmi les pionnières</a>.</div>';return}
+    grid.innerHTML=st.map(s=>`<a class="scard" href="${APP}/s/${encodeURIComponent(s.slug)}?src=domo.tn">
+      <div class="cv" style="${s.cover?`background-image:url('${media(s.cover)}')`:''}">${s.featured?'<span class="sp">Sponsorisé</span>':''}<span class="lg" style="${s.logo?`background-image:url('${media(s.logo)}')`:''}">${s.logo?'':esc((s.name||'?').charAt(0))}</span></div>
+      <div class="bd"><h3>${esc(s.name)}</h3><div class="mt">${[s.city,s.products+' produit'+(s.products>1?'s':''),s.minPrice!=null?'dès '+Math.round(s.minPrice)+' DT':''].filter(Boolean).map(esc).join(' · ')}</div>
+      ${s.thumbs&&s.thumbs.length?`<div class="th">${s.thumbs.slice(0,4).map(t=>`<span style="background-image:url('${media(t)}')"></span>`).join('')}</div>`:''}
+      <span class="go">Voir la boutique</span></div></a>`).join('');
+  }catch(e){grid.outerHTML='<div class="shops-empty">Impossible de charger les boutiques pour le moment. <a href="'+APP+'/?explore" style="color:var(--blue);font-weight:600">Ouvrir la liste des boutiques</a>.</div>'}
+})();
+document.getElementById('shopSearch').addEventListener('submit',e=>{e.preventDefault();const q=document.getElementById('sq').value.trim();location.href=APP+'/?explore'+(q?'='+encodeURIComponent(q):'')});
+
+// Bar that follows the reader once the hero is gone.
+{const top=document.querySelector('.top'),hero=document.querySelector('.hero');
+ new IntersectionObserver(([e])=>top.classList.toggle('stuck',!e.isIntersecting),{rootMargin:'-90px 0px 0px 0px'}).observe(hero);}
+
+// Track: send the visitor to the app's tracking page.
+const f=document.getElementById('trackForm'),inp=document.getElementById('ref'),err=document.getElementById('refErr');
+if(f){f.addEventListener('submit',e=>{
+  e.preventDefault();
+  const v=inp.value.toUpperCase().replace(/[^A-Z0-9]/g,'');
+  if(!/^(DM|WS)[A-Z0-9]{6}$/.test(v)){err.textContent='Numéro introuvable : il ressemble à DM-B27RPM (2 lettres, 6 caractères).';inp.focus();return}
+  location.href=APP+'/?track='+v.slice(0,2)+'-'+v.slice(2);
+});
+inp.addEventListener('input',()=>{err.textContent=''});}
+
+// The chat's single moment: the customer taps "confirm".
+const c=document.getElementById('confirm'),t=document.getElementById('yesTxt');
+const tap=()=>{c.classList.add('done');t.textContent='Commande confirmée'};
+matchMedia('(prefers-reduced-motion: reduce)').matches?tap():setTimeout(tap,3100);
+</script>
+</body>
+</html>

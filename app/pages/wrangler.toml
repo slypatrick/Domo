@@ -1,0 +1,25 @@
+# Cloudflare Pages deployment → https://patricksly.pages.dev
+# Build first:  npm run build:pages   (copies public/ to dist/ and the API worker to dist/_worker.js)
+# Deploy:       npx wrangler pages deploy (npm run deploy:pages does both)
+name = "patricksly"
+pages_build_output_dir = "../dist"
+compatibility_date = "2025-10-01"
+
+[vars]
+VAPID_PUBLIC_KEY = "BM9fF4Pa5IkzkMekbYLjOd9jiPcMR5IdMZKr3bKPTtNBZjamERlu9QI-cBIQoIbQQKsolh2j65JPSANMXVyprCo"
+VAPID_SUBJECT = "mailto:support@domo.tn"
+DELIVERY_FEE = "8"   # DT charged to the seller per Domo delivery
+DRIVER_PAY = "4"     # DT paid to the driver per completed run (for the driver earnings screen)
+ADMIN_PHONES = "29415587"    # comma-separated phone numbers of Domo admins (console access)
+
+[[d1_databases]]
+binding = "DB"
+database_name = "wsel"
+database_id = "dcb57cc9-05a1-4638-a324-398b247d3ad8"
+migrations_dir = "../migrations"
+
+# Optional: once R2 is enabled in the Cloudflare dashboard, create the bucket and uncomment.
+# New uploads then go to R2; images already stored in D1 keep working.
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "wsel-media"

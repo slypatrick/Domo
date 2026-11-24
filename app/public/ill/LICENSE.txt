@@ -1,0 +1,6 @@
+Illustrations in this folder come from unDraw (https://undraw.co) by Katerina Limpitsouni.
+unDraw license (https://undraw.co/license): free to use in commercial and personal projects,
+no attribution required. Not allowed: redistributing them as an illustration pack or using
+them to build a competing illustration service.
+Changes for Domo: optimized with SVGO, colors mapped to CSS classes (ua/uk/ub/uw) so they follow
+the app theme (brand blue, light/dark mode).

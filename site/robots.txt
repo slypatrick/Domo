@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /suivi/
+
+Sitemap: https://domo.tn/sitemap.xml

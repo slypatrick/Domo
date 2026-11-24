@@ -1,0 +1,19 @@
+name = "wsel"
+main = "src/worker.js"
+compatibility_date = "2025-10-01"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+run_worker_first = ["/api/*"]
+
+[vars]
+VAPID_PUBLIC_KEY = "BM9fF4Pa5IkzkMekbYLjOd9jiPcMR5IdMZKr3bKPTtNBZjamERlu9QI-cBIQoIbQQKsolh2j65JPSANMXVyprCo"
+VAPID_SUBJECT = "mailto:support@domo.tn"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "wsel"
+# Replace with the id printed by: npx wrangler d1 create wsel
+database_id = "dcb57cc9-05a1-4638-a324-398b247d3ad8"
+migrations_dir = "migrations"

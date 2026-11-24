@@ -1384,7 +1384,7 @@ async function registerDriver(env, body, ctx) {
   const password = String(body.password || '');
   if (password.length < 8) fail(400, 'Mot de passe : 8 caractères minimum');
   if (await env.DB.prepare('SELECT 1 FROM drivers WHERE phone=?').bind(phone).first()) fail(409, 'Une candidature existe déjà avec ce numéro. Connectez-vous.');
-  const d = { id: rid(), name, phone, pass: await hashPass(password), city: str(body.city, 40, 'ville'), zones: str(body.zones, 200, 'zones'), vehicle: VEHICLES.includes(body.vehicle) ? body.vehicle : 'moto', created_at: Date.now() };
+  const d = { id: rid(), name, phone, pass: await hashPass(password), city: str(body.city, 40, 'ville'), zones: (z => /^[\d\s+]{6,}$/.test(z || '') ? null : z)(str(body.zones, 200, 'zones')), vehicle: VEHICLES.includes(body.vehicle) ? body.vehicle : 'moto', created_at: Date.now() };
   await env.DB.prepare('INSERT INTO drivers (id, name, phone, pass, city, zones, vehicle, status, created_at) VALUES (?,?,?,?,?,?,?,?,?)')
     .bind(d.id, d.name, d.phone, d.pass, d.city, d.zones, d.vehicle, 'pending', d.created_at).run();
   bg(ctx, notifyAdmins(env, { type: 'account', title: 'Nouvelle candidature livreur', body: `${name} · ${d.city || 'ville ?'} · ${d.vehicle}`, url: '/#admin/livreurs', tag: 'drv-apply' }));

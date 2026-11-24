@@ -1058,6 +1058,92 @@ nav{box-shadow:0 -4px 16px rgba(14,22,48,.05)}
 
 @media(max-width:600px){.ord .acts .sp{flex-basis:auto;flex:1 1 0;height:auto}}
 .ord .acts details.omenu{margin-left:auto}[dir=rtl] .ord .acts details.omenu{margin-left:0;margin-right:auto}
+/* ===== Design upgrade, Nov 2026: one block, loaded last so it wins. Prefixes avoid class clashes. ===== */
+/* buttons: tactile press feedback, smooth hover */
+.btn{transition:background-color .15s,border-color .15s,box-shadow .15s,transform .08s}
+.btn:active:not([disabled]){transform:scale(.97)}
+@media(hover:hover){.sc:hover,.pc:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(14,22,48,.12)}.pc{transition:transform .15s,box-shadow .15s}}
+@media(prefers-reduced-motion:reduce){.btn:active:not([disabled]),.sc:hover,.pc:hover{transform:none}}
+
+/* top bar: on phones the avatar alone opens the account; a name cut to "D…" helped nobody */
+@media(max-width:419px){.who-me .wn{display:none}}
+
+/* order cards: status colour on the left edge so the queue scans at a glance */
+.ord[style*="--sc"]{box-shadow:inset 3px 0 0 var(--sc),var(--sh)}
+[dir=rtl] .ord[style*="--sc"],[lang=ar] .ord[style*="--sc"]{box-shadow:inset -3px 0 0 var(--sc),var(--sh)}
+/* actions on one tidy row: [Confirmée] [Pas de réponse] [call] [⋯] */
+.ord .acts{flex-wrap:wrap;gap:8px}
+.ord .acts .sp{display:none}
+.ord .acts>.btn[data-act]{flex:1 1 0;min-width:max-content}
+.ord .acts>.btn.icon,.ord .acts>details.omenu{flex:none;margin:0}
+.ord .acts>details.omenu{margin-left:0!important;margin-right:0!important}
+.ord .lshort{display:none}
+@media(max-width:479px){
+  .ord .lfull{display:none}.ord .lshort{display:inline}
+  .ord .acts:has(>.btn[data-act]~.btn[data-act]){display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) repeat(var(--ni,2),38px);gap:6px}
+  .ord .acts:has(>.btn[data-act]~.btn[data-act]):not(:has(details.omenu)){--ni:1}
+  .ord .acts>.btn[data-act]{min-width:0;padding:0 8px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ord .acts>.btn.icon,.ord .acts>details.omenu>summary{width:38px;height:38px;min-width:38px;padding:0}
+}
+@media(max-width:374px){.ord .acts>.btn[data-act] svg.i{display:none}}
+@media(max-width:359px){.ord .acts:has(>.btn[data-act]~.btn[data-act]){grid-template-columns:1fr 1fr}.ord .acts>.btn.icon,.ord .acts>details.omenu{justify-self:start}.btn.wafill{font-size:14px;white-space:normal;line-height:1.25;text-align:center}}
+/* wide screens: two columns of order cards instead of one stretched list */
+@media(min-width:1180px){#list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}#list>.ord{margin:0}#list>:not(.ord){grid-column:1/-1}}
+
+/* product sheet: full-bleed photo on phones, photo + details side by side on tablets and desktop */
+.sheetimg{border-radius:0}
+@media(min-width:600px){
+  #psheet .sheetimg{aspect-ratio:auto;height:min(58vh,480px);max-height:none;width:auto}
+}
+@media(min-width:820px){
+  #psheet{width:min(960px,calc(100vw - 64px));max-height:min(90dvh,760px)}
+  #psheet .db{padding:22px 24px 24px}
+  #psheet .psg{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:28px;align-items:start}
+  #psheet .psm{position:sticky;top:64px}
+  #psheet .sheetimg{margin:0;width:100%;height:auto;aspect-ratio:4/5;max-height:calc(min(90dvh,760px) - 120px);border-radius:16px}
+  #psheet .psi h2{margin-top:4px!important;font-size:26px!important;line-height:1.2}
+  #psheet .psi .op{font-size:24px!important}
+  #psheet .sheetact{position:static;margin-top:24px}
+}
+
+/* explore: product photos as the shop cover; no more big empty colour bands */
+.sc .scov.mos{display:grid;gap:2px;height:132px;background:var(--sf2)}
+.sc .scov.mos.n2{grid-template-columns:1fr 1fr}
+.sc .scov.mos.n3{grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr}
+.sc .scov.mos.n3 img:first-child{grid-row:1/3}
+.sc .scov.mos img{width:100%;height:100%;object-fit:cover;display:block;min-height:0}
+.sc .scov.plain{height:64px}
+
+/* shop page: the three "how to order" steps fit on one compact row on phones */
+@media(max-width:699px){
+  .howto{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:6px}
+  .howto div{flex-direction:column;align-items:flex-start!important;gap:6px;padding:10px}
+  .howto span{display:none}
+  .howto b{font-size:12.5px;line-height:1.25}
+}
+
+/* admin console: one scrollable row of tabs (they wrapped onto 4 rows on phones) */
+.atabs{flex-wrap:nowrap!important;overflow-x:auto!important;scrollbar-width:none;padding:2px 0 6px!important;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch}
+.atabs .tab{scroll-snap-align:start}
+@media(max-width:959px){.atabs{-webkit-mask-image:linear-gradient(to right,#000 85%,transparent);mask-image:linear-gradient(to right,#000 85%,transparent);padding-right:32px!important}}
+/* KPI cards: separate cards with real gaps; the grey grid lines showed through */
+.kpis.k4{background:none;border:0;box-shadow:none;overflow:visible;gap:10px}
+.kpis.k4>.kpi{border:1px solid var(--line);border-radius:14px;box-shadow:var(--sh);padding:14px 16px}
+.kpis.k4 .kpi small.kdelta,.kpi .kdelta{border:0!important;background:none!important;padding:0!important;box-shadow:none!important;display:inline-flex;margin-top:6px;font-size:12.5px;font-weight:600}
+a.kpi:hover{border-color:var(--brand)}
+/* driver card stats: one compact row instead of label/value pairs stretched across the page */
+.dstrip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:12px}
+.dstrip>div{background:var(--sf2);border-radius:12px;padding:8px 10px}
+.dstrip span{display:block;font-size:11.5px;color:var(--ink2);line-height:1.25}
+.dstrip b{font-size:15px;font-variant-numeric:tabular-nums}
+@media(max-width:419px){.dstrip{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.adrv .faint a{display:inline-block;padding:6px 0;margin:-6px 0;font-weight:600}
+.addd>summary{min-height:44px;display:flex;align-items:center;cursor:pointer}
+.adrv .jh{display:flex;align-items:center;gap:12px}.adrv .jh>.sp{flex:1}
+#adm>*+*{margin-top:12px}
+
+/* driver tiles: labels wrap instead of "livrés aujourd…" */
+.kpis.k3 .kpi span,.dstats span{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;line-height:1.25}
 </style>
 </head>
 <body>
@@ -1623,7 +1709,7 @@ function actions(o){
   if(o.reviewed)return`<span class="lock">${ic('lock')}Évaluée — statut verrouillé</span>`;
   const b=(s,l,cls='')=>`<button class="btn sm ${cls}" type="button" data-act="${s}" data-id="${o.id}">${l}</button>`;
   switch(o.status){
-    case'new':case'noanswer':return b('confirmed',ic('check')+'Marquer confirmée')+b('noanswer',o.attempts?`Pas de réponse · ${o.attempts}`:'Pas de réponse');
+    case'new':case'noanswer':return b('confirmed',ic('check')+'<span class="lfull">Marquer confirmée</span><span class="lshort">Confirmée</span>')+b('noanswer',o.attempts?`Pas de réponse · ${o.attempts}`:'Pas de réponse');
     case'confirmed':return o.delivery==='requested'?`<button class="btn sm" type="button" data-dlv="cancel" data-id="${o.id}">Annuler le livreur</button>`:o.delivery==='assigned'?`<button class="btn sm ghost" type="button" data-dlv="cancel" data-id="${o.id}">Annuler le ramassage</button>`:`<button class="btn sm pri" type="button" data-dlv="request" data-id="${o.id}">${ic('track')}Livreur Domo</button>`+b('shipped','Expédiée moi-même');
     case'shipped':return ['picked','assigned'].includes(o.delivery)?'<span class="lock">'+ic('track')+'Le livreur Domo met à jour le statut</span>':b('delivered','Livrée','pri')+b('refused','Refusée','dan');
     case'delivered':case'refused':return(o.customer?`<button class="btn sm pri" type="button" data-review="${o.id}">${ic('star')}Évaluer le client</button>`:'')+b('new','Rouvrir','ghost');
@@ -1639,7 +1725,7 @@ function omenu(o){
 }
 function card(o){
   const[l,c]=ST[o.status],pending=['new','noanswer','confirmed'].includes(o.status);
-  return`<article class="ord">
+  return`<article class="ord" style="--sc:${c}">
   <div class="o1">${avatar(o.name)}<div class="on"><b>${esc(o.name)}</b><span>${[o.gov?esc(o.gov):'',ago(o.created_at),o.src?esc(o.src):''].filter(Boolean).join(' · ')}</span></div><div class="op${num(o.price)<0.01?' tbd':''}">${priceTxt(o.price)}</div></div>
   <div class="oi">${esc(o.items)}</div>
   ${o.notes?`<div class="hint">${esc(o.notes)}</div>`:''}
@@ -2028,10 +2114,10 @@ async function shopOrderView(slug,src,embed){
     const sz=p.sizes||[],co=p.colors||[],need=(sz.length&&!pick.size)?'la taille':(co.length&&!pick.color)?'la couleur':'';
     const key=hasOpt(p)?[id,pick.size,pick.color].join('|'):id,q=cart[key]||0;
     const opts=(lab,list,k)=>list.length?`<fieldset class="optg"><legend>${lab}${pick[k]?` : <b>${esc(pick[k])}</b>`:''}</legend><div class="opts">${list.map(v=>`<button type="button" class="opt" data-opt="${k}" data-v="${esc(v)}" aria-pressed="${pick[k]===v}">${esc(v)}</button>`).join('')}</div></fieldset>`:'';
-    $('#psBody').innerHTML=`${pimg(p,'sheetimg')}<h2 style="margin:16px 0 4px;font-size:21px">${esc(p.name)}</h2><div class="op" style="font-size:21px">${money(p.price)}</div>${p.description?`<p class="muted" style="white-space:pre-line;margin:10px 0 0">${esc(p.description)}</p>`:''}
+    $('#psBody').innerHTML=`<div class="psg"><div class="psm">${pimg(p,'sheetimg')}</div><div class="psi"><h2 style="margin:16px 0 4px;font-size:21px">${esc(p.name)}</h2><div class="op" style="font-size:21px">${money(p.price)}</div>${p.description?`<p class="muted" style="white-space:pre-line;margin:10px 0 0">${esc(p.description)}</p>`:''}
       ${opts('Taille',sz,'size')}${opts('Couleur',co,'color')}
       <div class="sheetact">${q?`<div class="qty" role="group" aria-label="Quantité"><button type="button" data-sq="-1" aria-label="Retirer">−</button><span>${q}</span><button type="button" data-sq="1" aria-label="Ajouter">+</button></div><button class="btn pri" type="button" data-ck style="flex:1;min-height:52px">Commander · ${money(sub()+d.shipFee)}</button><div class="added"><span>${ic('check')}Ajouté au panier</span><button class="linkbtn" type="button" data-close>Continuer mes achats</button></div>`
-        :`<button class="btn pri wide" type="button" data-sq="1" style="min-height:52px" ${need?'disabled':''}>${need?`Choisissez ${need}`:`${ic('cart')}Ajouter au panier · ${money(p.price)}`}</button>`}</div>`;
+        :`<button class="btn pri wide" type="button" data-sq="1" style="min-height:52px" ${need?'disabled':''}>${need?`Choisissez ${need}`:`${ic('cart')}Ajouter au panier · ${money(p.price)}`}</button>`}</div></div></div>`;
     $('#psBody').onclick=e=>{if(e.target.closest('[data-ck]')){checkout();return}const o=e.target.closest('[data-opt]');if(o){pick[o.dataset.opt]=o.dataset.v;sheet(id,true);return}const b=e.target.closest('[data-sq]');if(b&&!b.disabled){if(hasOpt(p)&&((sz.length&&!pick.size)||(co.length&&!pick.color)))return;change(key,+b.dataset.sq)}};
     if(!keep)open($('#psheet'));
   }
@@ -2368,11 +2454,11 @@ async function renderExplore(pub,initial){
     try{const d=await api(`/stores?q=${encodeURIComponent(xq)}&cat=${encodeURIComponent(xcat)}&city=${encodeURIComponent(xcity)}`);
       if(pub)history.replaceState(null,'','/?explore'+(xq?'='+encodeURIComponent(xq):''));
       $('#xres').innerHTML=(d.exact?note('risk ok','check','Boutique trouvée avec cet ID.'):'')+(d.stores.length?`<p class="faint" style="margin:12px 0 0;font-size:13.5px">${pl(d.stores.length,'boutique')}${xq||xcat||xcity?' trouvée'+(d.stores.length>1?'s':''):''}</p><div class="sgrid">${d.stores.map(st=>`<a class="sc" href="/?shop=${encodeURIComponent(st.slug)}&src=Domo">${st.featured?'<span class="spon">Sponsorisé</span>':''}
-        <div class="scov" style="--h:${hue(st.name)};${st.cover?`background-image:url('${murl(st.cover)}')`:''}"></div>
+        ${!st.cover&&st.thumbs.length>=2?`<div class="scov mos n${Math.min(st.thumbs.length,3)}">${st.thumbs.slice(0,3).map(t=>`<img src="${murl(t)}" alt="" loading="lazy">`).join('')}</div>`:`<div class="scov${st.cover?'':' plain'}" style="--h:${hue(st.name)};${st.cover?`background-image:url('${murl(st.cover)}')`:''}"></div>`}
         <div class="sbody"><div class="slg">${st.logo?`<img src="${murl(st.logo)}" alt="" loading="lazy">`:avatar(st.name)}</div>
         <h3>${esc(st.name)} ${vmark(st)}</h3><div class="sm">${badge(st).replace('<button','<span').replace('</button>','</span>').replace('data-profile=','data-p=')}${st.trust.avg!=null?`<span>★ ${st.trust.avg.toLocaleString('fr-FR')} (${st.trust.reviews})</span>`:''}${st.city?`<span>${esc(st.city)}</span>`:''}</div>
         <div class="sm" style="margin-top:6px">${pl(st.products,'produit')}${st.minPrice!=null?` · dès ${money(st.minPrice)}`:''}${st.categories.length?' · '+st.categories.map(esc).join(', '):''}</div>
-        ${st.thumbs.length?`<div class="th4">${st.thumbs.map(t=>`<span><img src="${murl(t)}" alt="" loading="lazy"></span>`).join('')}</div>`:''}</div></a>`).join('')}</div>`
+        ${st.thumbs.length&&(st.cover||st.thumbs.length<2)?`<div class="th4">${st.thumbs.map(t=>`<span><img src="${murl(t)}" alt="" loading="lazy"></span>`).join('')}</div>`:''}</div></a>`).join('')}</div>`
       :`<div class="card empty" style="margin-top:14px">${ill('stores')}<b>Aucune boutique trouvée</b>${/^[a-z]{2}-?[a-z0-9]{4}$/i.test(xq)?'Vérifiez l’ID boutique avec le vendeur.':'Essayez un autre mot, ou retirez un filtre.'}</div>`);
     }catch(x){$('#xres').innerHTML=`<div class="empty"><b>Erreur</b>${esc(x.message)}</div>`}
   };
@@ -2416,7 +2502,7 @@ function gotIt(o){
   if(o.status!=='delivered'||o.reviewed)return'';
   return`<div class="gotit"><b>${ic('check')}Colis reçu</b><span>Comment s’est passé votre achat chez ${esc(o.seller?.name||'la boutique')} ?</span><div class="qstars" role="group" aria-label="Noter de 1 à 5">${[1,2,3,4,5].map(n=>`<button type="button" data-review="${o.id}" data-rate="${n}" aria-label="${n} sur 5">★</button>`).join('')}</div><small>Votre avis aide les autres clients et la boutique.</small></div>`;
 }
-function myOrderCard(o){const[l,c]=ST[o.status];const live=['new','noanswer','confirmed','shipped'].includes(o.status);return`<article class="ord">
+function myOrderCard(o){const[l,c]=ST[o.status];const live=['new','noanswer','confirmed','shipped'].includes(o.status);return`<article class="ord" style="--sc:${c}">
     <div class="o1">${sellerAv(o.seller||{name:'?'})}<div class="on"><b>${esc(o.seller?.name||'Boutique')} ${vmark(o.seller)}</b><span>${ago(o.created_at)}</span></div><div class="op">${priceTxt(o.price)}</div></div>
     <div class="oi">${esc(o.items)}</div>${live?tracker(o):gotIt(o)}
     <div class="who">${live?'':`<span class="st" style="--c:${c}"><i></i>${l}</span>`}${badge(o.seller)}${shieldTag(o)}${o.dispute_status?`<span class="shield" style="color:${DISP[o.dispute_status][1]};background:var(--sf2)">${ic('flag')}${DISP[o.dispute_status][0]}</span>`:''}${o.ref?`<span class="ref">${fmtRef(o.ref)}</span><a class="trk" href="/?track=${fmtRef(o.ref)}">${ic('track')}Suivre le colis</a>`:''}</div>
@@ -2456,7 +2542,7 @@ function renderReviews(){
   $('#app').innerHTML=head('Avis',seller?'Votre réputation et les clients à évaluer':'Votre réputation et les boutiques à évaluer')+
   `<div class="card pad">${scoreBlock({...me,name:seller?me.shop:me.name,since:me.created_at,trust:meTrust})}<button class="btn wide" type="button" data-profile="${me.id}" style="margin-top:14px">Voir mon profil public</button></div>
   <h2>À évaluer ${todo.length?`<span class="n">${todo.length}</span>`:''}</h2>
-  ${todo.length?todo.map(t=>{const[l,c]=ST[t.status];return`<article class="ord"><div class="o1">${avatar(t.who)}<div class="on"><b>${esc(t.who)}</b><span>${ago(t.created_at)}</span></div><div class="op">${money(t.price)}</div></div><div class="oi">${esc(t.items)}</div><div class="acts"><span class="st" style="--c:${c}"><i></i>${l}</span><span class="sp"></span><button class="btn sm pri" type="button" data-review="${t.id}">${ic('star')}${seller?'Évaluer le client':'Évaluer la boutique'}</button></div></article>`}).join('')
+  ${todo.length?todo.map(t=>{const[l,c]=ST[t.status];return`<article class="ord" style="--sc:${c}"><div class="o1">${avatar(t.who)}<div class="on"><b>${esc(t.who)}</b><span>${ago(t.created_at)}</span></div><div class="op">${money(t.price)}</div></div><div class="oi">${esc(t.items)}</div><div class="acts"><span class="st" style="--c:${c}"><i></i>${l}</span><span class="sp"></span><button class="btn sm pri" type="button" data-review="${t.id}">${ic('star')}${seller?'Évaluer le client':'Évaluer la boutique'}</button></div></article>`}).join('')
   :`<div class="card empty"><div class="ill">${ic('star')}</div><b>Tout est à jour</b>${seller?'Les commandes livrées ou refusées de clients vérifiés apparaîtront ici.':'Après chaque livraison, vous pourrez noter la boutique ici.'}</div>`}`;
 }
 let rState={id:null,rating:0,tags:new Set()};
@@ -3056,8 +3142,8 @@ function admDriversView(){
     <div class="row"><div><label for="adCity">Gouvernorat</label><select id="adCity">${GOVS.map(g=>`<option>${g}</option>`).join('')}</select></div><div><label for="adVeh">Véhicule</label><select id="adVeh">${Object.entries(VEH).map(([k,l])=>`<option value="${k}">${l}</option>`).join('')}</select></div></div>
     <label for="adPass">Mot de passe provisoire</label><input id="adPass" type="text" autocomplete="off" placeholder="8 caractères minimum"><div class="hint">Donnez-le au livreur : il se connecte avec son numéro, onglet « Je livre », et peut le changer.</div>
     <div class="err" id="adErr"></div><button class="btn pri" type="submit" style="margin-top:12px">Créer le compte livreur</button></form></details>`+
-  (admDrivers.length?admDrivers.map(d=>`<article class="card pad adrv"><div class="jh">${avatar(d.name)}<div style="min-width:0"><b>${esc(d.name)}</b> ${d.status==='active'?`<span class="avdot ${d.available?'live':''}" title="${d.available?'En service':'Hors service'}"></span>`:''}<div class="faint" style="font-size:13px"><a href="tel:+216${d.phone}">${fmtPhone(d.phone)}</a> · ${esc(d.city||'?')} · ${VEH[d.vehicle]||''}${d.zones?' · Zones : '+esc(d.zones):''}</div></div><span class="sp"></span><span class="st" style="--c:${SL[d.status][1]}"><i></i>${SL[d.status][0]}</span></div>
-    ${d.status==='active'||d.delivered?`<div class="kv"><span>En cours</span><b>${d.active}</b><span>Livrés</span><b>${d.delivered}</b><span>Cash à remettre</span><b>${money(d.held)}</b><span>Vu</span><b>${d.last_seen?ago(d.last_seen):'jamais'}</b></div>`:`<div class="faint" style="margin-top:6px">Candidature ${ago(d.created_at)}</div>`}
+  (admDrivers.length?admDrivers.map(d=>`<article class="card pad adrv"><div class="jh">${avatar(d.name)}<div style="min-width:0"><b>${esc(d.name)}</b> ${d.status==='active'?`<span class="avdot ${d.available?'live':''}" title="${d.available?'En service':'Hors service'}"></span>`:''}<div class="faint" style="font-size:13px"><a href="tel:+216${d.phone}">${fmtPhone(d.phone)}</a> · ${esc(d.city||'?')} · ${VEH[d.vehicle]||''}${d.zones&&!/^[\d\s+]{6,}$/.test(d.zones)?' · Zones : '+esc(d.zones):''}</div></div><span class="sp"></span><span class="st" style="--c:${SL[d.status][1]}"><i></i>${SL[d.status][0]}</span></div>
+    ${d.status==='active'||d.delivered?`<div class="dstrip"><div><span>En cours</span><b>${d.active}</b></div><div><span>Livrés</span><b>${d.delivered}</b></div><div><span>Cash à remettre</span><b>${money(d.held)}</b></div><div><span>Vu</span><b>${d.last_seen?ago(d.last_seen):'jamais'}</b></div></div>`:`<div class="faint" style="margin-top:6px">Candidature ${ago(d.created_at)}</div>`}
     <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px">${d.status==='pending'?`<button class="btn sm pri" type="button" data-dst="active" data-id="${d.id}">Activer</button><button class="btn sm ghost" type="button" data-dst="rejected" data-id="${d.id}">Refuser</button>`:d.status==='active'?`${d.held>0?`<button class="btn sm pri" type="button" data-settle="${d.id}" data-amt="${d.held}">Encaisser ${money(d.held)}</button>`:''}<button class="btn sm ghost" type="button" data-dst="suspended" data-id="${d.id}">Suspendre</button>`:`<button class="btn sm" type="button" data-dst="active" data-id="${d.id}">Réactiver</button>`}<a class="btn sm wa" href="https://wa.me/216${d.phone}" target="_blank" rel="noopener">${ic('wa')}WhatsApp</a></div>
   </article>`).join(''):`<div class="card empty">${ill('truck')}<b>Aucun livreur</b>Ajoutez vos livreurs ou partagez le lien : domo.tn → « Je livre ».</div>`);
   $('#adf').onsubmit=async e=>{e.preventDefault();try{await api('/admin/drivers',{method:'POST',body:{name:$('#adName').value,phone:$('#adPhone').value,city:$('#adCity').value,vehicle:$('#adVeh').value,password:$('#adPass').value}});toast('Livreur créé');renderAdmin()}catch(x){$('#adErr').textContent=x.message}};

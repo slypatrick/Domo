@@ -644,6 +644,8 @@ h2{font-weight:700;letter-spacing:-.015em}
 body:has(.auth){background:radial-gradient(900px 600px at 82% 12%,#3a5cf0 0%,rgba(58,92,240,0) 60%),radial-gradient(700px 500px at 0% 100%,#1530b0 0%,rgba(21,48,176,0) 70%),#1d3fd1;background-attachment:fixed;min-height:100vh;min-height:100dvh}
 body:has(.auth) .topbar{background:transparent;border-bottom-color:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;position:relative}
 body:has(.auth) .brand{color:#fff}
+body:has(.auth) .langbtn{color:#fff}
+@media(hover:hover){body:has(.auth) .langbtn:hover{background:rgba(255,255,255,.14)}}
 body:has(.auth) .mark{border-radius:8px;box-shadow:0 0 0 2px rgba(255,255,255,.24)}
 .tosite{display:inline-flex;align-items:center;min-height:38px;padding:0 14px;border-radius:999px;border:1.5px solid rgba(255,255,255,.45);color:#fff;font-weight:600;font-size:14px;text-decoration:none}
 @media(hover:hover){.tosite:hover{background:rgba(255,255,255,.14)}}
@@ -1565,7 +1567,7 @@ function trustLine(c){
 const pubCtx=(o={})=>{
   $('.brand').setAttribute('href','/');$('.brand').setAttribute('aria-label','Domo, accueil');
   if(o.shop){$('#sub').innerHTML=`<div class="pubnav shopnav"><b class="pshop">${esc(o.shop)}</b><a href="/?track" class="hm2" ${o.embed?'target="_blank" rel="noopener"':''}>${ic('track')}<span>Suivi</span></a><button class="btn sm cartbtn" type="button" id="hdrCart" aria-label="Panier">${ic('cart')}<i id="hdrCartN" hidden>0</i></button></div>`;return}
-  $('#sub').innerHTML=me||token?`<div class="pubnav"><a class="btn pri sm" href="/">Mon espace</a></div>`:`<div class="pubnav"><a href="/?track" class="hm2">${ic('track')}<span>Suivi</span></a><a class="hm" href="https://domo.tn">Vendre sur Domo</a><a href="/" class="btn sm">Se connecter</a></div>`};
+  $('#sub').innerHTML=me||token?`<div class="pubnav"><a class="btn pri sm" href="/">Mon espace</a></div>`:`<div class="pubnav"><a href="/?track" class="hm2">${ic('track')}<span>Suivi</span></a><a class="hm" href="https://domo.tn">Vendre sur Domo</a><a href="/" class="btn pri sm">Se connecter</a></div>`};
 const themeColor=c=>$$('meta[name=theme-color]').forEach(m=>{m.dataset.d=m.dataset.d||m.content;m.content=c||m.dataset.d});
 function chrome(on){
   themeColor();

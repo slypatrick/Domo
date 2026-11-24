@@ -32,8 +32,9 @@ npx wrangler pages dev ../dist --port 8788 --persist-to /tmp/domo-state --bindin
 Then create test accounts through the sign-in screen (seller, buyer, driver) and use phone 50111222 for a local admin seller.
 
 ## Design rules learned the hard way
-- **CSS class names collide**: `.th` (chat header), `.dl`, `.chart`, `.sbody` already caused bugs. Prefix new component classes (e.g. `ckth`, `pth`, `kdelta`, `shbody`).
+- **CSS class names collide**: `.th` (chat header), `.dl`, `.chart`, `.sbody`, `.done` (order tracker → now `tkdone`/`tkcur`) already caused bugs. Prefix new component classes (e.g. `ckth`, `pth`, `kdelta`, `shbody`).
 - `<nav>` elements inherit the bottom-bar styles; use `<div role="navigation">` for in-page navs.
+- Colours in JS maps (`ST`, `LV`, stop kinds) use theme tokens (`var(--good)`, `var(--warn)`, `var(--bad)`, `var(--ink3)`), never hex, so they pass contrast in light and dark. Accessibility fixes live in the last CSS block ("UX pass (Nov 2026)"): text ≥ 12px, 44px targets on phones.
 - Forms: errors appear under each field via `validate([[el,msg],...])` / `setErr`; phone placeholders read `ex. 22 123 456`; one column on phones.
 - One main action per card; rare actions go in the `⋯` menu (`omenu`). Bottom sheets on phones.
 - Paused features (protected purchase / "Achat sécurisé") must not be shown or advertised.

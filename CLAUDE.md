@@ -37,6 +37,8 @@ Then create test accounts through the sign-in screen (seller, buyer, driver) and
 - Forms: errors appear under each field via `validate([[el,msg],...])` / `setErr`; phone placeholders read `ex. 22 123 456`; one column on phones.
 - One main action per card; rare actions go in the `⋯` menu (`omenu`). Bottom sheets on phones.
 - Paused features (protected purchase / "Achat sécurisé") must not be shown or advertised.
+- Visual direction (Nov 2026): Uber Eats clarity + Etsy photo-first warmth. Buyer side: borderless photo-first product and shop cards, round "+" on the photo, grey pill chips (`--chip`) with black selected (`--cta`), black pill CTAs for cart/checkout. Domo blue (`--brand`) stays for links, brand and seller tools. Status tabs use the same black selected pill. Restyle rules live in the last CSS blocks of `index.html` ("Design upgrade" and "Commerce restyle").
+- Fonts: Bricolage Grotesque (titles) + Instrument Sans (text) for French; **Cairo** for Arabic (loaded on demand when the language is Arabic; a 1-glyph Cairo subset renders the "ع" button). Never add `text=` to the main Google Fonts link: it subsets every family in that request.
 - UX critique and history: see the Domo project doc `claude/domo-ux-critique-2026-11.md`.
 
 ## Not done yet

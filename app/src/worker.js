@@ -595,15 +595,19 @@ on('GET', '/api/lookup', async ({ env, me, url }) => {
 // --- customer
 on('GET', '/api/my-orders', async ({ env, me }) => {
   if (me.role !== 'customer') fail(403, 'Réservé aux clients');
-  const rows = (await env.DB.prepare(`SELECT o.id, o.ref, o.items, o.price, o.gov, o.status, o.created_at, o.claim_token, o.seller_id, o.secure, o.secure_fee, o.dispute_status
+  const rows = (await env.DB.prepare(`SELECT o.id, o.ref, o.items, o.price, o.gov, o.addr, o.status, o.created_at, o.claim_token, o.seller_id, o.secure, o.secure_fee, o.dispute_status, o.delivery, o.driver_id, o.carrier, o.carrier_ref, o.delivered_at
     FROM orders o WHERE o.customer_id=? ORDER BY o.created_at DESC LIMIT 500`).bind(me.id).all()).results;
   const sellers = {};
   await Promise.all([...new Set(rows.map(r => r.seller_id))].map(async id => {
     const u = await env.DB.prepare('SELECT * FROM users WHERE id=?').bind(id).first();
     if (u) sellers[id] = await card(env, u);
   }));
+  // The buyer sees the Domo driver (first name + phone) only while the parcel is on its way.
+  const live = rows.filter(r => r.driver_id && ['assigned', 'picked', 'returning'].includes(r.delivery));
+  const dn = {};
+  if (live.length) for (const d of (await env.DB.prepare(`SELECT id, name, phone FROM drivers WHERE id IN (${live.map(() => '?').join(',')})`).bind(...live.map(r => r.driver_id)).all()).results) dn[d.id] = { name: firstName(d.name), phone: d.phone };
   const out = await withReviewFlags(env, rows, me);
-  return json({ orders: out.map(r => ({ ...r, seller: sellers[r.seller_id] || null })) });
+  return json({ orders: out.map(({ driver_id, ...r }) => ({ ...r, seller: sellers[r.seller_id] || null, driver: ['assigned', 'picked', 'returning'].includes(r.delivery) ? dn[driver_id] || null : null })) });
 });
 
 // --- claim links (sent to the customer on WhatsApp). Opening one proves access to that phone's WhatsApp.

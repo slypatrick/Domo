@@ -1,5 +1,5 @@
 // Domo service worker: caches the app shell; never caches /api (always live data).
-const CACHE = 'domo-v30';
+const CACHE = 'domo-v31';
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png', '/badge-96.png', '/ill/offline.svg'];
 
 self.addEventListener('install', e => {

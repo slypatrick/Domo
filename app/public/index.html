@@ -1214,9 +1214,50 @@ nav .dot,.chatbtn .dot{font-size:12px;min-width:18px;height:18px;line-height:18p
  .tab,.chip,.chipsbar .chip,.seg button,.btn.sm,.who-me,.brand{min-height:44px}
  .atabs .tab{min-height:44px}
 }
+/* ===== Audit fixes (25 Nov 2026) ===== */
+.prof.plain{grid-template-columns:auto minmax(0,1fr)}
+.prof.plain .av.lg{width:64px;height:64px;font-size:22px}
+.shipln{display:flex;align-items:center;gap:8px;margin:8px 0 0;font-size:14px;color:var(--ink2)}
+.shipln svg.i{width:18px;height:18px;flex:none;color:var(--ink)}
+.shipnote{margin-top:2px}
+.cover.cmos{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:2px;background:var(--sf2);overflow:hidden}
+.cover.cmos img{width:100%;height:100%;object-fit:cover;display:block;min-height:0}
+.cover.cmos img:first-child{grid-row:1/3}
+.cover.cmos img:nth-child(4){grid-column:2/4}
+.cover.cmos:has(img:nth-child(3):last-child) img:nth-child(2),.cover.cmos:has(img:nth-child(3):last-child) img:nth-child(3){grid-column:2/4}
+.oos{color:var(--bad);font-weight:700}
+.pc .soldout{position:absolute;top:calc(100cqw - 46px);right:8px;z-index:2;background:var(--sf);color:var(--ink);font-size:12.5px;font-weight:700;padding:6px 12px;border-radius:999px;box-shadow:0 2px 10px rgba(11,15,28,.18)}
+[lang=ar] .pc .soldout{right:auto;left:8px}
+.pc.oosc .pimg img{filter:grayscale(.6) opacity(.7)}
+.pc .few{display:block;color:var(--warn);font-weight:600;font-size:12.5px;margin-top:2px}
+.carr{display:inline-flex;align-items:center;gap:4px;font-weight:600;color:var(--ink)}
+.carr svg.i{width:14px;height:14px}
+.note.stalen{width:100%;border:0;text-align:left;cursor:pointer;margin:0 0 14px}
+.bulkrow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}
+.ord.selmode{position:relative;padding-left:52px!important}
+.osel{position:absolute;left:12px;top:16px;width:32px;height:32px;display:grid;place-items:center;cursor:pointer;margin:0!important}
+.osel input{width:22px;height:22px;accent-color:var(--cta);margin:0}
+[lang=ar] .ord.selmode{padding-left:16px!important;padding-right:52px!important}[lang=ar] .osel{left:auto;right:12px}
+.bulkbar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(76px + var(--sab));z-index:30;display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--line);box-shadow:0 10px 30px rgba(11,15,28,.2);border-radius:999px;padding:8px 8px 8px 18px;max-width:calc(100vw - 24px)}
+@media(min-width:960px){.bulkbar{bottom:24px}}
+.usage{margin-bottom:14px}
+.usage .ush{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.usage .ush span{color:var(--ink2);font-size:14px;font-variant-numeric:tabular-nums}
+.ubar{height:8px;border-radius:99px;background:var(--sf2);margin-top:10px;overflow:hidden}
+.ubar i{display:block;height:100%;background:var(--cta);border-radius:inherit}
+.card.hero.fewdata>div:nth-child(2){display:none}
+.card.hero.fewdata{grid-template-columns:1fr!important}
+.skiplink{position:fixed;left:12px;top:-60px;z-index:100;background:var(--cta);color:var(--oncta);padding:10px 16px;border-radius:999px;font-weight:600;text-decoration:none;transition:top .15s}
+.skiplink:focus{top:calc(10px + var(--sat))}
+#app:focus{outline:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.ord.selmode .acts,.ord.selmode .wafill,.ord.selmode .ordsep{display:none!important}
+.ord.selmode{cursor:pointer}
+.bulkbar span{white-space:nowrap}
 </style>
 </head>
 <body>
+<a class="skiplink" href="#app">Aller au contenu</a>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="logo" viewBox="0 0 512 512"><rect width="512" height="512" rx="120" fill="#1d3fd1"/><path fill="#fff" fill-rule="evenodd" d="M128 112h150a122 122 0 0 1 122 122v44a122 122 0 0 1-122 122H128z M188 348V250a52 52 0 0 1 104 0v98z"/><circle cx="268" cy="304" r="16" fill="#ff5a3c"/></symbol>
 </svg>
@@ -1230,7 +1271,7 @@ nav .dot,.chatbtn .dot{font-size:12px;min-width:18px;height:18px;line-height:18p
   <button class="btn ink sm" id="newTop" type="button" hidden><svg class="i"><use href="#i-plus"/></svg>Nouvelle commande</button>
 </div></header>
 
-<main id="app"><div class="empty">Chargement…</div></main>
+<main id="app" tabindex="-1"><div class="empty">Chargement…</div></main>
 
 <button class="fab ext" id="fab" type="button" aria-label="Nouvelle commande" hidden><svg class="i"><use href="#i-plus"/></svg><span>Nouvelle commande</span></button>
 <nav id="nav" aria-label="Navigation" hidden></nav>
@@ -1356,6 +1397,8 @@ nav .dot,.chatbtn .dot{font-size:12px;min-width:18px;height:18px;line-height:18p
       <label for="prDesc">Description</label><textarea id="prDesc" rows="3" maxlength="600" placeholder="Matière, coupe, conseils…"></textarea>
       <div class="row"><div><label for="prSizes">Tailles proposées</label><input id="prSizes" placeholder="S, M, L, XL" autocomplete="off"></div><div><label for="prColors">Couleurs proposées</label><input id="prColors" placeholder="Noir, Beige" autocomplete="off"></div></div>
       <p class="hint" style="margin-top:6px">Séparez par des virgules. Le client devra choisir avant d’ajouter au panier, ce qui évite les erreurs de taille.</p>
+      <div class="row"><div><label for="prCost">Coût d’achat (DT) <span class="opt-l">(privé)</span></label><input id="prCost" type="number" step="0.5" min="0" inputmode="decimal" placeholder="ex. 35"></div><div><label for="prStock">Stock <span class="opt-l">(facultatif)</span></label><input id="prStock" type="number" step="1" min="0" inputmode="numeric" placeholder="Illimité"></div></div>
+      <p class="hint" style="margin-top:6px">Le coût reste privé : il sert à calculer votre bénéfice. Avec un stock, le produit passe en « Rupture » tout seul quand il est vendu.</p>
       <label style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span>Visible dans la vitrine</span><span class="switch2"><input type="checkbox" id="prOn" checked><i></i></span></label>
       <div class="err" id="prErr"></div>
     </div>
@@ -1372,6 +1415,8 @@ nav .dot,.chatbtn .dot{font-size:12px;min-width:18px;height:18px;line-height:18p
 <div class="toast" id="toast" hidden role="status"><span id="toastT"></span><button type="button" id="undo">Annuler</button></div>
 
 <script>
+/* Product switches. Paused or side products stay in the code but are hidden from users. */
+const FLAGS={delivery:false,boost:false,explore:false,buyerScore:false};
 /* ---------- Arabic interface (translates rendered text; French stays the source) ---------- */
 const AR={
 // navigation and chrome
@@ -1456,6 +1501,47 @@ const AR_RX=[
 ];
 const arMoney=x=>x.replace(/([\d.,\u00a0\u202f ]+?)[\s\u00a0\u202f]DT/g,'$1 د.ت');
 const AR_DAYS={lundi:'الاثنين',mardi:'الثلاثاء',mercredi:'الأربعاء',jeudi:'الخميس',vendredi:'الجمعة',samedi:'السبت',dimanche:'الأحد'},AR_MONTHS={janvier:'جانفي','février':'فيفري',mars:'مارس',avril:'أفريل',mai:'ماي',juin:'جوان',juillet:'جويلية','août':'أوت',septembre:'سبتمبر',octobre:'أكتوبر',novembre:'نوفمبر','décembre':'ديسمبر'};
+// ---- Arabic additions (25 Nov 2026 audit)
+Object.assign(AR,{
+'Aller au contenu':'الانتقال إلى المحتوى','Navigation':'التنقل','Afficher le mot de passe':'إظهار كلمة السر','Illimité':'غير محدود',
+'Tableau de bord':'لوحة القيادة','Vérifications':'التحقّقات','Contestations':'الاعتراضات','Livraisons à attribuer':'توصيلات للإسناد','Livraisons en cours':'توصيلات جارية','Livreurs':'عمّال التوصيل','Versements':'الدفعات','Sections de la console':'أقسام لوحة الإدارة',
+'Aucune contestation en attente':'لا توجد اعتراضات في الانتظار','Quand un client conteste un refus, il apparaît ici. Le refus ne compte pas tant que vous n’avez pas décidé.':'عندما يعترض زبون على رفض، يظهر هنا. لا يُحتسب الرفض قبل قرارك.',
+'30 jours':'30 يومًا','7 jours':'7 أيام','90 jours':'90 يومًا','Période':'الفترة','Action':'إجراء','Actualiser':'تحديث','Bloqué':'محظور','Clients inscrits':'زبائن مسجّلون','Commandes créées':'طلبيات أُنشئت','Commandes sur 30 jours':'الطلبيات خلال 30 يومًا','Gouvernorats':'الولايات','Inscriptions récentes':'تسجيلات حديثة','Inscriptions vendeurs':'تسجيلات البائعين','Inscriptions vendeurs par jour':'تسجيلات البائعين يوميًا','Inscrit':'مسجّل',
+'Les vendeurs sans commande après 24 h sont signalés. Un message personnel augmente fortement l’activation.':'يُنبَّه إلى البائعين الذين لم يسجّلوا طلبية بعد 24 ساعة. رسالة شخصية ترفع التفعيل كثيرًا.',
+'Raisons des colis non livrés':'أسباب الطرود غير المُسلَّمة','Refus après expédition':'رفض بعد الإرسال','Valeur livrée':'القيمة المُسلَّمة','Vendeurs':'البائعون','Vendeurs actifs (7 jours)':'بائعون نشطون (7 أيام)','Vendeurs activés':'بائعون مفعَّلون','Vendeurs inscrits':'بائعون مسجّلون','Vendeurs les plus actifs':'البائعون الأكثر نشاطًا','À faire':'للإنجاز',
+'Acceptées':'مقبولة','Les demandes des boutiques apparaissent ici.':'تظهر طلبات المتاجر هنا.','Rien à vérifier':'لا شيء للتحقق',
+'Après chaque livraison, vous pourrez noter la boutique ici.':'بعد كل توصيل، يمكنك تقييم المتجر هنا.','Les commandes livrées ou refusées de clients vérifiés apparaîtront ici.':'ستظهر هنا الطلبيات المُسلَّمة أو المرفوضة لزبائن موثَّقين.','Tout est à jour':'كل شيء محدَّث','Voir mon profil public':'عرض ملفي العام','Votre réputation et les boutiques à évaluer':'سمعتك والمتاجر التي تنتظر تقييمك','Votre réputation et les clients à évaluer':'سمعتك والزبائن الذين ينتظرون تقييمك','avis':'تقييمات','avis reçus':'تقييمات واردة','livrées':'مُسلَّمة','note':'التقييم','pour afficher le score de confiance.':'لإظهار مؤشر الثقة.','À évaluer':'للتقييم','Sections de la boutique':'أقسام المتجر',
+'Sélectionner':'تحديد','Annuler la sélection':'إلغاء التحديد','Liste de ramassage':'قائمة الاستلام','Tout':'الكل','Marquer confirmées':'تحديد كمؤكَّدة','Marquer expédiées':'تحديد كمُرسَلة','Marquer livrées':'تحديد كمُسلَّمة','Marquer expédiée':'تحديد كمُرسَلة','Actions groupées':'إجراءات جماعية',
+'Colis expédié':'طرد مُرسَل','Transporteur':'شركة التوصيل','Numéro de suivi du transporteur':'رقم تتبّع شركة التوصيل','Le client le voit sur sa page de suivi.':'يراه الزبون في صفحة التتبّع.','Je livre moi-même':'أوصل بنفسي',
+'Commandes et livraisons':'الطلبيات والتوصيل','Masquer ma ville':'إخفاء مدينتي','Messages et appels':'الرسائل والمكالمات','Suivi de mes commandes':'تتبّع طلبياتي','Type de document':'نوع الوثيقة',
+'Acheteur':'مشترٍ','Vendeur':'بائع','Application':'التطبيق','Badges':'الشارات','Carte d’identité':'بطاقة التعريف','Changer le mot de passe':'تغيير كلمة السر','Devenir vendeur':'كن بائعًا','Document':'وثيقة','Déconnecter mes autres appareils':'تسجيل الخروج من أجهزتي الأخرى','Envoyer pour vérification':'إرسال للتحقق',
+'Envoyez votre pièce d’identité ou votre RNE depuis Compte → Vérification.':'أرسل بطاقة تعريفك أو السجل الوطني للمؤسسات من الحساب ← التحقق.','Français':'Français','Informations':'معلومات','J’accepte que Domo conserve ces documents pour vérifier ma boutique.':'أوافق على أن يحتفظ Domo بهذه الوثائق للتحقق من متجري.','Le numéro sert à vous connecter et ne peut pas être changé.':'يُستعمل الرقم لتسجيل الدخول ولا يمكن تغييره.',
+'Mes espaces':'فضاءاتي','Messages des boutiques et appels dans Domo.':'رسائل المتاجر والمكالمات في Domo.','Messages des clients et appels dans Domo.':'رسائل الزبائن والمكالمات في Domo.','Mot de passe actuel':'كلمة السر الحالية','Nom tel qu’il figure sur le document':'الاسم كما يظهر في الوثيقة','Notifications bloquées':'الإشعارات محظورة','Nouvelles commandes, confirmations, livreur Domo.':'طلبيات جديدة وتأكيدات.',
+'Obtenez le badge « Vendeur vérifié »':'احصل على شارة «بائع موثَّق»','Ouvert':'مفتوح','Ouvrir':'فتح','Patente':'الباتيندة','Photo recto':'صورة الوجه','Photo verso':'صورة الظهر','Postuler':'تقديم طلب','Prochains badges':'الشارات القادمة','Quand quelqu’un vous évalue.':'عندما يقيّمك أحد.','Registre (RNE)':'السجل الوطني للمؤسسات','Supprimer ma boutique':'حذف متجري','Supprimer mon compte':'حذف حسابي','Sécurité':'الأمان',
+'Une catégorie coupée reste visible dans la cloche, sans notification sur le téléphone.':'الفئة المعطّلة تبقى ظاهرة في الجرس، دون إشعار على الهاتف.','Vos commandes, produits et avis reçus seront effacés. Les avis que vous avez écrits restent, de façon anonyme.':'ستُحذف طلبياتك ومنتجاتك والتقييمات الواردة. التقييمات التي كتبتها تبقى دون اسم.','Votre ville n’apparaît plus sur votre profil public.':'لم تعد مدينتك تظهر في ملفك العام.','Vérification':'التحقق','Vérification, badges, versements.':'التحقق والشارات.',
+'Pionnier':'رائد','Parmi les premiers clients sur Domo.':'من أوائل الزبائن على Domo.','Parmi les premières boutiques sur Domo.':'من أوائل المتاجر على Domo.','Numéro confirmé':'رقم مؤكَّد','Très bien noté':'تقييم ممتاز','Zéro litige':'صفر نزاعات','Expédition rapide':'إرسال سريع','Il faut 5 avis et une moyenne d’au moins 4,5.':'يلزم 5 تقييمات ومعدّل 4,5 على الأقل.','Expédiez au moins 5 colis, la plupart en moins de 24 h.':'أرسل 5 طرود على الأقل، أغلبها في أقل من 24 ساعة.','Au moins 20 commandes livrées sans aucun problème signalé.':'20 طلبية مُسلَّمة على الأقل دون أي مشكلة.','Les 10 premières commandes livrées.':'أول 10 طلبيات مُسلَّمة.','10 livraisons':'10 توصيلات',
+'Vérifiez votre numéro.':'تحقّق من رقمك.','Compte, notifications et confidentialité':'الحساب والإشعارات والخصوصية','Domo ne note pas les acheteurs. Chaque boutique voit seulement l’historique de vos commandes chez elle.':'Domo لا يقيّم المشترين. كل متجر يرى فقط سجل طلبياتك لديه.','Vous vendez aussi ?':'تبيع أيضًا؟','Commandez dans les boutiques Domo et suivez vos colis.':'اطلب من متاجر Domo وتابع طرودك.','Confirmez vos commandes sur WhatsApp, ouvrez votre vitrine, suivez vos colis.':'أكّد طلبياتك عبر واتساب، افتح واجهتك، وتابع طرودك.','Activité des boutiques, vérifications et signalements.':'نشاط المتاجر والتحقّقات والبلاغات.',
+'Commandes confirmées ce mois':'الطلبيات المؤكَّدة هذا الشهر','Gratuit et illimité pendant le lancement. Ensuite, l’offre gratuite inclura 40 commandes confirmées par mois.':'مجاني ودون حدود خلال فترة الإطلاق. بعدها، ستشمل الباقة المجانية 40 طلبية مؤكَّدة في الشهر.','Offre gratuite':'الباقة المجانية','Modèle':'النموذج','Nouvelles commandes, messages et appels, même quand Domo est fermé.':'طلبيات جديدة ورسائل ومكالمات، حتى عندما يكون Domo مغلقًا.','Visible par vos clients sur le lien de confirmation.':'يراه زبائنك في رابط التأكيد.','Sections':'الأقسام',
+'Ajoutez le coût d’achat de vos produits (Boutique) pour voir votre vrai bénéfice.':'أضف كلفة شراء منتجاتك (المتجر) لترى ربحك الحقيقي.','Chiffre d’affaires livré':'رقم المعاملات المُسلَّم','Bénéfice net, après retours':'الربح الصافي بعد المرتجعات',
+'Coût d’achat (DT)':'كلفة الشراء (د.ت)','(privé)':'(خاص)','Stock':'المخزون','Le coût reste privé : il sert à calculer votre bénéfice. Avec un stock, le produit passe en « Rupture » tout seul quand il est vendu.':'تبقى الكلفة خاصة: تُستعمل لحساب ربحك. مع المخزون، يصبح المنتج «نفد» تلقائيًا عند بيعه.','Rupture':'نفد','Rupture de stock':'نفد من المخزون',
+'Adresse de livraison':'عنوان التوصيل','Indiquez votre adresse : rue ou quartier, et un point de repère pour le livreur':'أدخل عنوانك: الشارع أو الحي، ونقطة دالّة لعامل التوصيل','vous payez à la livraison':'تدفع عند الاستلام',
+'Marquer confirmée':'تحديد كمؤكَّدة','partout en Tunisie · vous payez à la livraison':'في كامل تونس · تدفع عند الاستلام'
+});
+AR_RX.push(
+ [/^(\d+) commandes? sans réponse depuis plus de 24 h\.$/,'$1 طلبية دون رد منذ أكثر من 24 ساعة.'],
+ [/^Relancez-les sur WhatsApp avant qu’elles ne refroidissent\.$/,'ذكّرهم عبر واتساب قبل أن يفتر اهتمامهم.'],
+ [/^(\d+) \/ (\d+) commandes confirmées ce mois$/,'$1 / $2 طلبية مؤكَّدة هذا الشهر'],
+ [/^(\d+) colis refusés?(?: : (.+) perdus en frais)?$/,m=>`${m[1]} طرد مرفوض${m[2]?` : ${arMoney(m[2])} خسارة في المصاريف`:''}`],
+ [/^Vendeur · (.+)$/,'بائع · $1'],[/^Acheteur · (.+)$/,'مشترٍ · $1'],
+ [/^▲ \+(\d+) vs période précédente$/,'▲ +$1 مقارنة بالفترة السابقة'],[/^▼ −?(\d+) vs période précédente$/,'▼ −$1 مقارنة بالفترة السابقة'],
+ [/^(\d+) sur 30 jours$/,'$1 خلال 30 يومًا'],[/^\+(\d+) sur 30 jours$/,'+$1 خلال 30 يومًا'],
+ [/^(\d+) au total · max (\d+)\/jour$/,'$1 إجمالًا · أقصى $2 يوميًا'],
+ [/^(\d+) produits en vitrine$/,'$1 منتجات في الواجهة'],[/^(\d+) en stock$/,'$1 في المخزون'],[/^Plus que (\d+)$/,'بقي $1 فقط'],
+ [/^(\d+) confirmées par le client$/,'$1 أكّدها الزبون'],[/^(\d+) colis en route$/,'$1 طرد في الطريق'],
+ [/^(\d+) sélectionnées?$/,'$1 محدَّدة'],[/^(\d+) commandes? mises? à jour$/,'تحديث $1 طلبية'],
+ [/^Livraison (.+) partout en Tunisie · vous payez à la livraison$/,m=>`التوصيل ${arMoney(m[1])} في كامل تونس · تدفع عند الاستلام`],
+ [/^\+ livraison (.+) · vous payez à la livraison$/,m=>`+ توصيل ${arMoney(m[1])} · تدفع عند الاستلام`]
+);
 function arT(k){if(AR[k]!=null)return AR[k];for(const [rx,f] of AR_RX){const m=k.match(rx);if(m)return typeof f==='function'?f(m):k.replace(rx,f)}return null}
 const AR_SKIP='script,style,textarea,option,code,.bio,.rev,.pc .pb b,.sinfo h1,.pshop,.ckline .t b,.csr .t b,#psBody h2,[data-notr]';
 let LANG=(()=>{try{const v=JSON.parse(localStorage.getItem('wsel.lang')||'null');if(v)return v}catch(e){}return(navigator.language||'').toLowerCase().startsWith('ar')?'ar':'fr'})();
@@ -1562,7 +1648,7 @@ const isNew=t=>t.level==='new'||t.level==='unverified';
 const SLV={trusted:'Fiable',average:'Avis mitigés',risky:'Avis négatifs',new:'Nouvelle boutique',unverified:'Nouvelle boutique'};
 const lvOf=c=>{const t=c.trust,[l,col]=LV[t.level]||LV.new;return[c.role==='seller'?SLV[t.level]||l:l,col]};
 function badge(c){
-  if(!c)return'';const t=c.trust,[l,col]=lvOf(c);
+  if(!c||(c.trust&&c.trust.level==='private'))return'';const t=c.trust,[l,col]=lvOf(c);
   return`<button class="tb" type="button" data-profile="${c.id}" style="--c:${col};--p:${isNew(t)?0:t.score}" aria-label="Profil de ${esc(c.name)} : ${l}">${isNew(t)?`<span class="seal n">${ic('star')}</span>`:`<span class="seal"><span>${t.score}</span></span>`}<em>${l}</em></button>`;
 }
 function trustLine(c){
@@ -1623,7 +1709,7 @@ function authView(claim){
       </div>
     </div>
     <div class="card authcard">
-      ${claim?'':`<div class="seg" role="group" aria-label="Type de compte" style="display:flex;margin-bottom:18px"><button type="button" data-role="seller" aria-pressed="${seller}" style="flex:1">Je vends</button><button type="button" data-role="customer" aria-pressed="${role==='customer'}" style="flex:1">J'achète</button><button type="button" data-role="driver" aria-pressed="${driver}" style="flex:1">Je livre</button></div>`}
+      ${claim?'':`<div class="seg" role="group" aria-label="Type de compte" style="display:flex;margin-bottom:18px"><button type="button" data-role="seller" aria-pressed="${seller}" style="flex:1">Je vends</button><button type="button" data-role="customer" aria-pressed="${role==='customer'}" style="flex:1">J'achète</button>${FLAGS.delivery||driver?`<button type="button" data-role="driver" aria-pressed="${driver}" style="flex:1">Je livre</button>`:''}</div>`}
       <h2>${mode==='login'?'Connexion':driver?'Devenir livreur':'Créer un compte'}</h2>
       <p class="faint" style="margin:0">${mode==='login'?(driver?'Espace livreur Domo':seller?'Espace vendeur':'Espace client'):(driver?'L’équipe Domo vous rappelle sous 48 h':seller?'Gratuit pendant le lancement':'Gratuit, en 30 secondes')}</p>
       <form id="af" novalidate>
@@ -1637,7 +1723,7 @@ function authView(claim){
         <button class="btn pri wide" style="margin-top:18px;min-height:46px" type="submit" id="aGo">${mode==='login'?'Se connecter':driver?'Envoyer ma candidature':'Créer mon compte'}</button>
       </form>
       <div class="switch">${mode==='login'?(driver?'Pas encore livreur Domo ?':'Pas encore de compte ?'):'Déjà un compte ?'} <button type="button" id="aSwitch">${mode==='login'?(driver?'Postuler':'Créer un compte'):'Se connecter'}</button></div>
-    </div>${claim?'':`<a class="btn ghost wide" href="/?explore" style="grid-column:1/-1;max-width:440px;justify-self:center">${ic('search')}Explorer les boutiques sans compte</a>`}</div>`;
+    </div>${claim||!FLAGS.explore?'':`<a class="btn ghost wide" href="/?explore" style="grid-column:1/-1;max-width:440px;justify-self:center">${ic('search')}Explorer les boutiques sans compte</a>`}</div>`;
     $$('[data-role]').forEach(b=>b.onclick=()=>{role=b.dataset.role;S.set('wsel.role',role);draw()});if(pre&&$('#aPhone'))$('#aPhone').value=fmtPhone(pre);
     $('#aSwitch').onclick=()=>{mode=mode==='login'?'register':'login';draw()};
     $('#aForgot')&&($('#aForgot').onclick=()=>forgotPanel(role,$('#aPhone').value));
@@ -1741,17 +1827,18 @@ async function claimView(tk){
 
 /* ---------- navigation ---------- */
 const NAV={seller:[['commandes','Commandes','box'],['messages','Messages','chat','dsk'],['boutique','Boutique','store'],['avis','Avis','star','dsk'],['stats','Stats','chart'],['reglages','Réglages','gear']],customer:[['explorer','Explorer','search'],['mes-commandes','Commandes','box'],['messages','Messages','chat'],['avis','Avis','star'],['profil','Profil','user']],driver:[['tournee','Tournée','track'],['caisse','Caisse','wallet'],['compte','Compte','user']]};
+if(!FLAGS.explore)NAV.customer=NAV.customer.filter(x=>x[0]!=='explorer');
 function setUnread(n){unread=n;$('#chatDot').hidden=!n;$('#chatDot').textContent=n>9?'9+':n;const a=$('nav a[data-v=messages]');if(a){let d=a.querySelector('.dot');if(n){if(!d){d=document.createElement('span');d.className='dot';a.appendChild(d)}d.textContent=n>9?'9+':n}else if(d)d.remove()}}
 function drawNav(){
   $('#nav').innerHTML=`<a class="brand nb" href="#" aria-label="Domo"><svg class="mark"><use href="#logo"/></svg>Domo</a>`+
     NAV[me.role].map(([k,l,i,dsk])=>`<a href="#${k}" data-v="${k}"${dsk?' class="only-dsk"':''}>${ic(i)}<span>${l}</span>${k==='avis'&&todo.length?`<span class="dot">${todo.length}</span>`:''}</a>`).join('')+
-    (me.role==='seller'?`<a href="#boost" data-v="boost" class="only-dsk">${ic('mega')}<span>Domo Boost</span></a>`:'')+(me.admin?`<a href="#admin" data-v="admin" class="only-dsk">${ic('shield')}<span>Console Domo</span></a>`:'')+`<a class="nf" href="#compte">${esc(me.role==='seller'?me.shop:me.name)}<br><span style="font-size:12px">${ROLE_L[me.role]} · ${fmtPhone(me.phone)}</span>${(me.links||[]).length?`<button class="btn sm ghost nsw" type="button" data-space="${me.links[0]}">${ic('swap')}${me.links[0]==='seller'?'Espace vendeur':'Espace acheteur'}</button>`:''}</a>`;
+    (me.role==='seller'&&FLAGS.boost?`<a href="#boost" data-v="boost" class="only-dsk">${ic('mega')}<span>Domo Boost</span></a>`:'')+(me.admin?`<a href="#admin" data-v="admin" class="only-dsk">${ic('shield')}<span>Console Domo</span></a>`:'')+`<a class="nf" href="#compte">${esc(me.role==='seller'?me.shop:me.name)}<br><span style="font-size:12px">${ROLE_L[me.role]} · ${fmtPhone(me.phone)}</span>${(me.links||[]).length?`<button class="btn sm ghost nsw" type="button" data-space="${me.links[0]}">${ic('swap')}${me.links[0]==='seller'?'Espace vendeur':'Espace acheteur'}</button>`:''}</a>`;
   chrome(true);setUnread(unread);
 }
 function route(){
   if(!me){if(token&&location.search&&location.hash.length>1)location.href='/'+location.hash;return}
   if($('#sub .pubnav')||document.body.classList.contains('nonav')){setCtx();chrome(true);document.body.classList.remove('embed')}
-  const keys=[...NAV[me.role].map(x=>x[0]),'notifs','compte',...(me.role==='seller'?['boost']:[]),...(me.admin?['admin']:[])];let [v,sub]=location.hash.slice(1).split('/');if(!keys.includes(v))v=me.role==='customer'&&myOrders.length?'mes-commandes':keys[0];
+  const keys=[...NAV[me.role].map(x=>x[0]),'notifs','compte',...(me.role==='seller'&&FLAGS.boost?['boost']:[]),...(me.admin?['admin']:[])];let [v,sub]=location.hash.slice(1).split('/');if(!keys.includes(v))v=me.role==='customer'&&myOrders.length?'mes-commandes':keys[0];
   $$('#nav a[data-v]').forEach(a=>a.dataset.v===v?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
   const seller=me.role==='seller',drv=me.role==='driver';$('#fab').hidden=!(seller&&v==='commandes');$('#fab').classList.toggle('mini',orders.length>0);$('#newTop').hidden=!seller;$('#chatTop').hidden=drv;$('#bellTop').hidden=drv;$('#adminTop').hidden=!me.admin;
   if(v!=='messages'){activeConv=null;document.body.classList.remove('thread');clearInterval(threadT)}
@@ -1780,7 +1867,7 @@ function actions(o){
   const b=(s,l,cls='')=>`<button class="btn sm ${cls}" type="button" data-act="${s}" data-id="${o.id}">${l}</button>`;
   switch(o.status){
     case'new':case'noanswer':return b('confirmed',ic('check')+'<span class="lfull">Marquer confirmée</span><span class="lshort">Confirmée</span>')+b('noanswer',o.attempts?`Pas de réponse · ${o.attempts}`:'Pas de réponse');
-    case'confirmed':return o.delivery==='requested'?`<button class="btn sm" type="button" data-dlv="cancel" data-id="${o.id}">Annuler le livreur</button>`:o.delivery==='assigned'?`<button class="btn sm ghost" type="button" data-dlv="cancel" data-id="${o.id}">Annuler le ramassage</button>`:`<button class="btn sm pri" type="button" data-dlv="request" data-id="${o.id}">${ic('track')}Livreur Domo</button>`+b('shipped','Expédiée moi-même');
+    case'confirmed':return o.delivery==='requested'?`<button class="btn sm" type="button" data-dlv="cancel" data-id="${o.id}">Annuler le livreur</button>`:o.delivery==='assigned'?`<button class="btn sm ghost" type="button" data-dlv="cancel" data-id="${o.id}">Annuler le ramassage</button>`:(FLAGS.delivery?`<button class="btn sm pri" type="button" data-dlv="request" data-id="${o.id}">${ic('track')}Livreur Domo</button>`+b('shipped','Expédiée moi-même'):b('shipped',ic('track')+'Marquer expédiée','pri'));
     case'shipped':return ['picked','assigned'].includes(o.delivery)?'<span class="lock">'+ic('track')+'Le livreur Domo met à jour le statut</span>':b('delivered','Livrée','pri')+b('refused','Refusée','dan');
     case'delivered':case'refused':return(o.customer?`<button class="btn sm pri" type="button" data-review="${o.id}">${ic('star')}Évaluer le client</button>`:'')+b('new','Rouvrir','ghost');
     default:return b('new','Rouvrir','ghost');
@@ -1799,7 +1886,7 @@ function card(o){
   <div class="o1">${avatar(o.name)}<div class="on"><b>${esc(o.name)}</b><span>${[o.gov?esc(o.gov):'',ago(o.created_at),o.src?esc(o.src):''].filter(Boolean).join(' · ')}</span></div><div class="op${num(o.price)<0.01?' tbd':''}">${priceTxt(o.price)}</div></div>
   <div class="oi">${esc(o.items)}</div>
   ${o.notes?`<div class="hint">${esc(o.notes)}</div>`:''}
-  <div class="who"><span class="st" style="--c:${c}"><i></i>${l}</span>${o.customer?badge(o.customer):'<span>Sans compte Domo</span>'}<span>${fmtPhone(o.phone)}</span>${o.ref?`<span class="ref">${fmtRef(o.ref)}</span>`:''}${shieldTag(o)}${dlvTag(o)}</div>
+  <div class="who"><span class="st" style="--c:${c}"><i></i>${l}</span>${o.customer?badge(o.customer):'<span>Sans compte Domo</span>'}<span>${fmtPhone(o.phone)}</span>${o.ref?`<span class="ref">${fmtRef(o.ref)}</span>`:''}${o.carrier?`<span class="carr">${ic('track')}${esc(o.carrier)}${o.carrier_ref?' · '+esc(o.carrier_ref):''}</span>`:''}${shieldTag(o)}${dlvTag(o)}</div>
   ${o.dispute_status?disputeBox(o):''}
   ${pending?(o.customer?custRisk(o.customer):'')+ownRisk(own(o.phone,o.id)):''}
   ${['new','noanswer'].includes(o.status)&&!o.reviewed?`<a class="btn wafill" href="${waLink(o)}" target="_blank" rel="noopener">${ic('wa')}${o.status==='noanswer'?'Relancer sur WhatsApp':'Envoyer la confirmation WhatsApp'}</a>`:''}
@@ -1812,33 +1899,67 @@ function disputeBox(o){
   return`<div class="disp"><b>${ic('flag')} Problème signalé : ${esc(o.dispute_reason)}</b><div>${esc(o.dispute_details||'')}</div><div class="hint">Signalé ${ago(o.dispute_at)}. Répondez vite : le client voit votre réponse.</div>
   <div class="acts" data-dbox="${o.id}"><button class="btn sm pri" type="button" data-dres="replaced" data-id="${o.id}">Envoyer un échange</button><button class="btn sm" type="button" data-dres="refunded" data-id="${o.id}">Reprendre et rembourser</button><button class="btn sm ghost" type="button" data-dres="rejected" data-id="${o.id}">Refuser</button></div></div>`;
 }
+const DAY_MS=864e5;
+const BULK={todo:['confirmed','Marquer confirmées'],confirmed:['shipped','Marquer expédiées'],shipped:['delivered','Marquer livrées']};
+let sel=null;
+function bulkWire(list){
+  const t=$('#selT');if(t)t.onclick=()=>{sel=sel?null:new Set();renderOrders()};
+  const pl$=$('#printL');if(pl$)pl$.onclick=()=>printPickup(list);
+  document.querySelector('.bulkbar')?.remove();
+  if(!sel||!BULK[tab]){sel=null;return}
+  for(const id of [...sel])if(!list.some(o=>o.id===id))sel.delete(id);
+  for(const a of document.querySelectorAll('#list .ord')){const id=a.querySelector('[data-id]')?.dataset.id;if(!id)continue;
+    a.classList.add('selmode');a.insertAdjacentHTML('afterbegin',`<label class="osel"><input type="checkbox" data-sel="${id}" ${sel.has(id)?'checked':''} aria-label="Sélectionner la commande de ${esc((orders.find(o=>o.id===id)||{}).name||'')}"></label>`)}
+  const [st,lab]=BULK[tab];
+  const bar=document.createElement('div');bar.className='bulkbar';bar.setAttribute('role','region');bar.setAttribute('aria-label','Actions groupées');
+  const paint=()=>{bar.innerHTML=`<span><b>${sel.size}</b> sélectionnée${sel.size>1?'s':''}</span><button class="btn sm ghost" type="button" data-all>Tout</button><button class="btn sm pri" type="button" data-go ${sel.size?'':'disabled'}>${lab}</button>`};
+  paint();document.body.append(bar);
+  $('#list').onclick=e=>{const a=e.target.closest('.ord.selmode');if(!a||e.target.closest('input,a,button'))return;const c=a.querySelector('[data-sel]');c.checked=!c.checked;c.dispatchEvent(new Event('change',{bubbles:true}))};
+  $('#list').onchange=e=>{const c=e.target.closest('[data-sel]');if(!c)return;c.checked?sel.add(c.dataset.sel):sel.delete(c.dataset.sel);paint()};
+  bar.onclick=async e=>{
+    if(e.target.closest('[data-all]')){list.forEach(o=>sel.add(o.id));renderOrders();return}
+    if(!e.target.closest('[data-go]')||!sel.size)return;
+    let extra={};if(st==='shipped'){const c=await askCarrier(sel.size);if(!c)return;extra={carrier:c.carrier}}
+    let ok=0;for(const id of [...sel]){try{const o=orders.find(x=>x.id===id);Object.assign(o,(await api('/orders/'+id,{method:'PATCH',body:{status:st,...extra}})).order);ok++}catch(x){toast(x.message)}}
+    sel=null;route();toast(pl(ok,'commande mise à jour','commandes mises à jour'))};
+}
+function printPickup(list){
+  const rows=list.map(o=>`<tr><td>${esc(fmtRef(o.ref))}</td><td>${esc(o.name)}<br>${esc(fmtPhone(o.phone))}</td><td>${esc(o.gov||'')}<br>${esc(o.addr||'')}</td><td>${esc(o.items)}</td><td style="text-align:right;white-space:nowrap"><b>${money(o.price)}</b></td></tr>`).join('');
+  const html=`<!doctype html><html lang="fr"><meta charset="utf-8"><title>Ramassage ${esc(me.shop||'')}</title><style>body{font:13px/1.4 system-ui,sans-serif;margin:24px;color:#111}h1{font-size:18px;margin:0 0 4px}p{margin:0 0 14px;color:#555}table{width:100%;border-collapse:collapse}th,td{border:1px solid #bbb;padding:6px 8px;vertical-align:top;text-align:left}th{background:#f2f2f2}</style><h1>${esc(me.shop||'')} · liste de ramassage</h1><p>${new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})} · ${pl(list.length,'colis')} · à encaisser ${money(list.reduce((a,o)=>a+num(o.price),0))}</p><table><thead><tr><th>ID</th><th>Client</th><th>Adresse</th><th>Articles</th><th>À encaisser</th></tr></thead><tbody>${rows}</tbody></table>`;
+  const f=document.createElement('iframe');f.title='Liste de ramassage';f.style.cssText='position:fixed;width:0;height:0;border:0;right:0;bottom:0';document.body.append(f);
+  f.contentDocument.open();f.contentDocument.write(html);f.contentDocument.close();setTimeout(()=>{f.contentWindow.focus();f.contentWindow.print();setTimeout(()=>f.remove(),1000)},200);
+}
 function renderOrders(){
   {const f=$('#fab');if(f)f.classList.toggle('mini',orders.length>0)}
   if(tab==='disputes'&&!orders.some(o=>o.dispute_status==='open'))tab='todo';
-  const ss=(TABS.find(t=>t[0]===tab)||[0,0,[]])[2],q=query.trim().toLowerCase(),qd=q.replace(/\D/g,'');
+  const nz=t=>String(t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  const ss=(TABS.find(t=>t[0]===tab)||[0,0,[]])[2],q=nz(query.trim()),qd=q.replace(/\D/g,'');
+  const stale=orders.filter(o=>['new','noanswer'].includes(o.status)&&Date.now()-o.created_at>DAY_MS);
   const cnt=s=>orders.filter(o=>s.includes(o.status)).length;
   const route$=orders.filter(o=>o.status==='shipped');
   const disp=orders.filter(o=>o.dispute_status==='open');
-  const list=(tab==='disputes'?disp:orders.filter(o=>ss.includes(o.status))).filter(o=>(!q||[o.name,o.items,o.gov,o.addr,o.notes,o.ref,fmtRef(o.ref)].join(' ').toLowerCase().includes(q)||(qd.length>=3&&o.phone.includes(qd))));
+  const list=(tab==='disputes'?disp:orders.filter(o=>ss.includes(o.status))).filter(o=>(!q||nz([o.name,o.items,o.gov,o.addr,o.notes,o.ref,fmtRef(o.ref)].join(' ')).includes(q)||(qd.length>=3&&o.phone.includes(qd))));
   $('#app').innerHTML=head('Commandes',today())+onboarding()+
   (orders.length?`<div class="tiles">
     <button class="tile ${cnt(['new','noanswer'])?'hot':''}" type="button" data-tab="todo"><span>À confirmer</span><b>${cnt(['new','noanswer'])}</b><small>à contacter</small></button>
     <button class="tile" type="button" data-tab="confirmed"><span>À expédier</span><b>${cnt(['confirmed'])}</b><small>prêtes pour le livreur</small></button>
     <button class="tile" type="button" data-tab="shipped"><span>En livraison</span><b>${money(route$.reduce((a,o)=>a+num(o.price),0))}</b><small>${pl(route$.length,'colis')} en route</small></button>
   </div>`:'')+
-  `${disp.length?`<button class="note risk" type="button" data-tab="disputes" style="width:100%;border:0;text-align:left;cursor:pointer;margin:0 0 14px">${ic('flag')}<div><b>${pl(disp.length,'problème signalé')}</b> par des clients en achat sécurisé. Toucher pour répondre.</div></button>`:''}
+  `${stale.length?`<button class="note warn stalen" type="button" data-tab="todo">${ic('alert')}<div><b>${pl(stale.length,'commande','commandes')} sans réponse depuis plus de 24 h.</b> Relancez-les sur WhatsApp avant qu’elles ne refroidissent.</div></button>`:''}${disp.length?`<button class="note risk" type="button" data-tab="disputes" style="width:100%;border:0;text-align:left;cursor:pointer;margin:0 0 14px">${ic('flag')}<div><b>${pl(disp.length,'problème signalé')}</b> par des clients en achat sécurisé. Toucher pour répondre.</div></button>`:''}
   <div class="tools"><div class="tabs" role="toolbar" aria-label="Filtrer par statut">${TABS.map(([k,l,s])=>`<button class="tab" type="button" data-tab="${k}" aria-pressed="${k===tab}">${l}<i>${cnt(s)}</i></button>`).join('')}${disp.length?`<button class="tab" type="button" data-tab="disputes" aria-pressed="${tab==='disputes'}">Litiges<i>${disp.length}</i></button>`:''}</div>
   <div class="search">${ic('search')}<input id="q" type="search" placeholder="Nom, téléphone, produit, ID…" aria-label="Rechercher" value="${esc(query)}"></div></div>
+  ${list.length>1&&BULK[tab]?`<div class="bulkrow"><button class="btn sm ghost" type="button" id="selT">${ic(sel?'x':'check')}${sel?'Annuler la sélection':'Sélectionner'}</button>${tab==='confirmed'?`<button class="btn sm ghost" type="button" id="printL">${ic('list')}Liste de ramassage</button>`:''}</div>`:''}
   <div id="list">${list.length?list.map(card).join(''):orders.length?`<div class="empty">${ill(q?'search':'inbox')}<b>Rien ici</b>${q?'Aucun résultat pour cette recherche.':'Aucune commande à cette étape.'}</div>`
   :`<div class="card empty"><div class="ill">${ic('box')}</div><b>Votre première commande</b>Collez le message d’un client : Domo remplit la fiche et prépare le message WhatsApp avec un lien de confirmation en un clic.<br><br><button class="btn pri" type="button" data-new>${ic('plus')}Ajouter une commande</button></div>`}</div>`;
   maybePushPrompt();
+  bulkWire(list);
   const qi=$('#q');qi.oninput=e=>{query=e.target.value;const pos=qi.selectionStart;renderOrders();const n=$('#q');n.focus();n.setSelectionRange(pos,pos)};
 }
 // First steps for a new shop: one clear next action at a time, hidden once done or dismissed.
 let onbProducts=null;
 const a_onbSlim=()=>!S.get('wsel.onbOpen',false);
 function onboarding(){
-  if(me.role!=='seller'||S.get('wsel.onbHide',false))return '';
+  if(me.role!=='seller'||S.get('wsel.onbHide',false)||orders.length>=5)return '';
   if(onbProducts===null){onbProducts=-1;api('/products').then(d=>{onbProducts=d.products.length;if(location.hash===''||location.hash==='#commandes')renderOrders()}).catch(()=>{onbProducts=0});return ''}
   if(onbProducts<0)return '';
   const steps=[
@@ -1867,10 +1988,22 @@ function onboarding(){
     <ol>${steps.map(([k,ok,l,c,a])=>`<li class="${ok?'is-done':k===nx[0]?'next':''}"><span class="ck">${ok?ic('check'):''}</span><span>${l}</span>${!ok?`<button class="btn sm ${k===nx[0]?'pri':''}" type="button" data-onb="${a}">${c}</button>`:''}</li>`).join('')}</ol></section>`;
 }
 async function loadOrders(){orders=(await api('/orders')).orders}
-async function setStatus(id,s){
+const CARRIERS=['Aramex','First Delivery','Intigo','Navex','Rapid-Poste','Je livre moi-même'];
+function askCarrier(n){return new Promise(res=>{let d=$('#shipdlg');if(!d){d=document.createElement('dialog');d.id='shipdlg';d.setAttribute('aria-labelledby','shT');document.body.append(d)}
+  d.innerHTML=`<form method="dialog" id="shf" novalidate><div class="dh"><b id="shT">${n>1?pl(n,'colis expédié','colis expédiés'):'Colis expédié'}</b><button class="btn ghost icon sm" type="button" data-x aria-label="Fermer">${ic('x')}</button></div><div class="db">
+  <label for="shC" style="margin-top:0">Transporteur</label><input id="shC" list="shCl" value="${esc(S.get('wsel.carrier','')||'')}" placeholder="ex. Aramex, Intigo…" autocomplete="off"><datalist id="shCl">${CARRIERS.map(x=>`<option value="${x}">`).join('')}</datalist>
+  ${n>1?'':'<label for="shR">Numéro de suivi du transporteur <span class="opt-l">(facultatif)</span></label><input id="shR" maxlength="60" autocomplete="off" placeholder="ex. 1234567890">'}
+  <p class="hint">Le client le voit sur sa page de suivi.</p>
+  <button class="btn pri wide" value="ok" style="margin-top:14px">Marquer ${n>1?'expédiées':'expédiée'}</button></div></form>`;
+  let done=false;const fin=v=>{if(done)return;done=true;res(v)};
+  d.querySelector('[data-x]').onclick=()=>{d.close();fin(null)};
+  d.querySelector('#shf').onsubmit=e=>{e.preventDefault();const c=$('#shC').value.trim();if(c)S.set('wsel.carrier',c);const r=(n>1?'':($('#shR')?.value||'').trim());d.close();fin({carrier:c,carrier_ref:r})};
+  d.onclose=()=>fin(null);open(d);setTimeout(()=>$('#shC').focus(),50)})}
+async function setStatus(id,s,pre){
   const o=orders.find(x=>x.id===id);if(!o)return;
   const prev={status:o.status,attempts:o.attempts};
-  const body={status:s};if(s==='noanswer')body.attempts=(o.attempts||0)+1;
+  const body={status:s,...(pre||{})};if(s==='noanswer')body.attempts=(o.attempts||0)+1;
+  if(s==='shipped'&&!pre&&!o.carrier){const c=await askCarrier(1);if(!c)return;Object.assign(body,c)}
   if(s==='refused'){const c=await askCause('Colis non livré');if(!c)return;body.cause=c}
   try{Object.assign(o,(await api('/orders/'+id,{method:'PATCH',body})).order)}catch(x){return toast(x.message)}
   route();
@@ -1956,17 +2089,18 @@ function renderStats(){
   const pProfit=pos.filter(o=>o.status==='delivered').reduce((a,o)=>a+num(o.price)-num(o.cost)-num(o.courier)-num(o.secure_fee),0)-pos.filter(o=>o.status==='refused').reduce((a,o)=>a+num(o.ret),0);
   const dlt=Math.round((profit-pProfit)*10)/10,delta=period&&pos.length?`<span class="dchip ${dlt>=0?'up':'down'}">${dlt>=0?'+':'−'}${money(Math.abs(dlt))} vs ${days} j précédents</span>`:'';
   const rRate=dl.length+rf.length?rf.length/(dl.length+rf.length):0;
-  const tip=rf.length&&rRate>=.25?note('risk','alert',`<b>Les refus vous ont fait perdre ${money(rf.reduce((a,o)=>a+num(o.price),0))} de ventes</b>${loss?` et ${money(loss)} de frais de retour`:''} sur la période (${Math.round(rRate*100)} % des colis expédiés). Confirmez sur WhatsApp avant d’expédier et demandez un acompte aux clients « Quelques refus ».`):dl.length>=3&&rRate<.15?note('risk ok','check',`<b>Excellent taux de livraison : ${Math.round((1-rRate)*100)} %.</b> Vos clients confirment bien. Partagez votre vitrine pour en avoir plus.`):'';
+  const hasCost=dl.some(o=>num(o.cost)>0);
+  const tip=rf.length&&rRate>=.25?note('risk','alert',`<b>${rf.length} colis refusé${rf.length>1?'s':''}${loss?` : ${money(loss)} perdus en frais`:''}</b>, et ${money(rf.reduce((a,o)=>a+num(o.price),0))} de ventes manquées sur la période (${Math.round(rRate*100)} % des colis expédiés). Confirmez sur WhatsApp avant d’expédier et demandez un acompte aux clients « Quelques refus ».`):dl.length>=3&&rRate<.15?note('risk ok','check',`<b>Excellent taux de livraison : ${Math.round((1-rRate)*100)} %.</b> Vos clients confirment bien. Partagez votre vitrine pour en avoir plus.`):'';
   $('#app').innerHTML=head('Statistiques',period?`${days} derniers jours`:'Depuis le début',`<div class="seg">${[[7,'7 j'],[30,'30 j'],[0,'Tout']].map(([v,l])=>`<button type="button" data-period="${v}" aria-pressed="${v===period}">${l}</button>`).join('')}</div>`)+
-  `<div class="card hero">
-    <div><span>Bénéfice net, après retours</span><div class="big">${money(profit)}</div>${delta}
+  `<div class="card hero${n<10?' fewdata':''}">
+    <div><span>${hasCost?'Bénéfice net, après retours':'Chiffre d’affaires livré'}</span><div class="big">${money(hasCost?profit:ca)}</div>${hasCost?delta:''}${hasCost?'':`<div class="hint" style="margin-top:4px">Ajoutez le coût d’achat de vos produits (Boutique) pour voir votre vrai bénéfice.</div>`}
     <div class="sub" style="margin-top:6px"><span>CA livré <b>${money(ca)}</b></span><span>Perdu en retours <b>${money(loss)}</b></span><span>En livraison <b>${money(pending)}</b></span></div></div>
     <div><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><span>Commandes par jour${period?'':' (30 derniers jours)'}</span><div class="legend"><span><i style="background:var(--brand)"></i>Reçues</span><span><i style="background:var(--good)"></i>Livrées</span></div></div>
     <div class="chart" role="img" aria-label="Commandes reçues et livrées par jour">${buckets.map(b=>`<div title="${fmtD(b.d)} : ${b.n} reçues, ${b.dl} livrées">${b.n?`<i style="height:${(b.n-b.dl)/bmax*100}%"></i><i class="d" style="height:${b.dl/bmax*100}%"></i>`:'<i class="e"></i>'}</div>`).join('')}</div>
     <div class="axis"><span>${fmtD(buckets[0].d)}</span><span>Aujourd’hui</span></div></div>
   </div>${tip?`<div style="margin-top:12px">${tip}</div>`:''}
   <h2>Indicateurs</h2>
-  <div class="kpis">${[['Commandes',n],['Taux de confirmation',pct(confd,handled)],['Taux de livraison',pct(dl.length,dl.length+rf.length)],['Refusées',rf.length],['Clients vérifiés',pct(verified,n)],['Panier moyen',n?money(Math.round(os.reduce((a,o)=>a+num(o.price),0)/n*10)/10):'—'],['Litiges ouverts',os.filter(o=>o.dispute_status==='open').length]].map(([l,v])=>`<div class="kpi"><span>${l}</span><b>${v}</b></div>`).join('')}</div>
+  <div class="kpis">${[['Commandes',n],['Taux de confirmation',pct(confd,handled)],['Taux de livraison',pct(dl.length,dl.length+rf.length)],['Refusées',rf.length],['Panier moyen',n?money(Math.round(os.reduce((a,o)=>a+num(o.price),0)/n*10)/10):'—']].map(([l,v])=>`<div class="kpi"><span>${l}</span><b>${v}</b></div>`).join('')}</div>
   <h2>Parcours des commandes</h2>
   <div class="card pad">${n?Object.entries(ST).map(([k,[l,c]])=>`<div class="bar" style="--c:${c}"><span>${l}</span><div><i style="width:${cnt(k)/max*100}%"></i></div><em>${cnt(k)}</em></div>`).join(''):'<div class="faint">Pas encore de commandes sur cette période.</div>'}</div>
   <h2>Refus par gouvernorat</h2>
@@ -1986,22 +2120,25 @@ function secNav(){
 }
 function _renderSettings(){
   const s=me.settings;
+  const m0=new Date();m0.setDate(1);m0.setHours(0,0,0,0);
+  const used=orders.filter(o=>o.created_at>=m0.getTime()&&['confirmed','shipped','delivered','refused'].includes(o.status)).length,FREE=40;
   $('#app').innerHTML=head('Réglages','',`<span class="saved" id="sState"></span>`)+
-  `<div class="card pad">
-  <div class="sec"><div><h3>Boutique</h3><p>Visible par vos clients sur le lien de confirmation.</p></div>
+  `<div class="card pad usage"><div class="ush"><b>Offre gratuite</b><span>${used} / ${FREE} commandes confirmées ce mois</span></div><div class="ubar" role="progressbar" aria-label="Commandes confirmées ce mois" aria-valuemin="0" aria-valuemax="${FREE}" aria-valuenow="${Math.min(used,FREE)}"><i style="width:${Math.min(100,Math.round(used/FREE*100))}%"></i></div><p class="hint" style="margin:8px 0 0">Gratuit et illimité pendant le lancement. Ensuite, l’offre gratuite inclura ${FREE} commandes confirmées par mois.</p></div>
+  <div class="card pad">
+  <div class="sec"><div><h3 role="heading" aria-level="2">Boutique</h3><p>Visible par vos clients sur le lien de confirmation.</p></div>
     <div class="row"><div><label for="sShop">Nom de la boutique</label><input id="sShop" value="${esc(me.shop)}"></div><div><label for="sCity">Ville</label><input id="sCity" value="${esc(me.city)}"></div></div></div>
-  <div class="sec"><div><h3>Message WhatsApp</h3><p>Envoyé au client pour confirmer. Gardez {lien} : il confirme en un clic.</p></div>
+  <div class="sec"><div><h3 role="heading" aria-level="2">Message WhatsApp</h3><p>Envoyé au client pour confirmer. Gardez {lien} : il confirme en un clic.</p></div>
     <div><label for="sTpl">Modèle</label><textarea id="sTpl" rows="7">${esc(s.tpl||DEF.tpl)}</textarea>
     <div class="hint">Variables : {nom} {produits} {prix} {adresse} {boutique} {lien} {ref} {suivi}</div>
     <div class="chat"><div class="bubble" id="tplPrev"></div></div></div></div>
-  <div class="sec"><div><h3>Frais par défaut</h3><p>Pré-remplis sur chaque nouvelle commande.</p></div>
+  <div class="sec"><div><h3 role="heading" aria-level="2">Frais par défaut</h3><p>Pré-remplis sur chaque nouvelle commande.</p></div>
     <div class="row"><div><label for="sCour">Frais livreur (DT)</label><input id="sCour" type="number" step="0.5" min="0" inputmode="decimal" value="${s.courier??DEF.courier}"></div>
     <div><label for="sRet">Frais de retour (DT)</label><input id="sRet" type="number" step="0.5" min="0" inputmode="decimal" value="${s.ret??DEF.ret}"></div></div></div>
   ${pickupSec()}
-  <div class="sec"><div><h3>Notifications</h3><p>Nouvelles commandes, messages et appels, même quand Domo est fermé.</p></div><div id="pushBox"></div></div>
-  <div class="sec"><div><h3>Exporter</h3><p>Fichier CSV pour votre livreur ou votre comptabilité.</p></div>
+  <div class="sec"><div><h3 role="heading" aria-level="2">Notifications</h3><p>Nouvelles commandes, messages et appels, même quand Domo est fermé.</p></div><div id="pushBox"></div></div>
+  <div class="sec"><div><h3 role="heading" aria-level="2">Exporter</h3><p>Fichier CSV pour votre livreur ou votre comptabilité.</p></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px"><button class="btn" type="button" data-exp="conf">Commandes confirmées</button><button class="btn" type="button" data-exp="all">Toutes les commandes</button></div></div>
-  <div class="sec"><div><h3>Compte</h3><p>${esc(me.name)} · ${fmtPhone(me.phone)}</p></div>
+  <div class="sec"><div><h3 role="heading" aria-level="2">Compte</h3><p>${esc(me.name)} · ${fmtPhone(me.phone)}</p></div>
     <div style="display:flex;flex-wrap:wrap;gap:8px"><a class="btn" href="#compte">${ic('user')}Compte, photo et vérification</a><button class="btn" id="installBtn" type="button" ${deferred?'':'hidden'}>Installer l'application</button>${isIOS()&&!standalone()?'<span class="hint" style="flex-basis:100%">Sur iPhone : touchez Partager, puis « Sur l’écran d’accueil ».</span>':''}<button class="btn" type="button" id="logout">${ic('out')}Se déconnecter</button></div></div>
   </div>`;
   const prev=()=>$('#tplPrev').textContent=msgFor({name:'Amira Ben Salah',items:'Robe noire M ×1',price:69,addr:'Sahloul',gov:'Sousse',claim_token:'exemple',ref:'DM7K3P9Q'});
@@ -2038,7 +2175,7 @@ async function renderShop(){
   $('#app').innerHTML=head('Boutique','',`<a class="btn sm" href="${esc(link)}" target="_blank" rel="noopener">${ic('ext')}Voir ma vitrine</a>`)+
   `<div class="btabs seg" role="group" aria-label="Sections de la boutique">${[['produits','Produits',products.length],['vitrine','Vitrine',''],['partager','Partager','']].map(([k,l,n])=>`<button type="button" data-bt="${k}" aria-pressed="${btab===k}">${l}${n!==''?` <span class="n">${n}</span>`:''}</button>`).join('')}</div>
   <section data-bpane="vitrine" ${btab==='vitrine'?'':'hidden'}>`+
-  `<a class="bintro" href="#boost" style="text-decoration:none;color:inherit"><span class="si">${ic('mega')}</span><div style="flex:1;min-width:0"><b>Pas le temps de publier ? Domo gère vos réseaux.</b><p>Publications, stories, Reels, messages et publicité, selon le plan choisi. Dès 149 DT par mois.</p></div><span class="btn sm">Voir les plans</span></a>`+
+  (FLAGS.boost?`<a class="bintro" href="#boost" style="text-decoration:none;color:inherit"><span class="si">${ic('mega')}</span><div style="flex:1;min-width:0"><b>Pas le temps de publier ? Domo gère vos réseaux.</b><p>Publications, stories, Reels, messages et publicité, selon le plan choisi. Dès 149 DT par mois.</p></div><span class="btn sm">Voir les plans</span></a>`:'')+
   `<div class="card sfe">
     <label class="cover pick" id="coverBox" style="--h:${hue(me.shop)};${me.cover?`background-image:url('${murl(me.cover)}')`:''}"><span class="btn sm glass">${ic('cam')}${me.cover?'Changer la couverture':'Ajouter une couverture'}</span><input type="file" accept="image/*" id="coverIn" aria-label="Image de couverture"></label>
     <div class="shead"><label class="slogo pick" id="logoBox">${me.logo?`<img src="${murl(me.logo)}" alt="Logo">`:avatar(me.shop)}<span class="camb">${ic('cam')}</span><input type="file" accept="image/*" id="logoIn" aria-label="Logo"></label><div></div></div>
@@ -2058,7 +2195,7 @@ async function renderShop(){
   </section><section data-bpane="produits" ${btab==='produits'?'':'hidden'}>
   <div class="bph"><p class="faint" style="margin:0">${(n=>n===0?'Aucun produit visible':n===1?'1 produit visible':n+' produits visibles')(products.filter(p=>p.active).length)} dans votre vitrine</p><button class="btn pri" type="button" id="pNew">${ic('plus')}Ajouter un produit</button></div>
   <div class="card pad">
-    <div id="plist">${products.length?products.map(p=>`<div class="prow2 ${p.active?'':'off'}"><div class="pth">${p.image?`<img src="${murl(p.image)}" alt="" loading="lazy">`:ic('img')}</div><div><b>${esc(p.name)}</b><small>${p.category?esc(p.category)+' · ':''}${money(p.price)}</small></div><label class="pvis"><span class="switch2"><input type="checkbox" data-pact="${p.id}" ${p.active?'checked':''} aria-label="Afficher ${esc(p.name)} dans la vitrine"><i></i></span><small>${p.active?'En vitrine':'Masqué'}</small></label><button class="btn sm icon ghost" type="button" data-pedit="${p.id}" aria-label="Modifier ${esc(p.name)}">${ic('edit')}</button></div>`).join(''):`<div class="empty" style="padding:24px 8px">${ill('shop')}<b>Votre vitrine est vide</b>Ajoutez vos produits avec une photo, un prix et une catégorie.<br>Sans produits, vos clients peuvent quand même envoyer une demande libre.</div>`}</div>
+    <div id="plist">${products.length?products.map(p=>`<div class="prow2 ${p.active?'':'off'}"><div class="pth">${p.image?`<img src="${murl(p.image)}" alt="" loading="lazy">`:ic('img')}</div><div><b>${esc(p.name)}</b><small>${p.category?esc(p.category)+' · ':''}${money(p.price)}${p.stock!=null?` · ${p.stock?pl(p.stock,'en stock','en stock'):'<b class="oos">Rupture</b>'}`:''}</small></div><label class="pvis"><span class="switch2"><input type="checkbox" data-pact="${p.id}" ${p.active?'checked':''} aria-label="Afficher ${esc(p.name)} dans la vitrine"><i></i></span><small>${p.active?'En vitrine':'Masqué'}</small></label><button class="btn sm icon ghost" type="button" data-pedit="${p.id}" aria-label="Modifier ${esc(p.name)}">${ic('edit')}</button></div>`).join(''):`<div class="empty" style="padding:24px 8px">${ill('shop')}<b>Votre vitrine est vide</b>Ajoutez vos produits avec une photo, un prix et une catégorie.<br>Sans produits, vos clients peuvent quand même envoyer une demande libre.</div>`}</div>
   </div>
   <div class="card pad shipcard"><label for="shipFee" style="margin-top:0">Frais de livraison payés par le client</label><p class="hint" style="margin:0 0 8px">Ajoutés au total de chaque commande passée sur votre vitrine.</p><div class="amtbox sm"><input id="shipFee" type="number" step="0.5" min="0" inputmode="decimal" value="${s.shipFee??DEF.shipFee}"><span>DT</span></div><p class="saved" id="shipSaved" hidden>${ic('check')}Enregistré</p></div>
   </section><section hidden aria-hidden="true">
@@ -2097,7 +2234,7 @@ let prEdit=null,prImgKey='';
 function openProduct(p){
   prEdit=p;prImgKey=p?.image||'';
   $('#prT').textContent=p?'Modifier le produit':'Nouveau produit';
-  $('#prName').value=p?.name||'';$('#prPrice').value=p?p.price:'';$('#prCat').value=p?.category||'';$('#prDesc').value=p?.description||'';$('#prSizes').value=(()=>{try{return JSON.parse(p?.sizes||'[]').join(', ')}catch(e){return''}})();$('#prColors').value=(()=>{try{return JSON.parse(p?.colors||'[]').join(', ')}catch(e){return''}})();$('#prOn').checked=p?!!p.active:true;
+  $('#prName').value=p?.name||'';$('#prCost').value=p?.cost??'';$('#prStock').value=p?.stock??'';$('#prPrice').value=p?p.price:'';$('#prCat').value=p?.category||'';$('#prDesc').value=p?.description||'';$('#prSizes').value=(()=>{try{return JSON.parse(p?.sizes||'[]').join(', ')}catch(e){return''}})();$('#prColors').value=(()=>{try{return JSON.parse(p?.colors||'[]').join(', ')}catch(e){return''}})();$('#prOn').checked=p?!!p.active:true;
   $('#catList').innerHTML=[...new Set(products.map(x=>x.category).filter(Boolean))].map(c=>`<option value="${esc(c)}">`).join('');
   $('#prDel').hidden=!p;$('#prDel').textContent='Supprimer';$('#prDel').dataset.armed='';$('#prErr').textContent='';
   const show=()=>$('#prImgInner').innerHTML=prImgKey?`<img src="${murl(prImgKey)}" alt="Photo du produit">`:`${ic('cam')}<br>Ajouter une photo`;
@@ -2107,7 +2244,7 @@ function openProduct(p){
 }
 $('#prf').onsubmit=async e=>{
   e.preventDefault();$('#prErr').textContent='';$('#prSave').disabled=true;
-  const body={name:$('#prName').value,price:num($('#prPrice').value),category:$('#prCat').value,description:$('#prDesc').value,sizes:$('#prSizes').value,colors:$('#prColors').value,active:$('#prOn').checked,image:prImgKey||''};
+  const body={name:$('#prName').value,price:num($('#prPrice').value),category:$('#prCat').value,description:$('#prDesc').value,sizes:$('#prSizes').value,colors:$('#prColors').value,active:$('#prOn').checked,image:prImgKey||'',cost:$('#prCost').value===''?'':num($('#prCost').value),stock:$('#prStock').value===''?'':parseInt($('#prStock').value,10)};
   try{if(prEdit)await api('/products/'+prEdit.id,{method:'PATCH',body});else await api('/products',{method:'POST',body});$('#prdlg').close();toast(prEdit?'Produit modifié':'Produit ajouté');renderShop()}catch(x){$('#prErr').textContent=x.message}
   $('#prSave').disabled=false;
 };
@@ -2129,8 +2266,8 @@ async function shopOrderView(slug,src,embed){
   const count=()=>Object.values(cart).reduce((a,q)=>a+q,0);
   const sub=()=>Object.entries(cart).reduce((a,[k,q])=>{const x=kp(k);return a+(x.p?x.p.price*q:0)},0);
   const pimg=(p,cls='pimg')=>`<div class="${cls}" style="--h:${hue(p.name)}">${p.image?`<img src="${murl(p.image)}" alt="${esc(p.name)}" loading="lazy" decoding="async">`:`<span class="pini" aria-hidden="true">${esc((p.name||'?').trim().charAt(0).toUpperCase())}</span>`}${inCart(p.id)&&cls==='pimg'?`<span class="incart">${inCart(p.id)} au panier</span>`:''}</div>`;
-  const ctrl=p=>hasOpt(p)?`<button class="addb" type="button" data-pv="${p.id}" aria-label="Choisir taille et couleur pour ${esc(p.name)}">${ic('plus')}</button>`:cart[p.id]?`<div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-cq="${p.id}" data-d="-1" aria-label="Retirer">−</button><span>${cart[p.id]}</span><button type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter">+</button></div>`:`<button class="addb" type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter ${esc(p.name)} au panier">${ic('plus')}</button>`;
-  const pcard=p=>`<div class="pc" data-pv="${p.id}">${pimg(p)}<div class="pb"><b><button type="button" class="pcname" data-pv="${p.id}">${esc(p.name)}</button></b><div class="pf"><span class="op">${money(p.price)}</span>${ctrl(p)}</div></div></div>`;
+  const ctrl=p=>p.stock===0?`<span class="soldout">Rupture</span>`:hasOpt(p)?`<button class="addb" type="button" data-pv="${p.id}" aria-label="Choisir taille et couleur pour ${esc(p.name)}">${ic('plus')}</button>`:cart[p.id]?`<div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-cq="${p.id}" data-d="-1" aria-label="Retirer">−</button><span>${cart[p.id]}</span><button type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter">+</button></div>`:`<button class="addb" type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter ${esc(p.name)} au panier">${ic('plus')}</button>`;
+  const pcard=p=>`<div class="pc${p.stock===0?' oosc':''}" data-pv="${p.id}">${pimg(p)}<div class="pb"><b><button type="button" class="pcname" data-pv="${p.id}">${esc(p.name)}</button></b><div class="pf"><span class="op">${money(p.price)}</span>${ctrl(p)}</div>${p.stock>0&&p.stock<=3?`<small class="few">Plus que ${p.stock}</small>`:''}</div></div>`;
   const list=()=>d.products.filter(p=>!cat||p.category===cat);
   const grid=()=>{$('#pgrid').innerHTML=list().map(pcard).join('')};
   const optTxt=x=>[x.size,x.color].filter(Boolean).join(' · ');
@@ -2146,11 +2283,12 @@ async function shopOrderView(slug,src,embed){
   const tline=[t.avg!=null?`<span class="tstar">★ ${t.avg.toLocaleString('fr-FR',{maximumFractionDigits:1})}</span>`:'',t.delivered?`<span>${pl(t.delivered,'commande livrée','commandes livrées')}</span>`:'',sh.vs?`<span class="tver">${ic('check')}Vendeur vérifié</span>`:''].filter(Boolean);
   pubCtx({shop:sh.name,embed});
   $('#app').innerHTML=`<div class="store">
-    <div class="cover" style="--h:${hue(sh.name)};${sh.cover?`background-image:url('${murl(sh.cover)}')`:''}" role="img" aria-label="Couverture de ${esc(sh.name)}"></div>
+    ${(()=>{const ph=(d.products||[]).filter(x=>x.image).slice(0,4);return !sh.cover&&ph.length>=3?`<div class="cover cmos" role="img" aria-label="Couverture de ${esc(sh.name)}">${ph.map(x=>`<img src="${murl(x.image)}" alt="" loading="lazy">`).join('')}</div>`:`<div class="cover" style="--h:${hue(sh.name)};${sh.cover?`background-image:url('${murl(sh.cover)}')`:''}" role="img" aria-label="Couverture de ${esc(sh.name)}"></div>`})()}
     <div class="shead"><div class="slogo">${sh.logo?`<img src="${murl(sh.logo)}" alt="Logo ${esc(sh.name)}">`:avatar(sh.name)}</div>
       <div class="sact"><button class="btn sm" type="button" id="msgShop">${ic('chat')}<span>Message</span></button><button class="btn sm icon" type="button" id="shareB" aria-label="Partager la boutique">${ic('share')}</button></div>
       <div class="sinfo"><h1>${esc(sh.name)} ${vmark(sh)}</h1>
       <p class="tline">${tline.length?tline.join('<span aria-hidden="true">·</span>'):'<span>Nouvelle boutique</span>'}</p>
+      <p class="shipln">${ic('track')}<span>Livraison <b>${money(d.shipFee)}</b> partout en Tunisie · vous payez à la livraison</span></p>
       <details class="moreinfo"><summary>Plus d’infos</summary><div class="smeta">${meta}</div>${bchips((sh.badges||[]).filter(b=>b.id!=='verified'),6)}<div style="margin-top:10px">${codeChip(sh.code)}</div></details>
       ${sh.bio?`<p class="bio clamp" id="bioP">${esc(sh.bio)}</p>${sh.bio.length>160||sh.bio.split('\n').length>3?'<button class="more" type="button" id="bioMore">Voir plus</button>':''}`:''}
       <div class="howto" aria-label="Comment commander"><div><i>1</i><p><b>Choisissez</b><span>Touchez un article, choisissez taille et couleur.</span></p></div><div><i>2</i><p><b>Confirmez</b><span>Un lien WhatsApp, un clic.</span></p></div><div><i>3</i><p><b>Payez à la livraison</b><span>Livraison ${money(d.shipFee)}, payée avec la commande.</span></p></div></div></div>
@@ -2162,7 +2300,7 @@ async function shopOrderView(slug,src,embed){
     ${d.reviews.length?`<h2 id="avis-boutique" style="margin-top:34px">Avis clients <span class="n">${t.reviews}</span></h2>`:`<h2 id="avis-boutique" style="margin-top:34px">Commander sans risque</h2>`}
     ${d.reviews.length?`<div class="revs">${d.reviews.map(r=>`<div class="rev"><div class="top"><b>${esc(r.author)}</b><span class="faint" style="font-size:13px">${ago(r.created_at)}</span></div><div class="stars" aria-label="${r.rating} sur 5">${stars(r.rating)}</div>${r.tags.length?`<div class="tags">${r.tags.map(x=>`<span class="tag">${esc(x)}</span>`).join('')}</div>`:''}${r.comment?`<div>${esc(r.comment)}</div>`:''}${r.reply?`<div class="reply"><b>Réponse :</b> ${esc(r.reply)}</div>`:''}</div>`).join('')}</div>`:`<div class="safe3"><div>${ic('wallet')}<b>Vous payez à la livraison</b><span>Rien à payer en ligne. Vous réglez le livreur quand vous avez le colis.</span></div><div>${ic('wa')}<b>Confirmation sur WhatsApp</b><span>La boutique vous écrit avant d’expédier. Vous pouvez annuler.</span></div><div>${ic('star')}<b>Des avis vérifiés</b><span>Seuls les clients livrés peuvent noter. Les premiers avis arrivent bientôt.</span></div></div>`}
     </div><aside class="cartside" id="cartside" aria-label="Panier"></aside></div>
-    <footer class="sfoot"><a href="/?explore">${ic('search')}Découvrir d’autres boutiques</a><a href="/?track">${ic('track')}Suivre une commande</a><a href="https://domo.tn">${ic('store')}Vous vendez ? Créez votre boutique</a></footer>
+    <footer class="sfoot">${FLAGS.explore?`<a href="/?explore">${ic('search')}Découvrir d’autres boutiques</a>`:''}<a href="/?track">${ic('track')}Suivre une commande</a><a href="https://domo.tn">${ic('store')}Vous vendez ? Créez votre boutique</a></footer>
   </div><div class="cartbar" id="cartbar" hidden></div>`;
   if(d.products.length)grid();bar();
   $('#shareB').onclick=share;
@@ -2185,10 +2323,10 @@ async function shopOrderView(slug,src,embed){
     const sz=p.sizes||[],co=p.colors||[],need=(sz.length&&!pick.size)?'la taille':(co.length&&!pick.color)?'la couleur':'';
     const key=hasOpt(p)?[id,pick.size,pick.color].join('|'):id,q=cart[key]||0;
     const opts=(lab,list,k)=>list.length?`<fieldset class="optg"><legend>${lab}${pick[k]?` : <b>${esc(pick[k])}</b>`:''}</legend><div class="opts">${list.map(v=>`<button type="button" class="opt" data-opt="${k}" data-v="${esc(v)}" aria-pressed="${pick[k]===v}">${esc(v)}</button>`).join('')}</div></fieldset>`:'';
-    $('#psBody').innerHTML=`<div class="psg"><div class="psm">${pimg(p,'sheetimg')}</div><div class="psi"><h2 style="margin:16px 0 4px;font-size:21px">${esc(p.name)}</h2><div class="op" style="font-size:21px">${money(p.price)}</div>${p.description?`<p class="muted" style="white-space:pre-line;margin:10px 0 0">${esc(p.description)}</p>`:''}
+    $('#psBody').innerHTML=`<div class="psg"><div class="psm">${pimg(p,'sheetimg')}</div><div class="psi"><h2 style="margin:16px 0 4px;font-size:21px">${esc(p.name)}</h2><div class="op" style="font-size:21px">${money(p.price)}</div><div class="hint shipnote">+ livraison ${money(d.shipFee)} · vous payez à la livraison</div>${p.description?`<p class="muted" style="white-space:pre-line;margin:10px 0 0">${esc(p.description)}</p>`:''}
       ${opts('Taille',sz,'size')}${opts('Couleur',co,'color')}
       <div class="sheetact">${q?`<div class="qty" role="group" aria-label="Quantité"><button type="button" data-sq="-1" aria-label="Retirer">−</button><span>${q}</span><button type="button" data-sq="1" aria-label="Ajouter">+</button></div><button class="btn pri" type="button" data-ck style="flex:1;min-height:52px">Commander · ${money(sub()+d.shipFee)}</button><div class="added"><span>${ic('check')}Ajouté au panier</span><button class="linkbtn" type="button" data-close>Continuer mes achats</button></div>`
-        :`<button class="btn pri wide" type="button" data-sq="1" style="min-height:52px" ${need?'disabled':''}>${need?`Choisissez ${need}`:`${ic('cart')}Ajouter au panier · ${money(p.price)}`}</button>`}</div></div></div>`;
+        :p.stock===0?`<button class="btn wide" type="button" disabled style="min-height:52px">Rupture de stock</button>`:`<button class="btn pri wide" type="button" data-sq="1" style="min-height:52px" ${need?'disabled':''}>${need?`Choisissez ${need}`:`${ic('cart')}Ajouter au panier · ${money(p.price)}`}</button>`}</div></div></div>`;
     $('#psBody').onclick=e=>{if(e.target.closest('[data-ck]')){checkout();return}const o=e.target.closest('[data-opt]');if(o){pick[o.dataset.opt]=o.dataset.v;sheet(id,true);return}const b=e.target.closest('[data-sq]');if(b&&!b.disabled){if(hasOpt(p)&&((sz.length&&!pick.size)||(co.length&&!pick.color)))return;change(key,+b.dataset.sq)}};
     if(!keep)open($('#psheet'));
   }
@@ -2197,10 +2335,10 @@ async function shopOrderView(slug,src,embed){
     const lines=Object.keys(cart).filter(k=>kp(k).p);
     const totals=()=>{const st=sub(),n=count(),tot=st+d.shipFee;$('#ckGo').textContent=st?`Commander · ${money(tot)} à payer à la livraison`:'Envoyer ma demande';
       return st?`<div class="cksum"><div class="rline"><span>${pl(n,'article')}</span><span>${money(st)}</span></div><div class="rline"><span>Livraison</span><span>${money(d.shipFee)}</span></div><div class="rtotal"><span>Total à payer à la livraison</span><b>${money(tot)}</b></div></div>`:''};
-    $('#ckBody').innerHTML=`${lines.length?`<div id="ckLines">${lines.map(k=>{const x=kp(k),p=x.p;return`<div class="ckline"><div class="ckth">${p.image?`<img src="${murl(p.image)}" alt="">`:ic('img')}</div><div class="t"><b>${esc(p.name)}</b>${optTxt(x)?`<small>${esc(optTxt(x))}</small>`:''}<small>${money(p.price)}</small></div><div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-kq="${esc(k)}" data-d="-1" aria-label="Retirer">−</button><span>${cart[k]}</span><button type="button" data-kq="${esc(k)}" data-d="1" aria-label="Ajouter">+</button></div></div>`}).join('')}</div><label for="oReq">Précision pour la boutique <span class="opt-l">(facultatif)</span></label><input id="oReq" maxlength="300" placeholder="ex. emballage cadeau">`:`<label for="oReq" style="margin-top:0">Votre demande</label><textarea id="oReq" rows="3" maxlength="300" placeholder="Produit, taille, couleur, quantité…"></textarea>`}
+    $('#ckBody').innerHTML=`${lines.length?`<div id="ckLines">${lines.map(k=>{const x=kp(k),p=x.p;return`<div class="ckline"><div class="ckth">${p.image?`<img src="${murl(p.image)}" alt="">`:ic('img')}</div><div class="t"><b>${esc(p.name)}</b>${optTxt(x)?`<small>${esc(optTxt(x))}</small>`:''}<small>${money(p.price)}</small></div><div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-kq="${esc(k)}" data-d="-1" aria-label="Retirer">−</button><span>${cart[k]}</span><button type="button" data-kq="${esc(k)}" data-d="1" aria-label="Ajouter">+</button></div></div>`}).join('')}</div><input type="hidden" id="oReq" value="">`:`<label for="oReq" style="margin-top:0">Votre demande</label><textarea id="oReq" rows="3" maxlength="300" placeholder="Produit, taille, couleur, quantité…"></textarea>`}
       <h3 class="ckh">Vos coordonnées de livraison</h3>
       <div class="row"><div><label for="oName">Nom et prénom</label><input id="oName" autocomplete="name" autocapitalize="words" enterkeyhint="next"></div><div><label for="oPhone">Téléphone WhatsApp</label><input id="oPhone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="ex. 22 123 456" enterkeyhint="next"></div></div>
-      <div class="row"><div><label for="oGov">Gouvernorat</label><select id="oGov" autocomplete="address-level1"><option value="">Choisir…</option>${GOVS.map(g=>`<option>${g}</option>`).join('')}</select></div><div><label for="oAddr">Adresse <span class="opt-l">(facultatif)</span></label><input id="oAddr" autocomplete="street-address" placeholder="Rue, quartier, point de repère" enterkeyhint="next"></div></div>
+      <div class="row"><div><label for="oGov">Gouvernorat</label><select id="oGov" autocomplete="address-level1"><option value="">Choisir…</option>${GOVS.map(g=>`<option>${g}</option>`).join('')}</select></div><div><label for="oAddr">Adresse de livraison</label><input id="oAddr" autocomplete="street-address" placeholder="Rue, quartier, point de repère" enterkeyhint="next"></div></div>
       <label for="oNotes">Note pour la boutique <span class="opt-l">(facultatif)</span></label><input id="oNotes" maxlength="200"><input class="hp" id="oWeb" tabindex="-1" autocomplete="off" aria-hidden="true">
       <p class="hint">Vous recevrez un lien WhatsApp pour confirmer. Vous ne payez rien avant la livraison.</p><div class="err" id="oErr"></div><div id="ckTot"></div>`;
     $('#ckTot').innerHTML=totals();
@@ -2210,7 +2348,7 @@ async function shopOrderView(slug,src,embed){
   $('#ckf').onsubmit=async e=>{
     e.preventDefault();if(busy)return;$('#oErr').textContent='';
     const items=Object.entries(cart).map(([k,qty])=>{const x=kp(k);return{product_id:x.id,qty,size:x.size,color:x.color}});
-    if(!validate([[$('#oReq'),!items.length&&!$('#oReq').value.trim()&&'Décrivez ce que vous voulez commander'],[$('#oName'),!$('#oName').value.trim()&&'Indiquez votre nom pour le livreur'],[$('#oPhone'),!okPhone(normPhone($('#oPhone').value))&&($('#oPhone').value.trim()?'Numéro incomplet : ':'Indiquez votre numéro : ')+PHONE_MSG],[$('#oGov'),items.length&&!$('#oGov').value&&'Choisissez votre gouvernorat pour la livraison']]))return;
+    if(!validate([[$('#oReq'),!items.length&&!$('#oReq').value.trim()&&'Décrivez ce que vous voulez commander'],[$('#oName'),!$('#oName').value.trim()&&'Indiquez votre nom pour le livreur'],[$('#oPhone'),!okPhone(normPhone($('#oPhone').value))&&($('#oPhone').value.trim()?'Numéro incomplet : ':'Indiquez votre numéro : ')+PHONE_MSG],[$('#oGov'),items.length&&!$('#oGov').value&&'Choisissez votre gouvernorat pour la livraison'],[$('#oAddr'),items.length&&$('#oAddr').value.trim().length<5&&'Indiquez votre adresse : rue ou quartier, et un point de repère pour le livreur']]))return;
     busy=true;$('#ckGo').disabled=true;
     try{
       ckIdem=ckIdem||(crypto.randomUUID?crypto.randomUUID():Date.now().toString(36)+Math.random().toString(36).slice(2));
@@ -2355,7 +2493,11 @@ async function pollInbox(){
     setNotifUnread(d.notifs||0);appBadge(d.unread+(d.notifs||0));if(d.unread!==unread){setUnread(d.unread);if(location.hash==='#messages'&&!activeConv)renderMessages()}
     if(d.call&&!call)incomingCall(d.call)}catch(e){}
 }
-function startPolling(){clearInterval(pollT);pollT=setInterval(pollInbox,5000);pollInbox()}
+// Fast (5 s) only while a conversation or a call is on screen; every 20 s otherwise; paused when the app is in the background.
+let pollN=0;
+function pollTick(){if(document.hidden)return;pollN++;const fast=(typeof call!=='undefined'&&call)||document.querySelector('#msgs');if(fast||pollN%4===0)pollInbox()}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden&&pollT)pollInbox()});
+function startPolling(){clearInterval(pollT);pollN=0;pollT=setInterval(pollTick,5000);pollInbox()}
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)pollInbox()});
 
 /* ---------- calls (WebRTC, encrypted peer-to-peer; numbers never shared) ---------- */
@@ -2514,6 +2656,7 @@ let xq='',xcat='',xcity='',xmeta=null,xt=0;
 async function renderExplore(pub,initial){
   if(pub&&initial!==undefined)xq=initial;
   if(!xmeta){try{xmeta=await api('/stores/meta')}catch(e){xmeta={categories:[],cities:[]}}}
+  xmeta={categories:xmeta?.categories||[],cities:xmeta?.cities||[]};
   const xform=`<form class="xsearch" id="xf" role="search">${ic('search')}<input id="xq" type="search" value="${esc(xq)}" placeholder="Caftan, sac en cuir, Sousse… ou ID (ex. DY-7K3P)" aria-label="Rechercher une boutique" autocomplete="off" enterkeyhint="search"></form>`;
   $('#app').innerHTML=(pub?`<section class="xhero"><h1>Des boutiques de confiance, payées à la livraison</h1><p>Commandez chez des boutiques tunisiennes. Vous confirmez sur WhatsApp et vous payez quand le colis arrive.</p>${xform}<div class="xtrust"><span>${ic('check')}Paiement à la livraison</span><span>${ic('check')}Avis de clients livrés</span><span>${ic('chat')}Confirmation sur WhatsApp</span></div></section>`
     :head('Trouver une boutique','Cherchez par nom, produit, ville, ou entrez un ID boutique')+xform)+
@@ -2527,7 +2670,7 @@ async function renderExplore(pub,initial){
       $('#xres').innerHTML=(d.exact?note('risk ok','check','Boutique trouvée avec cet ID.'):'')+(d.stores.length?`<p class="faint" style="margin:12px 0 0;font-size:13.5px">${pl(d.stores.length,'boutique')}${xq||xcat||xcity?' trouvée'+(d.stores.length>1?'s':''):''}</p><div class="sgrid">${d.stores.map(st=>`<a class="sc" href="/?shop=${encodeURIComponent(st.slug)}&src=Domo">${st.featured?'<span class="spon">Sponsorisé</span>':''}
         ${!st.cover&&st.thumbs.length>=2?`<div class="scov mos n${Math.min(st.thumbs.length,3)}">${st.thumbs.slice(0,3).map(t=>`<img src="${murl(t)}" alt="" loading="lazy">`).join('')}</div>`:`<div class="scov${st.cover?'':' plain'}" style="--h:${hue(st.name)};${st.cover?`background-image:url('${murl(st.cover)}')`:''}"></div>`}
         <div class="sbody"><div class="slg">${st.logo?`<img src="${murl(st.logo)}" alt="" loading="lazy">`:avatar(st.name)}</div>
-        <h3>${esc(st.name)} ${vmark(st)}</h3><div class="sm">${badge(st).replace('<button','<span').replace('</button>','</span>').replace('data-profile=','data-p=')}${st.trust.avg!=null?`<span>★ ${st.trust.avg.toLocaleString('fr-FR')} (${st.trust.reviews})</span>`:''}${st.city?`<span>${esc(st.city)}</span>`:''}</div>
+        <h3 role="heading" aria-level="2">${esc(st.name)} ${vmark(st)}</h3><div class="sm">${badge(st).replace('<button','<span').replace('</button>','</span>').replace('data-profile=','data-p=')}${st.trust.avg!=null?`<span>★ ${st.trust.avg.toLocaleString('fr-FR')} (${st.trust.reviews})</span>`:''}${st.city?`<span>${esc(st.city)}</span>`:''}</div>
         <div class="sm" style="margin-top:6px">${pl(st.products,'produit')}${st.minPrice!=null?` · dès ${money(st.minPrice)}`:''}${st.categories.length?' · '+st.categories.map(esc).join(', '):''}</div>
         ${st.thumbs.length&&(st.cover||st.thumbs.length<2)?`<div class="th4">${st.thumbs.map(t=>`<span><img src="${murl(t)}" alt="" loading="lazy"></span>`).join('')}</div>`:''}</div></a>`).join('')}</div>`
       :`<div class="card empty" style="margin-top:14px">${ill('stores')}<b>Aucune boutique trouvée</b>${/^[a-z]{2}-?[a-z0-9]{4}$/i.test(xq)?'Vérifiez l’ID boutique avec le vendeur.':'Essayez un autre mot, ou retirez un filtre.'}</div>`);
@@ -2556,7 +2699,7 @@ async function trackView(ref){
   if(o.status==='cancelled')steps=[`<li class="ok"><i></i><b>Commande reçue</b><span>${when(o.created_at)}</span></li>`,`<li class="bad"><i></i><b>Commande annulée</b><span>${when(last.cancelled)}</span></li>`];
   const [sl,sc]=ST[o.status];
   $('#app').innerHTML=`<div class="receipt"><div class="rc"><div class="rhead">${sellerAv(d.seller)}<div class="faint" style="font-size:13px">Commande chez</div><h1>${esc(d.seller.name)} ${vmark(d.seller)}</h1><div class="who">${badge(d.seller)}</div></div><div class="perf"></div>
-    <div class="rbody"><div class="rline"><span>N° de suivi</span><span class="ref">${esc(o.ref)}</span></div><div class="rline"><span>Statut</span><span class="st" style="--c:${sc}"><i></i>${sl}</span></div><div class="rline"><span>Article</span><span>${esc(o.items)}</span></div>${o.gov?`<div class="rline"><span>Livraison</span><span>${esc(o.gov)}</span></div>`:''}${o.secure?`<div class="rline"><span>Protection</span><span class="shield">${ic('shield')}Achat sécurisé</span></div>`:''}<div class="rtotal"><span class="muted">Total à la livraison</span>${num(o.price)<0.01?'<b class="tbd">À confirmer</b>':`<b>${money(o.price)}</b>`}</div>
+    <div class="rbody"><div class="rline"><span>N° de suivi</span><span class="ref">${esc(o.ref)}</span></div>${o.carrier?`<div class="rline"><span>Transporteur</span><span><b>${esc(o.carrier)}</b>${o.carrier_ref?` · ${esc(o.carrier_ref)}`:''}</span></div>`:''}<div class="rline"><span>Statut</span><span class="st" style="--c:${sc}"><i></i>${sl}</span></div><div class="rline"><span>Article</span><span>${esc(o.items)}</span></div>${o.gov?`<div class="rline"><span>Livraison</span><span>${esc(o.gov)}</span></div>`:''}${o.secure?`<div class="rline"><span>Protection</span><span class="shield">${ic('shield')}Achat sécurisé</span></div>`:''}<div class="rtotal"><span class="muted">Total à la livraison</span>${num(o.price)<0.01?'<b class="tbd">À confirmer</b>':`<b>${money(o.price)}</b>`}</div>
     ${({confirmed:'confirmed',shipped:'truck',delivered:'arrived'})[o.status]?ill(({confirmed:'confirmed',shipped:'truck',delivered:'arrived'})[o.status],'tk'):''}<h2 style="margin-top:22px">Étapes</h2><ol class="steps">${steps.join('')}</ol>
     ${o.status==='noanswer'?note('risk info','info','La boutique a essayé de vous joindre. Répondez à son message WhatsApp pour confirmer.'):''}
     </div></div><p class="hint" style="text-align:center;margin-top:12px">Mis à jour ${ago(o.updated_at)} · <a href="/?track" style="color:inherit">Suivre une autre commande</a></p></div>`;
@@ -2580,7 +2723,7 @@ function myOrderCard(o){const[l,c]=ST[o.status];const live=['new','noanswer','co
     ${['new','noanswer'].includes(o.status)||(['delivered','refused'].includes(o.status)&&!o.reviewed)||o.reviewed||(o.secure&&o.status==='delivered')?`<div class="acts">${['new','noanswer'].includes(o.status)?`<a class="btn sm pri" href="/?o=${encodeURIComponent(o.claim_token)}">Confirmer ou annuler</a>`:''}${o.secure&&o.status==='delivered'&&!o.dispute_status?`<a class="btn sm ghost" href="/?o=${encodeURIComponent(o.claim_token)}">${ic('flag')}Signaler un problème</a>`:''}${o.status==='refused'&&!o.reviewed?`<button class="btn sm pri" type="button" data-review="${o.id}">${ic('star')}Évaluer la boutique</button>`:''}${o.reviewed?`<span class="lock">${ic('check')}Vous avez évalué cette commande</span>`:''}<span class="sp"></span>${o.seller?`<button class="btn sm" type="button" data-chat-shop="${o.seller.id}">${ic('chat')}Message</button>`:''}</div>`:`<div class="acts"><span class="sp"></span>${o.seller?`<button class="btn sm" type="button" data-chat-shop="${o.seller.id}">${ic('chat')}Message</button>`:''}</div>`}
   </article>`}
 function renderMyOrders(){setTimeout(maybePushPrompt,0);
-  const pending=me.verified?'':note('risk info','info','<b>Vérifiez votre numéro.</b> Ouvrez le lien de commande reçu sur WhatsApp et appuyez sur « Lier à mon compte ». Vos commandes apparaîtront ici et construiront votre badge.');
+  const pending=me.verified?'':note('risk info','info','<b>Vérifiez votre numéro.</b> Ouvrez le lien de commande reçu sur WhatsApp et appuyez sur « Lier à mon compte ». Vos commandes apparaîtront ici.');
   const live=myOrders.filter(o=>['new','noanswer','confirmed','shipped'].includes(o.status)),past=myOrders.filter(o=>!live.includes(o));
   const todoR=past.filter(o=>['delivered','refused'].includes(o.status)&&!o.reviewed).length;
   $('#app').innerHTML=head('Mes commandes',me.verified?pl(myOrders.length,'commande'):'')+pending+(myOrders.length?
@@ -2590,19 +2733,20 @@ function renderMyOrders(){setTimeout(maybePushPrompt,0);
 }
 const prog=c=>c.role==='seller'?(c.trust.reviews||0):(c.trust.delivered||0)+(c.trust.refused||0)+(c.trust.reviews||0);
 function scoreBlock(c,title){
+  if(c.role==='customer'&&!FLAGS.buyerScore)return`<div class="prof plain"><span class="av lg" style="--h:${hue(c.name||'')}">${esc(initials(c.name||'?'))}</span><div><h3 role="heading" aria-level="2">${esc(title||c.name)}</h3><div class="hint" style="margin-top:4px">${c.city?esc(c.city)+' · ':''}Membre depuis ${new Date(c.since).toLocaleDateString('fr-FR',{month:'long',year:'numeric'})}${c.verified?' · numéro vérifié':''}</div></div></div>`;
   const t=c.trust,[l,col]=lvOf(c);
   return`<div class="prof"><div class="ring" style="--c:${col};--p:${isNew(t)?Math.round(Math.min(3,prog(c))/3*100):t.score}"><div><span><b>${isNew(t)?(t.level==='unverified'?'—':`${Math.min(3,prog(c))}/3`):t.score}</b><small>${isNew(t)?(t.level==='unverified'?'à vérifier':'pour débloquer'):'sur 100'}</small></span></div></div>
-  <div><h3>${esc(title||c.name)} ${vmark(c)}</h3><div class="lvl" style="--c:${col}"><i></i>${l}</div><div class="hint" style="margin-top:4px">${c.city?esc(c.city)+' · ':''}Membre depuis ${new Date(c.since).toLocaleDateString('fr-FR',{month:'long',year:'numeric'})}${c.role==='customer'?(c.verified?' · numéro vérifié':' · numéro non vérifié'):''}</div></div></div>
+  <div><h3 role="heading" aria-level="2">${esc(title||c.name)} ${vmark(c)}</h3><div class="lvl" style="--c:${col}"><i></i>${l}</div><div class="hint" style="margin-top:4px">${c.city?esc(c.city)+' · ':''}Membre depuis ${new Date(c.since).toLocaleDateString('fr-FR',{month:'long',year:'numeric'})}${c.role==='customer'?(c.verified?' · numéro vérifié':' · numéro non vérifié'):''}</div></div></div>
   <div class="stats4">${c.role==='customer'?`<div><b>${t.delivered}</b><span>livrées</span></div><div><b>${t.refused}</b><span>refus</span></div>`:`<div><b>${t.delivered}</b><span>livrées</span></div><div><b>${t.reviews}</b><span>avis reçus</span></div>`}<div><b>${t.avg!=null?t.avg.toLocaleString('fr-FR'):'—'}</b><span>note</span></div><div><b>${t.reviews}</b><span>avis</span></div></div>
   ${t.level==='unverified'?`<div class="unlock">${ic('info')}<span><b>Vérifiez votre numéro</b> pour obtenir un score : ouvrez un lien de commande reçu sur WhatsApp.</span></div>`:t.level==='new'?(()=>{const left=Math.max(1,3-prog(c)),sel=c.role==='seller';return`<div class="unlock">${ic('star')}<span><b>Plus que ${left===1?(sel?'un avis client':'une commande ou un avis'):left+(sel?' avis clients':' commandes ou avis')}</b> pour afficher le score de confiance.</span></div>`})():''}`;
 }
 function renderProfileTab(){
   $('#app').innerHTML=head('Profil','')+
-  `<div class="card pad">${scoreBlock({...me,since:me.created_at,trust:meTrust},me.name)}<button class="btn wide" type="button" data-profile="${me.id}" style="margin-top:14px">Voir mon profil public et mes avis</button></div>
-  <h2>Mes badges</h2><div class="card pad">${badgeCards(meBadges,meNext)}</div>
+  `<div class="card pad">${scoreBlock({...me,since:me.created_at,trust:meTrust},me.name)}${FLAGS.buyerScore?`<button class="btn wide" type="button" data-profile="${me.id}" style="margin-top:14px">Voir mon profil public et mes avis</button>`:''}</div>
+  ${FLAGS.buyerScore?`<h2>Mes badges</h2><div class="card pad">${badgeCards(meBadges,meNext)}</div>
   <h2>Augmenter mon score</h2>
-  <div class="card pad"><p class="muted" style="margin:0">Acceptez les colis que vous commandez, restez joignable et donnez une adresse précise. Les refus comptent le plus. Un avis injuste ? Répondez publiquement ou signalez-le depuis votre profil public.</p></div>
-  ${(me.links||[]).includes('seller')?'':`<div class="card pad sellcta">${ic('store')}<div><b>Vous vendez aussi ?</b><span>Ouvrez votre boutique Domo avec le même numéro : confirmations WhatsApp, vitrine, livreurs Domo.</span></div><a class="btn pri" href="#compte">Devenir vendeur</a></div>`}
+  <div class="card pad"><p class="muted" style="margin:0">Acceptez les colis que vous commandez, restez joignable et donnez une adresse précise. Les refus comptent le plus. Un avis injuste ? Répondez publiquement ou signalez-le depuis votre profil public.</p></div>`:`<div class="card pad"><p class="muted" style="margin:0">Domo ne note pas les acheteurs. Chaque boutique voit seulement l’historique de vos commandes chez elle.</p></div>`}
+  ${(me.links||[]).includes('seller')?'':`<div class="card pad sellcta">${ic('store')}<div><b>Vous vendez aussi ?</b><span>Ouvrez votre boutique Domo avec le même numéro : confirmations WhatsApp, vitrine et suivi des colis.</span></div><a class="btn pri" href="#compte">Devenir vendeur</a></div>`}
   <a class="btn wide" href="#compte" style="margin-top:20px">${ic('gear')}Compte, notifications et confidentialité</a>`;
 }
 
@@ -2766,14 +2910,14 @@ async function renderAccount(){
   </div>
   <h2>Mes espaces</h2>
   <div class="card spaces">
-    ${spaceRow('cart','Acheteur','Commandez, suivez vos colis, gagnez votre badge de confiance.',!seller?'<span class="pill ok">Ouvert</span>':hasBuyer?`<button class="btn sm" type="button" data-space="customer">Ouvrir</button>`:`<button class="btn sm" type="button" data-add="customer">Activer</button>`)}
-    ${spaceRow('store','Vendeur','Confirmez vos commandes, ouvrez votre vitrine, faites livrer par Domo.',seller?'<span class="pill ok">Ouvert</span>':hasSeller?`<button class="btn sm" type="button" data-space="seller">Ouvrir</button>`:`<button class="btn sm pri" type="button" data-add="seller">Devenir vendeur</button>`)}
-    ${spaceRow('track','Livreur Domo','Livrez pour Domo dans votre ville. Paiement à la course.',me.driver==='active'?`<button class="btn sm" type="button" id="drvGo">Ouvrir</button>`:me.driver==='pending'?'<span class="pill">Candidature en cours</span>':me.driver==='rejected'?'<span class="pill">Non retenue</span>':me.driver==='suspended'?'<span class="pill">Suspendu</span>':`<button class="btn sm" type="button" id="drvApply">Postuler</button>`)}
-    ${seller?spaceRow('mega','Domo Boost','On gère vos réseaux sociaux et votre marketing digital.',`<a class="btn sm" href="#boost">Voir les plans</a>`):''}
-    ${me.admin?spaceRow('shield','Console Domo','Ramassages, livreurs, vérifications et versements.',`<a class="btn sm" href="#admin">Ouvrir</a>`):''}
+    ${spaceRow('cart','Acheteur','Commandez dans les boutiques Domo et suivez vos colis.',!seller?'<span class="pill ok">Ouvert</span>':hasBuyer?`<button class="btn sm" type="button" data-space="customer">Ouvrir</button>`:`<button class="btn sm" type="button" data-add="customer">Activer</button>`)}
+    ${spaceRow('store','Vendeur','Confirmez vos commandes sur WhatsApp, ouvrez votre vitrine, suivez vos colis.',seller?'<span class="pill ok">Ouvert</span>':hasSeller?`<button class="btn sm" type="button" data-space="seller">Ouvrir</button>`:`<button class="btn sm pri" type="button" data-add="seller">Devenir vendeur</button>`)}
+    ${FLAGS.delivery||me.driver==='active'||me.driver==='pending'?spaceRow('track','Livreur Domo','Livrez pour Domo dans votre ville. Paiement à la course.',me.driver==='active'?`<button class="btn sm" type="button" id="drvGo">Ouvrir</button>`:me.driver==='pending'?'<span class="pill">Candidature en cours</span>':me.driver==='rejected'?'<span class="pill">Non retenue</span>':me.driver==='suspended'?'<span class="pill">Suspendu</span>':`<button class="btn sm" type="button" id="drvApply">Postuler</button>`):''}
+    ${seller&&FLAGS.boost?spaceRow('mega','Domo Boost','On gère vos réseaux sociaux et votre marketing digital.',`<a class="btn sm" href="#boost">Voir les plans</a>`):''}
+    ${me.admin?spaceRow('shield','Console Domo',FLAGS.delivery?'Ramassages, livreurs, vérifications et versements.':'Activité des boutiques, vérifications et signalements.',`<a class="btn sm" href="#admin">Ouvrir</a>`):''}
     <div id="spaceForm"></div>
   </div>
-  <h2>Badges</h2><div class="card pad">${badgeCards(meBadges,meNext)}</div>
+  ${me.role!=='customer'||FLAGS.buyerScore?`<h2>Badges</h2><div class="card pad">${badgeCards(meBadges,meNext)}</div>`:''}
   ${verif}
   <h2>Informations</h2>
   <div class="card pad"><div class="row"><div><label for="acName" style="margin-top:0">Nom et prénom</label><input id="acName" autocomplete="name" value="${esc(me.name)}"></div><div><label for="acCity" style="margin-top:0">Ville</label><input id="acCity" autocomplete="address-level2" value="${esc(me.city)}"></div></div>
@@ -2882,8 +3026,9 @@ async function requestDelivery(id,action){
   catch(x){toast(x.message);if(/ramassage dans Réglages/.test(x.message)){location.hash='reglages';setTimeout(()=>$('#pkAddr')&&$('#pkAddr').focus(),300)}}
 }
 function pickupSec(){
+  if(!FLAGS.delivery)return'';
   const pk=me.pickup||{};
-  return`<div class="sec" id="pkSec"><div><h3>Livraison Domo</h3><p>Un livreur Domo récupère vos colis confirmés et encaisse pour vous. ${money(meConfig.deliveryFee||8)} par colis, déduits du versement.</p></div>
+  return`<div class="sec" id="pkSec"><div><h3 role="heading" aria-level="2">Livraison Domo</h3><p>Un livreur Domo récupère vos colis confirmés et encaisse pour vous. ${money(meConfig.deliveryFee||8)} par colis, déduits du versement.</p></div>
     <div><label for="pkAddr" style="margin-top:0">Adresse de ramassage</label><input id="pkAddr" value="${esc(pk.addr||'')}" placeholder="Rue, immeuble, étage">
     <div class="row"><div><label for="pkGov">Gouvernorat</label><select id="pkGov"><option value="">Choisir…</option>${GOVS.map(g=>`<option ${g===pk.gov?'selected':''}>${g}</option>`).join('')}</select></div><div><label for="pkPhone">Téléphone sur place</label><input id="pkPhone" inputmode="tel" value="${esc(pk.phone?fmtPhone(pk.phone):'')}" placeholder="${fmtPhone(me.phone)}"></div></div>
     <div class="locline" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px"><button class="btn sm" type="button" id="pkGps">${ic('locate')}Utiliser ma position actuelle</button><span class="hint" id="pkGpsT" style="margin:0">${pk.lat?'Position GPS enregistrée : le livreur arrive au bon endroit.':'Conseillé : faites-le depuis la boutique.'}</span></div>
@@ -3118,8 +3263,11 @@ async function renderAdmin(sub){
   if(!me.admin){location.hash='';return}
   admTab=sub||admTab;
   const tabs=[['tableau','Tableau de bord'],['verifications','Vérifications','verif'],['contestations','Contestations','contests'],['boost','Domo Boost','boost'],['ramassages','Livraisons à attribuer','pickups'],['encours','Livraisons en cours'],['livreurs','Livreurs','drivers'],['versements','Versements']];
-  const delivery=['ramassages','encours','livreurs','versements'].includes(admTab);
+  let delivery=['ramassages','encours','livreurs','versements'].includes(admTab);
   let ov={};try{ov=await api('/admin/overview')}catch(x){toast(x.message)}
+  const dlvLive=FLAGS.delivery||Object.entries(ov).some(([k,v])=>/pickup|active|cash|payout/i.test(k)&&+v>0);
+  for(let i=tabs.length-1;i>=0;i--){const k=tabs[i][0];if((!dlvLive&&['ramassages','encours','livreurs','versements'].includes(k))||(!FLAGS.boost&&k==='boost'))tabs.splice(i,1)}
+  if(!tabs.some(t=>t[0]===admTab)){admTab='tableau';delivery=false}
   $('#app').innerHTML=head('Console Domo','')+
   `<div class="tabs atabs" role="tablist" aria-label="Sections de la console" style="margin-top:4px">${tabs.map(([k,l,c])=>`<a class="tab" role="tab" href="#admin/${k}" aria-selected="${k===admTab}">${l}${c&&ov[c]?` <i>${ov[c]}</i>`:''}</a>`).join('')}</div>${delivery?`<p class="hint" style="margin:14px 0 10px">La livraison Domo est en pause pour les nouveaux vendeurs. Ces onglets servent aux commandes déjà en cours.</p><div class="kpis"><div class="kpi"><span>À attribuer</span><b>${ov.pickups||0}</b></div><div class="kpi"><span>En cours</span><b>${ov.active||0}</b></div><div class="kpi"><span>Cash chez les livreurs</span><b>${money(ov.cashHeld||0)}</b></div><div class="kpi"><span>À verser aux boutiques</span><b>${money(ov.payoutsDue||0)}</b></div><div class="kpi"><span>Vérifications</span><b>${ov.verif||0}</b></div><div class="kpi"><span>Candidatures livreur</span><b>${ov.drivers||0}</b></div></div>`:''}<div id="adm"><div class="empty">Chargement…</div></div>`;
   {const t=$('.atabs'),c=t&&t.querySelector('[aria-selected=true]');if(c)t.scrollLeft=c.offsetLeft-(t.clientWidth-c.offsetWidth)/2}
@@ -3172,7 +3320,7 @@ async function admDash(){
       <h3 style="margin-top:18px">Gouvernorats</h3>${m.gov.length?`<ul class="hbars">${m.gov.map(x=>`<li><span>${esc(x.g)}</span><i style="--w:${Math.round(x.n/m.gov[0].n*100)}%"></i><b>${x.n}${x.r?` <small>(${x.r} refus)</small>`:''}</b></li>`).join('')}</ul>`:'<p class="muted">Pas encore de données.</p>'}</section>
   </div>
   <section class="card pad" id="stuck" style="margin-top:16px"><h3>Inscriptions récentes</h3><p class="hint" style="margin-top:-4px">Les vendeurs sans commande après 24 h sont signalés. Un message personnel augmente fortement l’activation.</p>
-    <div class="tblw"><table class="tbl"><thead><tr><th>Boutique</th><th>Inscrit</th><th>Commandes</th><th>Produits</th><th></th></tr></thead><tbody>${m.fresh.map(x=>{const st=!x.orders&&Date.now()-x.created_at>864e5;return`<tr class="${st?'stk':''}"><td><b>${esc(x.shop||x.name||'—')}</b><small>${fmtPhone(x.phone)}</small></td><td>${ago(x.created_at)}</td><td>${x.orders}${st?' <span class="pill warn">Bloqué</span>':''}</td><td>${x.products}</td><td><a class="btn sm" href="${waTo(x.phone,`Bonjour, ici l’équipe Domo. Je peux vous aider à créer votre première commande en 2 minutes ?`)}" target="_blank" rel="noopener">${ic('chat')}WhatsApp</a></td></tr>`}).join('')}</tbody></table></div></section>`;
+    <div class="tblw"><table class="tbl"><thead><tr><th>Boutique</th><th>Inscrit</th><th>Commandes</th><th>Produits</th><th><span class="sr">Action</span></th></tr></thead><tbody>${m.fresh.map(x=>{const st=!x.orders&&Date.now()-x.created_at>864e5;return`<tr class="${st?'stk':''}"><td><b>${esc(x.shop||x.name||'—')}</b><small>${fmtPhone(x.phone)}</small></td><td>${ago(x.created_at)}</td><td>${x.orders}${st?' <span class="pill warn">Bloqué</span>':''}</td><td>${x.products}</td><td><a class="btn sm" href="${waTo(x.phone,`Bonjour, ici l’équipe Domo. Je peux vous aider à créer votre première commande en 2 minutes ?`)}" target="_blank" rel="noopener">${ic('chat')}WhatsApp</a></td></tr>`}).join('')}</tbody></table></div></section>`;
   box.onclick=e=>{const b=e.target.closest('[data-days]');if(b){admDays=+b.dataset.days;admDash();return}if(e.target.closest('#dashRe'))admDash()};
 }
 async function admContests(){

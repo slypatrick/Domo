@@ -157,14 +157,16 @@ async function currentUser(req, env) {
 /* ---------------- trust score ---------------- */
 const VISIBLE = `(r.created_at < ?2 OR EXISTS (SELECT 1 FROM reviews r2 WHERE r2.order_id = r.order_id AND r2.author_id = r.target_id))`;
 
-async function trust(env, user) {
+// Buyer reliability is private and per shop: a seller only sees their own history with a buyer (scope = seller id).
+// Without a scope (the buyer's own profile, public pages) no score is computed for buyers.
+async function trust(env, user, scope) {
   const cutoff = Date.now() - BLIND_DAYS * DAY;
-  const rv = await env.DB.prepare(`SELECT COUNT(*) n, COALESCE(SUM(rating),0) s FROM reviews r WHERE r.target_id = ?1 AND ${VISIBLE}`)
-    .bind(user.id, cutoff).first();
+  const rv = await env.DB.prepare(`SELECT COUNT(*) n, COALESCE(SUM(rating),0) s FROM reviews r WHERE r.target_id = ?1 AND ${VISIBLE}${user.role === 'customer' && scope ? ' AND r.author_id = ?3' : ''}`)
+    .bind(...(user.role === 'customer' && scope ? [user.id, cutoff, scope] : [user.id, cutoff])).first();
   const n = rv.n, avg = n ? Math.round((rv.s / n) * 10) / 10 : null;
   if (user.role === 'customer') {
-    const o = await env.DB.prepare(`SELECT COALESCE(SUM(status='delivered'),0) d, COALESCE(SUM(${COUNTS_AGAINST}),0) r, COALESCE(SUM(status='cancelled'),0) c, COALESCE(SUM(status='refused' AND fail_contest='open'),0) k, COALESCE(SUM(status='refused'),0) rr FROM orders WHERE customer_id = ?`)
-      .bind(user.id).first();
+    const o = await env.DB.prepare(`SELECT COALESCE(SUM(status='delivered'),0) d, COALESCE(SUM(${COUNTS_AGAINST}),0) r, COALESCE(SUM(status='cancelled'),0) c, COALESCE(SUM(status='refused' AND fail_contest='open'),0) k, COALESCE(SUM(status='refused'),0) rr FROM orders WHERE customer_id = ?${scope ? ' AND seller_id = ?' : ''}`)
+      .bind(...(scope ? [user.id, scope] : [user.id])).first();
     // Delivery reliability counts most (70%). Both parts start from a neutral prior so one bad order can't sink a new customer.
     const reliability = (o.d + 3) / (o.d + o.r + 4);
     const rating = (rv.s + 3 * 3.5) / (n + 3);
@@ -178,7 +180,10 @@ async function trust(env, user) {
   return { score, level, delivered: o.d, reviews: n, avg };
 }
 
-async function card(env, user) { return { ...publicView(user), trust: await trust(env, user), badges: (await userBadges(env, user)).earned }; }
+async function card(env, user, scope) {
+  if (user.role === 'customer' && !scope) return { ...publicView(user), trust: { level: 'private', delivered: 0, refused: 0, reviews: 0, avg: null, score: 0 }, badges: [] };
+  return { ...publicView(user), trust: await trust(env, user, scope), badges: user.role === 'customer' ? [] : (await userBadges(env, user)).earned };
+}
 
 /* ---------------- orders ---------------- */
 const ORDER_FIELDS = ['name', 'phone', 'gov', 'addr', 'items', 'price', 'cost', 'courier', 'ret', 'src', 'notes'];
@@ -194,6 +199,8 @@ function cleanOrder(b, partial = false) {
   for (const k of ['cost', 'courier', 'ret']) if (has(k)) o[k] = money(b[k], k);
   if (has('src')) o.src = str(b.src, 20, 'source');
   if (has('notes')) o.notes = str(b.notes, 300, 'notes');
+  if (b.carrier !== undefined) o.carrier = str(b.carrier, 40, 'transporteur') || null;
+  if (b.carrier_ref !== undefined) o.carrier_ref = str(b.carrier_ref, 60, 'numéro de suivi') || null;
   return o;
 }
 async function verifiedCustomerId(env, phone) {
@@ -497,7 +504,7 @@ on('GET', '/api/orders', async ({ env, me }) => {
   const cards = {};
   await Promise.all(customerIds.map(async id => {
     const u = await env.DB.prepare('SELECT * FROM users WHERE id=?').bind(id).first();
-    if (u) cards[id] = await card(env, u);
+    if (u) cards[id] = await card(env, u, me.id);
   }));
   const out = await withReviewFlags(env, rows, me);
   const dIds = [...new Set(rows.map(r => r.driver_id).filter(Boolean))];
@@ -582,7 +589,7 @@ on('GET', '/api/lookup', async ({ env, me, url }) => {
   const own = await env.DB.prepare(`SELECT COALESCE(SUM(status='delivered'),0) d, COALESCE(SUM(${COUNTS_AGAINST}),0) r, COALESCE(SUM(status='cancelled'),0) c FROM orders WHERE seller_id=? AND phone=?`)
     .bind(me.id, phone).first();
   const u = await env.DB.prepare("SELECT * FROM users WHERE role='customer' AND phone=? AND phone_verified=1").bind(phone).first();
-  return json({ customer: u ? await card(env, u) : null, own });
+  return json({ customer: u ? await card(env, u, me.id) : null, own });
 });
 
 // --- customer
@@ -788,7 +795,7 @@ on('GET', '/api/profile/:id', async ({ env, me, params }) => {
   let hidden = 0;
   if (isMe) hidden = (await env.DB.prepare(`SELECT COUNT(*) n FROM reviews r WHERE r.target_id = ?1 AND NOT ${VISIBLE}`).bind(u.id, cutoff).first()).n;
   return json({
-    profile: await card(env, u),
+    profile: await card(env, u, u.role === 'customer' && me.role === 'seller' ? me.id : null),
     isMe, hidden,
     reviews: rows.map(r => ({
       id: r.id, rating: r.rating, tags: JSON.parse(r.tags || '[]'), comment: r.comment, reply: r.reply, reported: !!r.reported, created_at: r.created_at,
@@ -831,6 +838,8 @@ const cleanProduct = (b, partial) => {
   if (b.description !== undefined) p.description = str(b.description, 600, 'description') || null;
   if (b.image !== undefined) p.image = b.image ? String(b.image) : null;
   if (b.sort !== undefined) p.sort = Math.max(0, Math.min(9999, parseInt(b.sort, 10) || 0));
+  if (b.cost !== undefined) p.cost = b.cost === '' || b.cost === null ? null : money(b.cost, 'coût');
+  if (b.stock !== undefined) p.stock = b.stock === '' || b.stock === null ? null : Math.max(0, Math.min(99999, parseInt(b.stock, 10) || 0));
   for (const k of ['sizes', 'colors']) if (b[k] !== undefined) {
     const list = (Array.isArray(b[k]) ? b[k] : String(b[k] || '').split(/[,;\n]/)).map(x => String(x).trim().slice(0, 20)).filter(Boolean);
     const uniq = [...new Set(list)].slice(0, 12);
@@ -850,6 +859,7 @@ on('POST', '/api/products', async ({ env, me, body }) => {
   if (n >= 200) fail(400, '200 produits maximum');
   const p = { id: rid(), seller_id: me.id, active: 1, sort: n, created_at: Date.now(), category: null, description: null, image: null, sizes: null, colors: null, ...cleanProduct(body) };
   await env.DB.prepare('INSERT INTO products (id, seller_id, name, price, active, sort, created_at, category, description, image, sizes, colors) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').bind(p.id, p.seller_id, p.name, p.price, p.active, p.sort, p.created_at, p.category, p.description, p.image, p.sizes, p.colors).run();
+  if (p.cost != null || p.stock != null) await env.DB.prepare('UPDATE products SET cost=?, stock=? WHERE id=?').bind(p.cost ?? null, p.stock ?? null, p.id).run();
   return json({ product: p }, 201);
 });
 on('PATCH', '/api/products/:id', async ({ env, me, body, params }) => {
@@ -880,7 +890,7 @@ async function shopBySlug(env, slug) {
 }
 on('GET', '/api/shop/:slug', async ({ env, params }) => {
   const u = await shopBySlug(env, params.slug);
-  const products = (await env.DB.prepare('SELECT id, name, price, image, category, description, sizes, colors FROM products WHERE seller_id=? AND active=1 ORDER BY sort, created_at').bind(u.id).all()).results
+  const products = (await env.DB.prepare('SELECT id, name, price, image, category, description, sizes, colors, stock FROM products WHERE seller_id=? AND active=1 ORDER BY sort, created_at').bind(u.id).all()).results
     .map(p => ({ ...p, sizes: optList(p.sizes), colors: optList(p.colors) }));
   const s = JSON.parse(u.settings || '{}');
   const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
@@ -902,14 +912,18 @@ on('POST', '/api/shop/:slug/orders', async ({ env, params, body, ctx }) => {
   const recent = await env.DB.prepare('SELECT COUNT(*) n FROM orders WHERE seller_id=? AND phone=? AND created_at > ?').bind(u.id, phone, Date.now() - DAY).first();
   if (recent.n >= 5) fail(429, 'Trop de commandes avec ce numéro aujourd’hui. Contactez la boutique.');
   const lines = Array.isArray(body.items) ? body.items.slice(0, 30) : [];
-  let items = [], total = 0;
+  let items = [], total = 0, costTotal = 0;
+  const take = {};
   if (lines.length) {
     const ids = lines.map(l => String(l.product_id));
-    const rows = (await env.DB.prepare(`SELECT id, name, price, sizes, colors FROM products WHERE seller_id=? AND active=1 AND id IN (${ids.map(() => '?').join(',')})`).bind(u.id, ...ids).all()).results;
+    const rows = (await env.DB.prepare(`SELECT id, name, price, sizes, colors, cost, stock FROM products WHERE seller_id=? AND active=1 AND id IN (${ids.map(() => '?').join(',')})`).bind(u.id, ...ids).all()).results;
     const byId = Object.fromEntries(rows.map(r => [r.id, r]));
     for (const l of lines) {
       const p = byId[String(l.product_id)], q = Math.max(1, Math.min(20, parseInt(l.qty, 10) || 1));
       if (!p) fail(400, 'Un produit n’est plus disponible, rechargez la page');
+      take[p.id] = (take[p.id] || 0) + q;
+      if (p.stock != null && take[p.id] > p.stock) fail(409, p.stock ? `Plus que ${p.stock} « ${p.name} » en stock` : `« ${p.name} » est en rupture de stock`);
+      costTotal += (p.cost || 0) * q;
       const sz = optList(p.sizes), co = optList(p.colors), opt = [];
       if (sz.length) { if (!sz.includes(String(l.size || ''))) fail(400, `Choisissez la taille pour « ${p.name} »`); opt.push(String(l.size)); }
       if (co.length) { if (!co.includes(String(l.color || ''))) fail(400, `Choisissez la couleur pour « ${p.name} »`); opt.push(String(l.color)); }
@@ -918,6 +932,7 @@ on('POST', '/api/shop/:slug/orders', async ({ env, params, body, ctx }) => {
   }
   const free = str(body.request, 300, 'demande');
   if (!items.length && !free) fail(400, 'Choisissez au moins un produit');
+  if (items.length && String(body.addr || '').trim().length < 5) fail(400, 'Indiquez votre adresse de livraison');
   if (free) items.push(free);
   const shipFee = s.shipFee ?? 7;
   const secure = false; // protected purchase is frozen (strategy D3)
@@ -926,11 +941,13 @@ on('POST', '/api/shop/:slug/orders', async ({ env, params, body, ctx }) => {
     name: body.name, phone, gov: body.gov, addr: body.addr, items: items.join(', '),
     price: total ? total + shipFee + fee : 0.001, // price 0.001 = "à fixer par le vendeur" for free-text requests
     courier: s.courier ?? 7, ret: s.ret ?? 7, src: SOURCES.includes(body.src) ? body.src : 'Site web', notes: body.notes,
+    ...(costTotal ? { cost: costTotal } : {}),
   });
   if (!total) o.notes = ['Prix à confirmer par la boutique', o.notes].filter(Boolean).join(' · ');
   if (secure) { o.secure = 1; o.secure_fee = fee; }
   const row = await insertOrder(env, u.id, o, 'customer', body.idem);
   if (row.duplicate) return json({ ref: fmtRef(row.ref), claim: row.claim_token, total: total ? total + shipFee + fee : null, secure, secure_fee: fee, duplicate: true });
+  for (const [pid, q] of Object.entries(take)) await env.DB.prepare('UPDATE products SET stock = MAX(0, stock - ?) WHERE id=? AND stock IS NOT NULL').bind(q, pid).run();
   bg(ctx, notify(env, u.id, { type: 'order', title: `Nouvelle commande ${fmtRef(row.ref)}`, body: `${firstName(o.name)} · ${o.items.slice(0, 80)} · ${total ? dt(o.price) : 'prix à fixer'}${secure ? ' · achat sécurisé' : ''}`, url: '/#commandes', tag: 'order-' + row.id }));
   return json({ ref: fmtRef(row.ref), claim: row.claim_token, total: total ? total + shipFee + fee : null, secure, secure_fee: fee }, 201);
 }, { public: true, cors: true });
@@ -945,7 +962,7 @@ on('GET', '/api/track/:ref', async ({ env, req, params }) => {
   const seller = await env.DB.prepare('SELECT * FROM users WHERE id=?').bind(o.seller_id).first();
   const events = (await env.DB.prepare('SELECT status, by_role, at FROM order_events WHERE order_id=? ORDER BY at, id').bind(o.id).all()).results;
   return json({
-    order: { ref: fmtRef(o.ref), items: o.items, price: o.price, gov: o.gov, status: o.status, created_at: o.created_at, updated_at: o.updated_at, secure: !!o.secure, dispute_status: o.dispute_status,
+    order: { ref: fmtRef(o.ref), items: o.items, price: o.price, gov: o.gov, status: o.status, created_at: o.created_at, updated_at: o.updated_at, secure: !!o.secure, dispute_status: o.dispute_status, carrier: o.carrier || null, carrier_ref: o.carrier_ref || null,
       delivery: o.delivery, driver: o.driver_id && ['assigned', 'picked'].includes(o.delivery) ? firstName((await env.DB.prepare('SELECT name FROM drivers WHERE id=?').bind(o.driver_id).first())?.name) : null },
     events, seller: await card(env, seller),
   });
@@ -2040,8 +2057,27 @@ async function shopPage(req, env, url, slug) {
     .transform(res);
 }
 
+// Security headers on every HTML page. Shop pages opened with ?embed=1 may be framed by sellers' own sites.
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self'; worker-src 'self'; manifest-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'";
+function secure(res, url) {
+  const ct = res.headers.get('content-type') || '';
+  if (!ct.includes('text/html')) return res;
+  const r = new Response(res.body, res);
+  const embed = url.searchParams.get('embed') === '1';
+  r.headers.set('Content-Security-Policy', CSP + (embed ? '' : "; frame-ancestors 'none'"));
+  if (!embed) r.headers.set('X-Frame-Options', 'DENY');
+  r.headers.set('Strict-Transport-Security', 'max-age=31536000');
+  r.headers.set('X-Content-Type-Options', 'nosniff');
+  r.headers.set('Permissions-Policy', 'camera=(self), microphone=(self), geolocation=(self)');
+  return r;
+}
 export default {
   async fetch(req, env, ctx) {
+    return secure(await route(req, env, ctx), new URL(req.url));
+  },
+};
+async function route(req, env, ctx) {
+  {
     const url = new URL(req.url);
     if (url.pathname.startsWith('/media/') && req.method === 'GET') return serveMedia(req, env, url, ctx);
     if (req.method === 'GET' && url.pathname === '/robots.txt') return new Response(`User-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /media/\n\nSitemap: ${url.origin}/sitemap.xml\n`, { headers: { 'content-type': 'text/plain; charset=utf-8', 'cache-control': 'public, max-age=3600' } });
@@ -2054,8 +2090,8 @@ export default {
     const res = await handle(req, env, url, ctx);
     if (corsPath) for (const [k, v] of Object.entries(CORS)) res.headers.set(k, v);
     return res;
-  },
-};
+  }
+}
 
 async function handle(req, env, url, ctx) {
     try {

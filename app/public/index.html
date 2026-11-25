@@ -797,7 +797,7 @@ body{font-size:16px}
 @media(min-width:900px){.kpis.k4{grid-template-columns:repeat(4,minmax(0,1fr))}}
 .kpis.k4 .kpi{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:inherit}
 .kpis.k4 .kpi small{color:var(--ink3);font-size:13px;line-height:1.35}
-.kpi .kdelta{display:block;margin-top:4px;font-size:12.5px;font-weight:600;color:var(--ink3)}.kpi .kdelta.up{color:var(--good)}.kpi .kdelta.dn{color:var(--bad)}
+.kpi .kdelta{display:block;margin-top:4px;font-size:12.5px;font-weight:600;color:var(--ink3)}.kpi .kdelta.kup{color:var(--good)}.kpi .kdelta.kdn{color:var(--bad)}
 .charts{display:grid;gap:12px;margin-top:16px}@media(min-width:900px){.charts{grid-template-columns:1fr 1fr}}
 .achart{margin:0;background:var(--sf);border:1px solid var(--line);border-radius:16px;padding:14px 16px}
 .achart figcaption{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-bottom:8px}.achart figcaption span{color:var(--ink3);font-size:13px}
@@ -1254,6 +1254,113 @@ nav .dot,.chatbtn .dot{font-size:12px;min-width:18px;height:18px;line-height:18p
 .ord.selmode .acts,.ord.selmode .wafill,.ord.selmode .ordsep{display:none!important}
 .ord.selmode{cursor:pointer}
 .bulkbar span{white-space:nowrap}
+
+/* Dashboard 2026 (seller + admin): full-width desktop, sidebar sections and profile card,
+   round icon buttons, KPI cards with one highlighted card, chart cards. Keep last. */
+:root{--gut:clamp(24px,2.4vw,40px)}
+/* desktop: pages fill the view inside safe gutters */
+@media(min-width:960px){
+ main,.bin,main:has(.duty){max-width:none!important}
+ main{padding:28px var(--gut) 40px!important}
+ body:not(.nonav) .topbar .bin{padding:0 var(--gut);height:68px}
+ body.nonav main:has(.auth),body.nonav:has(.auth) .bin{max-width:1240px!important}
+ /* sidebar */
+ nav{padding:20px 16px;gap:2px}
+ nav .nb{padding:4px 10px 18px}
+ nav .nsec{display:block;padding:14px 12px 6px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink3)}
+ nav a{border-radius:12px;padding:11px 12px}
+ nav a[aria-current=page]{background:var(--ink);color:var(--bg)!important;font-weight:600}
+ nav a[aria-current=page] svg.i{color:var(--bg)!important}
+ nav .nf{display:flex!important;flex-direction:column;align-items:flex-start;text-align:start;gap:2px;margin-top:auto;padding:16px;border-radius:16px;background:var(--brand);color:var(--onbrand);text-decoration:none;position:relative;overflow:hidden}
+ nav .nf::before{content:"";position:absolute;inset:auto -30% -60% auto;width:160px;height:160px;border-radius:50%;background:rgba(255,255,255,.08)}
+ nav .nf .nfk{font-size:12px;opacity:.8}
+ nav .nf b{font-size:15px;line-height:1.3}
+ nav .nf .nfp{font-size:12.5px;opacity:.8}
+ nav .nf .nfgo{align-self:stretch;display:inline-flex;align-items:center;justify-content:center;gap:6px;margin-top:12px;min-height:36px;border-radius:999px;background:rgba(255,255,255,.16);font-size:13px;font-weight:600}
+ nav .nf .nfgo svg.i{width:14px;height:14px}
+ nav .nf .nsw{margin-top:8px;color:inherit}
+}
+@media(max-width:959px){nav .nsec{display:none}}
+@media(max-width:959px){nav .nf{display:none!important}}
+/* top bar: round icon buttons */
+.topbar .chatbtn{width:42px;height:42px;border-radius:50%;background:var(--sf2);border:0}
+@media(hover:hover){.topbar .chatbtn:hover{background:var(--line)}}
+.topbar #newTop{border-radius:999px;min-height:42px;padding:0 18px}
+@media(min-width:960px){.topbar .ctx{order:-1;margin-left:0;margin-right:auto}}
+/* page header */
+.ph h1{letter-spacing:-.025em}
+/* KPI cards (seller tiles + admin kpis) */
+.tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-bottom:24px}
+.tile,.kpis.k4 .kpi{position:relative;display:flex;flex-direction:column;gap:4px;padding:18px 18px 16px;border-radius:var(--kr,16px);border:1px solid var(--line);background:var(--sf);box-shadow:none;min-height:132px;text-align:start}
+.tile span,.kpis.k4 .kpi>span{font-size:13px;font-weight:500;color:var(--ink2);padding-inline-end:44px}
+.tile b,.kpis.k4 .kpi b{font-size:clamp(24px,2.2vw,30px);font-weight:700;letter-spacing:-.02em;margin:2px 0 auto;color:var(--ink)}
+.tile small,.kpis.k4 .kpi small:not(.kdelta){display:inline-flex!important;align-self:flex-start;align-items:center;gap:6px;margin-top:10px;padding:5px 12px;border-radius:999px;background:var(--sf2);color:var(--ink2);font-size:12.5px;font-weight:500;line-height:1.3}
+.kpis.k4 .kpi small.kdelta{flex:none;height:auto;width:auto;max-width:100%;display:inline-flex!important;align-items:center;gap:4px;line-height:1.3;align-self:flex-start;margin-top:10px!important;padding:5px 12px!important;border-radius:999px;background:var(--goodbg)!important;color:color-mix(in srgb,var(--good) 75%,var(--ink))}
+.kpis.k4 .kpi small.kdelta.kdn{background:var(--badbg)!important;color:var(--bad)}
+.kpis.k4 .kpi small.kdelta:not(.kup):not(.kdn){background:var(--sf2)!important;color:var(--ink2)}
+.kpis.k4 .kpi.kfeat small.kdelta{background:rgba(255,255,255,.16)!important;color:var(--onbrand)}
+.karr{position:absolute;top:14px;inset-inline-end:14px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:var(--sf2);color:var(--ink);font-style:normal}
+.karr svg.i{width:17px;height:17px}
+[dir=rtl] .karr svg.i{transform:scaleX(-1)}
+.tile.hot b{color:var(--ink)}
+.tile.kfeat,.kpis.k4 .kpi.kfeat{background:var(--brand);border-color:var(--brand);color:var(--onbrand)}
+.tile.kfeat span,.tile.kfeat b,.kpi.kfeat>span,.kpi.kfeat b{color:var(--onbrand)!important}
+.tile.kfeat span,.kpi.kfeat>span{opacity:.85}
+.tile.kfeat small,.kpi.kfeat small:not(.kdelta){background:rgba(255,255,255,.16)!important;color:var(--onbrand)!important}
+.kfeat .karr{background:rgba(255,255,255,.18);color:var(--onbrand)}
+@media(hover:hover){.tile:hover,.kpis.k4 a.kpi:hover{border-color:var(--line2)}.tile.kfeat:hover{background:var(--brandh)}}
+.kpis.k4{gap:16px;background:none;border:0;box-shadow:none;border-radius:0;overflow:visible}
+.krow{margin:4px 0 20px}
+@media(max-width:1099px){.tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}}
+@media(max-width:520px){
+ .tile,.kpis.k4 .kpi{min-height:118px;padding:14px}
+ .tile small{display:inline-flex!important;font-size:12px;padding:4px 10px}
+ .karr{width:32px;height:32px;top:10px;inset-inline-end:10px}
+ .tile span,.kpis.k4 .kpi>span{padding-inline-end:36px}
+}
+/* two-column dashboard rows */
+.dgrid2{display:grid;gap:16px;margin:0 0 16px;align-items:start}
+@media(min-width:1100px){.dgrid2{grid-template-columns:minmax(0,1.7fr) minmax(0,1fr)}.dgrid2.rev{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.dgrid2>.card,.dgrid>.card,#stuck,.kpis.k4~.card{border-radius:var(--kr,16px)}
+/* chart card: rounded bars, highest day highlighted with its value */
+.kchart{border:0!important;padding:0!important;background:none!important}
+.kchart figcaption{display:grid;gap:2px;margin-bottom:14px}
+.kchart .kct{font-weight:600;font-size:15px;color:var(--ink)}
+.kchart .kcv{font-family:var(--display);font-size:28px;letter-spacing:-.02em;line-height:1.15}
+.kchart .kcs{font-size:13px;color:var(--ink3)}
+.kbars{display:flex;align-items:flex-end;gap:clamp(3px,.8%,10px);height:200px;padding-top:28px;border-bottom:1px dashed var(--line2)}
+.kbars i{flex:1;min-width:2px;height:max(var(--v),3px);border-radius:8px 8px 3px 3px;background:color-mix(in srgb,var(--brand) 22%,var(--sf));position:relative;font-style:normal}
+.kbars.dense{gap:2px}.kbars.dense i{border-radius:3px 3px 1px 1px}
+.kbars i.mx{background:var(--brand);background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.22) 0 2px,transparent 2px 9px)}
+.kbars i em{position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);padding:3px 9px;border-radius:999px;background:var(--ink);color:var(--bg);font-style:normal;font-size:12px;font-weight:700;white-space:nowrap}
+.kchart .cax{display:flex;justify-content:space-between;margin-top:8px;font-size:12px;color:var(--ink3)}
+/* to-do list card (reports style: coloured edge + arrow) */
+.ktodo h3{margin:0 0 12px}
+.ktodo ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.ktodo li a{display:flex;align-items:center;gap:12px;padding:12px 12px 12px 16px;border-radius:12px;border-inline-start:4px solid var(--c,var(--brand));background:color-mix(in srgb,var(--c,var(--brand)) 12%,var(--sf));text-decoration:none;color:var(--ink)}
+.ktodo li a>span{flex:1;min-width:0;display:grid}
+.ktodo li b{font-size:14.5px}
+.ktodo li small{font-size:12.5px;color:var(--ink2)}
+.ktodo .karr{position:static;background:var(--sf);flex:none}
+.ktodo .kt0{--c:#7c5cfa}.ktodo .kt1{--c:var(--brand)}.ktodo .kt2{--c:var(--good)}.ktodo .kt3{--c:var(--warn)}
+/* tables: header row on a soft band */
+.tbl thead th{background:var(--sf2);font-weight:600;color:var(--ink2)}
+.tbl thead th:first-child{border-radius:10px 0 0 10px}.tbl thead th:last-child{border-radius:0 10px 10px 0}
+/* segmented period switch as pills */
+.dashbar .seg,.seg{border-radius:999px}
+.seg button{border-radius:999px}
+/* edge-to-edge rows follow the desktop gutter */
+@media(min-width:960px){.xfilters,.chipsbar{margin-left:calc(-1*var(--gut));margin-right:calc(-1*var(--gut));padding-left:var(--gut);scroll-padding-inline:var(--gut)}
+ .cover{margin-left:calc(-1*var(--gut));margin-right:calc(-1*var(--gut))}}
+@media(min-width:1120px){.cover{margin:0}}
+/* buyer orders and public shop use the width */
+@media(min-width:1280px){.mogrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;align-items:start}.mogrid>*{margin:0!important}}
+@media(min-width:960px){.store{max-width:none}}
+/* phones: KPI pills stay on one line */
+@media(max-width:520px){.tile small,.kpis.k4 .kpi small{max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block!important;flex:none}.kpis.k4 .kpi small.kdelta{display:block!important}}
+/* seller order list fills wide screens */
+@media(min-width:1500px){#list{grid-template-columns:repeat(3,minmax(0,1fr))!important}}
+@media(min-width:1500px){.pgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1277,7 +1384,7 @@ nav .dot,.chatbtn .dot{font-size:12px;min-width:18px;height:18px;line-height:18p
 <nav id="nav" aria-label="Navigation" hidden></nav>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-arr" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
   <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
   <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10v4a1 1 0 0 0 1 1h2l5 4V5L6 9H4a1 1 0 0 0-1 1zM15 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12"/></symbol>
@@ -1416,11 +1523,11 @@ nav .dot,.chatbtn .dot{font-size:12px;min-width:18px;height:18px;line-height:18p
 
 <script>
 /* Product switches. Paused or side products stay in the code but are hidden from users. */
-const FLAGS={delivery:false,boost:false,explore:false,buyerScore:false};
+const FLAGS={delivery:true,boost:true,explore:true,buyerScore:false};
 /* ---------- Arabic interface (translates rendered text; French stays the source) ---------- */
 const AR={
 // navigation and chrome
-'Commandes':'الطلبيات','Mes commandes':'طلبياتي','Messages':'الرسائل','Boutique':'المتجر','Avis':'التقييمات','Stats':'الإحصائيات','Réglages':'الإعدادات','Explorer':'تصفّح','Profil':'حسابي','Tournée':'الجولة','Caisse':'الصندوق','Compte':'الحساب','Notifications':'الإشعارات','Domo Boost':'Domo Boost','Console Domo':'لوحة Domo',
+'Commandes':'الطلبيات','Mes commandes':'طلبياتي','Messages':'الرسائل','Boutique':'المتجر','Avis':'التقييمات','Stats':'الإحصائيات','Réglages':'الإعدادات','Explorer':'تصفّح','Profil':'حسابي','Tournée':'الجولة','Caisse':'الصندوق','Compte':'الحساب','Livrées ce mois':'المُسلَّمة هذا الشهر','Menu':'القائمة','Général':'عام','Mon compte':'حسابي','À faire':'للقيام به','Notifications':'الإشعارات','Domo Boost':'Domo Boost','Console Domo':'لوحة Domo',
 'Nouvelle commande':'طلبية جديدة','Mon espace':'فضائي','Se connecter':'تسجيل الدخول','Vendre sur Domo':'بِع على Domo','Suivi':'التتبّع','Panier':'السلة','Fermer':'إغلاق','Annuler':'إلغاء','Confirmer':'تأكيد','Confirmées':'المؤكَّدة','Expédiées':'المُرسَلة','Livrées':'المُسلَّمة','Refusées':'المرفوضة','Refus et annulations':'الرفض والإلغاء','colis en route':'طرود في الطريق','prêtes pour le livreur':'جاهزة للإرسال','à contacter':'للاتصال','Sans compte Domo':'بدون حساب Domo','Prix à confirmer par la boutique':'السعر يؤكده المتجر','Nom, téléphone, produit, ID…':'الاسم، الهاتف، المنتج، المعرّف…','Modifier':'تعديل','Appeler':'اتصال','Rechercher':'بحث','Boutique en ligne':'المتجر الإلكتروني','Statistiques':'الإحصائيات','Enregistrer':'حفظ','Supprimer':'حذف','Retour':'رجوع','Chargement…':'جارٍ التحميل…','Erreur':'خطأ','Masquer':'إخفاء','Voir plus':'عرض المزيد','Voir moins':'عرض أقل','Partager':'مشاركة','Copier':'نسخ','Message':'رسالة','Partager la boutique':'مشاركة المتجر','Lien copié':'تم نسخ الرابط','Numéro copié':'تم نسخ الرقم','ID boutique copié':'تم نسخ معرّف المتجر','Votre panier est vide':'سلتك فارغة',
 // more
 'Connexion':'تسجيل الدخول','Espace vendeur':'فضاء البائع','Espace client':'فضاء الزبون','Espace livreur':'فضاء عامل التوصيل','Pas encore de compte ?':'ليس لديك حساب؟','Explorer les boutiques sans compte':'تصفّح المتاجر بدون حساب','Domo confirme vos commandes en un clic sur WhatsApp et vous montre qui est fiable avant d’expédier. Moins de retours, plus de bénéfice.':'يؤكد Domo طلبياتك بنقرة على واتساب ويُريك من هو موثوق قبل الإرسال. مرتجعات أقل، وربح أكثر.',
@@ -1537,7 +1644,7 @@ AR_RX.push(
  [/^(\d+) sur 30 jours$/,'$1 خلال 30 يومًا'],[/^\+(\d+) sur 30 jours$/,'+$1 خلال 30 يومًا'],
  [/^(\d+) au total · max (\d+)\/jour$/,'$1 إجمالًا · أقصى $2 يوميًا'],
  [/^(\d+) produits en vitrine$/,'$1 منتجات في الواجهة'],[/^(\d+) en stock$/,'$1 في المخزون'],[/^Plus que (\d+)$/,'بقي $1 فقط'],
- [/^(\d+) confirmées par le client$/,'$1 أكّدها الزبون'],[/^(\d+) colis en route$/,'$1 طرد في الطريق'],
+ [/^(\d+) confirmées par le client$/,'$1 أكّدها الزبون'],[/^(\d+) colis en route$/,'$1 طرد في الطريق'],[/^(\d+) commandes? payées?$/,'$1 طلبية مدفوعة'],[/^(\d+) colis livrés · (\d+) avis$/,'$1 طرد مُسلَّم · $2 تقييم'],
  [/^(\d+) sélectionnées?$/,'$1 محدَّدة'],[/^(\d+) commandes? mises? à jour$/,'تحديث $1 طلبية'],
  [/^Livraison (.+) partout en Tunisie · vous payez à la livraison$/,m=>`التوصيل ${arMoney(m[1])} في كامل تونس · تدفع عند الاستلام`],
  [/^\+ livraison (.+) · vous payez à la livraison$/,m=>`+ توصيل ${arMoney(m[1])} · تدفع عند الاستلام`]
@@ -1830,9 +1937,9 @@ const NAV={seller:[['commandes','Commandes','box'],['messages','Messages','chat'
 if(!FLAGS.explore)NAV.customer=NAV.customer.filter(x=>x[0]!=='explorer');
 function setUnread(n){unread=n;$('#chatDot').hidden=!n;$('#chatDot').textContent=n>9?'9+':n;const a=$('nav a[data-v=messages]');if(a){let d=a.querySelector('.dot');if(n){if(!d){d=document.createElement('span');d.className='dot';a.appendChild(d)}d.textContent=n>9?'9+':n}else if(d)d.remove()}}
 function drawNav(){
-  $('#nav').innerHTML=`<a class="brand nb" href="#" aria-label="Domo"><svg class="mark"><use href="#logo"/></svg>Domo</a>`+
+  $('#nav').innerHTML=`<a class="brand nb" href="#" aria-label="Domo"><svg class="mark"><use href="#logo"/></svg>Domo</a><span class="nsec">Menu</span>`+
     NAV[me.role].map(([k,l,i,dsk])=>`<a href="#${k}" data-v="${k}"${dsk?' class="only-dsk"':''}>${ic(i)}<span>${l}</span>${k==='avis'&&todo.length?`<span class="dot">${todo.length}</span>`:''}</a>`).join('')+
-    (me.role==='seller'&&FLAGS.boost?`<a href="#boost" data-v="boost" class="only-dsk">${ic('mega')}<span>Domo Boost</span></a>`:'')+(me.admin?`<a href="#admin" data-v="admin" class="only-dsk">${ic('shield')}<span>Console Domo</span></a>`:'')+`<a class="nf" href="#compte">${esc(me.role==='seller'?me.shop:me.name)}<br><span style="font-size:12px">${ROLE_L[me.role]} · ${fmtPhone(me.phone)}</span>${(me.links||[]).length?`<button class="btn sm ghost nsw" type="button" data-space="${me.links[0]}">${ic('swap')}${me.links[0]==='seller'?'Espace vendeur':'Espace acheteur'}</button>`:''}</a>`;
+    ((me.role==='seller'&&FLAGS.boost)||me.admin?'<span class="nsec">Général</span>':'')+(me.role==='seller'&&FLAGS.boost?`<a href="#boost" data-v="boost" class="only-dsk">${ic('mega')}<span>Domo Boost</span></a>`:'')+(me.admin?`<a href="#admin" data-v="admin" class="only-dsk">${ic('shield')}<span>Console Domo</span></a>`:'')+`<a class="nf" href="#compte"><span class="nfk">${ROLE_L[me.role]}${me.admin?' · Admin':''}</span><b>${esc(me.role==='seller'?me.shop:me.name)}</b><span class="nfp">${fmtPhone(me.phone)}</span><span class="nfgo">Mon compte ${ic('arr')}</span>${(me.links||[]).length?`<button class="btn sm ghost nsw" type="button" data-space="${me.links[0]}">${ic('swap')}${me.links[0]==='seller'?'Espace vendeur':'Espace acheteur'}</button>`:''}</a>`;
   chrome(true);setUnread(unread);
 }
 function route(){
@@ -1941,9 +2048,10 @@ function renderOrders(){
   const list=(tab==='disputes'?disp:orders.filter(o=>ss.includes(o.status))).filter(o=>(!q||nz([o.name,o.items,o.gov,o.addr,o.notes,o.ref,fmtRef(o.ref)].join(' ')).includes(q)||(qd.length>=3&&o.phone.includes(qd))));
   $('#app').innerHTML=head('Commandes',today())+onboarding()+
   (orders.length?`<div class="tiles">
-    <button class="tile ${cnt(['new','noanswer'])?'hot':''}" type="button" data-tab="todo"><span>À confirmer</span><b>${cnt(['new','noanswer'])}</b><small>à contacter</small></button>
-    <button class="tile" type="button" data-tab="confirmed"><span>À expédier</span><b>${cnt(['confirmed'])}</b><small>prêtes pour le livreur</small></button>
-    <button class="tile" type="button" data-tab="shipped"><span>En livraison</span><b>${money(route$.reduce((a,o)=>a+num(o.price),0))}</b><small>${pl(route$.length,'colis')} en route</small></button>
+    <button class="tile kfeat ${cnt(['new','noanswer'])?'hot':''}" type="button" data-tab="todo"><span>À confirmer</span><i class="karr">${ic('arr')}</i><b>${cnt(['new','noanswer'])}</b><small>à contacter</small></button>
+    <button class="tile" type="button" data-tab="confirmed"><span>À expédier</span><i class="karr">${ic('arr')}</i><b>${cnt(['confirmed'])}</b><small>prêtes pour le livreur</small></button>
+    <button class="tile" type="button" data-tab="shipped"><span>En livraison</span><i class="karr">${ic('arr')}</i><b>${money(route$.reduce((a,o)=>a+num(o.price),0))}</b><small>${pl(route$.length,'colis')} en route</small></button>
+    ${(()=>{const m0=new Date();m0.setDate(1);m0.setHours(0,0,0,0);const dl=orders.filter(o=>o.status==='delivered'&&(o.delivered_at||o.updated_at||0)>=+m0);return`<button class="tile" type="button" data-tab="delivered"><span>Livrées ce mois</span><i class="karr">${ic('arr')}</i><b>${money(dl.reduce((a,o)=>a+num(o.price),0))}</b><small>${pl(dl.length,'commande')} payée${dl.length>1?'s':''}</small></button>`})()}
   </div>`:'')+
   `${stale.length?`<button class="note warn stalen" type="button" data-tab="todo">${ic('alert')}<div><b>${pl(stale.length,'commande','commandes')} sans réponse depuis plus de 24 h.</b> Relancez-les sur WhatsApp avant qu’elles ne refroidissent.</div></button>`:''}${disp.length?`<button class="note risk" type="button" data-tab="disputes" style="width:100%;border:0;text-align:left;cursor:pointer;margin:0 0 14px">${ic('flag')}<div><b>${pl(disp.length,'problème signalé')}</b> par des clients en achat sécurisé. Toucher pour répondre.</div></button>`:''}
   <div class="tools"><div class="tabs" role="toolbar" aria-label="Filtrer par statut">${TABS.map(([k,l,s])=>`<button class="tab" type="button" data-tab="${k}" aria-pressed="${k===tab}">${l}<i>${cnt(s)}</i></button>`).join('')}${disp.length?`<button class="tab" type="button" data-tab="disputes" aria-pressed="${tab==='disputes'}">Litiges<i>${disp.length}</i></button>`:''}</div>
@@ -2727,8 +2835,8 @@ function renderMyOrders(){setTimeout(maybePushPrompt,0);
   const live=myOrders.filter(o=>['new','noanswer','confirmed','shipped'].includes(o.status)),past=myOrders.filter(o=>!live.includes(o));
   const todoR=past.filter(o=>['delivered','refused'].includes(o.status)&&!o.reviewed).length;
   $('#app').innerHTML=head('Mes commandes',me.verified?pl(myOrders.length,'commande'):'')+pending+(myOrders.length?
-    (live.length?`<h2 class="mo-h">En cours <span class="n">${live.length}</span></h2>${live.map(myOrderCard).join('')}`:'')+
-    (past.length?`<h2 class="mo-h">Terminées <span class="n">${past.length}</span>${todoR?`<span class="mo-r">${ic('star')}${pl(todoR,'avis')} à donner</span>`:''}</h2>${past.map(myOrderCard).join('')}`:'')
+    (live.length?`<h2 class="mo-h">En cours <span class="n">${live.length}</span></h2><div class="mogrid">${live.map(myOrderCard).join('')}</div>`:'')+
+    (past.length?`<h2 class="mo-h">Terminées <span class="n">${past.length}</span>${todoR?`<span class="mo-r">${ic('star')}${pl(todoR,'avis')} à donner</span>`:''}</h2><div class="mogrid">${past.map(myOrderCard).join('')}</div>`:'')
   :me.verified?`<div class="card empty">${ill('bags')}<b>Aucune commande</b>Vos prochaines commandes chez les boutiques Domo apparaîtront ici.<br><br><a class="btn pri" href="#explorer">${ic('search')}Trouver une boutique</a></div>`:'');
 }
 const prog=c=>c.role==='seller'?(c.trust.reviews||0):(c.trust.delivered||0)+(c.trust.refused||0)+(c.trust.reviews||0);
@@ -3288,9 +3396,9 @@ async function admJobs(view){
     const id=(a||u).dataset[a?'assign':'unassign'];try{await api(`/admin/deliveries/${id}/assign`,{method:'POST',body:{driver_id:a?$('#as-'+id).value:''}});toast(a?'Livreur attribué et prévenu':'Course remise à attribuer');renderAdmin()}catch(x){toast(x.message)}};
 }
 const pct=(a,b)=>b?Math.round(a/b*100)+' %':'–';
-const delta=(a,b)=>{if(!b&&!a)return'';const d=a-b;return`<small class="kdelta ${d>0?'up':d<0?'dn':''}">${d>0?'▲ +':d<0?'▼ ':''}${d} vs période précédente</small>`};
-const bars=(arr,label,days)=>{const mx=Math.max(1,...arr),w=100/arr.length,day=i=>new Date(Date.now()-(days-i-1)*864e5).toLocaleDateString('fr-FR',{day:'numeric',month:'short'});
-  return`<figure class="achart"><figcaption><b>${label}</b><span>${arr.reduce((a,b)=>a+b,0)} au total · max ${mx}/jour</span></figcaption><svg viewBox="0 0 100 40" preserveAspectRatio="none" role="img" aria-label="${label} par jour">${arr.map((v,i)=>`<rect x="${(i*w+w*.15).toFixed(2)}" y="${(40-v/mx*38).toFixed(2)}" width="${(w*.7).toFixed(2)}" height="${Math.max(v?0.8:0,v/mx*38).toFixed(2)}" rx=".5"><title>${day(i)} : ${v}</title></rect>`).join('')}</svg><div class="cax"><span>${day(0)}</span><span>Aujourd’hui</span></div></figure>`};
+const delta=(a,b)=>{if(!b&&!a)return'';const d=a-b;return`<small class="kdelta ${d>0?'kup':d<0?'kdn':''}">${d>0?'▲ +':d<0?'▼ ':''}${d} vs période précédente</small>`};
+const bars=(arr,label,days)=>{const mx=Math.max(1,...arr),tot=arr.reduce((a,b)=>a+b,0),day=i=>new Date(Date.now()-(days-i-1)*864e5).toLocaleDateString('fr-FR',{day:'numeric',month:'short'}),mi=arr.lastIndexOf(Math.max(...arr));
+  return`<figure class="achart kchart"><figcaption><span class="kct">${label}</span><b class="kcv">${tot}</b><span class="kcs">sur ${days} jours · max ${mx}/jour</span></figcaption><div class="kbars${arr.length>40?' dense':''}" role="img" aria-label="${label} par jour : ${tot} au total, maximum ${mx} par jour">${arr.map((v,i)=>`<i class="${i===mi&&v?'mx':''}" style="--v:${(v/mx*100).toFixed(1)}%" title="${day(i)} : ${v}">${i===mi&&v?`<em>${v}</em>`:''}</i>`).join('')}</div><div class="cax"><span>${day(0)}</span><span>${day(Math.floor(arr.length/2))}</span><span>Aujourd’hui</span></div></figure>`};
 const waTo=(ph,txt)=>`https://wa.me/216${ph}?text=${encodeURIComponent(txt)}`;
 document.addEventListener('click',async e=>{const b=e.target.closest('[data-rst]');if(!b)return;b.disabled=true;const w=window.open('','_blank');
   try{const r=await api('/admin/resets/'+b.dataset.rst+'/link',{method:'POST'});const url=waTo(r.phone,`Bonjour ${(r.name||'').split(' ')[0]}, voici votre lien Domo pour choisir un nouveau mot de passe (valable 24 h) : ${r.url}`);if(w)w.location=url;else location.href=url;b.innerHTML=ic('check')+'Lien envoyé';toast('Lien créé : envoyez le message WhatsApp')}
@@ -3298,27 +3406,29 @@ document.addEventListener('click',async e=>{const b=e.target.closest('[data-rst]
 async function admDash(){
   const box=$('#adm');let m;try{m=await api('/admin/metrics?days='+admDays)}catch(x){box.innerHTML=`<div class="empty"><b>Erreur</b>${esc(x.message)}</div>`;return}
   const t=m.totals,c=m.counts||{};
-  const tile=(l,v,sub='',href='')=>`<${href?`a href="${href}"`:'div'} class="kpi"><span>${l}</span><b>${v}</b>${sub}</${href?'a':'div'}>`;
+  const tile=(l,v,sub='',href='',cls='')=>`<${href?`a href="${href}"`:'div'} class="kpi ${cls}"><span>${l}</span>${href?`<i class="karr">${ic('arr')}</i>`:''}<b>${v}</b>${sub}</${href?'a':'div'}>`;
   const todo=[[c.verif,'vérification(s) de vendeur','#admin/verifications'],[c.contests,'contestation(s) de refus','#admin/contestations'],[t.boost_new,'demande(s) Domo Boost','#admin/boost'],[m.stuck.length,'vendeur(s) inscrit(s) sans commande','#stuck']].filter(x=>x[0]);
   box.innerHTML=`<div class="dashbar"><div class="seg" role="group" aria-label="Période">${[7,30,90].map(n=>`<button type="button" data-days="${n}" aria-pressed="${admDays===n}">${n} jours</button>`).join('')}</div><button class="btn sm ghost" type="button" id="dashRe">${ic('refresh')}Actualiser</button></div>
   ${(m.resets||[]).length?`<div class="card pad dtodo" id="rstBox"><b>Mots de passe oubliés</b><ul class="rsts">${m.resets.map(r=>`<li><span><b>${esc(r.name||'Compte')}</b> · ${fmtPhone(r.phone)} · ${{seller:'vendeur',customer:'client',driver:'livreur'}[r.role]} · ${ago(r.created_at)}${r.link_at?' · lien déjà créé':''}</span><button class="btn sm pri" type="button" data-rst="${r.id}">${ic('wa')}Envoyer le lien</button></li>`).join('')}</ul></div>`:''}
-  ${todo.length?`<div class="card pad dtodo"><b>À faire</b><ul>${todo.map(([n,l,h])=>`<li><a href="${h}">${n} ${l}</a></li>`).join('')}</ul></div>`:`<div class="note risk ok">${ic('check')}<div>Rien en attente : aucune vérification, contestation ni demande Boost.</div></div>`}
+  <div class="kpis k4 krow">
+    ${tile('Valeur livrée',money(t.gmv),`<small>${t.delivered} colis livrés · ${t.reviews} avis</small>`,'#admin/tableau','kfeat')}
+    ${tile('Commandes créées',t.orders,delta(t.orders,t.orders_prev)||`<small>sur ${m.days} jours</small>`)}
+    ${tile('Taux de confirmation',pct(t.confirmed,t.orders),`<small>${t.confirmed} confirmées par le client</small>`)}
+    ${tile('Refus après expédition',pct(t.refused,t.shipped),`<small>${t.refused} refusées · ${t.delivered} livrées</small>`)}</div>
+  <div class="dgrid2">
+    <section class="card pad">${bars(m.orders,'Commandes',m.days)}</section>
+    <section class="card pad ktodo"><h3>À faire</h3>${todo.length?`<ul>${todo.map(([n,l,h],k)=>`<li class="kt${k}"><a href="${h}"><span><b>${n} ${l}</b><small>${['Vendeurs qui demandent le badge vérifié','Clients qui contestent un refus','Vendeurs intéressés par Domo Boost','Un message personnel aide à démarrer'][['#admin/verifications','#admin/contestations','#admin/boost','#stuck'].indexOf(h)]||''}</small></span><i class="karr">${ic('arr')}</i></a></li>`).join('')}</ul>`:`<div class="note risk ok">${ic('check')}<div>Rien en attente : aucune vérification, contestation ni demande Boost.</div></div>`}</section>
+  </div>
   <h2>Vendeurs</h2><div class="kpis k4">
     ${tile('Vendeurs inscrits',t.sellers,`<small>+${t.signups} sur ${m.days} jours</small>${delta(t.signups,t.signups_prev)}`)}
     ${tile('Vendeurs actifs (7 jours)',t.active7,`<small>${t.active} sur ${m.days} jours</small>`)}
     ${tile('Vendeurs activés',t.activated,`<small>5 commandes confirmées dans leurs 30 premiers jours · ${pct(t.activated,t.sellers)}</small>`)}
     ${tile('Clients inscrits',t.customers,`<small>${t.products} produits en vitrine</small>`)}</div>
-  <h2>Commandes sur ${m.days} jours</h2><div class="kpis k4">
-    ${tile('Commandes créées',t.orders,delta(t.orders,t.orders_prev))}
-    ${tile('Taux de confirmation',pct(t.confirmed,t.orders),`<small>${t.confirmed} confirmées par le client</small>`)}
-    ${tile('Refus après expédition',pct(t.refused,t.shipped),`<small>${t.refused} refusées · ${t.delivered} livrées</small>`)}
-    ${tile('Valeur livrée',money(t.gmv),`<small>${t.reviews} avis laissés</small>`)}</div>
-  <div class="charts">${bars(m.orders,'Commandes',m.days)}${bars(m.signups,'Inscriptions vendeurs',m.days)}</div>
-  <div class="dgrid">
-    <section class="card pad"><h3>Vendeurs les plus actifs</h3>${m.top.length?`<div class="tblw"><table class="tbl"><thead><tr><th>Boutique</th><th>Commandes</th><th>Confirmées</th><th>Livrées</th><th>Refusées</th></tr></thead><tbody>${m.top.map(x=>`<tr><td>${x.slug?`<a href="/s/${esc(x.slug)}" target="_blank" rel="noopener">${esc(x.shop||'—')}</a>`:esc(x.shop||'—')}<small>${ago(x.last)}</small></td><td>${x.n}</td><td>${x.c} <small>${pct(x.c,x.n)}</small></td><td>${x.d}</td><td>${x.r}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">Aucune commande sur la période.</p>'}</section>
+  <div class="dgrid2 rev"><section class="card pad">${bars(m.signups,'Inscriptions vendeurs',m.days)}</section>
     <section class="card pad"><h3>Raisons des colis non livrés</h3>${m.causes.length?`<ul class="hbars">${m.causes.map(x=>{const tot=m.causes.reduce((a,b)=>a+b.n,0);return`<li><span>${esc(x.label)}</span><i style="--w:${Math.round(x.n/tot*100)}%"></i><b>${x.n}</b></li>`}).join('')}</ul>`:'<p class="muted">Aucun colis refusé sur la période.</p>'}
       <h3 style="margin-top:18px">Gouvernorats</h3>${m.gov.length?`<ul class="hbars">${m.gov.map(x=>`<li><span>${esc(x.g)}</span><i style="--w:${Math.round(x.n/m.gov[0].n*100)}%"></i><b>${x.n}${x.r?` <small>(${x.r} refus)</small>`:''}</b></li>`).join('')}</ul>`:'<p class="muted">Pas encore de données.</p>'}</section>
   </div>
+    <section class="card pad" style="margin-top:16px"><h3>Vendeurs les plus actifs</h3>${m.top.length?`<div class="tblw"><table class="tbl"><thead><tr><th>Boutique</th><th>Commandes</th><th>Confirmées</th><th>Livrées</th><th>Refusées</th></tr></thead><tbody>${m.top.map(x=>`<tr><td>${x.slug?`<a href="/s/${esc(x.slug)}" target="_blank" rel="noopener">${esc(x.shop||'—')}</a>`:esc(x.shop||'—')}<small>${ago(x.last)}</small></td><td>${x.n}</td><td>${x.c} <small>${pct(x.c,x.n)}</small></td><td>${x.d}</td><td>${x.r}</td></tr>`).join('')}</tbody></table></div>`:'<p class="muted">Aucune commande sur la période.</p>'}</section>
   <section class="card pad" id="stuck" style="margin-top:16px"><h3>Inscriptions récentes</h3><p class="hint" style="margin-top:-4px">Les vendeurs sans commande après 24 h sont signalés. Un message personnel augmente fortement l’activation.</p>
     <div class="tblw"><table class="tbl"><thead><tr><th>Boutique</th><th>Inscrit</th><th>Commandes</th><th>Produits</th><th><span class="sr">Action</span></th></tr></thead><tbody>${m.fresh.map(x=>{const st=!x.orders&&Date.now()-x.created_at>864e5;return`<tr class="${st?'stk':''}"><td><b>${esc(x.shop||x.name||'—')}</b><small>${fmtPhone(x.phone)}</small></td><td>${ago(x.created_at)}</td><td>${x.orders}${st?' <span class="pill warn">Bloqué</span>':''}</td><td>${x.products}</td><td><a class="btn sm" href="${waTo(x.phone,`Bonjour, ici l’équipe Domo. Je peux vous aider à créer votre première commande en 2 minutes ?`)}" target="_blank" rel="noopener">${ic('chat')}WhatsApp</a></td></tr>`}).join('')}</tbody></table></div></section>`;
   box.onclick=e=>{const b=e.target.closest('[data-days]');if(b){admDays=+b.dataset.days;admDash();return}if(e.target.closest('#dashRe'))admDash()};

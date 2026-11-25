@@ -32,7 +32,7 @@ npx wrangler pages dev ../dist --port 8788 --persist-to /tmp/domo-state --bindin
 Then create test accounts through the sign-in screen (seller, buyer, driver) and use phone 50111222 for a local admin seller.
 
 ## Design rules learned the hard way
-- **CSS class names collide**: `.th` (chat header), `.dl`, `.chart`, `.sbody`, `.done` (order tracker → now `tkdone`/`tkcur`) already caused bugs. Prefix new component classes (e.g. `ckth`, `pth`, `kdelta`, `shbody`).
+- **CSS class names collide**: `.th` (chat header), `.dl`, `.chart`, `.sbody`, `.done` (order tracker → now `tkdone`/`tkcur`), `.up` (driver stop row; KPI deltas use `kup`/`kdn`) already caused bugs. Prefix new component classes (e.g. `ckth`, `pth`, `kdelta`, `shbody`).
 - `<nav>` elements inherit the bottom-bar styles; use `<div role="navigation">` for in-page navs.
 - Colours in JS maps (`ST`, `LV`, stop kinds) use theme tokens (`var(--good)`, `var(--warn)`, `var(--bad)`, `var(--ink3)`), never hex, so they pass contrast in light and dark. Accessibility fixes live in the last CSS block ("UX pass (Nov 2026)"): text ≥ 12px, 44px targets on phones.
 - Forms: errors appear under each field via `validate([[el,msg],...])` / `setErr`; phone placeholders read `ex. 22 123 456`; one column on phones.
@@ -40,6 +40,8 @@ Then create test accounts through the sign-in screen (seller, buyer, driver) and
 - Paused features (protected purchase / "Achat sécurisé") must not be shown or advertised.
 - Visual direction (Nov 2026): Uber Eats clarity + Etsy photo-first warmth. Buyer side: borderless photo-first product and shop cards, round "+" on the photo, grey pill chips (`--chip`) with black selected (`--cta`), black pill CTAs for cart/checkout. Domo blue (`--brand`) stays for links, brand and seller tools. Status tabs use the same black selected pill. Restyle rules live in the last CSS blocks of `index.html` ("Design upgrade" and "Commerce restyle").
 - Fonts: Bricolage Grotesque (titles) + Instrument Sans (text) for French; **Cairo** for Arabic (loaded on demand when the language is Arabic; a 1-glyph Cairo subset renders the "ع" button). Never add `text=` to the main Google Fonts link: it subsets every family in that request.
+- Dashboard layout (Nov 2026, last CSS block "Dashboard 2026"): on desktop every page fills the width inside `--gut` gutters (no max-width on `main`); sidebar has MENU / GÉNÉRAL labels (`.nsec`) and a brand profile card (`.nf`); KPI cards (`.tile`, `.kpis.k4 .kpi`) have a ↗ `karr` button and a pill, the first card is highlighted (`kfeat`); admin dashboard = KPI row, chart card (`bars()` → `.kbars`) + "À faire" card, then tables.
+- Feature switches: `FLAGS` near the top of the script (`delivery`, `boost`, `explore` on; `buyerScore` off for buyer privacy).
 - UX critique and history: see the Domo project doc `claude/domo-ux-critique-2026-11.md`.
 
 ## Not done yet

@@ -8,6 +8,7 @@ Domo (ex-Wsel) is a Tunisian COD (cash on delivery) order-confirmation platform 
 ## How to work
 - Language of the product: French first, Arabic (RTL) layer, user-facing copy in plain words.
 - Implement directly, test, never claim untested work. Test on phone sizes (360/390) and desktop (1280), in the WebKit (iPhone) engine as well as Chromium.
+- **Always push**: the owner wants every tested change committed and pushed to `main` (deployed) without asking first, then the Actions run checked.
 - **Deploying = pushing to `main`.** GitHub Actions (`.github/workflows/deploy.yml`) deploys `app/` to Cloudflare Pages project `patricksly` and `site/` to project `domo-tn`, and applies new D1 migrations from `app/migrations/`. No Cloudflare token is needed in a session.
 - After a push, check the Actions run, then verify live: `curl -s https://app.domo.tn/sw.js | grep -o "domo-v[0-9]*"`.
 - Bump the service-worker cache name in `app/public/sw.js` (`domo-vNN`) on every app release so phones pick up the new version.

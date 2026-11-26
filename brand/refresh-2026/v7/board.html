@@ -1,0 +1,57 @@
+<!doctype html><meta charset="utf-8"><title>Domo identity</title>
+<style>
+:root{--blue:#1d3fd1;--ink:#0e1630;--coral:#ff5a3c;--sky:#9db7ff;--sun:#ffc23d;--cream:#fbf3e6}
+*{box-sizing:border-box}body{margin:0;width:1600px;padding:56px;background:#f4f1ea;color:var(--ink);font:16px/1.45 "Helvetica Neue",Arial,sans-serif}
+h1{font-size:44px;letter-spacing:-.02em;margin:0}.lead{font-size:18px;color:#4d5774;max-width:900px;margin:10px 0 36px}
+.g{display:grid;gap:24px;margin-bottom:24px}.card{background:#fff;border-radius:22px;padding:32px;position:relative;overflow:hidden}
+.lab{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#8a90a3;margin-bottom:18px;font-weight:600}
+.c{display:flex;align-items:center;justify-content:center}
+.chip{border-radius:16px;height:120px;padding:14px;display:flex;flex-direction:column;justify-content:flex-end;font-size:13px;font-weight:600}
+.chip span{font-weight:400;opacity:.8}
+.phone{width:230px;height:470px;border-radius:40px;background:#111;padding:10px;margin:auto}
+.scr{width:100%;height:100%;border-radius:31px;background:url(pattern-cream.svg) center/cover;display:flex;align-items:center;justify-content:center}
+.scr div{background:var(--blue);border-radius:28px;padding:18px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.bag{width:300px;height:360px;background:var(--cream);border-radius:10px 10px 18px 18px;margin:40px auto 0;position:relative;box-shadow:0 18px 40px rgba(14,22,48,.18)}
+.bag:before{content:"";position:absolute;left:90px;top:-60px;width:120px;height:90px;border:12px solid var(--ink);border-bottom:0;border-radius:60px 60px 0 0}
+.bag .band{position:absolute;left:0;right:0;bottom:0;height:120px;border-radius:0 0 18px 18px;background:url(pattern-band.svg) center/cover}
+.stk{width:230px;height:230px;border-radius:50%;background:var(--blue);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;font-weight:700;gap:10px;margin:auto;box-shadow:0 10px 24px rgba(0,0,0,.15);transform:rotate(-8deg)}
+.post{aspect-ratio:1;border-radius:16px;background:url(pattern-cream.svg) center/cover;display:flex;align-items:flex-end;padding:18px}
+.post b{background:#fff;border-radius:999px;padding:10px 16px;font-size:17px}
+</style>
+<h1>Domo — do / mo</h1>
+<p class="lead">The name is the mark. Four tiles spell <b>domo</b> and, at a glance, build a little house: a chimney, two domed doorways, a warm light. The same tiles become a playful pattern, like Tunisian ceramics — made by hand.</p>
+
+<div class="g" style="grid-template-columns:1.25fr 1fr 1fr">
+ <div class="card"><div class="lab">Logo</div><div class="c" style="gap:32px;height:250px"><img src="monogram-color.svg" width="200"><img src="logotype-color.svg" width="250"></div></div>
+ <div class="card" style="background:var(--blue)"><div class="lab" style="color:#c8d4ff">Inversé · icône</div><div class="c" style="gap:28px;height:250px"><img src="monogram-white.svg" width="170"><img src="app-icon.svg" width="120"></div></div>
+ <div class="card"><div class="lab">Construction</div><div class="c" style="height:250px"><img src="construction.svg" width="250"></div><div style="font-size:13px;color:#6b7187;margin-top:-8px">Tuile 96 · trait 22 · contre-forme 26 · espace 14 · cheminée 30</div></div>
+</div>
+
+<div class="g" style="grid-template-columns:repeat(6,1fr)">
+ <div class="chip" style="background:var(--blue);color:#fff">Bleu Domo<span>#1D3FD1</span></div>
+ <div class="chip" style="background:var(--ink);color:#fff">Encre<span>#0E1630</span></div>
+ <div class="chip" style="background:var(--coral);color:#fff">Corail<span>#FF5A3C</span></div>
+ <div class="chip" style="background:var(--sun)">Soleil<span>#FFC23D</span></div>
+ <div class="chip" style="background:var(--sky)">Ciel<span>#9DB7FF</span></div>
+ <div class="chip" style="background:var(--cream);border:1px solid #e8dfcf">Jasmin<span>#FBF3E6</span></div>
+</div>
+
+<div class="g" style="grid-template-columns:1fr 1fr">
+ <div class="card" style="padding:0"><img src="pattern-cream.svg" style="display:block;width:100%"></div>
+ <div class="card" style="padding:0"><img src="pattern-blue.svg" style="display:block;width:100%"></div>
+</div>
+
+<div class="g" style="grid-template-columns:1fr 1.1fr 1fr 1fr">
+ <div class="card"><div class="lab">Écran d'accueil</div><div class="phone"><div class="scr"><div><img src="monogram-white.svg" width="110" style="display:block"></div></div></div></div>
+ <div class="card" style="background:#e9e4da"><div class="lab">Sac de livraison</div><div class="bag"><img src="logotype-color.svg" width="190" style="position:absolute;left:55px;top:80px"><div class="band"></div></div></div>
+ <div class="card"><div class="lab">Sticker vendeur</div><div style="height:470px;display:flex;align-items:center"><div class="stk"><img src="monogram-white.svg" width="96" style="filter:none"><span style="font-size:15px">commandé sur domo</span></div></div></div>
+ <div class="card"><div class="lab">Post Instagram</div><div style="height:470px;display:flex;align-items:center"><div class="post" style="width:100%"><b>Fait maison,<br>livré chez vous</b></div></div></div>
+</div>
+
+<div class="card"><div class="lab">Activités · la 4e tuile change de couleur</div>
+ <div style="display:flex;justify-content:space-around;align-items:center">
+  <div class="c" style="flex-direction:column;gap:8px"><img src="sub-commandes.svg" width="120"><b>domo · commandes</b></div>
+  <div class="c" style="flex-direction:column;gap:8px"><img src="sub-livraison.svg" width="120"><b>domo · livraison</b></div>
+  <div class="c" style="flex-direction:column;gap:8px"><img src="sub-boost.svg" width="120"><b>domo · boost</b></div>
+  <div class="c" style="gap:18px"><img src="favicon.svg" width="64"><img src="favicon.svg" width="32"><img src="favicon.svg" width="16"><span style="color:#8a90a3;font-size:13px">64 · 32 · 16 px</span></div>
+ </div></div>

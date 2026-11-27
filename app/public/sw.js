@@ -1,5 +1,5 @@
 // Domo service worker: caches the app shell; never caches /api (always live data).
-const CACHE = 'domo-v36';
+const CACHE = 'domo-v37';
 const SHELL = ['/', '/index.html', '/manifest.webmanifest', '/icon.svg', '/icon-192.png', '/icon-512.png', '/apple-touch-icon.png', '/badge-96.png', '/ill/offline.svg'];
 
 self.addEventListener('install', e => {
@@ -30,7 +30,7 @@ self.addEventListener('fetch', e => {
   })));
 });
 // Never leave the browser with an error page: a small retry page when there is no network and no cache.
-const offline = () => new Response('<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Domo</title><body style="font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0;background:#f5f7fc;color:#0e1630;text-align:center;padding:24px"><div><h1 style="font-size:22px;margin:0 0 8px">Connexion impossible</h1><p style="margin:0 0 18px;color:#4d5774">Vérifiez votre connexion internet, puis réessayez.</p><button onclick="location.reload()" style="font:600 16px system-ui;padding:12px 22px;border-radius:999px;border:0;background:#1d3fd1;color:#fff">Réessayer</button></div></body></html>', { status: 503, headers: { 'content-type': 'text/html; charset=utf-8' } });
+const offline = () => new Response('<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Domo</title><body style="font:16px/1.5 system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;margin:0;background:#f5f7fc;color:#0e1630;text-align:center;padding:24px"><div><h1 style="font-size:22px;margin:0 0 8px">Connexion impossible</h1><p style="margin:0 0 18px;color:#4d5774">Vérifiez votre connexion internet, puis réessayez.</p><button onclick="location.reload()" style="font:600 16px system-ui;padding:12px 22px;border-radius:999px;border:0;background:#0133F8;color:#fff">Réessayer</button></div></body></html>', { status: 503, headers: { 'content-type': 'text/html; charset=utf-8' } });
 
 // ---- push notifications (Android, desktop, and iOS 16.4+ home-screen app)
 self.addEventListener('push', e => {

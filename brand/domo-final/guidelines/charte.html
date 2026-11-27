@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>Domo — Charte graphique</title>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+@page{size:297mm 210mm;margin:0}
+:root{--blue:#0133F8;--ink:#010D36;--orange:#FE5901;--mist:#F4F5FA;--grey:#5A6280}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{font:400 11.5pt/1.5 Nunito,system-ui,sans-serif;color:var(--ink);background:#d9dbe3}
+.page{width:297mm;height:210mm;background:#fff;position:relative;overflow:hidden;page-break-after:always;padding:18mm 20mm 16mm}
+.page:last-child{page-break-after:auto}
+@media screen{.page{margin:0 auto 10mm}}
+h1{font:700 30pt/1.1 Comfortaa,sans-serif;margin:0 0 4mm;letter-spacing:-.01em}
+h2{font:700 13pt/1.2 Comfortaa,sans-serif;margin:0 0 3mm}
+.kicker{font:800 8.5pt/1 Nunito;letter-spacing:.16em;text-transform:uppercase;color:var(--blue);margin-bottom:5mm}
+.lead{font-size:12.5pt;color:var(--grey);max-width:200mm;margin:0 0 8mm}
+.foot{position:absolute;left:20mm;right:20mm;bottom:9mm;display:flex;justify-content:space-between;font:600 8pt Nunito;color:#9aa0b6}
+.foot img{height:4.5mm}
+.grid{display:grid;gap:6mm}.box{border-radius:5mm;display:flex;align-items:center;justify-content:center;position:relative}
+.cap{font:700 8pt Nunito;color:var(--grey);margin-top:2.5mm;letter-spacing:.04em}
+.small{font-size:9.5pt;color:var(--grey)}
+table{border-collapse:collapse;width:100%;font-size:9.5pt}td{padding:1.6mm 0;border-bottom:1px solid #e6e8f0;vertical-align:top}td:first-child{color:var(--grey);width:38%}
+.sw{border-radius:5mm;height:52mm;padding:5mm;display:flex;flex-direction:column;justify-content:space-between;font-size:9pt}
+.sw b{font:700 13pt Comfortaa}
+.no{background:var(--mist);border-radius:4mm;height:40mm;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.x{position:absolute;top:2.4mm;right:3.4mm;font:800 11pt Nunito;color:var(--orange)}
+.nocap{font:600 8.5pt Nunito;color:var(--grey);text-align:center;margin-top:2mm}
+</style></head><body>
+
+<!-- 1 Cover -->
+<section class="page" style="background:var(--blue);color:#fff;display:flex;flex-direction:column;justify-content:space-between">
+ <div style="font:800 9pt Nunito;letter-spacing:.18em;text-transform:uppercase;opacity:.85">Charte graphique</div>
+ <div><img src="../logo/domo-logo-horizontal-white.svg" style="width:150mm"></div>
+ <div style="display:flex;justify-content:space-between;font:600 10pt Nunito;opacity:.9"><span>Tout ce qu’il vous faut, au même endroit.</span><span>Version 1.0 · novembre 2026</span></div>
+</section>
+
+<!-- 2 Logo -->
+<section class="page">
+ <div class="kicker">01 · Le logo</div>
+ <h1>Une maison, un point de rencontre</h1>
+ <p class="lead">Le symbole est une maison : le foyer, l’endroit où l’on trouve ce qu’il faut. La goutte découpée à l’intérieur est un repère de lieu : chez vous, là où la commande arrive. Le point orange qui termine « domo. » dit la même chose en une seule touche : c’est ici.</p>
+ <div class="box" style="background:var(--mist);height:92mm"><img src="../logo/domo-logo-horizontal-color.svg" style="width:170mm"></div>
+ <div class="cap">LOGO PRINCIPAL · VERSION HORIZONTALE EN COULEUR</div>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 2</span></div>
+</section>
+
+<!-- 3 Versions -->
+<section class="page">
+ <div class="kicker">02 · Versions</div>
+ <h1>Quatre versions, un seul logo</h1>
+ <p class="lead">Utilisez la version horizontale partout où la place le permet. La version empilée sert aux formats carrés ; le symbole seul, aux petits formats (icône d’application, favicon, avatar) ; le logotype seul, quand le symbole est déjà visible ailleurs.</p>
+ <div class="grid" style="grid-template-columns:1.5fr 1fr 1fr">
+  <div><div class="box" style="background:var(--mist);height:60mm"><img src="../logo/domo-logo-horizontal-color.svg" style="width:82%"></div><div class="cap">HORIZONTALE · PRINCIPALE</div></div>
+  <div><div class="box" style="background:var(--mist);height:60mm"><img src="../logo/domo-logo-stacked-color.svg" style="height:78%"></div><div class="cap">EMPILÉE</div></div>
+  <div><div class="box" style="background:var(--mist);height:60mm"><img src="../icon/domo-icon-color.svg" style="height:60%"></div><div class="cap">SYMBOLE</div></div>
+ </div>
+ <div class="grid" style="grid-template-columns:1.5fr 1fr 1fr;margin-top:6mm">
+  <div><div class="box" style="background:var(--mist);height:34mm"><img src="../logo/domo-wordmark-color.svg" style="width:56%"></div><div class="cap">LOGOTYPE</div></div>
+  <div><div class="box" style="background:var(--blue);height:34mm"><img src="../icon/domo-app-icon.svg" style="height:78%"></div><div class="cap">ICÔNE D’APPLICATION</div></div>
+  <div><div class="box" style="background:#fff;border:1px solid #e6e8f0;height:34mm;gap:6mm"><img src="../icon/domo-icon-color.svg" style="width:16px"><img src="../icon/domo-icon-color.svg" style="width:32px"><img src="../icon/domo-icon-color.svg" style="width:48px"></div><div class="cap">FAVICON · 16 / 32 / 48 PX</div></div>
+ </div>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 3</span></div>
+</section>
+
+<!-- 4 Construction -->
+<section class="page">
+ <div class="kicker">03 · Construction</div>
+ <h1>Zone de protection et tailles minimales</h1>
+ <p class="lead">L’unité de mesure <b>x</b> est le diamètre du point orange. Gardez au moins <b>2x</b> d’espace vide autour du logo : aucun texte, bord ou image dans cette zone. Les proportions entre le symbole et le logotype sont fixes ; ne les recomposez pas.</p>
+ <div class="grid" style="grid-template-columns:1.6fr 1fr">
+  <div class="box" style="background:var(--mist);height:96mm">
+   <div style="position:relative;padding:15mm 17mm;outline:1.4px dashed #8aa0ff;outline-offset:0">
+    <img src="../logo/domo-logo-horizontal-color.svg" style="width:128mm;display:block">
+    <span style="position:absolute;left:1.5mm;top:1mm;font:700 8pt Nunito;color:#5b74ff">2x</span>
+    <span style="position:absolute;right:2mm;bottom:1mm;font:700 8pt Nunito;color:#5b74ff">2x</span>
+   </div>
+  </div>
+  <div>
+   <h2>Tailles minimales</h2>
+   <table>
+    <tr><td>Logo horizontal</td><td>120 px de large à l’écran · 30 mm en impression</td></tr>
+    <tr><td>Logo empilé</td><td>72 px de large · 20 mm</td></tr>
+    <tr><td>Symbole seul</td><td>16 px (favicon) · 8 mm</td></tr>
+   </table>
+   <h2 style="margin-top:7mm">Géométrie du symbole</h2>
+   <table>
+    <tr><td>Toit</td><td>pente 2:3 (33,7°), faîte arrondi</td></tr>
+    <tr><td>Goutte</td><td>cercle + pointe posée sur la marche du bas</td></tr>
+    <tr><td>Logotype</td><td>Comfortaa Bold vectorisée, contour 8,4 unités, espacement régulier</td></tr>
+   </table>
+  </div>
+ </div>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 4</span></div>
+</section>
+
+<!-- 5 Colours -->
+<section class="page">
+ <div class="kicker">04 · Couleurs</div>
+ <h1>Trois couleurs, un rôle chacune</h1>
+ <p class="lead">Le bleu porte la marque, l’encre porte le texte, l’orange signale ce qui compte : le point du logo, un bouton d’action, un prix promo. L’orange reste un accent ; il ne remplit jamais de grandes surfaces.</p>
+ <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+  <div><div class="sw" style="background:var(--blue);color:#fff"><span>Couleur principale</span><b>Bleu Domo</b></div><table style="margin-top:3mm"><tr><td>HEX</td><td>#0133F8</td></tr><tr><td>RGB</td><td>1 · 51 · 248</td></tr><tr><td>CMJN*</td><td>100 · 79 · 0 · 3</td></tr></table></div>
+  <div><div class="sw" style="background:var(--ink);color:#fff"><span>Texte et logotype</span><b>Encre</b></div><table style="margin-top:3mm"><tr><td>HEX</td><td>#010D36</td></tr><tr><td>RGB</td><td>1 · 13 · 54</td></tr><tr><td>CMJN*</td><td>98 · 76 · 0 · 79</td></tr></table></div>
+  <div><div class="sw" style="background:var(--orange);color:#fff"><span>Accent</span><b>Orange</b></div><table style="margin-top:3mm"><tr><td>HEX</td><td>#FE5901</td></tr><tr><td>RGB</td><td>254 · 89 · 1</td></tr><tr><td>CMJN*</td><td>0 · 65 · 100 · 0</td></tr></table></div>
+  <div><div class="sw" style="background:var(--mist);color:var(--ink);border:1px solid #e6e8f0"><span>Fond clair</span><b>Brume</b></div><table style="margin-top:3mm"><tr><td>HEX</td><td>#F4F5FA</td></tr><tr><td>RGB</td><td>244 · 245 · 250</td></tr><tr><td>CMJN*</td><td>2 · 2 · 0 · 2</td></tr></table></div>
+ </div>
+ <p class="small" style="margin-top:6mm"><b>Contrastes vérifiés :</b> blanc sur Bleu Domo 7,4:1 et encre sur blanc 18,9:1 (AAA) · encre sur orange 6,0:1 (AA) · blanc sur orange 3,2:1 : seulement pour du texte gras de 19 px et plus. &nbsp; *Valeurs CMJN calculées à partir du RGB : à valider avec l’imprimeur sur épreuve (références Pantone à choisir sur nuancier).</p>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 5</span></div>
+</section>
+
+<!-- 6 Typography -->
+<section class="page">
+ <div class="kicker">05 · Typographie</div>
+ <h1>Comfortaa pour la voix, Nunito pour le texte</h1>
+ <p class="lead">Comfortaa, la police du logo, donne le ton dans les titres. Nunito, arrondie elle aussi, reste lisible en petit : elle sert au texte, aux interfaces et aux documents. Les deux sont libres (SIL Open Font License) et disponibles sur Google Fonts.</p>
+ <div class="grid" style="grid-template-columns:1fr 1fr">
+  <div class="box" style="background:var(--mist);height:86mm;flex-direction:column;align-items:flex-start;justify-content:center;padding:10mm">
+   <div style="font:700 54pt/1 Comfortaa">Aa</div><div style="font:700 18pt Comfortaa;margin-top:4mm">Comfortaa Bold</div>
+   <div class="small" style="margin-top:2mm">Titres, accroches, chiffres clés. Jamais en dessous de 18 px.</div>
+   <div style="font:700 13pt Comfortaa;margin-top:5mm">Tout ce qu’il vous faut, au même endroit.</div></div>
+  <div class="box" style="background:var(--mist);height:86mm;flex-direction:column;align-items:flex-start;justify-content:center;padding:10mm">
+   <div style="font:800 54pt/1 Nunito">Aa</div><div style="font:700 18pt Nunito;margin-top:4mm">Nunito · Regular, SemiBold, Bold</div>
+   <div class="small" style="margin-top:2mm">Texte courant, boutons, formulaires, factures. Texte courant à 16 px minimum sur mobile.</div>
+   <div style="font:400 11pt Nunito;margin-top:5mm">Des boutiques différentes, des produits différents, un seul endroit. Commandez, suivez, recevez chez vous.</div></div>
+ </div>
+ <p class="small" style="margin-top:5mm">Arabe : <b style="font-family:Cairo,'Noto Sans Arabic',sans-serif">Cairo</b> (déjà utilisée par l’application) pour toutes les versions arabes.</p>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 6</span></div>
+</section>
+
+<!-- 7 Backgrounds -->
+<section class="page">
+ <div class="kicker">06 · Fonds</div>
+ <h1>Sur quels fonds poser le logo</h1>
+ <p class="lead">Le logo en couleur va sur le blanc et la Brume. Sur le Bleu Domo ou l’Encre, utilisez la version blanche, le point restant orange. Sur une photo, choisissez une zone calme ou ajoutez un voile sombre.</p>
+ <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+  <div><div class="box" style="background:#fff;border:1px solid #e6e8f0;height:46mm"><img src="../logo/domo-logo-horizontal-color.svg" style="width:82%"></div><div class="cap">BLANC · COULEUR</div></div>
+  <div><div class="box" style="background:var(--mist);height:46mm"><img src="../logo/domo-logo-horizontal-color.svg" style="width:82%"></div><div class="cap">BRUME · COULEUR</div></div>
+  <div><div class="box" style="background:var(--blue);height:46mm"><img src="../logo/domo-logo-horizontal-white.svg" style="width:82%"></div><div class="cap">BLEU DOMO · BLANC</div></div>
+  <div><div class="box" style="background:var(--ink);height:46mm"><img src="../logo/domo-logo-horizontal-white.svg" style="width:82%"></div><div class="cap">ENCRE · BLANC</div></div>
+ </div>
+ <div class="grid" style="grid-template-columns:repeat(4,1fr);margin-top:6mm">
+  <div><div class="box" style="background:linear-gradient(rgba(1,13,54,.55),rgba(1,13,54,.55)),url(../../domo-2027/img/carthage.webp) center/cover;height:46mm"><img src="../logo/domo-logo-horizontal-mono-white.svg" style="width:82%"></div><div class="cap">PHOTO + VOILE · BLANC</div></div>
+  <div><div class="box" style="background:#fff;border:1px solid #e6e8f0;height:46mm"><img src="../logo/domo-logo-horizontal-black.svg" style="width:82%"></div><div class="cap">NOIR · IMPRESSION 1 COULEUR</div></div>
+  <div><div class="box" style="background:#fff;border:1px solid #e6e8f0;height:46mm"><img src="../logo/domo-logo-horizontal-blue.svg" style="width:82%"></div><div class="cap">BLEU · 1 COULEUR</div></div>
+  <div><div class="box" style="background:var(--orange);height:46mm"><img src="../logo/domo-logo-horizontal-mono-white.svg" style="width:82%"></div><div class="cap">ORANGE · BLANC (RARE)</div></div>
+ </div>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 7</span></div>
+</section>
+
+<!-- 8 Misuse -->
+<section class="page">
+ <div class="kicker">07 · À éviter</div>
+ <h1>Ce qu’on ne fait pas avec le logo</h1>
+ <p class="lead">Le logo s’utilise toujours à partir des fichiers fournis. Ne le redessinez pas, ne le retapez pas dans une police, ne le recomposez pas.</p>
+ <div class="grid" style="grid-template-columns:repeat(4,1fr)">
+  <div><div class="no"><span class="x">✕</span><img src="../logo/domo-logo-horizontal-color.svg" style="width:78%;transform:scaleX(1.3)"></div><div class="nocap">Déformer ou étirer</div></div>
+  <div><div class="no"><span class="x">✕</span><img src="../logo/domo-logo-horizontal-color.svg" style="width:78%;filter:hue-rotate(140deg)"></div><div class="nocap">Changer les couleurs</div></div>
+  <div><div class="no"><span class="x">✕</span><img src="../logo/domo-logo-horizontal-color.svg" style="width:78%;filter:drop-shadow(3px 5px 3px rgba(0,0,0,.45))"></div><div class="nocap">Ajouter ombre ou effet</div></div>
+  <div><div class="no"><span class="x">✕</span><img src="../logo/domo-logo-horizontal-color.svg" style="width:78%;transform:rotate(-12deg)"></div><div class="nocap">Faire pivoter</div></div>
+  <div><div class="no" style="background:url(../../domo-2027/img/carthage.webp) center/cover"><span class="x">✕</span><img src="../logo/domo-logo-horizontal-color.svg" style="width:78%"></div><div class="nocap">Poser sur une photo chargée</div></div>
+  <div><div class="no" style="background:var(--blue)"><span class="x">✕</span><img src="../logo/domo-logo-horizontal-color.svg" style="width:78%"></div><div class="nocap">Logo couleur sur fond bleu</div></div>
+  <div><div class="no"><span class="x">✕</span><div style="display:flex;align-items:center;gap:9mm"><img src="../icon/domo-icon-color.svg" style="height:16mm"><img src="../logo/domo-wordmark-color.svg" style="height:10mm"></div></div><div class="nocap">Changer l’espace ou la taille relative</div></div>
+  <div><div class="no"><span class="x">✕</span><span style="font:700 26pt Nunito;color:var(--ink)">Domo</span></div><div class="nocap">Retaper le nom dans une police</div></div>
+ </div>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 8</span></div>
+</section>
+
+<!-- 9 Applications -->
+<section class="page" style="background:var(--mist)">
+ <div class="kicker">08 · Applications</div>
+ <h1>La marque en situation</h1>
+ <div class="grid" style="grid-template-columns:0.8fr 1.4fr 1fr;margin-top:6mm;align-items:end">
+  <div style="display:flex;flex-direction:column;align-items:center">
+   <div style="width:52mm;height:104mm;border-radius:9mm;background:#10131c;padding:2.4mm"><div style="width:100%;height:100%;border-radius:7mm;background:linear-gradient(160deg,#3a4a7a,#1b2240);padding:9mm 5mm;display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;align-content:start">
+    <span style="aspect-ratio:1;border-radius:2.6mm;background:rgba(255,255,255,.18)"></span><span style="aspect-ratio:1;border-radius:2.6mm;background:rgba(255,255,255,.18)"></span><img src="../icon/domo-app-icon.svg" style="width:100%"><span style="aspect-ratio:1;border-radius:2.6mm;background:rgba(255,255,255,.18)"></span>
+    <span style="aspect-ratio:1;border-radius:2.6mm;background:rgba(255,255,255,.18)"></span><span style="aspect-ratio:1;border-radius:2.6mm;background:rgba(255,255,255,.18)"></span><span style="aspect-ratio:1;border-radius:2.6mm;background:rgba(255,255,255,.18)"></span><span style="aspect-ratio:1;border-radius:2.6mm;background:rgba(255,255,255,.18)"></span></div></div>
+   <div class="cap">ICÔNE SUR L’ÉCRAN D’ACCUEIL</div></div>
+  <div>
+   <div style="background:#fff;border-radius:4mm;overflow:hidden;box-shadow:0 4mm 10mm rgba(1,13,54,.08)">
+    <div style="display:flex;align-items:center;gap:5mm;padding:4mm 5mm;border-bottom:1px solid #eef0f6"><img src="../logo/domo-logo-horizontal-color.svg" style="height:7mm"><div style="flex:1;background:var(--mist);border-radius:99px;padding:2mm 4mm;font-size:8pt;color:#8b92aa">Rechercher un produit, une boutique…</div><span style="background:var(--orange);color:#fff;border-radius:99px;padding:2mm 4mm;font:700 8pt Nunito">Panier</span></div>
+    <div style="background:var(--blue);color:#fff;padding:8mm 6mm;display:flex;justify-content:space-between;align-items:center"><div style="font:700 17pt/1.15 Comfortaa">Tout ce qu’il vous faut,<br>au même endroit.</div><span style="background:#fff;color:var(--ink);border-radius:99px;padding:2.5mm 5mm;font:800 9pt Nunito">Découvrir</span></div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:3mm;padding:4mm 5mm"><span style="height:16mm;border-radius:3mm;background:url(../../domo-2027/img/sac.webp) center/cover"></span><span style="height:16mm;border-radius:3mm;background:url(../../domo-2027/img/sandales.webp) center/cover"></span><span style="height:16mm;border-radius:3mm;background:var(--mist)"></span><span style="height:16mm;border-radius:3mm;background:url(../../domo-2027/img/bague.webp) center/cover;background-color:#eee"></span></div>
+   </div><div class="cap">SITE WEB</div></div>
+  <div style="display:flex;flex-direction:column;align-items:center">
+   <div style="position:relative;width:56mm;height:66mm;background:var(--blue);border-radius:2mm 2mm 4mm 4mm;margin-top:16mm;display:flex;align-items:center;justify-content:center;box-shadow:0 5mm 10mm rgba(1,13,54,.18)">
+    <div style="position:absolute;top:-13mm;left:17mm;width:22mm;height:17mm;border:2.6mm solid var(--ink);border-bottom:0;border-radius:11mm 11mm 0 0"></div>
+    <img src="../logo/domo-logo-stacked-white.svg" style="width:62%"></div><div class="cap">SAC DE LIVRAISON</div></div>
+ </div>
+ <div class="grid" style="grid-template-columns:1fr 1fr;margin-top:7mm">
+  <div style="background:#fff;border-radius:4mm;padding:4mm;display:flex;gap:4mm;align-items:center"><img src="../social/profile-1080.png" style="width:16mm;border-radius:50%"><div><b style="font:700 11pt Nunito">domo.tn</b><div class="small">Photo de profil Instagram · Facebook · TikTok</div></div></div>
+  <div style="background:#fff;border-radius:4mm;padding:4mm;display:flex;gap:4mm;align-items:center"><img src="../social/og-image-1200x630.png" style="width:38mm;border-radius:2mm;border:1px solid #eee"><div><b style="font:700 11pt Nunito">Aperçu de lien</b><div class="small">WhatsApp, Facebook, X (1200 × 630)</div></div></div>
+ </div>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 9</span></div>
+</section>
+
+<!-- 10 Files -->
+<section class="page">
+ <div class="kicker">09 · Fichiers</div>
+ <h1>Le kit de fichiers</h1>
+ <div class="grid" style="grid-template-columns:1fr 1fr;gap:10mm">
+  <table>
+   <tr><td>logo/</td><td>Horizontal, empilé, logotype · couleur, blanc, noir, bleu, blanc 1 couleur (SVG vectoriel)</td></tr>
+   <tr><td>icon/</td><td>Symbole couleur, encre, noir, blanc · icône d’application (SVG)</td></tr>
+   <tr><td>png/</td><td>Tous les logos en PNG transparent, 1200 et 2400 px (icônes 512 et 1024 px)</td></tr>
+   <tr><td>web/</td><td>favicon.ico / .svg, favicon 16-32-48 px, apple-touch-icon, icônes 192 et 512, maskable, site.webmanifest, extrait &lt;head&gt;</td></tr>
+   <tr><td>social/</td><td>Photo de profil 1080 px, aperçu de lien 1200 × 630 (blanc et bleu), couverture 1500 × 500</td></tr>
+   <tr><td>guidelines/</td><td>Cette charte (PDF et HTML)</td></tr>
+  </table>
+  <div>
+   <h2>Bon à savoir</h2>
+   <p class="small">Utilisez le SVG partout où c’est possible (site, application, impression) : il reste net à toutes les tailles. Le PNG sert aux outils qui n’acceptent pas le SVG (réseaux sociaux, présentations).</p>
+   <p class="small">Le logotype est vectorisé : il ne dépend d’aucune police installée. Pour les titres et le texte, installez Comfortaa et Nunito depuis Google Fonts.</p>
+   <p class="small">Avant toute impression ou dépôt de marque, faites vérifier le logo et le nom auprès de l’INNORPI et par une recherche d’antériorité : le symbole « maison + goutte » est proche d’autres marques existantes.</p>
+  </div>
+ </div>
+ <div class="foot"><img src="../logo/domo-logo-horizontal-color.svg"><span>Charte graphique · 10</span></div>
+</section>
+</body></html>

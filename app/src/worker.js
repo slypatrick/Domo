@@ -849,9 +849,41 @@ const cleanProduct = (b, partial) => {
     const uniq = [...new Set(list)].slice(0, 12);
     p[k] = uniq.length ? JSON.stringify(uniq) : null;
   }
+  if (b.kind !== undefined) p.kind = /^[a-z]{2,20}$/.test(String(b.kind || '')) ? String(b.kind) : null;
+  if (b.specs !== undefined) {
+    const list = (Array.isArray(b.specs) ? b.specs : []).filter(x => Array.isArray(x) && String(x[1] ?? '').trim())
+      .slice(0, 12).map(([l, v]) => [str(l, 30, 'détail'), str(v, 160, 'détail')]);
+    p.specs = list.length ? JSON.stringify(list) : null;
+  }
+  if (b.variants !== undefined) {
+    const list = (Array.isArray(b.variants) ? b.variants : []).slice(0, 144).map(v => ({
+      k: String(v?.k ?? '').slice(0, 50),
+      price: v?.price === '' || v?.price == null ? null : money(v.price, 'prix de la variante'),
+      stock: v?.stock === '' || v?.stock == null ? null : Math.max(0, Math.min(99999, parseInt(v.stock, 10) || 0)),
+    })).filter(v => v.k.includes('|') && (v.price != null || v.stock != null));
+    p.variants = list.length ? JSON.stringify(list) : null;
+  }
+  if (b.disc !== undefined) {
+    const d = b.disc === '' || b.disc == null ? 0 : money(b.disc, 'remise');
+    p.disc_type = b.disc_type === 'amt' ? 'amt' : 'pct';
+    if (p.disc_type === 'pct' && d > 90) fail(400, 'Remise : 90 % maximum');
+    if (p.disc_type === 'amt' && p.price != null && d >= p.price) fail(400, 'La remise doit être plus petite que le prix');
+    p.disc = d > 0 ? d : null;
+    if (!p.disc) p.disc_type = null;
+  }
+  if (b.disc_until !== undefined) { const t = Number(b.disc_until) || 0; p.disc_until = t > 0 ? t : null; }
   return p;
 };
 const optList = v => { try { const a = JSON.parse(v || '[]'); return Array.isArray(a) ? a : []; } catch { return []; } };
+// Price a buyer pays: the variant price (or base price), minus a running discount. Same rule in index.html (unitPrice).
+const discOn = p => p.disc > 0 && (!p.disc_until || p.disc_until > Date.now());
+const unitPrice = (p, k) => {
+  const v = k ? optList(p.variants).find(x => x.k === k) : null;
+  const base = v && v.price != null ? v.price : p.price;
+  if (!discOn(p)) return base;
+  return Math.max(0, Math.round((p.disc_type === 'amt' ? base - p.disc : base * (100 - p.disc) / 100) * 1000) / 1000);
+};
+const PRODUCT_EXTRA = ['cost', 'stock', 'kind', 'specs', 'variants', 'disc', 'disc_type', 'disc_until'];
 on('GET', '/api/products', async ({ env, me }) => {
   sellerOnly(me);
   return json({ products: (await env.DB.prepare('SELECT * FROM products WHERE seller_id=? ORDER BY sort, created_at').bind(me.id).all()).results });
@@ -863,7 +895,8 @@ on('POST', '/api/products', async ({ env, me, body }) => {
   if (n >= 200) fail(400, '200 produits maximum');
   const p = { id: rid(), seller_id: me.id, active: 1, sort: n, created_at: Date.now(), category: null, description: null, image: null, sizes: null, colors: null, ...cleanProduct(body) };
   await env.DB.prepare('INSERT INTO products (id, seller_id, name, price, active, sort, created_at, category, description, image, sizes, colors) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)').bind(p.id, p.seller_id, p.name, p.price, p.active, p.sort, p.created_at, p.category, p.description, p.image, p.sizes, p.colors).run();
-  if (p.cost != null || p.stock != null) await env.DB.prepare('UPDATE products SET cost=?, stock=? WHERE id=?').bind(p.cost ?? null, p.stock ?? null, p.id).run();
+  const extra = PRODUCT_EXTRA.filter(k => p[k] !== undefined);
+  if (extra.length) await env.DB.prepare(`UPDATE products SET ${extra.map(k => `${k}=?`).join(',')} WHERE id=?`).bind(...extra.map(k => p[k] ?? null), p.id).run();
   return json({ product: p }, 201);
 });
 on('PATCH', '/api/products/:id', async ({ env, me, body, params }) => {
@@ -894,8 +927,8 @@ async function shopBySlug(env, slug) {
 }
 on('GET', '/api/shop/:slug', async ({ env, params }) => {
   const u = await shopBySlug(env, params.slug);
-  const products = (await env.DB.prepare('SELECT id, name, price, image, category, description, sizes, colors, stock FROM products WHERE seller_id=? AND active=1 ORDER BY sort, created_at').bind(u.id).all()).results
-    .map(p => ({ ...p, sizes: optList(p.sizes), colors: optList(p.colors) }));
+  const products = (await env.DB.prepare('SELECT id, name, price, image, category, description, sizes, colors, stock, kind, specs, variants, disc, disc_type, disc_until FROM products WHERE seller_id=? AND active=1 ORDER BY sort, created_at').bind(u.id).all()).results
+    .map(p => { const on = discOn(p); return { ...p, sizes: optList(p.sizes), colors: optList(p.colors), specs: optList(p.specs), variants: optList(p.variants), disc: on ? p.disc : null, disc_type: on ? p.disc_type : null, disc_until: on ? p.disc_until : null }; });
   const s = JSON.parse(u.settings || '{}');
   const categories = [...new Set(products.map(p => p.category).filter(Boolean))];
   const cutoff = Date.now() - BLIND_DAYS * DAY;
@@ -917,10 +950,10 @@ on('POST', '/api/shop/:slug/orders', async ({ env, params, body, ctx }) => {
   if (recent.n >= 5) fail(429, 'Trop de commandes avec ce numéro aujourd’hui. Contactez la boutique.');
   const lines = Array.isArray(body.items) ? body.items.slice(0, 30) : [];
   let items = [], total = 0, costTotal = 0;
-  const take = {};
+  const take = {}, takeV = {};
   if (lines.length) {
     const ids = lines.map(l => String(l.product_id));
-    const rows = (await env.DB.prepare(`SELECT id, name, price, sizes, colors, cost, stock FROM products WHERE seller_id=? AND active=1 AND id IN (${ids.map(() => '?').join(',')})`).bind(u.id, ...ids).all()).results;
+    const rows = (await env.DB.prepare(`SELECT id, name, price, sizes, colors, cost, stock, variants, disc, disc_type, disc_until FROM products WHERE seller_id=? AND active=1 AND id IN (${ids.map(() => '?').join(',')})`).bind(u.id, ...ids).all()).results;
     const byId = Object.fromEntries(rows.map(r => [r.id, r]));
     for (const l of lines) {
       const p = byId[String(l.product_id)], q = Math.max(1, Math.min(20, parseInt(l.qty, 10) || 1));
@@ -929,9 +962,16 @@ on('POST', '/api/shop/:slug/orders', async ({ env, params, body, ctx }) => {
       if (p.stock != null && take[p.id] > p.stock) fail(409, p.stock ? `Plus que ${p.stock} « ${p.name} » en stock` : `« ${p.name} » est en rupture de stock`);
       costTotal += (p.cost || 0) * q;
       const sz = optList(p.sizes), co = optList(p.colors), opt = [];
-      if (sz.length) { if (!sz.includes(String(l.size || ''))) fail(400, `Choisissez la taille pour « ${p.name} »`); opt.push(String(l.size)); }
-      if (co.length) { if (!co.includes(String(l.color || ''))) fail(400, `Choisissez la couleur pour « ${p.name} »`); opt.push(String(l.color)); }
-      items.push(`${p.name}${opt.length ? ` (${opt.join(', ')})` : ''} ×${q}`); total += p.price * q;
+      if (sz.length) { if (!sz.includes(String(l.size || ''))) fail(400, `Choisissez une option pour « ${p.name} »`); opt.push(String(l.size)); }
+      if (co.length) { if (!co.includes(String(l.color || ''))) fail(400, `Choisissez une option pour « ${p.name} »`); opt.push(String(l.color)); }
+      const vk = sz.length || co.length ? `${sz.length ? String(l.size) : ''}|${co.length ? String(l.color) : ''}` : '';
+      const v = vk ? optList(p.variants).find(x => x.k === vk) : null;
+      if (v && v.stock != null) {
+        const tk = p.id + '\n' + vk; takeV[tk] = (takeV[tk] || 0) + q;
+        if (takeV[tk] > v.stock) fail(409, v.stock ? `Plus que ${v.stock} « ${p.name} » (${opt.join(', ')}) en stock` : `« ${p.name} » (${opt.join(', ')}) est en rupture de stock`);
+      }
+      const unit = unitPrice(p, vk);
+      items.push(`${p.name}${opt.length ? ` (${opt.join(', ')})` : ''} ×${q}`); total += unit * q;
     }
   }
   const free = str(body.request, 300, 'demande');
@@ -952,6 +992,13 @@ on('POST', '/api/shop/:slug/orders', async ({ env, params, body, ctx }) => {
   const row = await insertOrder(env, u.id, o, 'customer', body.idem);
   if (row.duplicate) return json({ ref: fmtRef(row.ref), claim: row.claim_token, total: total ? total + shipFee + fee : null, secure, secure_fee: fee, duplicate: true });
   for (const [pid, q] of Object.entries(take)) await env.DB.prepare('UPDATE products SET stock = MAX(0, stock - ?) WHERE id=? AND stock IS NOT NULL').bind(q, pid).run();
+  const vByProd = {};
+  for (const [tk, q] of Object.entries(takeV)) { const [pid, vk] = tk.split('\n'); (vByProd[pid] ||= {})[vk] = q; }
+  for (const [pid, m] of Object.entries(vByProd)) {
+    const cur = await env.DB.prepare('SELECT variants FROM products WHERE id=?').bind(pid).first();
+    const list = optList(cur?.variants).map(v => (m[v.k] && v.stock != null ? { ...v, stock: Math.max(0, v.stock - m[v.k]) } : v));
+    await env.DB.prepare('UPDATE products SET variants=? WHERE id=?').bind(JSON.stringify(list), pid).run();
+  }
   bg(ctx, notify(env, u.id, { type: 'order', title: `Nouvelle commande ${fmtRef(row.ref)}`, body: `${firstName(o.name)} · ${o.items.slice(0, 80)} · ${total ? dt(o.price) : 'prix à fixer'}${secure ? ' · achat sécurisé' : ''}`, url: '/#commandes', tag: 'order-' + row.id }));
   return json({ ref: fmtRef(row.ref), claim: row.claim_token, total: total ? total + shipFee + fee : null, secure, secure_fee: fee }, 201);
 }, { public: true, cors: true });

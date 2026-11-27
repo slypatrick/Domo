@@ -1636,6 +1636,86 @@ dialog[open]:has(> form > .db) .dh,dialog[open]:has(> .db) .dh{border-bottom:1px
 .chist .h1{min-width:0;display:flex;flex-direction:column}.chist .h1 b{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chist .h1 span{font-size:12px;color:var(--ink2)}
 .chist .h2{display:flex;flex-direction:column;align-items:flex-end;gap:3px}.chist .h2 b{font-size:13.5px;white-space:nowrap}
 @media(max-width:400px){.cstats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Products 2026: types, options, promos, catalogue views */
+:root{--sale:#c2410c;--onsale:#fff;--salebg:#fff1e8}
+:root[data-theme=dark]{--sale:#ff8a4c;--onsale:#1a0c03;--salebg:#3a1d0c}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--sale:#ff8a4c;--onsale:#1a0c03;--salebg:#3a1d0c}}
+.dbadge{display:inline-flex;align-items:center;background:var(--sale);color:var(--onsale);font-weight:800;font-size:12.5px;line-height:1;border-radius:999px;padding:5px 9px;white-space:nowrap}
+.dbadge.sm{font-size:12px;padding:4px 7px;vertical-align:middle}
+.sheetimg{position:relative}
+.spcf .pvis small{display:none}.otable .pvis small,.otable td.tst{white-space:nowrap}
+.spc:not(.off) .phid{display:none}.pcu{white-space:nowrap}@media(max-width:479px){.pcu{display:none}}.phid{position:absolute;z-index:1;bottom:8px;left:8px;background:var(--ink);color:var(--bg);font-size:12px;font-weight:700;border-radius:999px;padding:4px 9px}
+.pvhead{position:sticky;top:-10px;background:var(--sf);z-index:1;padding-top:4px}
+.pimg>.dbadge,.spcimg>.dbadge,.sheetimg>.dbadge{position:absolute;top:8px;left:8px;z-index:1}
+.pimg>.dbadge~.incart{top:38px}
+.op.promo{color:var(--sale)}
+.was{color:var(--ink3);font-size:13px;font-weight:500;margin-inline-start:6px;white-space:nowrap}
+.op .from{font-size:12px;font-weight:600;color:var(--ink3)}
+.pprice{display:flex;align-items:baseline;flex-wrap:wrap;min-width:0}
+.psprice{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.psprice .op{font-size:21px}.psprice .was{font-size:15px;margin:0}
+#psheet .psprice .op{font-size:24px}
+.promoend{display:flex;align-items:center;gap:6px;color:var(--sale);font-weight:600}.promoend svg.i{width:15px;height:15px}
+.opt.optout{color:var(--ink3);text-decoration:line-through;border-style:dashed}
+.psh{font-size:16px;margin:22px 0 8px}
+.pspecs{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.pspecs div{display:grid;grid-template-columns:minmax(110px,40%) 1fr;gap:12px;padding:10px 12px;border-top:1px solid var(--line);font-size:14px}
+.pspecs div:first-child{border-top:0}.pspecs dt{color:var(--ink3)}.pspecs dd{margin:0;font-weight:600;overflow-wrap:anywhere}
+.few{color:var(--warn);font-weight:600}
+/* seller product form */
+.pkq{font-family:var(--display);font-size:20px;font-weight:700;margin:2px 0 4px}
+.pkgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media(min-width:560px){.pkgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.pktile{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:88px;padding:14px;border:1.5px solid var(--line);border-radius:14px;background:var(--sf);color:var(--ink);font:inherit;font-weight:600;font-size:14.5px;text-align:start;cursor:pointer;transition:border-color 150ms var(--ease-out),transform 150ms var(--ease-out)}
+.pktile svg.i{width:26px;height:26px;color:var(--brand)}
+.pktile:hover{border-color:var(--line2)}.pktile:active{transform:scale(.98)}
+.pktile[aria-pressed=true]{border-color:var(--brand);background:var(--bsoft)}
+.pktile:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.pkchip{display:flex;align-items:center;gap:12px;width:100%;min-height:56px;padding:10px 14px;border:1px solid var(--line);border-radius:14px;background:var(--sf2);color:var(--ink);font:inherit;text-align:start;cursor:pointer}
+.pkchip svg.i{width:24px;height:24px;color:var(--brand)}
+.pkchip span{flex:1;min-width:0;display:flex;flex-direction:column}.pkchip small{font-size:12px;color:var(--ink3)}.pkchip b{font-weight:700}
+.pkchip em{font-style:normal;color:var(--brand);font-weight:600;font-size:14px}
+.prh{font-size:15px;margin:24px 0 2px;padding-top:16px;border-top:1px solid var(--line)}
+.prspecs{display:grid;grid-template-columns:1fr;column-gap:12px}
+@media(min-width:560px){.prspecs{grid-template-columns:1fr 1fr}}
+.prsw{display:flex;align-items:center;justify-content:space-between;gap:14px;margin:12px 0 0;cursor:pointer;font-weight:400}
+.prsw>span:first-child{display:flex;flex-direction:column;gap:2px}.prsw b{font-weight:600}.prsw small{color:var(--ink3);font-size:13px}
+#prVar{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:10px 12px;max-height:340px;overflow-y:auto}
+.pvhead,.pvrow{display:grid;grid-template-columns:minmax(0,1fr) 92px 76px;gap:8px;align-items:center}
+.pvhead{font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;padding-bottom:6px}
+.pvrow{padding:6px 0;border-top:1px solid var(--line)}.pvrow b{font-weight:600;font-size:14px;overflow-wrap:anywhere}
+.pvrow input{margin:0;min-height:44px;padding:8px 10px}
+.pdisc{display:flex;gap:8px;align-items:stretch}.pdisc input{flex:1;min-width:0;margin:0}
+.pdseg{display:inline-flex;background:var(--sf2);border-radius:12px;padding:3px;gap:2px}
+.pdseg button{min-width:44px;min-height:44px;border:0;border-radius:9px;background:none;color:var(--ink2);font:inherit;font-weight:700;cursor:pointer}
+.pdseg button[aria-pressed=true]{background:var(--sf);color:var(--ink);box-shadow:var(--sh)}
+.pdprev{margin:10px 0 0;font-size:14px;color:var(--ink2);display:flex;align-items:center;gap:6px;flex-wrap:wrap}.pdprev s{color:var(--ink3)}
+/* seller catalogue views */
+.ptools{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px}
+.pchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.pchip{display:inline-flex;align-items:center;gap:5px;background:var(--chip,var(--sf2));color:var(--ink2);border-radius:999px;padding:3px 9px;font-size:12px;font-weight:600}
+.pchip svg.i{width:13px;height:13px}.pchip.promo{background:var(--salebg);color:var(--sale)}
+.prow2 small .op{font-size:13px}.prow2 small .was{font-size:12px}.prow2 .pth svg.i{width:22px;height:22px}
+.spcgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media(min-width:760px){.spcgrid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}}
+.spc{background:var(--sf);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.spc.off .spcimg img,.spc.off .spcimg>svg.i{opacity:.5}.spc.off .spcb b{color:var(--ink3)}
+.spcopen{display:flex;flex-direction:column;border:0;background:none;padding:0;color:inherit;font:inherit;text-align:start;cursor:pointer;flex:1}
+.spcopen:focus-visible{outline:2px solid var(--brand);outline-offset:-2px}
+.spcimg{position:relative;aspect-ratio:1/1;background:var(--sf2);display:grid;place-items:center;color:var(--ink3);overflow:hidden}
+.spcimg img{width:100%;height:100%;object-fit:cover}.spcimg>svg.i{width:34px;height:34px}
+.spcb{display:flex;flex-direction:column;gap:3px;padding:10px 12px 4px;min-width:0}
+.spcb b{font-weight:600;font-size:14.5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.spcp{display:flex;align-items:baseline;flex-wrap:wrap}.spcp .op{font-size:15px}.spcp .was{font-size:12.5px}
+.spcb small{font-size:12.5px;color:var(--ink3)}.spcb small.oos{color:var(--bad);font-weight:700}.spcb small.few{color:var(--warn)}
+.spcf{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:4px 8px 8px 12px}
+.spcf .pvis{display:flex;align-items:center;gap:8px}
+.spcf [data-pedit]{width:44px;min-height:44px}
+.otable tr.off td{color:var(--ink3)}.otable .pth{width:40px;height:40px;border-radius:10px;overflow:hidden;background:var(--sf2);display:grid;place-items:center;flex:none;color:var(--ink3)}
+.otable .pth img{width:100%;height:100%;object-fit:cover}.otable .tpr{white-space:nowrap}.otable .tpr .op{font-size:14px}
+.otable td.oos{color:var(--bad);font-weight:700}.otable td.few{color:var(--warn);font-weight:600}
+.otable .pvis{display:flex;align-items:center;gap:8px;justify-items:start}
+@media(max-width:759px){.pvhead,.pvrow{grid-template-columns:minmax(0,1fr) 84px 68px}}
+@media(prefers-reduced-motion:reduce){.pktile{transition:none}.pktile:active{transform:none}}
 </style>
 </head>
 <body>
@@ -1662,6 +1742,18 @@ dialog[open]:has(> form > .db) .dh,dialog[open]:has(> .db) .dh{border-bottom:1px
   <symbol id="i-arr" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol><symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
   <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7M20 4v7h-7"/></symbol>
   <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="m3 8 9 5 9-5M12 13v8"/></symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8.5 3 3 6l2 4.5 2.5-1.2V21h9V9.3l2.5 1.2L21 6l-5.5-3a3.5 3.5 0 0 1-7 0z"/></symbol>
+  <symbol id="i-shoe" viewBox="0 0 24 24"><path d="M3 6.5V18h18v-2.6a2.4 2.4 0 0 0-1.9-2.3l-4.6-1L11 8H7.5v2.2H3"/><path d="M3 15h18"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6.5a3 3 0 0 1 6 0V8"/></symbol>
+  <symbol id="i-gem" viewBox="0 0 24 24"><path d="M6.5 4h11L21 9l-9 11L3 9z"/><path d="M3 9h18M12 20 8.5 9l1.5-5M12 20l3.5-11L14 4"/></symbol>
+  <symbol id="i-drop" viewBox="0 0 24 24"><path d="M12 3s6.5 6.6 6.5 11.2a6.5 6.5 0 0 1-13 0C5.5 9.6 12 3 12 3z"/><path d="M9 15a3 3 0 0 0 3 3"/></symbol>
+  <symbol id="i-bottle" viewBox="0 0 24 24"><path d="M9 3h6v3H9z"/><path d="M10 6v2H8.5A3.5 3.5 0 0 0 5 11.5V18a3 3 0 0 0 3 3h8a3 3 0 0 0 3-3v-6.5A3.5 3.5 0 0 0 15.5 8H14V6"/></symbol>
+  <symbol id="i-sofa" viewBox="0 0 24 24"><path d="M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3"/><path d="M3 13a2 2 0 0 1 4 0v2h10v-2a2 2 0 0 1 4 0v5H3z"/><path d="M5.5 18v2M18.5 18v2"/></symbol>
+  <symbol id="i-device" viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="12" rx="2"/><path d="M8 20.5h8M12 16.5v4"/></symbol>
+  <symbol id="i-food" viewBox="0 0 24 24"><path d="M3 11.5h18a9 9 0 0 1-18 0z"/><path d="M8.5 8c0-2 2-2 2-4.5M13.5 8c0-2 2-2 2-4.5"/></symbol>
+  <symbol id="i-baby" viewBox="0 0 24 24"><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="6.5" r="2.5"/><circle cx="12" cy="13.5" r="7"/><path d="M10 16a3 3 0 0 0 4 0"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12.2V4h8.2L21 13.8 13.8 21z"/><circle cx="7.6" cy="8.6" r="1.4"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
   <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10v4a1 1 0 0 0 1 1h2l5 4V5L6 9H4a1 1 0 0 0-1 1zM15 8.5a5 5 0 0 1 0 7M18 6a8.5 8.5 0 0 1 0 12"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17.3 6.5 20.2l1-6.2L3 9.6l6.2-.9z"/></symbol>
   <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></symbol>
@@ -1774,18 +1866,35 @@ dialog[open]:has(> form > .db) .dh,dialog[open]:has(> .db) .dh{border-bottom:1px
 <!-- product editor (seller) -->
 <dialog id="prdlg" aria-labelledby="prT">
   <form id="prf" novalidate>
-    <div class="dh"><b id="prT">Nouveau produit</b><button class="btn ghost icon sm" type="button" data-close aria-label="Fermer"><svg class="i"><use href="#i-x"/></svg></button></div>
+    <div class="dh"><button class="btn ghost icon sm" type="button" id="prBack" hidden aria-label="Retour à la fiche"><svg class="i"><use href="#i-back"/></svg></button><b id="prT">Nouveau produit</b><button class="btn ghost icon sm" type="button" data-close aria-label="Fermer"><svg class="i"><use href="#i-x"/></svg></button></div>
     <div class="db">
-      <label class="pick imgpick" id="prImgBox" style="margin-top:4px"><span id="prImgInner"><svg class="i" style="width:28px;height:28px"><use href="#i-cam"/></svg><br>Ajouter une photo</span><input type="file" accept="image/*" id="prImg" aria-label="Photo du produit"></label>
-      <label for="prName">Nom</label><input id="prName" maxlength="80">
-      <div class="row"><div><label for="prPrice">Prix (DT)</label><input id="prPrice" type="number" step="0.5" min="0" inputmode="decimal"></div><div><label for="prCat">Catégorie</label><input id="prCat" list="catList" maxlength="30" placeholder="Robes, Sacs…"><datalist id="catList"></datalist></div></div>
-      <label for="prDesc">Description</label><textarea id="prDesc" rows="3" maxlength="600" placeholder="Matière, coupe, conseils…"></textarea>
-      <div class="row"><div><label for="prSizes">Tailles proposées</label><input id="prSizes" placeholder="S, M, L, XL" autocomplete="off"></div><div><label for="prColors">Couleurs proposées</label><input id="prColors" placeholder="Noir, Beige" autocomplete="off"></div></div>
-      <p class="hint" style="margin-top:6px">Séparez par des virgules. Le client devra choisir avant d’ajouter au panier, ce qui évite les erreurs de taille.</p>
-      <div class="row"><div><label for="prCost">Coût d’achat (DT) <span class="opt-l">(privé)</span></label><input id="prCost" type="number" step="0.5" min="0" inputmode="decimal" placeholder="ex. 35"></div><div><label for="prStock">Stock <span class="opt-l">(facultatif)</span></label><input id="prStock" type="number" step="1" min="0" inputmode="numeric" placeholder="Illimité"></div></div>
-      <p class="hint" style="margin-top:6px">Le coût reste privé : il sert à calculer votre bénéfice. Avec un stock, le produit passe en « Rupture » tout seul quand il est vendu.</p>
-      <label style="display:flex;align-items:center;justify-content:space-between;gap:12px"><span>Visible dans la vitrine</span><span class="switch2"><input type="checkbox" id="prOn" checked><i></i></span></label>
-      <div class="err" id="prErr"></div>
+      <div id="prKinds" hidden><p class="pkq">Que vendez-vous ?</p><p class="hint" style="margin:0 0 14px">La fiche s’adapte : pointures pour les chaussures, contenance pour les parfums, garantie pour l’électronique…</p><div class="pkgrid" id="prKindGrid"></div></div>
+      <div id="prMain">
+        <button type="button" class="pkchip" id="prKind"></button>
+        <label class="pick imgpick" id="prImgBox" style="margin-top:12px"><span id="prImgInner"><svg class="i" style="width:28px;height:28px"><use href="#i-cam"/></svg><br>Ajouter une photo</span><input type="file" accept="image/*" id="prImg" aria-label="Photo du produit"></label>
+        <label for="prName">Nom</label><input id="prName" maxlength="80">
+        <div class="row"><div><label for="prPrice">Prix (DT)</label><input id="prPrice" type="number" step="0.5" min="0" inputmode="decimal" placeholder="ex. 79"></div><div><label for="prCat">Rayon <span class="opt-l">(facultatif)</span></label><input id="prCat" list="catList" maxlength="30" placeholder="Robes, Sacs…"><datalist id="catList"></datalist></div></div>
+        <label for="prDesc">Description <span class="opt-l">(facultatif)</span></label><textarea id="prDesc" rows="3" maxlength="600"></textarea>
+        <div id="prSpecW"><h3 class="prh">Détails</h3><div class="prspecs" id="prSpecs"></div></div>
+        <h3 class="prh">Options au choix du client</h3>
+        <p class="hint" style="margin:0">Séparez par des virgules. Le client choisit avant d’ajouter au panier.</p>
+        <div class="row prorow"><div id="prO1w"><label for="prSizes" id="prO1L">Tailles</label><input id="prSizes" autocomplete="off"></div><div id="prO2w"><label for="prColors" id="prO2L">Couleurs</label><input id="prColors" autocomplete="off"></div></div>
+        <div id="prVarW" hidden>
+          <label class="prsw"><span><b>Prix ou stock différent selon l’option</b><small>Par exemple, le XL plus cher, ou le stock de chaque couleur.</small></span><span class="switch2"><input type="checkbox" id="prVarOn"><i></i></span></label>
+          <div id="prVar" hidden></div>
+        </div>
+        <h3 class="prh">Promotion</h3>
+        <label class="prsw"><span><b>Mettre en promo</b><small>Le client voit l’ancien prix barré et la remise.</small></span><span class="switch2"><input type="checkbox" id="prDiscOn"><i></i></span></label>
+        <div id="prDiscW" hidden>
+          <div class="row"><div><label for="prDisc">Remise</label><div class="pdisc"><input id="prDisc" type="number" step="1" min="0" inputmode="decimal" placeholder="ex. 20"><div class="pdseg" role="group" aria-label="Type de remise"><button type="button" data-dt="pct" aria-pressed="true">%</button><button type="button" data-dt="amt" aria-pressed="false">DT</button></div></div></div><div><label for="prUntil">Jusqu’au <span class="opt-l">(facultatif)</span></label><input id="prUntil" type="date"></div></div>
+          <p class="pdprev" id="prDiscPrev" aria-live="polite"></p>
+        </div>
+        <h3 class="prh">Stock et coût</h3>
+        <div class="row"><div id="prStockW"><label for="prStock">Stock <span class="opt-l">(facultatif)</span></label><input id="prStock" type="number" step="1" min="0" inputmode="numeric" placeholder="Illimité"></div><div><label for="prCost">Coût d’achat (DT) <span class="opt-l">(privé)</span></label><input id="prCost" type="number" step="0.5" min="0" inputmode="decimal" placeholder="ex. 35"></div></div>
+        <p class="hint" style="margin-top:6px">Le coût reste privé : il sert à calculer votre bénéfice. Avec un stock, le produit passe en « Rupture » tout seul quand il est vendu.</p>
+        <label class="prsw" style="margin-top:14px"><span><b>Visible dans la vitrine</b></span><span class="switch2"><input type="checkbox" id="prOn" checked><i></i></span></label>
+        <div class="err" id="prErr"></div>
+      </div>
     </div>
     <div class="df"><button class="btn dan" type="button" id="prDel" hidden>Supprimer</button><button class="btn pri" type="submit" id="prSave">Enregistrer</button></div>
   </form>
@@ -1805,6 +1914,9 @@ dialog[open]:has(> form > .db) .dh,dialog[open]:has(> .db) .dh{border-bottom:1px
 const FLAGS={delivery:true,boost:true,explore:true,buyerScore:false};
 /* ---------- Arabic interface (translates rendered text; French stays the source) ---------- */
 const AR={
+'Variantes':'المتغيّرات',
+'Que vendez-vous ?':'ماذا تبيع؟','Type':'النوع','Changer':'تغيير','Choisir':'اختيار','Choisir le type de produit':'اختر نوع المنتج','La fiche s’adapte : pointures pour les chaussures, contenance pour les parfums, garantie pour l’électronique…':'البطاقة تتأقلم: المقاسات للأحذية، السعة للعطور، الضمان للإلكترونيات…','Vêtements':'ملابس','Sacs et accessoires':'حقائب وإكسسوارات','Bijoux et montres':'مجوهرات وساعات','Beauté et soins':'تجميل وعناية','Parfums':'عطور','Maison et déco':'منزل وديكور','Électronique':'إلكترونيات','Fait maison et alimentation':'منتجات منزلية وغذائية','Bébé et enfants':'رضّع وأطفال','Autre chose':'شيء آخر','Rayon':'القسم','Détails':'التفاصيل','Options au choix du client':'خيارات يختارها الحريف','Séparez par des virgules. Le client choisit avant d’ajouter au panier.':'افصل بفواصل. الحريف يختار قبل الإضافة إلى السلة.','Tailles':'المقاسات','Couleurs':'الألوان','Pointures':'المقاسات','Contenances':'السعات','Teintes':'الدرجات','Finitions':'التشطيبات','Dimensions':'الأبعاد','Capacités':'السعات','Formats':'الأحجام','Saveurs':'النكهات','Âges':'الأعمار','Options':'الخيارات','Pointure':'المقاس','Contenance':'السعة','Teinte':'الدرجة','Finition':'التشطيب','Capacité':'السعة','Format':'الحجم','Saveur':'النكهة','Âge':'العمر','Option':'الخيار','Prix ou stock différent selon l’option':'سعر أو مخزون مختلف حسب الخيار','Par exemple, le XL plus cher, ou le stock de chaque couleur.':'مثلاً XL أغلى، أو مخزون كل لون.','Prix vide = prix du produit. Stock vide = illimité. Stock 0 = option en rupture.':'سعر فارغ = سعر المنتج. مخزون فارغ = غير محدود. مخزون 0 = الخيار نافد.','Promotion':'تخفيض','Mettre en promo':'وضع في التخفيض','Le client voit l’ancien prix barré et la remise.':'الحريف يرى السعر القديم مشطوباً والتخفيض.','Remise':'التخفيض','Jusqu’au':'إلى غاية','Type de remise':'نوع التخفيض','Le client paie':'الحريف يدفع','au lieu de':'عوض','Stock et coût':'المخزون والتكلفة','Visible dans la vitrine':'ظاهر في الواجهة','Retour à la fiche':'الرجوع إلى البطاقة','Donnez un nom au produit':'أعط اسماً للمنتج','Indiquez le prix en DT':'أدخل السعر بالدينار','dès':'ابتداءً من','Promo terminée':'انتهى التخفيض','Stock illimité':'مخزون غير محدود','Épuisé dans cette option':'نفد في هذا الخيار','Matière':'المادة','Coupe':'القصّة','Entretien':'العناية','Affichage des produits':'عرض المنتجات','Prix':'السعر',
+
 // navigation and chrome
 'Commandes':'الطلبيات','Mes commandes':'طلبياتي','Messages':'الرسائل','Boutique':'المتجر','Avis':'التقييمات','Stats':'الإحصائيات','Réglages':'الإعدادات','Explorer':'تصفّح','Profil':'حسابي','Tournée':'الجولة','Caisse':'الصندوق','Compte':'الحساب','Selon le plan choisi, l’équipe Domo prend en charge vos réseaux sociaux et votre marketing digital : création des publications, stories et Reels, réponses aux clients, publicité. Le budget publicitaire reste à votre charge et vous le validez avant chaque campagne.':'حسب الباقة المختارة، يتكفّل فريق Domo بشبكاتك الاجتماعية وتسويقك الرقمي: إنشاء المنشورات والقصص والريلز، الرد على الحرفاء، والإعلانات. ميزانية الإعلانات على حسابك وتوافق عليها قبل كل حملة.','On gère votre Instagram ou votre Facebook':'ندير حسابك على إنستغرام أو فيسبوك','1 réseau géré par Domo : Instagram ou Facebook':'شبكة واحدة يديرها Domo: إنستغرام أو فيسبوك','8 publications designées et 4 stories par mois':'8 منشورات مصمَّمة و4 قصص في الشهر','Profil optimisé : bio, couverture, stories à la une':'ملف محسَّن: نبذة، غلاف، قصص مميّزة','Retouche de 10 photos produit':'تعديل 10 صور منتجات','À la une dans Explorer 1 semaine par mois':'ظهور مميّز في «تصفّح» أسبوعًا في الشهر','Domo Pro inclus et rapport mensuel':'Domo Pro مشمول مع تقرير شهري','Instagram et Facebook, publicité comprise':'إنستغرام وفيسبوك، مع الإعلانات','Instagram et Facebook gérés par Domo':'إنستغرام وفيسبوك يديرهما Domo','12 publications, 8 stories et 2 Reels par mois':'12 منشورًا و8 قصص و2 ريلز في الشهر','Réponses aux commentaires et messages, jours ouvrés':'الرد على التعليقات والرسائل في أيام العمل','1 campagne publicitaire par mois, créée et suivie':'حملة إعلانية واحدة في الشهر، إنشاء ومتابعة','Retouche de 20 photos produit':'تعديل 20 صورة منتجات','À la une 2 semaines par mois, Domo Pro inclus':'ظهور مميّز أسبوعين في الشهر، Domo Pro مشمول','Tout votre marketing digital, de A à Z':'كل تسويقك الرقمي، من الألف إلى الياء','Instagram, Facebook et TikTok gérés par Domo':'إنستغرام وفيسبوك وتيك توك يديرها Domo','20 publications, 15 stories et 4 Reels ou TikToks par mois':'20 منشورًا و15 قصة و4 ريلز أو تيك توك في الشهر','Messages et commentaires chaque jour, commandes saisies dans Domo':'الرسائل والتعليقات يوميًا، والطلبيات تُسجَّل في Domo','Stratégie mensuelle et jusqu’à 3 campagnes publicitaires':'استراتيجية شهرية وحتى 3 حملات إعلانية','Retouche de 40 photos produit, 1 collaboration influenceur par mois':'تعديل 40 صورة منتجات وتعاون مع مؤثّر شهريًا','À la une tout le mois, appel bilan mensuel':'ظهور مميّز طوال الشهر، ومكالمة تقييم شهرية','Ajoutez des services à votre plan, ou composez votre propre formule.':'أضف خدمات إلى باقتك، أو كوّن باقتك الخاصة.','Création ou refonte de page (bio, couverture, stories à la une)':'إنشاء أو تجديد الصفحة (نبذة، غلاف، قصص مميّزة)','120 DT une fois':'120 د.ت مرة واحدة','Publication designée':'منشور مصمَّم','Reel : script, montage, sous-titres':'ريل: سيناريو، مونتاج، ترجمة','Retouche photo produit':'تعديل صورة منتج','Création d’une campagne publicitaire':'إنشاء حملة إعلانية','Gestion de vos pubs (15 % du budget, minimum 60 DT)':'إدارة إعلاناتك (15 % من الميزانية، 60 د.ت على الأقل)','60 DT par mois, minimum':'60 د.ت في الشهر على الأقل','Story sur les pages Domo':'قصة على صفحات Domo','À la une dans Explorer':'ظهور مميّز في «تصفّح»','Toutes les boutiques':'كل المتاجر','Oui, numéro confirmé':'نعم، الرقم مؤكَّد','Confirmez d’abord la commande avec le client.':'أكّد الطلبية مع الحريف أولًا.','Prête : demandez un livreur Domo ou expédiez vous-même.':'جاهزة: اطلب موصّل Domo أو أرسلها بنفسك.','Transporteur':'شركة التوصيل','Marquer expédiée':'تحديد كمُرسلة','Ramassages, livreurs, vérifications et versements.':'الاستلامات والموصّلون والتحقق والتحويلات.','Touchez le cadenas à côté de l’adresse (ou Réglages du téléphone → Applications → Domo) et autorisez les notifications.':'المس القفل بجانب العنوان (أو إعدادات الهاتف ← التطبيقات ← Domo) واسمح بالإشعارات.','Livreur Domo':'موصّل Domo','Vous payez seulement quand le colis arrive chez vous.':'تدفع فقط عندما يصلك الطرد.','Entrez votre numéro de suivi DM-…':'أدخل رقم التتبّع DM-…','Vous vendez ?':'تبيع؟','Ouvrez votre boutique Domo gratuitement.':'افتح متجرك على Domo مجانًا.','À la une':'مميّزة','Livrez pour Domo dans votre ville. Paiement à la course.':'وصّل لـDomo في مدينتك. الدفع حسب كل توصيلة.','Compte Domo':'حساب Domo','Total à encaisser':'المبلغ المطلوب تحصيله','Pas de livreur Domo sur cette commande.':'لا يوجد موصّل Domo لهذه الطلبية.','La boutique prépare votre colis. Vous verrez ici le livreur dès qu’il part.':'المتجر يحضّر طردك. سترى الموصّل هنا عند انطلاقه.','Client':'الحريف','Commande':'الطلبية','Nom':'الاسم','Note':'ملاحظة','Créée':'أُنشئت','Passée':'أُرسلت','Étape':'المرحلة','N° transporteur':'رقم شركة التوصيل','Appeler le livreur':'اتصل بالموصّل','Voir la boutique':'عرض المتجر','Livreur demandé, en attente d’attribution':'تم طلب موصّل، في انتظار التعيين','Livreur attribué, passe récupérer le colis':'تم تعيين موصّل، سيمرّ لاستلام الطرد','Colis récupéré, en route vers le client':'تم استلام الطرد، في الطريق إلى الحريف','Livré par Domo':'سلّمه Domo','Retour en cours vers la boutique':'الإرجاع جارٍ نحو المتجر','Colis rendu à la boutique':'أُرجع الطرد إلى المتجر','Livraison Domo':'توصيل Domo','Un livreur Domo récupère vos colis confirmés et encaisse pour vous. 8 DT par colis, déduits du versement.':'موصّل Domo يستلم طرودك المؤكَّدة ويحصّل المبلغ عنك. 8 د.ت لكل طرد، تُخصم من التحويل.','Adresse de ramassage':'عنوان الاستلام','Téléphone sur place':'الهاتف في المكان','Conseillé : faites-le depuis la boutique.':'يُنصح بالقيام بذلك من المتجر.','Enregistrer l’adresse':'حفظ العنوان','On gère vos réseaux sociaux et votre marketing digital.':'نتكفّل بشبكاتك الاجتماعية وتسويقك الرقمي.','Voir les plans':'عرض الباقات','Au moins 5 colis livrés par les livreurs Domo.':'5 طرود على الأقل سلّمها موصّلو Domo.','Les clients commandent plus facilement chez une boutique vérifiée. Vos documents restent privés : seule l’équipe Domo les voit.':'الحرفاء يطلبون بسهولة أكبر من متجر موثَّق. وثائقك تبقى خاصة: فريق Domo فقط يراها.','Vos réseaux sociaux et votre marketing digital, gérés par Domo':'شبكاتك الاجتماعية وتسويقك الرقمي، يديرها Domo','Vous vendez, on s’occupe du reste.':'أنت تبيع، ونحن نتكفّل بالباقي.','Choisissez votre plan':'اختر باقتك','par mois':'في الشهر','Sur mesure':'حسب الطلب','Choisir Essentiel':'اختيار Essentiel','Choisir Croissance':'اختيار Croissance','Choisir Premium':'اختيار Premium','Nouvelle candidature livreur':'طلب موصّل جديد','Préparez le montant. Le livreur peut vous appeler pour trouver l’adresse.':'حضّر المبلغ. قد يتصل بك الموصّل لإيجاد العنوان.','Confirmée, en route, livrée.':'مؤكَّدة، في الطريق، مُسلَّمة.','Ouvrez votre boutique Domo avec le même numéro : confirmations WhatsApp, vitrine et suivi des colis.':'افتح متجرك على Domo بنفس الرقم: تأكيدات واتساب، واجهة متجر وتتبّع الطرود.','Les avis vous concernant seront effacés et vos commandes détachées de votre compte. Les avis que vous avez écrits restent, de façon anonyme.':'ستُحذف التقييمات التي تخصّك وتُفصل طلبياتك عن حسابك. التقييمات التي كتبتها تبقى بشكل مجهول.','Bloquées : touchez le cadenas près de l’adresse':'محظورة: المس القفل بجانب العنوان','Argent à remettre à Domo':'المال المطلوب تسليمه لـDomo','Gagné aujourd’hui':'مربوح اليوم','Reprendre la tournée':'استئناف الجولة','Courses ce mois':'توصيلات هذا الشهر','Par course':'لكل توصيلة','Gagné ce mois':'مربوح هذا الشهر','Tout est remis. Merci !':'تم تسليم كل شيء. شكرًا!','Remettez l’argent à l’équipe Domo à la fin de la journée. La remise est validée dans la console Domo.':'سلّم المال لفريق Domo في نهاية اليوم. يتم تأكيد التسليم في لوحة Domo.','Plus que 3 avis clients':'بقي 3 تقييمات من الحرفاء','Les places À la une sont signalées « Sponsorisé ». Payer ne change jamais votre score de confiance, vos badges ni vos avis.':'الأماكن المميّزة مُعلَّمة «مُموَّل». الدفع لا يغيّر أبدًا مؤشر الثقة أو الشارات أو التقييمات.','Notifications activées sur cet appareil':'الإشعارات مفعّلة على هذا الجهاز','Vous êtes prévenu des nouvelles commandes, des messages, des appels et des problèmes signalés.':'يتم إعلامك بالطلبيات الجديدة والرسائل والمكالمات والمشاكل المبلَّغ عنها.','Envoyer un test':'إرسال تجربة','Désactiver':'إيقاف','Retirer la photo':'إزالة الصورة','Retirer les filtres':'إزالة الفلاتر','Boutiques précédentes':'المتاجر السابقة','Boutiques suivantes':'المتاجر التالية','Livrées ce mois':'المُسلَّمة هذا الشهر','Menu':'القائمة','Général':'عام','Mon compte':'حسابي','À faire':'للقيام به','Notifications':'الإشعارات','Domo Boost':'Domo Boost','Console Domo':'لوحة Domo',
 'Nouvelle commande':'طلبية جديدة','Mon espace':'فضائي','Se connecter':'تسجيل الدخول','Vendre sur Domo':'بِع على Domo','Suivi':'التتبّع','Panier':'السلة','Fermer':'إغلاق','Annuler':'إلغاء','Confirmer':'تأكيد','Confirmées':'المؤكَّدة','Expédiées':'المُرسَلة','Livrées':'المُسلَّمة','Refusées':'المرفوضة','Refus et annulations':'الرفض والإلغاء','colis en route':'طرود في الطريق','prêtes pour le livreur':'جاهزة للإرسال','à contacter':'للاتصال','Sans compte Domo':'بدون حساب Domo','Prix à confirmer par la boutique':'السعر يؤكده المتجر','Nom, téléphone, produit, ID…':'الاسم، الهاتف، المنتج، المعرّف…','Modifier':'تعديل','Appeler':'اتصال','Rechercher':'بحث','Boutique en ligne':'المتجر الإلكتروني','Statistiques':'الإحصائيات','Enregistrer':'حفظ','Supprimer':'حذف','Retour':'رجوع','Chargement…':'جارٍ التحميل…','Erreur':'خطأ','Masquer':'إخفاء','Voir plus':'عرض المزيد','Voir moins':'عرض أقل','Partager':'مشاركة','Copier':'نسخ','Message':'رسالة','Partager la boutique':'مشاركة المتجر','Lien copié':'تم نسخ الرابط','Numéro copié':'تم نسخ الرقم','ID boutique copié':'تم نسخ معرّف المتجر','Votre panier est vide':'سلتك فارغة',
@@ -1855,6 +1967,8 @@ const AR={
 'Ne ratez aucune commande':'لا تفوّت أي طلبية','Soyez prévenu de chaque nouvelle course':'كن على علم بكل طلبية توصيل جديدة','Suivez vos colis en direct':'تابع طرودك مباشرة','Activez les notifications':'فعّل الإشعارات','Activer':'تفعيل','Voir les étapes':'عرض الخطوات','Réduire':'تصغير','Plus qu’une étape pour une boutique prête':'خطوة واحدة فقط ليصبح متجرك جاهزًا','En cours':'قيد التنفيذ','Terminées':'المنتهية','Commandée':'مطلوبة','En route':'في الطريق','Trouver une boutique':'ابحث عن متجر','Commander sans risque':'اطلب بدون مخاطرة','Vous payez à la livraison':'تدفع عند الاستلام','Rien à payer en ligne. Vous réglez le livreur quand vous avez le colis.':'لا شيء للدفع عبر الإنترنت. تدفع لعامل التوصيل عند استلام الطرد.','Confirmation sur WhatsApp':'التأكيد عبر واتساب','La boutique vous écrit avant d’expédier. Vous pouvez annuler.':'يراسلك المتجر قبل الإرسال. يمكنك الإلغاء.','Des avis vérifiés':'تقييمات موثّقة','Seuls les clients livrés peuvent noter. Les premiers avis arrivent bientôt.':'فقط الزبائن الذين استلموا طلبياتهم يمكنهم التقييم. أولى التقييمات قادمة قريبًا.','La boutique va vous écrire sur WhatsApp. Confirmez pour lancer l’envoi.':'سيراسلك المتجر على واتساب. أكّد لبدء الإرسال.','Commande confirmée. La boutique prépare votre colis.':'تم تأكيد الطلبية. المتجر يحضّر طردك.','La boutique n’a pas pu vous joindre. Confirmez ici pour ne pas perdre la commande.':'لم يتمكن المتجر من الاتصال بك. أكّد هنا حتى لا تضيع الطلبية.',
 'Excellent taux de livraison':'نسبة توصيل ممتازة','Suivre le colis':'تتبّع الطرد','Confirmer ou annuler':'أكّد أو ألغِ',};
 const AR_RX=[
+ [/^· jusqu’au (.+)$/,'· إلى غاية $1'],
+ [/^Promo jusqu’au (.+)$/,'تخفيض إلى غاية $1'],[/^Promo (−.+) · jusqu’au (.+)$/,'تخفيض $1 · إلى غاية $2'],[/^Promo (−.+)$/,'تخفيض $1'],[/^(\d+) variantes?$/,'$1 متغيّرات'],[/^(\d+) en stock$/,'$1 في المخزون'],[/^Plus que (\d+) en stock$/,'بقي $1 فقط في المخزون'],[/^Choisissez (la |le |l’|les )(taille|pointure|contenance|couleur|teinte|finition|dimensions|capacité|format|saveur|âge|option)$/,m=>'اختر '+{taille:'المقاس',pointure:'المقاس',contenance:'السعة',couleur:'اللون',teinte:'الدرجة',finition:'التشطيب',dimensions:'الأبعاد','capacité':'السعة',format:'الحجم',saveur:'النكهة','âge':'العمر',option:'الخيار'}[m[2]]],[/^(\d+) produits?$/,'$1 منتجات'],
  [/^(\d+) produits visibles dans votre vitrine$/,'$1 منتجات ظاهرة في واجهتك'],[/^Zones : (.+)$/,'المناطق: $1'],
  [/^(\d+) commandes?$/,'$1 طلبية'],
  [/^([+−])(.+) vs (\d+) j précédents$/,m=>`${m[1]}${arMoney(m[2])} مقارنة بـ ${m[3]} يومًا السابقة`],
@@ -2709,9 +2823,7 @@ async function renderShop(){
   </div>
   </section><section data-bpane="produits" ${btab==='produits'?'':'hidden'}>
   <div class="bph"><p class="faint" style="margin:0">${(n=>n===0?'Aucun produit visible':n===1?'1 produit visible':n+' produits visibles')(products.filter(p=>p.active).length)} dans votre vitrine</p><button class="btn pri" type="button" id="pNew">${ic('plus')}Ajouter un produit</button></div>
-  <div class="card pad">
-    <div id="plist">${products.length?products.map(p=>`<div class="prow2 ${p.active?'':'off'}"><div class="pth">${p.image?`<img src="${murl(p.image)}" alt="" loading="lazy">`:ic('img')}</div><div><b>${esc(p.name)}</b><small>${p.category?esc(p.category)+' · ':''}${money(p.price)}${p.stock!=null?` · ${p.stock?pl(p.stock,'en stock','en stock'):'<b class="oos">Rupture</b>'}`:''}</small></div><label class="pvis"><span class="switch2"><input type="checkbox" data-pact="${p.id}" ${p.active?'checked':''} aria-label="Afficher ${esc(p.name)} dans la vitrine"><i></i></span><small>${p.active?'En vitrine':'Masqué'}</small></label><button class="btn sm icon ghost" type="button" data-pedit="${p.id}" aria-label="Modifier ${esc(p.name)}">${ic('edit')}</button></div>`).join(''):`<div class="empty" style="padding:24px 8px">${ill('shop')}<b>Votre vitrine est vide</b>Ajoutez vos produits avec une photo, un prix et une catégorie.<br>Sans produits, vos clients peuvent quand même envoyer une demande libre.</div>`}</div>
-  </div>
+  ${prodCatalog()}
   <div class="card pad shipcard"><label for="shipFee" style="margin-top:0">Frais de livraison payés par le client</label><p class="hint" style="margin:0 0 8px">Ajoutés au total de chaque commande passée sur votre vitrine.</p><div class="amtbox sm"><input id="shipFee" type="number" step="0.5" min="0" inputmode="decimal" value="${s.shipFee??DEF.shipFee}"><span>DT</span></div><p class="saved" id="shipSaved" hidden>${ic('check')}Enregistré</p></div>
   </section><section hidden aria-hidden="true">
   <div class="card pad"><div style="display:flex;gap:14px;align-items:flex-start;justify-content:space-between"><div><b>${ic('shield')} Proposer l’achat sécurisé à vos clients</b><p class="muted" style="margin:6px 0 0;font-size:14px">Le client paie 3 % de plus (2 à 15 DT). En échange, il peut ouvrir le colis avant de payer, retourner un article non conforme, et signaler un problème pendant 7 jours. Les clients achètent plus facilement chez une boutique qui le propose.</p><p class="hint">Vous vous engagez à accepter l’ouverture du colis et les retours non conformes. Les frais sont dus à Domo et apparaissent dans vos statistiques.</p></div><label class="switch2" style="margin-top:2px"><input type="checkbox" id="secOn" ${s.secure?'checked':''} aria-label="Proposer l’achat sécurisé"><i></i></label></div></div>
@@ -2732,9 +2844,10 @@ async function renderShop(){
   $('#shareNative')&&($('#shareNative').onclick=()=>navigator.share({title:me.shop,text:`Commandez chez ${me.shop} : paiement à la livraison`,url:link}).catch(()=>{}));
   $('#app').onclick=e=>{const c=e.target.closest('[data-copy]'),ce=e.target.closest('[data-copy-el]');if(c)copyText(c.dataset.copy,'Lien copié');if(ce)copyText($('#'+ce.dataset.copyEl).textContent,'Copié')};
   $('#slugSave').onclick=async()=>{$('#slugErr').textContent='';try{await api('/me',{method:'PATCH',body:{slug:$('#slug').value}});me=(await api('/me')).user;toast('Lien enregistré');renderShop()}catch(x){$('#slugErr').textContent=x.message}};
-  $$('[data-pact]').forEach(i=>i.onchange=async()=>{try{await api('/products/'+i.dataset.pact,{method:'PATCH',body:{active:i.checked}});i.closest('.prow').classList.toggle('off',!i.checked)}catch(x){toast(x.message);i.checked=!i.checked}});
+  $$('[data-pact]').forEach(i=>i.onchange=async()=>{try{await api('/products/'+i.dataset.pact,{method:'PATCH',body:{active:i.checked}});const it=i.closest('[data-pitem]');it&&it.classList.toggle('off',!i.checked);const sm=i.closest('.pvis')?.querySelector('small');if(sm)sm.textContent=i.checked?'En vitrine':'Masqué';const pp=products.find(x=>x.id===i.dataset.pact);if(pp)pp.active=i.checked?1:0}catch(x){toast(x.message);i.checked=!i.checked}});
   $('#pNew').onclick=()=>openProduct(null);
   $$('[data-pedit]').forEach(b=>b.onclick=()=>openProduct(products.find(p=>p.id===b.dataset.pedit)));
+  $$('[data-pview]').forEach(b=>b.onclick=()=>{pview=b.dataset.pview;S.set('wsel.pview',pview);renderShop()});
   const pickImg=(input,box,opts,field)=>input.onchange=async()=>{const f=input.files[0];if(!f)return;box.classList.add('uploading');try{const key=await uploadImage(f,opts);me=(await api('/me',{method:'PATCH',body:{[field]:key}})).user;setCtx();toast('Image enregistrée');renderShop()}catch(x){toast(x.message)}box.classList.remove('uploading');input.value=''};
   pickImg($('#coverIn'),$('#coverBox'),{maxW:1600,ratio:16/6},'cover');
   pickImg($('#logoIn'),$('#logoBox'),{max:512,square:true},'logo');
@@ -2745,21 +2858,156 @@ async function renderShop(){
   $('#keyDel')&&($('#keyDel').onclick=async e=>{const b=e.currentTarget;if(!b.dataset.armed){b.dataset.armed='1';b.textContent='Confirmer la révocation';return}try{await api('/me/api-key',{method:'DELETE'});me.api_key_hint='';toast('Clé révoquée');renderShop()}catch(x){toast(x.message)}});
 }
 
-let prEdit=null,prImgKey='';
+/* ---------- product types, variants, discounts (shared by the seller form and the storefront) ---------- */
+// o1/o2 = the two option lists the buyer picks from: [label, "choose …" wording, placeholder]. sp = details [label, placeholder, choices?]
+const KINDS={
+  mode:{l:'Vêtements',i:'shirt',cat:'Robes, Hauts, Jeans…',desc:'Coupe, longueur, conseils de taille…',o1:['Tailles','la taille','S, M, L, XL','Taille'],o2:['Couleurs','la couleur','Noir, Beige, Bleu','Couleur'],sp:[['Matière','ex. 100 % coton'],['Coupe','ex. Ample, ajustée'],['Entretien','ex. Lavage à 30 °C']]},
+  chaussures:{l:'Chaussures',i:'shoe',cat:'Baskets, Sandales…',desc:'Confort, taille normale ou petite…',o1:['Pointures','la pointure','37, 38, 39, 40, 41','Pointure'],o2:['Couleurs','la couleur','Noir, Blanc','Couleur'],sp:[['Matière','ex. Cuir véritable'],['Semelle','ex. Caoutchouc antidérapant'],['Hauteur du talon','ex. 5 cm']]},
+  sacs:{l:'Sacs et accessoires',i:'bag',cat:'Sacs à main, Ceintures…',desc:'Ce qui rentre dedans, les poches…',o1:['Tailles','la taille','Petit, Moyen, Grand','Taille'],o2:['Couleurs','la couleur','Noir, Camel','Couleur'],sp:[['Matière','ex. Simili cuir'],['Dimensions','ex. 30 × 20 × 10 cm'],['Fermeture','ex. Zip, aimant']]},
+  bijoux:{l:'Bijoux et montres',i:'gem',cat:'Colliers, Bagues…',desc:'Style, occasion, idée cadeau…',o1:['Tailles','la taille','50, 52, 54, 56','Taille'],o2:['Finitions','la finition','Doré, Argenté, Rose','Finition'],sp:[['Métal','ex. Acier inoxydable'],['Pierre','ex. Zircon'],['Résiste à l’eau','',['Oui','Non']]]},
+  beaute:{l:'Beauté et soins',i:'drop',cat:'Visage, Cheveux…',desc:'Effet, résultats, pour qui…',o1:['Contenances','la contenance','50 ml, 100 ml, 200 ml','Contenance'],o2:['Teintes','la teinte','Clair, Medium, Foncé','Teinte'],sp:[['Type de peau','ex. Tous types, peau sèche'],['Ingrédients clés','ex. Huile d’argan, aloe vera'],['Utilisation','ex. Matin et soir'],['Origine','ex. Fabriqué en Tunisie']]},
+  parfum:{l:'Parfums',i:'bottle',cat:'Femme, Homme, Mixte…',desc:'Notes, saison, occasion…',o1:['Contenances','la contenance','30 ml, 50 ml, 100 ml','Contenance'],o2:null,sp:[['Famille olfactive','ex. Boisé, floral, oriental'],['Concentration','',['Eau de parfum','Eau de toilette','Extrait','Huile parfumée']],['Tenue','ex. 8 heures'],['Inspiré de','ex. Une fragrance connue']]},
+  maison:{l:'Maison et déco',i:'sofa',cat:'Coussins, Vaisselle…',desc:'Style, pièce, entretien…',o1:['Dimensions','les dimensions','40 × 40 cm, 60 × 60 cm','Dimensions'],o2:['Couleurs','la couleur','Blanc, Terracotta','Couleur'],sp:[['Matière','ex. Céramique, lin'],['Pièce','ex. Salon, cuisine'],['Entretien','ex. Lavable en machine']]},
+  tech:{l:'Électronique',i:'device',cat:'Téléphones, Écouteurs…',desc:'Points forts, contenu de la boîte…',o1:['Capacités','la capacité','64 Go, 128 Go, 256 Go','Capacité'],o2:['Couleurs','la couleur','Noir, Argent','Couleur'],sp:[['Marque','ex. Samsung'],['Modèle','ex. Galaxy A15'],['État','',['Neuf','Comme neuf','Reconditionné','Occasion']],['Garantie','ex. 12 mois']]},
+  food:{l:'Fait maison et alimentation',i:'food',cat:'Gâteaux, Épices…',desc:'Goût, fraîcheur, comment le servir…',o1:['Formats','le format','250 g, 500 g, 1 kg','Format'],o2:['Saveurs','la saveur','Nature, Chocolat, Amande','Saveur'],sp:[['Ingrédients','ex. Farine, beurre, miel'],['Allergènes','ex. Gluten, fruits à coque'],['Conservation','ex. 5 jours au frais'],['Délai de préparation','ex. Commander 48 h avant']]},
+  enfants:{l:'Bébé et enfants',i:'baby',cat:'Jouets, Vêtements bébé…',desc:'Pour quel âge, ce qu’il apprend…',o1:['Âges','l’âge','0-3 mois, 3-6 mois, 2 ans','Âge'],o2:['Couleurs','la couleur','Rose, Bleu','Couleur'],sp:[['Âge conseillé','ex. Dès 3 ans'],['Matière','ex. Coton bio'],['Sécurité','ex. Norme CE']]},
+  autre:{l:'Autre chose',i:'box',cat:'Votre rayon',desc:'Ce que c’est, pour qui, ce qui le rend unique…',o1:['Options','l’option','Petit, Grand','Option'],o2:['Couleurs','la couleur','Noir, Blanc','Couleur'],sp:[['Marque','ex. Fait main'],['Matière','ex. Bois d’olivier'],['Dimensions','ex. 20 × 10 cm']]},
+};
+const DEFKIND={o1:['Tailles','la taille','S, M, L, XL','Taille'],o2:['Couleurs','la couleur','Noir, Beige','Couleur']};
+const kindOf=p=>KINDS[p&&p.kind]||null;
+const optLab=(p,i)=>{const k=kindOf(p)||DEFKIND,o=k['o'+i];return o||DEFKIND['o'+i]};
+const jarr=v=>Array.isArray(v)?v:(()=>{try{const a=JSON.parse(v||'[]');return Array.isArray(a)?a:[]}catch(e){return[]}})();
+// Same rule as the server (worker.js unitPrice): variant price or base price, minus a running discount.
+const discOn=p=>!!p&&p.disc>0&&(!p.disc_until||p.disc_until>Date.now());
+const varOf=(p,k)=>jarr(p.variants).find(v=>v.k===k);
+const basePrice=(p,k)=>{const v=k?varOf(p,k):null;return v&&v.price!=null?v.price:p.price};
+const unitPrice=(p,k)=>{const b=basePrice(p,k);if(!discOn(p))return b;return Math.max(0,Math.round((p.disc_type==='amt'?b-p.disc:b*(100-p.disc)/100)*1000)/1000)};
+const discLabel=p=>p.disc_type==='amt'?`−${money(p.disc)}`:`−${(+p.disc).toLocaleString('fr-FR')} %`;
+const combos=p=>{const a=jarr(p.sizes),b=jarr(p.colors);if(!a.length&&!b.length)return[''];return(a.length?a:['']).flatMap(x=>(b.length?b:['']).map(y=>x+'|'+y))};
+const varStock=(p,k)=>{const v=k?varOf(p,k):null;return v&&v.stock!=null?v.stock:null};
+const soldOut=p=>p.stock===0||(jarr(p.variants).length>0&&combos(p).every(k=>varStock(p,k)===0));
+const priceHTML=(p,k)=>{
+  let u,b,from=false;
+  if(k!=null){u=unitPrice(p,k);b=basePrice(p,k)}
+  else{const ks=combos(p),us=ks.map(x=>unitPrice(p,x)),i=us.indexOf(Math.min(...us));u=us[i];b=basePrice(p,ks[i]);from=Math.max(...us)>u}
+  return`<span class="op${discOn(p)?' promo':''}">${from?'<small class="from">dès</small> ':''}${money(u)}</span>${discOn(p)&&b>u?`<s class="was">${money(b)}</s>`:''}`;
+};
+const discBadge=p=>discOn(p)?`<span class="dbadge">${discLabel(p)}</span>`:'';
+const untilTxt=p=>p.disc_until?new Date(p.disc_until).toLocaleDateString('fr-FR',{day:'numeric',month:'long'}):'';
+const PVIEWS=[['cards','grid','Cartes'],['list','list','Liste'],['table','table','Tableau','vt']];
+let pview=S.get('wsel.pview','cards');
+const curPView=()=>pview==='table'&&innerWidth<760?'list':pview;
+// what a seller needs to see at a glance about one product: type, options, promo, stock
+function prodMeta(p){
+  const k=kindOf(p),ks=combos(p),nv=ks[0]===''?0:ks.length,vs=jarr(p.variants);
+  const vst=vs.length&&ks.every(x=>varStock(p,x)!=null)?ks.reduce((a,x)=>a+varStock(p,x),0):null;
+  const st=vst!=null?vst:p.stock,out=soldOut(p),low=!out&&st!=null&&st<=3;
+  return{k,nv,st,out,low,stockTxt:out?'Rupture':st!=null?st+' en stock':'Stock illimité',
+    chips:[k?`<span class="pchip">${ic(k.i)}${k.l}</span>`:'',nv?`<span class="pchip">${ic('layers')}${pl(nv,'variante')}</span>`:'',discOn(p)?`<span class="pchip promo">${ic('tag')}Promo ${discLabel(p)}${p.disc_until?`<span class="pcu"> · jusqu’au ${untilTxt(p)}</span>`:''}</span>`:p.disc>0?`<span class="pchip">${ic('tag')}Promo terminée</span>`:''].filter(Boolean).join('')};
+}
+const pvisSw=p=>`<label class="pvis"><span class="switch2"><input type="checkbox" data-pact="${p.id}" ${p.active?'checked':''} aria-label="Afficher ${esc(p.name)} dans la vitrine"><i></i></span><small>${p.active?'En vitrine':'Masqué'}</small></label>`;
+const pthumb=(p,cls='pth')=>`<div class="${cls}">${p.image?`<img src="${murl(p.image)}" alt="" loading="lazy">`:ic(kindOf(p)?.i||'img')}${cls==='spcimg'?discBadge(p)+'<span class="phid">Masqué</span>':''}</div>`;
+function prodCatalog(){
+  if(!products.length)return`<div class="card pad"><div class="empty" style="padding:24px 8px">${ill('shop')}<b>Votre vitrine est vide</b>Ajoutez vos produits avec une photo, un prix et une catégorie.<br>Sans produits, vos clients peuvent quand même envoyer une demande libre.</div></div>`;
+  const vw=curPView();
+  const sw=`<div class="ptools"><span class="faint">${pl(products.length,'produit')}</span><div class="vsw" role="group" aria-label="Affichage des produits">${PVIEWS.map(([k,i,l,c])=>`<button type="button" class="${c||''}" data-pview="${k}" aria-pressed="${vw===k}" aria-label="${l}" title="${l}">${ic(i)}<span>${l}</span></button>`).join('')}</div></div>`;
+  if(vw==='cards')return sw+`<div class="spcgrid">${products.map(p=>{const m=prodMeta(p);return`<div class="spc ${p.active?'':'off'}" data-pitem><button type="button" class="spcopen" data-pedit="${p.id}" aria-label="Modifier ${esc(p.name)}">${pthumb(p,'spcimg')}<span class="spcb"><b>${esc(p.name)}</b><span class="spcp">${priceHTML(p)}</span><small class="${m.out?'oos':m.low?'few':''}">${m.stockTxt}${m.nv?' · '+pl(m.nv,'variante'):''}</small></span></button><div class="spcf">${pvisSw(p)}<button class="btn sm icon ghost" type="button" data-pedit="${p.id}" aria-label="Modifier ${esc(p.name)}">${ic('edit')}</button></div></div>`}).join('')}</div>`;
+  if(vw==='table')return sw+`<div class="otable"><table><thead><tr><th>Produit</th><th>Type</th><th>Prix</th><th>Variantes</th><th>Stock</th><th>Vitrine</th><th><span class="sr">Action</span></th></tr></thead><tbody>${products.map(p=>{const m=prodMeta(p);return`<tr class="${p.active?'':'off'}" data-pitem><td><div class="tp">${pthumb(p)}<button type="button" class="tlink" data-pedit="${p.id}">${esc(p.name)}</button></div></td><td>${m.k?esc(m.k.l):'<span class="faint">—</span>'}</td><td class="tpr">${priceHTML(p)}${discOn(p)?` <span class="dbadge sm">${discLabel(p)}</span>`:''}</td><td>${m.nv?pl(m.nv,'variante'):'<span class="faint">—</span>'}</td><td class="tst ${m.out?'oos':m.low?'few':''}">${m.stockTxt}</td><td>${pvisSw(p)}</td><td class="ta"><button class="btn sm" type="button" data-pedit="${p.id}">${ic('edit')}Modifier</button></td></tr>`}).join('')}</tbody></table></div>`;
+  return sw+`<div class="card pad"><div id="plist">${products.map(p=>{const m=prodMeta(p);return`<div class="prow2 ${p.active?'':'off'}" data-pitem>${pthumb(p)}<div><b>${esc(p.name)}</b><small>${p.category?esc(p.category)+' · ':''}${priceHTML(p)} · <span class="${m.out?'oos':m.low?'few':''}">${m.stockTxt}</span></small>${m.chips?`<div class="pchips">${m.chips}</div>`:''}</div>${pvisSw(p)}<button class="btn sm icon ghost" type="button" data-pedit="${p.id}" aria-label="Modifier ${esc(p.name)}">${ic('edit')}</button></div>`}).join('')}</div></div>`;
+}
+let prEdit=null,prImgKey='',prKindK='',prVarVals={},prDT='pct';
+const prSpecVals=()=>$$('#prSpecs [data-spec]').map(el=>[el.dataset.spec,el.value.trim()]);
+function prKindGrid(){
+  $('#prKindGrid').innerHTML=Object.entries(KINDS).map(([k,v])=>`<button type="button" class="pktile" data-kind="${k}" aria-pressed="${prKindK===k}">${ic(v.i)}<span>${v.l}</span></button>`).join('');
+}
+function prShowKinds(on){
+  $('#prKinds').hidden=!on;$('#prMain').hidden=on;$('#prdlg .df').hidden=on;
+  $('#prBack').hidden=!(on&&prKindK);
+  $('#prT').textContent=on?'Type de produit':prEdit?'Modifier le produit':'Nouveau produit';
+  if(on){prKindGrid();setTimeout(()=>($('#prKindGrid [aria-pressed=true]')||$('#prKindGrid button')).focus(),60)}
+  $('#prdlg .db').scrollTop=0;
+}
+function prApplyKind(prevSpecs){
+  const k=KINDS[prKindK],lab=k||DEFKIND;
+  $('#prKind').innerHTML=k?`${ic(k.i)}<span><small>Type</small><b>${k.l}</b></span><em>Changer</em>`:`${ic('box')}<span><small>Type</small><b>Choisir le type de produit</b></span><em>Choisir</em>`;
+  $('#prCat').placeholder=k?k.cat:'Robes, Sacs…';
+  $('#prDesc').placeholder=k?k.desc:'Matière, coupe, conseils…';
+  const old=Object.fromEntries((prevSpecs||[]).filter(x=>x[1]));
+  const sp=k?k.sp:[];
+  // details filled for another type stay as rows, so nothing typed is lost
+  const extra=Object.keys(old).filter(l=>!sp.some(x=>x[0]===l)).map(l=>[l,'']);
+  $('#prSpecW').hidden=!sp.length&&!extra.length;
+  $('#prSpecs').innerHTML=[...sp,...extra].map(([l,ph,ch],i)=>{const id='prSp'+i,v=old[l]||'';return`<div><label for="${id}">${esc(l)} <span class="opt-l">(facultatif)</span></label>${ch?`<select id="${id}" data-spec="${esc(l)}"><option value="">—</option>${ch.map(c=>`<option ${c===v?'selected':''}>${esc(c)}</option>`).join('')}</select>`:`<input id="${id}" data-spec="${esc(l)}" maxlength="160" value="${esc(v)}" placeholder="${esc(ph)}">`}</div>`}).join('');
+  const o1=lab.o1||DEFKIND.o1,o2=lab.o2;
+  $('#prO1L').textContent=o1[0];$('#prSizes').placeholder='ex. '+o1[2];
+  $('#prO2w').hidden=!o2&&!$('#prColors').value.trim();
+  $('#prO2L').textContent=(o2||DEFKIND.o2)[0];$('#prColors').placeholder='ex. '+(o2||DEFKIND.o2)[2];
+  prVarBuild();
+}
+const prList=el=>[...new Set(el.value.split(/[,;\n]/).map(x=>x.trim().slice(0,20)).filter(Boolean))].slice(0,12);
+function prVarRead(){$$('#prVar [data-vk]').forEach(r=>{prVarVals[r.dataset.vk]={price:r.querySelector('[data-vp]').value,stock:r.querySelector('[data-vs]').value}})}
+function prVarBuild(){
+  prVarRead();
+  const a=prList($('#prSizes')),b=$('#prO2w').hidden?[]:prList($('#prColors'));
+  const ks=(a.length||b.length)?(a.length?a:['']).flatMap(x=>(b.length?b:['']).map(y=>x+'|'+y)):[];
+  $('#prVarW').hidden=!ks.length;
+  const on=$('#prVarOn').checked&&ks.length>0;
+  $('#prVar').hidden=!on;$('#prStockW').hidden=on;
+  if(!on)return;
+  const base=$('#prPrice').value;
+  $('#prVar').innerHTML=`<div class="pvhead"><span>Option</span><span>Prix (DT)</span><span>Stock</span></div>`+ks.map(k=>{const v=prVarVals[k]||{},nm=k.split('|').filter(Boolean).join(' · ');return`<div class="pvrow" data-vk="${esc(k)}"><b>${esc(nm)}</b><input type="number" step="0.5" min="0" inputmode="decimal" data-vp value="${esc(v.price??'')}" placeholder="${esc(base||'Prix')}" aria-label="Prix ${esc(nm)}"><input type="number" step="1" min="0" inputmode="numeric" data-vs value="${esc(v.stock??'')}" placeholder="∞" aria-label="Stock ${esc(nm)}"></div>`}).join('')+`<p class="hint" style="margin:8px 0 0">Prix vide = prix du produit. Stock vide = illimité. Stock 0 = option en rupture.</p>`;
+}
+function prDiscPrev(){
+  const on=$('#prDiscOn').checked;$('#prDiscW').hidden=!on;
+  $$('#prDiscW [data-dt]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.dt===prDT));
+  $('#prDisc').max=prDT==='pct'?90:'';$('#prDisc').step=prDT==='pct'?1:0.5;
+  const pr=num($('#prPrice').value),d=num($('#prDisc').value);
+  if(!on||!pr||!d){$('#prDiscPrev').innerHTML=on?'Indiquez la remise pour voir le nouveau prix.':'';return}
+  const p={price:pr,disc:d,disc_type:prDT};
+  $('#prDiscPrev').innerHTML=`Le client paie <b>${money(unitPrice(p,''))}</b> au lieu de <s>${money(pr)}</s> <span class="dbadge sm">${discLabel(p)}</span>`;
+}
+const isoDay=t=>new Date(t-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
 function openProduct(p){
-  prEdit=p;prImgKey=p?.image||'';
-  $('#prT').textContent=p?'Modifier le produit':'Nouveau produit';
-  $('#prName').value=p?.name||'';$('#prCost').value=p?.cost??'';$('#prStock').value=p?.stock??'';$('#prPrice').value=p?p.price:'';$('#prCat').value=p?.category||'';$('#prDesc').value=p?.description||'';$('#prSizes').value=(()=>{try{return JSON.parse(p?.sizes||'[]').join(', ')}catch(e){return''}})();$('#prColors').value=(()=>{try{return JSON.parse(p?.colors||'[]').join(', ')}catch(e){return''}})();$('#prOn').checked=p?!!p.active:true;
+  prEdit=p;prImgKey=p?.image||'';prKindK=p?.kind||'';prVarVals={};
+  for(const v of jarr(p?.variants))prVarVals[v.k]={price:v.price??'',stock:v.stock??''};
+  $('#prName').value=p?.name||'';$('#prCost').value=p?.cost??'';$('#prStock').value=p?.stock??'';$('#prPrice').value=p?p.price:'';$('#prCat').value=p?.category||'';$('#prDesc').value=p?.description||'';
+  $('#prSizes').value=jarr(p?.sizes).join(', ');$('#prColors').value=jarr(p?.colors).join(', ');$('#prOn').checked=p?!!p.active:true;
+  $('#prVarOn').checked=jarr(p?.variants).length>0;
+  $('#prDiscOn').checked=!!(p&&p.disc>0);prDT=p?.disc_type==='amt'?'amt':'pct';$('#prDisc').value=p?.disc||'';
+  $('#prUntil').value=p?.disc_until?isoDay(p.disc_until):'';$('#prUntil').min=isoDay(Date.now());
   $('#catList').innerHTML=[...new Set(products.map(x=>x.category).filter(Boolean))].map(c=>`<option value="${esc(c)}">`).join('');
   $('#prDel').hidden=!p;$('#prDel').textContent='Supprimer';$('#prDel').dataset.armed='';$('#prErr').textContent='';
+  for(const el of [$('#prName'),$('#prPrice'),$('#prDisc')])setErr(el,'');
   const show=()=>$('#prImgInner').innerHTML=prImgKey?`<img src="${murl(prImgKey)}" alt="Photo du produit">`:`${ic('cam')}<br>Ajouter une photo`;
   show();
   $('#prImg').onchange=async e=>{const f=e.target.files[0];if(!f)return;const box=$('#prImgBox');box.classList.add('uploading');try{prImgKey=await uploadImage(f,{max:1000,square:true});show()}catch(x){$('#prErr').textContent=x.message}box.classList.remove('uploading');e.target.value=''};
-  open($('#prdlg'));if(!p)setTimeout(()=>$('#prName').focus(),60);
+  prApplyKind(jarr(p?.specs));prDiscPrev();
+  open($('#prdlg'));
+  prShowKinds(!p);
 }
+$('#prKindGrid').onclick=e=>{const b=e.target.closest('[data-kind]');if(!b)return;const prev=prSpecVals();prKindK=b.dataset.kind;prApplyKind(prev);prShowKinds(false);if(!prEdit&&!$('#prName').value)setTimeout(()=>$('#prName').focus(),60)};
+$('#prKind').onclick=()=>prShowKinds(true);
+$('#prBack').onclick=()=>prShowKinds(false);
+$('#prSizes').oninput=$('#prColors').oninput=()=>prVarBuild();
+$('#prVarOn').onchange=()=>prVarBuild();
+$('#prPrice').oninput=()=>{$$('#prVar [data-vp]').forEach(i=>i.placeholder=$('#prPrice').value||'Prix');prDiscPrev()};
+$('#prDiscOn').onchange=()=>{prDiscPrev();if($('#prDiscOn').checked)setTimeout(()=>$('#prDisc').focus(),30)};
+$('#prDisc').oninput=prDiscPrev;
+$('#prDiscW').onclick=e=>{const b=e.target.closest('[data-dt]');if(!b)return;prDT=b.dataset.dt;prDiscPrev()};
 $('#prf').onsubmit=async e=>{
-  e.preventDefault();$('#prErr').textContent='';$('#prSave').disabled=true;
-  const body={name:$('#prName').value,price:num($('#prPrice').value),category:$('#prCat').value,description:$('#prDesc').value,sizes:$('#prSizes').value,colors:$('#prColors').value,active:$('#prOn').checked,image:prImgKey||'',cost:$('#prCost').value===''?'':num($('#prCost').value),stock:$('#prStock').value===''?'':parseInt($('#prStock').value,10)};
+  e.preventDefault();$('#prErr').textContent='';
+  const pr=num($('#prPrice').value),d=num($('#prDisc').value),don=$('#prDiscOn').checked;
+  if(!validate([[$('#prName'),!$('#prName').value.trim()&&'Donnez un nom au produit'],[$('#prPrice'),!(pr>0)&&'Indiquez le prix en DT'],
+    [$('#prDisc'),don&&!(d>0)?'Indiquez la remise, ou désactivez la promo':don&&prDT==='pct'&&d>90?'90 % maximum':don&&prDT==='amt'&&d>=pr?'La remise doit être plus petite que le prix':'']]))return;
+  prVarRead();
+  const ks=$('#prVarW').hidden||!$('#prVarOn').checked?[]:$$('#prVar [data-vk]').map(r=>r.dataset.vk);
+  const variants=ks.map(k=>({k,price:prVarVals[k].price===''?'':num(prVarVals[k].price),stock:prVarVals[k].stock===''?'':parseInt(prVarVals[k].stock,10)})).filter(v=>v.price!==''||v.stock!=='');
+  const allStock=ks.length&&ks.every(k=>prVarVals[k].stock!=='');
+  const stock=ks.length?(allStock?ks.reduce((a,k)=>a+(parseInt(prVarVals[k].stock,10)||0),0):''):($('#prStock').value===''?'':parseInt($('#prStock').value,10));
+  const until=$('#prUntil').value?new Date($('#prUntil').value+'T23:59:59').getTime():'';
+  const body={name:$('#prName').value,price:pr,category:$('#prCat').value,description:$('#prDesc').value,sizes:$('#prSizes').value,colors:$('#prO2w').hidden?'':$('#prColors').value,active:$('#prOn').checked,image:prImgKey||'',
+    cost:$('#prCost').value===''?'':num($('#prCost').value),stock,kind:prKindK||'',specs:prSpecVals(),variants,disc:don?d:'',disc_type:prDT,disc_until:don?until:''};
+  $('#prSave').disabled=true;
   try{if(prEdit)await api('/products/'+prEdit.id,{method:'PATCH',body});else await api('/products',{method:'POST',body});$('#prdlg').close();toast(prEdit?'Produit modifié':'Produit ajouté');renderShop()}catch(x){$('#prErr').textContent=x.message}
   $('#prSave').disabled=false;
 };
@@ -2775,19 +3023,20 @@ async function shopOrderView(slug,src,embed){
   const kp=k=>{const [id,size,color]=k.split('|');return{id,size:size||'',color:color||'',p:P(id)}};
   const hasOpt=p=>(p.sizes||[]).length||(p.colors||[]).length;
   for(const k of Object.keys(cart)){const x=kp(k);if(!x.p||(hasOpt(x.p)&&!k.includes('|')))delete cart[k]}
+  const vkOf=x=>hasOpt(x.p)?x.size+'|'+x.color:'';
   const inCart=id=>Object.entries(cart).reduce((a,[k,q])=>a+(kp(k).id===id?q:0),0);
   let cat='',bioOpen=false,busy=false,secure=false,ckIdem='';
   const save=()=>{try{sessionStorage.setItem(ckey,JSON.stringify(cart))}catch(e){}};
   const count=()=>Object.values(cart).reduce((a,q)=>a+q,0);
-  const sub=()=>Object.entries(cart).reduce((a,[k,q])=>{const x=kp(k);return a+(x.p?x.p.price*q:0)},0);
-  const pimg=(p,cls='pimg')=>`<div class="${cls}" style="--h:${hue(p.name)}">${p.image?`<img src="${murl(p.image)}" alt="${esc(p.name)}" loading="lazy" decoding="async">`:`<span class="pini" aria-hidden="true">${esc((p.name||'?').trim().charAt(0).toUpperCase())}</span>`}${inCart(p.id)&&cls==='pimg'?`<span class="incart">${inCart(p.id)} au panier</span>`:''}</div>`;
-  const ctrl=p=>p.stock===0?`<span class="soldout">Rupture</span>`:hasOpt(p)?`<button class="addb" type="button" data-pv="${p.id}" aria-label="Choisir taille et couleur pour ${esc(p.name)}">${ic('plus')}</button>`:cart[p.id]?`<div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-cq="${p.id}" data-d="-1" aria-label="Retirer">−</button><span>${cart[p.id]}</span><button type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter">+</button></div>`:`<button class="addb" type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter ${esc(p.name)} au panier">${ic('plus')}</button>`;
-  const pcard=p=>`<div class="pc${p.stock===0?' oosc':''}" data-pv="${p.id}">${pimg(p)}<div class="pb"><b><button type="button" class="pcname" data-pv="${p.id}">${esc(p.name)}</button></b><div class="pf"><span class="op">${money(p.price)}</span>${ctrl(p)}</div>${p.stock>0&&p.stock<=3?`<small class="few">Plus que ${p.stock}</small>`:''}</div></div>`;
+  const sub=()=>Object.entries(cart).reduce((a,[k,q])=>{const x=kp(k);return a+(x.p?unitPrice(x.p,vkOf(x))*q:0)},0);
+  const pimg=(p,cls='pimg')=>`<div class="${cls}" style="--h:${hue(p.name)}">${p.image?`<img src="${murl(p.image)}" alt="${esc(p.name)}" loading="lazy" decoding="async">`:`<span class="pini" aria-hidden="true">${esc((p.name||'?').trim().charAt(0).toUpperCase())}</span>`}${cls==='pimg'?discBadge(p):''}${inCart(p.id)&&cls==='pimg'?`<span class="incart">${inCart(p.id)} au panier</span>`:''}</div>`;
+  const ctrl=p=>soldOut(p)?`<span class="soldout">Rupture</span>`:hasOpt(p)?`<button class="addb" type="button" data-pv="${p.id}" aria-label="Choisir les options pour ${esc(p.name)}">${ic('plus')}</button>`:cart[p.id]?`<div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-cq="${p.id}" data-d="-1" aria-label="Retirer">−</button><span>${cart[p.id]}</span><button type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter">+</button></div>`:`<button class="addb" type="button" data-cq="${p.id}" data-d="1" aria-label="Ajouter ${esc(p.name)} au panier">${ic('plus')}</button>`;
+  const pcard=p=>`<div class="pc${soldOut(p)?' oosc':''}" data-pv="${p.id}">${pimg(p)}<div class="pb"><b><button type="button" class="pcname" data-pv="${p.id}">${esc(p.name)}</button></b><div class="pf"><span class="pprice">${priceHTML(p)}</span>${ctrl(p)}</div>${p.stock>0&&p.stock<=3?`<small class="few">Plus que ${p.stock}</small>`:''}</div></div>`;
   const list=()=>d.products.filter(p=>!cat||p.category===cat);
   const grid=()=>{$('#pgrid').innerHTML=list().map(pcard).join('')};
   const optTxt=x=>[x.size,x.color].filter(Boolean).join(' · ');
   const side=()=>{const el=$('#cartside');if(!el)return;const n=count();
-    el.innerHTML=n?`<h3>Votre panier</h3><div class="csl">${Object.entries(cart).map(([k,q])=>{const x=kp(k);return x.p?`<div class="csr"><div class="t"><b>${esc(x.p.name)}</b>${optTxt(x)?`<small>${esc(optTxt(x))}</small>`:''}<small>${money(x.p.price)}</small></div><div class="qty sm" role="group" aria-label="Quantité ${esc(x.p.name)}"><button type="button" data-cq="${esc(k)}" data-d="-1" aria-label="Retirer">−</button><span>${q}</span><button type="button" data-cq="${esc(k)}" data-d="1" aria-label="Ajouter">+</button></div></div>`:''}).join('')}</div>
+    el.innerHTML=n?`<h3>Votre panier</h3><div class="csl">${Object.entries(cart).map(([k,q])=>{const x=kp(k);return x.p?`<div class="csr"><div class="t"><b>${esc(x.p.name)}</b>${optTxt(x)?`<small>${esc(optTxt(x))}</small>`:''}<small>${money(unitPrice(x.p,vkOf(x)))}</small></div><div class="qty sm" role="group" aria-label="Quantité ${esc(x.p.name)}"><button type="button" data-cq="${esc(k)}" data-d="-1" aria-label="Retirer">−</button><span>${q}</span><button type="button" data-cq="${esc(k)}" data-d="1" aria-label="Ajouter">+</button></div></div>`:''}).join('')}</div>
       <div class="rline"><span>Articles</span><span>${money(sub())}</span></div><div class="rline"><span>Livraison</span><span>${money(d.shipFee)}</span></div><div class="rtotal"><span class="muted">À payer à la livraison</span><b>${money(sub()+d.shipFee)}</b></div><button class="btn pri wide" type="button" id="openCk2" style="min-height:50px">Commander · ${money(sub()+d.shipFee)}</button>`
       :`<h3>Votre panier</h3><p class="muted" style="margin:0">Touchez un article pour l’ajouter. Vous payez à la livraison, après confirmation sur WhatsApp.</p>`};
   const bar=()=>{const n=count();document.body.classList.toggle('hascart',n>0);$('#cartbar').hidden=!n;if(n)$('#cartbar').innerHTML=`<button class="btn pri" type="button" id="openCk"><span>${ic('cart')} ${pl(n,'article')}</span><span>Commander · ${money(sub()+d.shipFee)}</span></button>`;side();const hc=$('#hdrCartN');if(hc){hc.textContent=n;hc.hidden=!n}};
@@ -2833,16 +3082,26 @@ async function shopOrderView(slug,src,embed){
   let pick={size:'',color:''};
   function sheet(id,keep){
     const p=P(id);if(!p)return;
-    if(!keep||$('#psBody').dataset.id!==id)pick={size:(p.sizes||[]).length===1?p.sizes[0]:'',color:(p.colors||[]).length===1?p.colors[0]:''};
-    $('#psT').textContent=p.category||sh.name;$('#psBody').dataset.id=id;
-    const sz=p.sizes||[],co=p.colors||[],need=(sz.length&&!pick.size)?'la taille':(co.length&&!pick.color)?'la couleur':'';
+    const sz=p.sizes||[],co=p.colors||[];
+    if(!keep||$('#psBody').dataset.id!==id)pick={size:sz.length===1?sz[0]:'',color:co.length===1?co[0]:''};
+    $('#psT').textContent=p.category||kindOf(p)?.l||sh.name;$('#psBody').dataset.id=id;
+    const L1=optLab(p,1),L2=optLab(p,2);
+    const need=(sz.length&&!pick.size)?L1[1]:(co.length&&!pick.color)?L2[1]:'';
+    const vk=hasOpt(p)?pick.size+'|'+pick.color:'';
     const key=hasOpt(p)?[id,pick.size,pick.color].join('|'):id,q=cart[key]||0;
-    const opts=(lab,list,k)=>list.length?`<fieldset class="optg"><legend>${lab}${pick[k]?` : <b>${esc(pick[k])}</b>`:''}</legend><div class="opts">${list.map(v=>`<button type="button" class="opt" data-opt="${k}" data-v="${esc(v)}" aria-pressed="${pick[k]===v}">${esc(v)}</button>`).join('')}</div></fieldset>`:'';
-    $('#psBody').innerHTML=`<div class="psg"><div class="psm">${pimg(p,'sheetimg')}</div><div class="psi"><h2 style="margin:16px 0 4px;font-size:21px">${esc(p.name)}</h2><div class="op" style="font-size:21px">${money(p.price)}</div><div class="hint shipnote">+ livraison ${money(d.shipFee)} · vous payez à la livraison</div>${p.description?`<p class="muted" style="white-space:pre-line;margin:10px 0 0">${esc(p.description)}</p>`:''}
-      ${opts('Taille',sz,'size')}${opts('Couleur',co,'color')}
+    // an option is greyed out when every combination it belongs to is sold out
+    const outOpt=(k,v)=>{const keys=k==='size'?(co.length?(pick.color?[v+'|'+pick.color]:co.map(c=>v+'|'+c)):[v+'|']):(sz.length?(pick.size?[pick.size+'|'+v]:sz.map(s=>s+'|'+v)):['|'+v]);return keys.every(x=>varStock(p,x)===0)};
+    const opts=(lab,list,k)=>list.length?`<fieldset class="optg"><legend>${lab}${pick[k]?` : <b>${esc(pick[k])}</b>`:''}</legend><div class="opts">${list.map(v=>{const out=outOpt(k,v);return`<button type="button" class="opt${out?' optout':''}" data-opt="${k}" data-v="${esc(v)}" aria-pressed="${pick[k]===v}" ${out?`aria-label="${esc(v)}, épuisé"`:''}>${esc(v)}</button>`}).join('')}</div></fieldset>`:'';
+    const full=!need,vs=full&&vk?varStock(p,vk):null,out=soldOut(p)||(full&&vs===0);
+    const left=full?(vs!=null?vs:p.stock):null;
+    const specs=jarr(p.specs).filter(x=>x[1]);
+    $('#psBody').innerHTML=`<div class="psg"><div class="psm">${pimg(p,'sheetimg')}</div><div class="psi"><h2 style="margin:16px 0 4px;font-size:21px">${esc(p.name)}</h2><div class="psprice">${priceHTML(p,full?vk:null)}${discBadge(p)}</div>${discOn(p)&&p.disc_until?`<div class="hint promoend">${ic('tag')}Promo jusqu’au ${untilTxt(p)}</div>`:''}<div class="hint shipnote">+ livraison ${money(d.shipFee)} · vous payez à la livraison</div>${p.description?`<p class="muted" style="white-space:pre-line;margin:10px 0 0">${esc(p.description)}</p>`:''}
+      ${opts(L1[3]||'Taille',sz,'size')}${opts((L2||DEFKIND.o2)[3]||'Couleur',co,'color')}
+      ${left>0&&left<=3&&!q?`<p class="few" style="margin:10px 0 0">Plus que ${left} en stock</p>`:''}
       <div class="sheetact">${q?`<div class="qty" role="group" aria-label="Quantité"><button type="button" data-sq="-1" aria-label="Retirer">−</button><span>${q}</span><button type="button" data-sq="1" aria-label="Ajouter">+</button></div><button class="btn pri" type="button" data-ck style="flex:1;min-height:52px">Commander · ${money(sub()+d.shipFee)}</button><div class="added"><span>${ic('check')}Ajouté au panier</span><button class="linkbtn" type="button" data-close>Continuer mes achats</button></div>`
-        :p.stock===0?`<button class="btn wide" type="button" disabled style="min-height:52px">Rupture de stock</button>`:`<button class="btn pri wide" type="button" data-sq="1" style="min-height:52px" ${need?'disabled':''}>${need?`Choisissez ${need}`:`${ic('cart')}Ajouter au panier · ${money(p.price)}`}</button>`}</div></div></div>`;
-    $('#psBody').onclick=e=>{if(e.target.closest('[data-ck]')){checkout();return}const o=e.target.closest('[data-opt]');if(o){pick[o.dataset.opt]=o.dataset.v;sheet(id,true);return}const b=e.target.closest('[data-sq]');if(b&&!b.disabled){if(hasOpt(p)&&((sz.length&&!pick.size)||(co.length&&!pick.color)))return;change(key,+b.dataset.sq)}};
+        :out?`<button class="btn wide" type="button" disabled style="min-height:52px">${soldOut(p)?'Rupture de stock':'Épuisé dans cette option'}</button>`:`<button class="btn pri wide" type="button" data-sq="1" style="min-height:52px" ${need?'disabled':''}>${need?`Choisissez ${need}`:`${ic('cart')}Ajouter au panier · ${money(unitPrice(p,vk))}`}</button>`}</div>
+      ${specs.length?`<h3 class="psh">Détails</h3><dl class="pspecs">${specs.map(([l,v])=>`<div><dt>${esc(l)}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`:''}</div></div>`;
+    $('#psBody').onclick=e=>{if(e.target.closest('[data-ck]')){checkout();return}const o=e.target.closest('[data-opt]');if(o){pick[o.dataset.opt]=pick[o.dataset.opt]===o.dataset.v&&(o.dataset.opt==='size'?sz:co).length>1?'':o.dataset.v;sheet(id,true);return}const b=e.target.closest('[data-sq]');if(b&&!b.disabled){if(hasOpt(p)&&((sz.length&&!pick.size)||(co.length&&!pick.color)))return;if(+b.dataset.sq>0&&left!=null&&q>=left){toast(left?`Plus que ${left} en stock`:'Rupture de stock');return}change(key,+b.dataset.sq)}};
     if(!keep)open($('#psheet'));
   }
   function checkout(){
@@ -2850,7 +3109,7 @@ async function shopOrderView(slug,src,embed){
     const lines=Object.keys(cart).filter(k=>kp(k).p);
     const totals=()=>{const st=sub(),n=count(),tot=st+d.shipFee;$('#ckGo').textContent=st?`Commander · ${money(tot)} à payer à la livraison`:'Envoyer ma demande';
       return st?`<div class="cksum"><div class="rline"><span>${pl(n,'article')}</span><span>${money(st)}</span></div><div class="rline"><span>Livraison</span><span>${money(d.shipFee)}</span></div><div class="rtotal"><span>Total à payer à la livraison</span><b>${money(tot)}</b></div></div>`:''};
-    $('#ckBody').innerHTML=`${lines.length?`<div id="ckLines">${lines.map(k=>{const x=kp(k),p=x.p;return`<div class="ckline"><div class="ckth">${p.image?`<img src="${murl(p.image)}" alt="">`:ic('img')}</div><div class="t"><b>${esc(p.name)}</b>${optTxt(x)?`<small>${esc(optTxt(x))}</small>`:''}<small>${money(p.price)}</small></div><div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-kq="${esc(k)}" data-d="-1" aria-label="Retirer">−</button><span>${cart[k]}</span><button type="button" data-kq="${esc(k)}" data-d="1" aria-label="Ajouter">+</button></div></div>`}).join('')}</div><input type="hidden" id="oReq" value="">`:`<label for="oReq" style="margin-top:0">Votre demande</label><textarea id="oReq" rows="3" maxlength="300" placeholder="Produit, taille, couleur, quantité…"></textarea>`}
+    $('#ckBody').innerHTML=`${lines.length?`<div id="ckLines">${lines.map(k=>{const x=kp(k),p=x.p;return`<div class="ckline"><div class="ckth">${p.image?`<img src="${murl(p.image)}" alt="">`:ic('img')}</div><div class="t"><b>${esc(p.name)}</b>${optTxt(x)?`<small>${esc(optTxt(x))}</small>`:''}<small>${money(unitPrice(p,vkOf(x)))}</small></div><div class="qty sm" role="group" aria-label="Quantité ${esc(p.name)}"><button type="button" data-kq="${esc(k)}" data-d="-1" aria-label="Retirer">−</button><span>${cart[k]}</span><button type="button" data-kq="${esc(k)}" data-d="1" aria-label="Ajouter">+</button></div></div>`}).join('')}</div><input type="hidden" id="oReq" value="">`:`<label for="oReq" style="margin-top:0">Votre demande</label><textarea id="oReq" rows="3" maxlength="300" placeholder="Produit, taille, couleur, quantité…"></textarea>`}
       <h3 class="ckh">Vos coordonnées de livraison</h3>
       <div class="row"><div><label for="oName">Nom et prénom</label><input id="oName" autocomplete="name" autocapitalize="words" enterkeyhint="next"></div><div><label for="oPhone">Téléphone WhatsApp</label><input id="oPhone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="ex. 22 123 456" enterkeyhint="next"></div></div>
       <div class="row"><div><label for="oGov">Gouvernorat</label><select id="oGov" autocomplete="address-level1"><option value="">Choisir…</option>${GOVS.map(g=>`<option>${g}</option>`).join('')}</select></div><div><label for="oAddr">Adresse de livraison</label><input id="oAddr" autocomplete="street-address" placeholder="Rue, quartier, point de repère" enterkeyhint="next"></div></div>
@@ -2925,7 +3184,7 @@ new MutationObserver(()=>requestAnimationFrame(keepTabVisible)).observe(document
 function setErr(el,msg){
   if(!el)return;const id=(el.id||'f')+'-err';let p=document.getElementById(id);
   if(!msg){if(p)p.remove();el.removeAttribute('aria-invalid');return}
-  if(!p){p=document.createElement('p');p.className='ferr';p.id=id;p.setAttribute('role','alert');(el.closest('.amtbox')||el).after(p)}
+  if(!p){p=document.createElement('p');p.className='ferr';p.id=id;p.setAttribute('role','alert');(el.closest('.amtbox,.pdisc')||el).after(p)}
   p.innerHTML=`<svg class="i"><use href="#i-alert"/></svg>${msg}`;el.setAttribute('aria-invalid','true');el.setAttribute('aria-describedby',id);
   const clr=()=>{setErr(el,'');el.removeEventListener('input',clr);el.removeEventListener('change',clr)};el.addEventListener('input',clr);el.addEventListener('change',clr);
 }

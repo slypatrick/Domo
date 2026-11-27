@@ -1525,6 +1525,117 @@ dialog[open] .db:hover::-webkit-scrollbar-thumb,dialog[open] .db.scrolling::-web
 dialog[open] .db::-webkit-scrollbar-thumb:hover{background-color:var(--ink3)}
 dialog[open]:has(> form > .db) .dh,dialog[open]:has(> .db) .dh{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:12px}
 @media(max-width:600px){details.more>summary{display:grid;grid-template-columns:1fr auto;row-gap:2px;padding:10px 0}details.more>summary>small{grid-column:1;grid-row:2;margin-left:0;white-space:normal}details.more>summary::after{grid-column:2;grid-row:1/3;align-self:center}}
+
+/* ---------- Orders: views (cards / list / table / kanban) + customer sheet (Nov 2026) ---------- */
+.vsw{display:inline-flex;background:var(--sf2);border-radius:999px;padding:3px;gap:2px;flex:none}
+.vsw button{display:inline-flex;align-items:center;gap:6px;border:0;background:none;color:var(--ink2);font:inherit;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;cursor:pointer;min-height:36px}
+.vsw button svg.i{width:17px;height:17px}
+.vsw button[aria-pressed=true]{background:var(--sf);color:var(--ink);box-shadow:var(--sh)}
+.vsw button:focus-visible{outline:2px solid var(--brand);outline-offset:1px}
+@media(max-width:759px){.vsw .vt{display:none}.vsw button span{display:none}.vsw button{padding:7px 10px;min-height:40px;min-width:44px;justify-content:center}}
+.otools2{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 12px;flex-wrap:wrap}
+.otools2 .bulkrow{margin:0}
+/* product thumbnail */
+.oth{flex:none;width:var(--t,64px);height:var(--t,64px);border-radius:12px;background:var(--sf2) center/cover no-repeat;display:grid;place-items:center;color:var(--ink3);overflow:hidden}
+.oth svg.i{width:calc(var(--t,64px)*.38);height:calc(var(--t,64px)*.38)}
+/* card */
+.ord.oc{padding:14px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--sh)!important;cursor:pointer}
+.ord.oc:hover{border-color:var(--line2)}
+.oc-top{display:flex;gap:12px;align-items:flex-start}
+.oc-main{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.oc-items{font-weight:700;font-size:15px;line-height:1.3;color:var(--ink);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.oc-tbtn{background:none;border:0;padding:0;margin:0;text-align:start;font:inherit;color:inherit;cursor:pointer;border-radius:6px}.oc-tbtn:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+.oc-meta{font-size:12.5px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.oc-meta .ref{font-size:12px}
+.oc-side{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex:none}
+.oc-price{font:700 17px/1.1 var(--display,inherit);white-space:nowrap;letter-spacing:-.01em}
+.oc-price.tbd{font-size:13px;color:var(--warn)}
+.oc-cust{display:flex;align-items:center;gap:10px;width:100%;text-align:start;background:var(--sf2);border:0;border-radius:12px;padding:9px 10px;font:inherit;color:inherit;cursor:pointer;min-height:48px}
+.oc-cust:hover{background:var(--bsoft)}
+.oc-cust .av{width:32px;height:32px;font-size:12px;flex:none}
+.oc-cust .cn{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.oc-cust .cn b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.oc-cust .cn span{font-size:12.5px;color:var(--ink2)}
+@media(max-width:480px){.oc-cust .nacc{display:none}}
+.oc-cust .cs{font-size:12px;font-weight:600;color:var(--ink2);white-space:nowrap;display:flex;align-items:center;gap:4px}
+.oc-cust .cs.good{color:var(--good)}.oc-cust .cs.bad{color:var(--bad)}.oc-cust .cs.new{color:var(--brand)}
+.oc-cust>svg.i{width:16px;height:16px;color:var(--ink3);flex:none;transform:scaleX(-1)}
+[dir=rtl] .oc-cust>svg.i{transform:none}
+.oc-tags{display:flex;flex-wrap:wrap;gap:6px}
+.oc-tags:empty{display:none}
+.oc .note{margin:0}
+.oc-foot{display:flex;gap:8px;align-items:center;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:12px}
+.oc-foot .acts{display:flex;gap:8px;flex:1;flex-wrap:wrap;border:0;padding:0;margin:0}
+.oc-foot .acts .btn{flex:1}
+.oc-foot .acts .btn.icon{flex:none}
+.oc .wafill{margin:0}
+.oc .hint{margin:0;font-size:13px}
+/* list view */
+#list.v-list,#list.v-table,#list.v-kanban{display:block!important}
+.olist{background:var(--sf);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.ord.orow{display:grid;grid-template-columns:auto minmax(0,1fr) auto auto;gap:12px;align-items:center;padding:10px 14px;margin:0;border:0;border-radius:0;box-shadow:none!important;border-bottom:1px solid var(--line);cursor:pointer;min-height:64px}
+.ord.orow:last-child{border-bottom:0}
+.ord.orow:hover{background:var(--sf2)}
+.orow .r1{min-width:0;display:flex;flex-direction:column;gap:2px}
+.orow .r1 b{font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.orow .r1 span{font-size:12.5px;color:var(--ink2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.orow .r3{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.orow .r3 b{font-size:14.5px;white-space:nowrap}
+.orow .chev{color:var(--ink3);display:flex}.orow .chev svg.i{width:16px;height:16px;transform:scaleX(-1)}
+[dir=rtl] .orow .chev svg.i{transform:none}
+.ord.orow.selmode{grid-template-columns:auto auto minmax(0,1fr) auto auto}
+.ord.orow .osel{position:static}
+/* table view */
+.otable{background:var(--sf);border:1px solid var(--line);border-radius:var(--r);overflow-x:auto}
+.otable table{width:100%;border-collapse:collapse;font-size:13.5px}
+.otable th{text-align:start;font-size:12px;font-weight:700;color:var(--ink3);text-transform:uppercase;letter-spacing:.04em;padding:11px 12px;border-bottom:1px solid var(--line);background:var(--sf2);white-space:nowrap}
+.otable td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.otable tr:last-child td{border-bottom:0}
+.otable tr.ord{cursor:pointer;background:none;box-shadow:none!important;border:0}
+.otable tr.ord:hover td{background:var(--sf2)}
+.otable .tp{display:flex;align-items:center;gap:10px;min-width:180px}
+.otable .tp b{font-weight:600;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.otable .tc{display:flex;flex-direction:column;min-width:120px}.otable .tc span{color:var(--ink2);font-size:12.5px}
+.otable .tn{text-align:end;font-weight:700;white-space:nowrap}
+.otable .ta{text-align:end;white-space:nowrap}
+.otable .ta .btn{min-height:34px;white-space:nowrap}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.otable .tlink{background:none;border:0;padding:0;font:inherit;color:var(--ink);font-weight:600;cursor:pointer;text-align:start}
+.otable .tlink:hover{color:var(--brand);text-decoration:underline}
+/* kanban */
+.kb{display:grid;grid-template-columns:repeat(5,minmax(176px,1fr));gap:12px;align-items:start;overflow-x:auto;padding-bottom:6px;scroll-snap-type:x mandatory}
+.kcol{background:var(--sf2);border-radius:var(--r);padding:10px;display:flex;flex-direction:column;gap:8px;min-height:160px;scroll-snap-align:start}
+.kcol.drop{outline:2px dashed var(--brand);outline-offset:-2px;background:var(--bsoft)}
+.kh{display:flex;align-items:center;gap:8px;padding:2px 4px 4px}
+.kh i{width:8px;height:8px;border-radius:50%;background:var(--c);flex:none}
+.kh b{font-size:13.5px}.kh .kn{font-size:12px;font-weight:700;color:var(--ink2);background:var(--sf);border-radius:999px;padding:1px 8px}
+.kh .ks{margin-inline-start:auto;font-size:12px;color:var(--ink2);white-space:nowrap}
+.ord.kc{margin:0;padding:10px;display:flex;flex-direction:column;gap:8px;cursor:pointer;box-shadow:var(--sh)!important}
+.ord.kc[draggable=true]{cursor:grab}
+.ord.kc.dragging{opacity:.5}
+.kc .k1{display:flex;gap:10px;align-items:flex-start}
+.kc .k1 .kt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.kc .k1 .kt b{font-size:13.5px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.kc .k1 .kt span{font-size:12.5px;color:var(--ink2)}
+.kc .k2{display:flex;justify-content:space-between;align-items:center;gap:6px}
+.kc .k2 b{font-size:14px;white-space:nowrap}
+.kc .acts{display:flex;gap:6px;flex-wrap:wrap;margin:0;border:0;padding:0}
+.kc .acts .btn{flex:1;min-width:0;min-height:36px;font-size:12.5px;padding-inline:8px}
+.kc .lfull{display:none!important}.kc .lshort{display:inline!important}
+.kh b{min-width:0}
+.kempty{font-size:12.5px;color:var(--ink3);text-align:center;padding:18px 6px;border:1px dashed var(--line2);border-radius:12px}
+@media(max-width:759px){.kb{grid-template-columns:repeat(5,82%);max-width:100%}.kc .acts .btn{min-height:44px}.vsw button{min-height:44px}.oc-foot .btn.icon,.oc-foot .omenu>summary{min-width:44px;min-height:44px}}
+/* customer sheet */
+.cstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:2px 0 4px}
+.cstats div{background:var(--sf2);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.cstats b{font:700 17px/1.2 var(--display,inherit)}.cstats span{font-size:12px;color:var(--ink2)}
+.cstats .good b{color:var(--good)}.cstats .bad b{color:var(--bad)}
+.chist{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.chist button{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--sf);border:0;border-bottom:1px solid var(--line);padding:9px 10px;text-align:start;font:inherit;color:inherit;cursor:pointer;min-height:52px}
+.chist button:last-child{border-bottom:0}.chist button:hover{background:var(--sf2)}
+.chist .h1{min-width:0;display:flex;flex-direction:column}.chist .h1 b{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.chist .h1 span{font-size:12px;color:var(--ink2)}
+.chist .h2{display:flex;flex-direction:column;align-items:flex-end;gap:3px}.chist .h2 b{font-size:13.5px;white-space:nowrap}
+@media(max-width:400px){.cstats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
 </head>
 <body>
@@ -1580,6 +1691,9 @@ dialog[open]:has(> form > .db) .dh,dialog[open]:has(> .db) .dh{border-bottom:1px
 <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20s-7-4.4-9-9a4.8 4.8 0 0 1 9-3 4.8 4.8 0 0 1 9 3c-2 4.6-9 9-9 9z"/></symbol>
 <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="14" rx="3"/><path d="M3 10h18"/><path d="M16 15h2"/><path d="M6 6l9-3 1 3"/></symbol>
 <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4 3 6.5v13.5l6-2.5 6 2.5 6-2.5V4l-6 2.5z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></symbol>
+<symbol id="i-table" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2"/><path d="M3.5 9.5h17M3.5 14.5h17M9.5 9.5v10"/></symbol>
+<symbol id="i-board" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="4.5" height="15" rx="1.5"/><rect x="9.75" y="4.5" width="4.5" height="10" rx="1.5"/><rect x="16" y="4.5" width="4.5" height="12.5" rx="1.5"/></symbol>
 <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11"/><circle cx="4.5" cy="6" r="1"/><circle cx="4.5" cy="12" r="1"/><circle cx="4.5" cy="18" r="1"/></symbol>
 <symbol id="i-nav" viewBox="0 0 24 24"><path d="M3 11 21 3l-8 18-2-8z"/></symbol>
 <symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><circle cx="12" cy="12" r="2.5"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/></symbol>
@@ -1717,7 +1831,7 @@ const AR={
 'Décrivez votre demande.':'اكتب طلبك.','Ajoutez votre nom.':'أضف اسمك.','Numéro invalide : 8 chiffres tunisiens (ex. 22 123 456).':'رقم غير صحيح: 8 أرقام تونسية (مثال 22 123 456).',
 'Commande envoyée':'تم إرسال الطلبية','Gardez votre numéro de suivi :':'احتفظ برقم التتبّع:','Total à payer à la livraison :':'المجموع عند الاستلام:','Confirmer ma commande maintenant':'أكِّد طلبيتي الآن','Suivre ma commande':'تتبّع طلبيتي','Copier le numéro':'نسخ الرقم','Retour à la boutique':'العودة إلى المتجر',
 // buyer confirmation page
-'Je confirme ma commande':'أؤكد طلبيتي','Commande confirmée':'تم تأكيد الطلبية','Compte créé, bienvenue !':'تم إنشاء الحساب، مرحبًا!','Merci ! Votre commande est confirmée. La boutique la prépare.':'شكرًا! تم تأكيد طلبيتك. المتجر يجهّزها.','Commande annulée':'تم إلغاء الطلبية','Annuler la commande':'إلغاء الطلبية','Merci pour votre commande !':'شكرًا على طلبيتك!','Commande chez':'طلبية من','Lien invalide':'رابط غير صالح','Adresse à préciser':'العنوان غير مكتمل','Prix à fixer':'السعر يُحدَّد لاحقًا',
+'Je confirme ma commande':'أؤكد طلبيتي','Commande confirmée':'تم تأكيد الطلبية','Cartes':'بطاقات','Liste':'قائمة','Tableau':'جدول','Kanban':'لوحة','Affichage':'العرض','Fiche client':'ملف الحريف','Nouveau client':'حريف جديد','Livrées':'مُسلَّمة','Refusées':'مرفوضة','Taux de réussite':'نسبة النجاح','Total dépensé':'مجموع المشتريات','Panier moyen':'معدّل السلة','Coordonnées':'المعطيات','Client depuis':'حريف منذ','Dernière commande':'آخر طلبية','Historique':'السجلّ','Produit':'المنتج','Client':'الحريف','Statut':'الحالة','Source':'المصدر','Date':'التاريخ','Total':'المجموع','Aucune commande':'لا توجد طلبيات','Confirmées':'مؤكدة','Expédiées':'مُرسَلة','À confirmer':'للتأكيد','Compte créé, bienvenue !':'تم إنشاء الحساب، مرحبًا!','Merci ! Votre commande est confirmée. La boutique la prépare.':'شكرًا! تم تأكيد طلبيتك. المتجر يجهّزها.','Commande annulée':'تم إلغاء الطلبية','Annuler la commande':'إلغاء الطلبية','Merci pour votre commande !':'شكرًا على طلبيتك!','Commande chez':'طلبية من','Lien invalide':'رابط غير صالح','Adresse à préciser':'العنوان غير مكتمل','Prix à fixer':'السعر يُحدَّد لاحقًا',
 'Commande annulée. Merci de nous avoir prévenus.':'تم إلغاء الطلبية. شكرًا لإعلامنا.','À la livraison, vous pouvez ouvrir et vérifier le colis avant de payer.':'عند الاستلام يمكنك فتح الطرد والتثبت منه قبل الدفع.','La boutique a essayé de vous joindre. Répondez à son message WhatsApp pour confirmer.':'حاول المتجر الاتصال بك. ردّ على رسالته في واتساب للتأكيد.',
 'Position envoyée au livreur':'تم إرسال موقعك إلى عامل التوصيل','Recherche de votre position…':'جارٍ تحديد موقعك…','Votre téléphone ne partage pas la position':'هاتفك لا يشارك الموقع','Position refusée. Vous pouvez l’autoriser dans les réglages du navigateur.':'تم رفض الموقع. يمكنك السماح به من إعدادات المتصفح.',
 'Lier cette commande à votre compte':'اربط هذه الطلبية بحسابك','Lier à mon compte':'اربط بحسابي','Créer mon compte client':'إنشاء حساب زبون','Cela confirme que ce numéro est le vôtre et ajoute vos commandes à votre historique.':'هذا يؤكد أن الرقم رقمك ويضيف طلبياتك إلى سجلك.',
@@ -2176,19 +2290,78 @@ function omenu(o){
   if(['new','noanswer','confirmed'].includes(o.status)&&!o.reviewed&&!['requested','assigned'].includes(o.delivery))it.push(`<button type="button" class="dan" data-act="cancelled" data-id="${o.id}">${ic('x')}Annuler la commande</button>`);
   return it.length?`<details class="omenu"><summary class="btn sm icon ghost" aria-label="Plus d’actions" title="Plus d’actions">${ic('more')}</summary><div class="omenu-p" role="menu">${it.join('')}</div></details>`:'';
 }
+let oview=S.get('wsel.oview','cards'),oprods=null;
+const OVIEWS=[['cards','grid','Cartes'],['list','list','Liste'],['table','table','Tableau','vt'],['kanban','board','Kanban']];
+const curView=()=>oview==='table'&&innerWidth<760?'list':oview;
+function loadOProds(){if(oprods!==null)return;oprods=[];api('/products').then(d=>{oprods=(d.products||[]).filter(p=>p.image).map(p=>({n:String(p.name||'').toLowerCase().trim(),img:p.image})).filter(p=>p.n.length>1).sort((a,b)=>b.n.length-a.n.length);if(location.hash===''||location.hash==='#commandes')renderOrders()}).catch(()=>{})}
+function prodImg(o){if(!oprods||!oprods.length)return'';const t=String(o.items||'').toLowerCase();const m=oprods.find(p=>t.includes(p.n));return m?m.img:''}
+const thumb=(o,size)=>{const k=prodImg(o);return`<span class="oth" style="--t:${size||64}px${k?`;background-image:url('${murl(k)}')`:''}" aria-hidden="true">${k?'':ic('box')}</span>`};
+function custStats(phone){
+  const l=orders.filter(o=>o.phone===phone).sort((a,b)=>b.created_at-a.created_at);
+  let d=0,r=0,c=0,spent=0,sum=0,n=0;
+  for(const o of l){if(o.status==='delivered'){d++;spent+=num(o.price)}else if(o.status==='refused')r++;else if(o.status==='cancelled')c++;if(o.status!=='cancelled'&&num(o.price)>0){sum+=num(o.price);n++}}
+  return{list:l,n:l.length,d,r,c,spent,avg:n?sum/n:0,rate:d+r?Math.round(100*d/(d+r)):null,first:l.length?l[l.length-1].created_at:null,last:l.length?l[0].created_at:null};
+}
+function custChip(o){
+  const s=custStats(o.phone);
+  if(s.n<=1)return`<span class="cs new">${ic('star')}Nouveau client</span>`;
+  if(s.r>0)return`<span class="cs bad">${pl(s.n,'commande')} · ${pl(s.r,'refus')}</span>`;
+  return`<span class="cs ${s.d?'good':''}">${pl(s.n,'commande')}${s.d?` · ${s.d} livrée${s.d>1?'s':''}`:''}</span>`;
+}
+const stPill=o=>{const[l,c]=ST[o.status];return`<span class="st" style="--c:${c}"><i></i>${l}</span>`};
+const telIcon=o=>`<a class="btn sm icon" href="tel:+216${o.phone}" aria-label="Appeler ${fmtPhone(o.phone)}" title="Appeler">${ic('phone')}</a>`;
 function card(o){
-  const[l,c]=ST[o.status],pending=['new','noanswer','confirmed'].includes(o.status);
-  return`<article class="ord" data-oid="${o.id}" style="--sc:${c}">
-  <div class="o1">${avatar(o.name)}<div class="on"><b><button type="button" class="oname" data-open="${o.id}" aria-label="Voir le détail : ${esc(o.name)}, ${priceTxt(o.price)}">${esc(o.name)}</button></b><span>${[o.gov?esc(o.gov):'',ago(o.created_at),o.src?esc(o.src):''].filter(Boolean).join(' · ')}</span></div><div class="op${num(o.price)<0.01?' tbd':''}">${priceTxt(o.price)}</div><span class="ochev" aria-hidden="true">${ic('back')}</span></div>
-  <div class="oi">${esc(o.items)}</div>
-  ${o.notes?`<div class="hint">${esc(o.notes)}</div>`:''}
-  <div class="who"><span class="st" style="--c:${c}"><i></i>${l}</span>${o.customer?badge(o.customer):'<span>Sans compte Domo</span>'}<span>${fmtPhone(o.phone)}</span>${o.ref?`<span class="ref">${fmtRef(o.ref)}</span>`:''}${o.carrier?`<span class="carr">${ic('track')}${esc(o.carrier)}${o.carrier_ref?' · '+esc(o.carrier_ref):''}</span>`:''}${shieldTag(o)}${dlvTag(o)}</div>
+  const pending=['new','noanswer','confirmed'].includes(o.status);
+  const meta=[o.ref?`<span class="ref">${fmtRef(o.ref)}</span>`:'',esc(ago(o.created_at)),o.src?esc(o.src):'',o.gov?esc(o.gov):''].filter(Boolean).join('<span aria-hidden="true">·</span>');
+  const tags=`${o.carrier?`<span class="carr">${ic('track')}${esc(o.carrier)}${o.carrier_ref?' · '+esc(o.carrier_ref):''}</span>`:''}${shieldTag(o)}${dlvTag(o)}`;
+  return`<article class="ord oc" data-oid="${o.id}">
+  <div class="oc-top">${thumb(o,64)}<div class="oc-main"><button type="button" class="oc-tbtn" data-open="${o.id}" aria-label="Voir le détail : ${esc(o.items||o.name)}, ${priceTxt(o.price)}" title="${esc(o.items)}"><span class="oc-items">${esc(o.items||'Commande')}</span></button><div class="oc-meta">${meta}</div></div>
+  <div class="oc-side"><span class="oc-price${num(o.price)<0.01?' tbd':''}">${priceTxt(o.price)}</span>${stPill(o)}</div></div>
+  <button type="button" class="oc-cust" data-cust="${esc(o.phone)}" aria-label="Fiche client : ${esc(o.name)}">${avatar(o.name)}<span class="cn"><b>${esc(o.name)}</b><span>${fmtPhone(o.phone)}${o.customer?'':'<span class="nacc"> · sans compte</span>'}</span></span>${custChip(o)}${ic('back')}</button>
+  ${tags.trim()?`<div class="oc-tags">${tags}</div>`:''}
+  ${o.notes?`<p class="hint">${esc(o.notes)}</p>`:''}
   ${o.dispute_status?disputeBox(o):''}
   ${pending?(o.customer?custRisk(o.customer):'')+ownRisk(own(o.phone,o.id)):''}
   ${['new','noanswer'].includes(o.status)&&!o.reviewed?`<a class="btn wafill" href="${waLink(o)}" target="_blank" rel="noopener">${ic('wa')}${o.status==='noanswer'?'Relancer sur WhatsApp':'Envoyer la confirmation WhatsApp'}</a>`:''}
-  <div class="acts">${actions(o)}${pending||o.status==='shipped'?`<a class="btn sm icon" href="tel:+216${o.phone}" aria-label="Appeler ${fmtPhone(o.phone)}" title="Appeler">${ic('phone')}</a>`:''}</div>
+  <div class="oc-foot"><div class="acts">${actions(o)}</div>${pending||o.status==='shipped'?telIcon(o):''}${omenu(o)}</div>
   </article>`;
 }
+const mainAct=o=>{const bs=actions(o).match(/<button[^>]*>[\s\S]*?<\/button>/g)||[];return bs.find(b=>/class="btn sm pri/.test(b))||bs.find(b=>!/ghost/.test(b))||''};
+function rowItem(o){
+  return`<article class="ord orow" data-oid="${o.id}">${thumb(o,44)}<div class="r1"><b>${esc(o.items||'Commande')}</b><span>${esc(o.name)} · ${fmtPhone(o.phone)} · ${esc(ago(o.created_at))}</span></div><div class="r3"><b>${priceTxt(o.price)}</b>${stPill(o)}</div><span class="chev" aria-hidden="true">${ic('back')}</span><span hidden data-id="${o.id}"></span></article>`;
+}
+function tableView(list){
+  return`<div class="otable"><table><thead><tr><th>Produit</th><th>Client</th><th>Statut</th><th>Date · source</th><th style="text-align:end">Total</th><th style="text-align:end"><span class="vh">Action</span></th></tr></thead><tbody>${list.map(o=>`<tr class="ord" data-oid="${o.id}"><td><div class="tp">${thumb(o,40)}<b>${esc(o.items||'Commande')}</b></div></td><td><div class="tc"><button type="button" class="tlink" data-cust="${esc(o.phone)}">${esc(o.name)}</button><span>${fmtPhone(o.phone)}</span></div></td><td>${stPill(o)}</td><td><div class="tc" style="min-width:0"><span style="color:var(--ink);font-size:13.5px;white-space:nowrap">${esc(ago(o.created_at))}</span><span>${esc(o.src||'—')}</span></div></td><td class="tn">${priceTxt(o.price)}</td><td class="ta">${mainAct(o)}</td></tr>`).join('')}</tbody></table></div>`;
+}
+const KCOLS=[['todo','À confirmer',['new','noanswer'],'var(--ink3)',null],['confirmed','Confirmées',['confirmed'],'#0133F8','confirmed'],['shipped','Expédiées',['shipped'],'#7c5cfa','shipped'],['delivered','Livrées',['delivered'],'var(--good)','delivered'],['lost','Refus et annulations',['refused','cancelled'],'var(--bad)',null]];
+const KNEXT={new:'confirmed',noanswer:'confirmed',confirmed:'shipped',shipped:'delivered'};
+function kanbanView(list){
+  return`<div class="kb" role="list">${KCOLS.map(([k,l,ss,c,drop])=>{const col=list.filter(o=>ss.includes(o.status));const tot=col.reduce((a,o)=>a+num(o.price),0);
+    return`<section class="kcol" role="listitem" aria-label="${l}" ${drop?`data-kdrop="${drop}"`:''}><div class="kh" style="--c:${c}"><i></i><b>${l}</b><span class="kn">${col.length}</span>${tot?`<span class="ks">${money(tot)}</span>`:''}</div>
+    ${col.length?col.map(o=>{const can=KNEXT[o.status]&&!o.reviewed&&!['requested','assigned','picked'].includes(o.delivery);return`<article class="ord kc" data-oid="${o.id}" ${can?`draggable="true" data-knext="${KNEXT[o.status]}"`:''}><div class="k1">${thumb(o,40)}<div class="kt"><b>${esc(o.items||'Commande')}</b><span>${esc(o.name)}</span></div></div><div class="k2"><b>${priceTxt(o.price)}</b><span class="faint" style="font-size:12px">${esc(ago(o.created_at))}</span></div>${['new','noanswer','confirmed','shipped'].includes(o.status)&&mainAct(o)?`<div class="acts">${mainAct(o)}</div>`:''}</article>`}).join(''):`<div class="kempty">Aucune commande</div>`}</section>`}).join('')}</div>`;
+}
+function wireKanban(){
+  const kb=document.querySelector('.kb');if(!kb||matchMedia('(pointer:coarse)').matches)return;
+  let drag=null;
+  kb.addEventListener('dragstart',e=>{const c=e.target.closest('.kc[draggable=true]');if(!c)return;drag=c;c.classList.add('dragging');e.dataTransfer.effectAllowed='move';e.dataTransfer.setData('text/plain',c.dataset.oid)});
+  kb.addEventListener('dragend',()=>{drag&&drag.classList.remove('dragging');drag=null;kb.querySelectorAll('.drop').forEach(x=>x.classList.remove('drop'))});
+  kb.addEventListener('dragover',e=>{const col=e.target.closest('[data-kdrop]');if(!col||!drag||drag.dataset.knext!==col.dataset.kdrop)return;e.preventDefault();kb.querySelectorAll('.drop').forEach(x=>x!==col&&x.classList.remove('drop'));col.classList.add('drop')});
+  kb.addEventListener('dragleave',e=>{const col=e.target.closest('[data-kdrop]');if(col&&!col.contains(e.relatedTarget))col.classList.remove('drop')});
+  kb.addEventListener('drop',e=>{const col=e.target.closest('[data-kdrop]');if(!col||!drag||drag.dataset.knext!==col.dataset.kdrop)return;e.preventDefault();col.classList.remove('drop');setStatus(drag.dataset.oid,col.dataset.kdrop)});
+}
+// Customer record: contact, stats and order history with this shop.
+function openCustomer(phone){
+  const s=custStats(phone);if(!s.n)return;const o=s.list[0],c=o.customer;
+  const addr=[o.addr,o.gov].filter(Boolean).join(', ');
+  const body=`<div class="cstats"><div><b>${s.n}</b><span>Commandes</span></div><div class="good"><b>${s.d}</b><span>Livrées</span></div><div class="${s.r?'bad':''}"><b>${s.r}</b><span>Refusées</span></div>
+    <div class="${s.rate!=null&&s.rate<70?'bad':s.rate!=null?'good':''}"><b>${s.rate==null?'—':s.rate+' %'}</b><span>Taux de réussite</span></div><div><b>${money(s.spent)}</b><span>Total dépensé</span></div><div><b>${s.avg?money(s.avg):'—'}</b><span>Panier moyen</span></div></div>
+  ${c?custRisk(c):''}
+  <section class="odsec"><h3>${ic('user')}Coordonnées</h3>${odRow('Téléphone',fmtPhone(phone))}${odRow('Adresse',esc(addr)||'<span class="faint">Pas d’adresse</span>')}${odRow('Compte Domo',c?'Oui, numéro confirmé':'Sans compte Domo')}${odRow('Client depuis',odWhen(s.first))}${odRow('Dernière commande',esc(ago(s.last)))}
+    <div class="odc">${telBtn(phone)}${waBtn(phone,`Bonjour ${(o.name||'').split(' ')[0]}, c’est ${me.shop}.`)}${c?`<button class="btn sm" type="button" data-chat-cust="${c.id}">${ic('chat')}Message</button>`:''}</div></section>
+  <section class="odsec"><h3>${ic('box')}Historique</h3><div class="chist">${s.list.map(x=>`<button type="button" data-open="${x.id}">${thumb(x,40)}<span class="h1"><b>${esc(x.items||'Commande')}</b><span>${[fmtRef(x.ref),odWhen(x.created_at)].filter(Boolean).join(' · ')}</span></span><span class="h2"><b>${priceTxt(x.price)}</b>${stPill(x)}</span></button>`).join('')}</div></section>`;
+  sheetShell($('#odlg'),esc(o.name),`${fmtPhone(phone)} · <span>${pl(s.n,'commande')}</span>`,avatar(o.name),body,'');
+}
+function viewSwitch(){return`<div class="vsw" role="group" aria-label="Affichage">${OVIEWS.map(([k,i,l,cls])=>`<button type="button" class="${cls||''}" data-oview="${k}" aria-pressed="${curView()===k}" aria-label="${l}" title="${l}">${ic(i)}<span>${l}</span></button>`).join('')}</div>`}
 const telBtn=(p,l='Appeler')=>`<a class="btn sm" href="tel:+216${p}">${ic('phone')}${l}</a>`;
 const waBtn=(p,txt)=>`<a class="btn sm wa" href="https://wa.me/216${p}${txt?'?text='+encodeURIComponent(txt):''}" target="_blank" rel="noopener">${ic('wa')}WhatsApp</a>`;
 const odRow=(k,v)=>v?`<div class="odr"><span>${k}</span><b>${v}</b></div>`:'';
@@ -2206,7 +2379,7 @@ function openOrder(id){
   const waTxt=['new','noanswer'].includes(o.status)?msgFor(o):`Bonjour ${(o.name||'').split(' ')[0]}, c’est ${me.shop} pour votre commande ${fmtRef(o.ref)}.`;
   const body=`<div class="odsum"><span class="st" style="--c:${c}"><i></i>${ST[o.status][0]}</span>${dlvTag(o)}<b class="odp">${priceTxt(o.price)}</b></div>
   <section class="odsec"><h3>${ic('user')}Client</h3>${odRow('Nom',esc(o.name))}${odRow('Téléphone',fmtPhone(o.phone))}${odRow('Adresse',esc(addr)||'<span class="faint">Pas d’adresse</span>')}${odRow('Compte Domo',o.customer?'Oui, numéro confirmé':'Sans compte Domo')}
-    <div class="odc">${telBtn(o.phone)}${waBtn(o.phone,waTxt)}${o.customer?`<button class="btn sm" type="button" data-chat-cust="${o.customer.id}">${ic('chat')}Message</button>`:''}</div></section>
+    <div class="odc">${telBtn(o.phone)}${waBtn(o.phone,waTxt)}${o.customer?`<button class="btn sm" type="button" data-chat-cust="${o.customer.id}">${ic('chat')}Message</button>`:''}<button class="btn sm" type="button" data-cust="${esc(o.phone)}">${ic('user')}Fiche client</button></div></section>
   <section class="odsec"><h3>${ic('box')}Commande</h3>${odRow('Articles',esc(o.items))}${odRow('Total à encaisser',priceTxt(o.price))}${o.notes?odRow('Note',esc(o.notes)):''}${odRow('Source',esc(o.src||''))}${odRow('Créée',odWhen(o.created_at))}${o.ref?odRow('N° de suivi',`<span class="ref">${fmtRef(o.ref)}</span>`):''}</section>
   <section class="odsec"><h3>${ic('track')}Livraison</h3>${drv?`${odRow('Livreur Domo',esc(drv.name))}${odRow('Téléphone',fmtPhone(drv.phone))}${odRow('Étape',DLV_L[o.delivery]||'')}<div class="odc">${telBtn(drv.phone)}${waBtn(drv.phone,`Bonjour ${(drv.name||'').split(' ')[0]}, c’est ${me.shop} pour le colis ${fmtRef(o.ref)} (${o.name}, ${o.gov||''}).`)}</div>`
     :o.delivery==='requested'?`<p class="hint">${DLV_L.requested}.</p>`
@@ -2276,7 +2449,9 @@ function renderOrders(){
   const cnt=s=>orders.filter(o=>s.includes(o.status)).length;
   const route$=orders.filter(o=>o.status==='shipped');
   const disp=orders.filter(o=>o.dispute_status==='open');
-  const list=(tab==='disputes'?disp:orders.filter(o=>ss.includes(o.status))).filter(o=>(!q||nz([o.name,o.items,o.gov,o.addr,o.notes,o.ref,fmtRef(o.ref)].join(' ')).includes(q)||(qd.length>=3&&o.phone.includes(qd))));
+  const vw=curView();loadOProds();
+  const match=o=>(!q||nz([o.name,o.items,o.gov,o.addr,o.notes,o.ref,fmtRef(o.ref)].join(' ')).includes(q)||(qd.length>=3&&o.phone.includes(qd)));
+  const list=vw==='kanban'?orders.filter(match):(tab==='disputes'?disp:orders.filter(o=>ss.includes(o.status))).filter(match);
   $('#app').innerHTML=head('Commandes',today())+onboarding()+
   (orders.length?`<div class="tiles">
     <button class="tile kfeat ${cnt(['new','noanswer'])?'hot':''}" type="button" data-tab="todo"><span>À confirmer</span><i class="karr">${ic('arr')}</i><b>${cnt(['new','noanswer'])}</b><small>à contacter</small></button>
@@ -2285,13 +2460,14 @@ function renderOrders(){
     ${(()=>{const m0=new Date();m0.setDate(1);m0.setHours(0,0,0,0);const dl=orders.filter(o=>o.status==='delivered'&&(o.delivered_at||o.updated_at||0)>=+m0);return`<button class="tile" type="button" data-tab="delivered"><span>Livrées ce mois</span><i class="karr">${ic('arr')}</i><b>${money(dl.reduce((a,o)=>a+num(o.price),0))}</b><small>${pl(dl.length,'commande')} payée${dl.length>1?'s':''}</small></button>`})()}
   </div>`:'')+
   `${stale.length?`<button class="note warn stalen" type="button" data-tab="todo">${ic('alert')}<div><b>${pl(stale.length,'commande','commandes')} sans réponse depuis plus de 24 h.</b> Relancez-les sur WhatsApp avant qu’elles ne refroidissent.</div></button>`:''}${disp.length?`<button class="note risk" type="button" data-tab="disputes" style="width:100%;border:0;text-align:left;cursor:pointer;margin:0 0 14px">${ic('flag')}<div><b>${pl(disp.length,'problème signalé')}</b> par des clients en achat sécurisé. Toucher pour répondre.</div></button>`:''}
-  <div class="tools"><div class="tabs" role="toolbar" aria-label="Filtrer par statut">${TABS.map(([k,l,s])=>`<button class="tab" type="button" data-tab="${k}" aria-pressed="${k===tab}">${l}<i>${cnt(s)}</i></button>`).join('')}${disp.length?`<button class="tab" type="button" data-tab="disputes" aria-pressed="${tab==='disputes'}">Litiges<i>${disp.length}</i></button>`:''}</div>
+  <div class="tools">${vw==='kanban'?'':`<div class="tabs" role="toolbar" aria-label="Filtrer par statut">${TABS.map(([k,l,s])=>`<button class="tab" type="button" data-tab="${k}" aria-pressed="${k===tab}">${l}<i>${cnt(s)}</i></button>`).join('')}${disp.length?`<button class="tab" type="button" data-tab="disputes" aria-pressed="${tab==='disputes'}">Litiges<i>${disp.length}</i></button>`:''}</div>`}
   <div class="search">${ic('search')}<input id="q" type="search" placeholder="Nom, téléphone, produit, ID…" aria-label="Rechercher" value="${esc(query)}"></div></div>
-  ${list.length>1&&BULK[tab]?`<div class="bulkrow"><button class="btn sm ghost" type="button" id="selT">${ic(sel?'x':'check')}${sel?'Annuler la sélection':'Sélectionner'}</button>${tab==='confirmed'?`<button class="btn sm ghost" type="button" id="printL">${ic('list')}Liste de ramassage</button>`:''}</div>`:''}
-  <div id="list">${list.length?list.map(card).join(''):orders.length?`<div class="empty">${ill(q?'search':'inbox')}<b>Rien ici</b>${q?'Aucun résultat pour cette recherche.':'Aucune commande à cette étape.'}</div>`
+  ${orders.length?`<div class="otools2">${list.length>1&&BULK[tab]&&['cards','list'].includes(vw)?`<div class="bulkrow"><button class="btn sm ghost" type="button" id="selT">${ic(sel?'x':'check')}${sel?'Annuler la sélection':'Sélectionner'}</button>${tab==='confirmed'?`<button class="btn sm ghost" type="button" id="printL">${ic('list')}Liste de ramassage</button>`:''}</div>`:'<span></span>'}${viewSwitch()}</div>`:''}
+  <div id="list" class="v-${vw}">${list.length||(vw==='kanban'&&orders.length)?(vw==='list'?`<div class="olist">${list.map(rowItem).join('')}</div>`:vw==='table'?tableView(list):vw==='kanban'?kanbanView(list):list.map(card).join('')):orders.length?`<div class="empty">${ill(q?'search':'inbox')}<b>Rien ici</b>${q?'Aucun résultat pour cette recherche.':'Aucune commande à cette étape.'}</div>`
   :`<div class="card empty"><div class="ill">${ic('box')}</div><b>Votre première commande</b>Collez le message d’un client : Domo remplit la fiche et prépare le message WhatsApp avec un lien de confirmation en un clic.<br><br><button class="btn pri" type="button" data-new>${ic('plus')}Ajouter une commande</button></div>`}</div>`;
   maybePushPrompt();
-  bulkWire(list);
+  if(['cards','list'].includes(vw))bulkWire(list);else{sel=null;document.querySelector('.bulkbar')?.remove()}
+  if(vw==='kanban')wireKanban();
   const qi=$('#q');qi.oninput=e=>{query=e.target.value;const pos=qi.selectionStart;renderOrders();const n=$('#q');n.focus();n.setSelectionRange(pos,pos)};
 }
 // First steps for a new shop: one clear next action at a time, hidden once done or dismissed.
@@ -3168,6 +3344,8 @@ document.addEventListener('click',async e=>{
   const dv=e.target.closest('[data-dlv]');if(dv){requestDelivery(dv.dataset.id,dv.dataset.dlv);return}
   const sp=e.target.closest('[data-space]');if(sp){e.preventDefault();switchRole(sp.dataset.space);return}
   {const inS=e.target.closest('#odlg [data-act],#odlg [data-dlv],#odlg [data-edit],#odlg [data-chat-cust],#odlg [data-chat-shop],#odlg [data-review]');if(inS)$('#odlg').close()}
+  const vb=e.target.closest('[data-oview]');if(vb){oview=vb.dataset.oview;S.set('wsel.oview',oview);sel=null;renderOrders();return}
+  const cu=e.target.closest('[data-cust]');if(cu){openCustomer(cu.dataset.cust);return}
   const opn=e.target.closest('[data-open],[data-mopen]');if(opn){opn.dataset.open?openOrder(opn.dataset.open):openMyOrder(opn.dataset.mopen);return}
   {const oc=e.target.closest('.ord[data-oid],.ord[data-moid]');if(oc&&!oc.classList.contains('selmode')&&!e.target.closest('a,button,input,label,summary,details,textarea,select,.disp,.wafill')){oc.dataset.oid?openOrder(oc.dataset.oid):openMyOrder(oc.dataset.moid);return}}
   const cc=e.target.closest('[data-chat-cust],[data-chat-shop]');

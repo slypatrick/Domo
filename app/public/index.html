@@ -1485,6 +1485,31 @@ input[type=file]::file-selector-button{border:1px solid var(--line2);border-radi
 .xchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .xchips>span,.xchips .xchip{display:inline-flex;align-items:center;gap:4px;min-height:28px;padding:0 10px;border-radius:999px;background:var(--chip,var(--sf2));color:var(--ink2);font-size:12.5px;font-weight:500;border:0}
 .xchips .xchip svg.i{width:13px;height:13px}
+
+/* ---------- Lottie-style motion (Nov 2026): confirm / create / send / cancel ----------
+   Pure SVG + CSS. Each step uses the 100–300ms tokens with ease-out; steps are staggered with delays.
+   Final state is the static default, so prefers-reduced-motion simply turns animation off. */
+:root{--ease-out:cubic-bezier(.16,1,.3,1);--toastok:#4ade80;--toastnew:#9db7ff;--toastno:#a3abba}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--toastok:#15803d;--toastnew:#0133F8;--toastno:#626b87}}
+:root[data-theme=dark]{--toastok:#15803d;--toastnew:#0133F8;--toastno:#626b87}
+.lot{display:inline-block;flex:none;line-height:0;width:var(--s,96px);height:var(--s,96px)}
+.lot svg{width:100%;height:100%;overflow:visible}
+.lot .lring{transform-box:fill-box;transform-origin:center;animation:lotPop .3s var(--ease-out) both}
+.lot .lhalo{transform-box:fill-box;transform-origin:center;opacity:0;animation:lotHalo .3s .15s var(--ease-out) both}
+.lot .lmark{stroke-dasharray:var(--len);stroke-dashoffset:0;animation:lotDraw .3s .2s var(--ease-out) both}
+.lot .lplus{transform-box:fill-box;transform-origin:center;opacity:0;animation:lotPlus .3s .1s var(--ease-out) both}
+.lot .lspark{opacity:0;animation:lotSpark .3s .35s var(--ease-out) both}
+.lot .lplane{animation:lotFly .3s .1s var(--ease-out) both}
+.lot .ltrail{stroke-dasharray:var(--len);stroke-dashoffset:0;animation:lotDraw .3s .25s var(--ease-out) both}
+@keyframes lotPop{from{transform:scale(.4);opacity:0}to{transform:none;opacity:1}}
+@keyframes lotHalo{0%{transform:scale(.9);opacity:0}1%{opacity:.45}100%{transform:scale(1.45);opacity:0}}
+@keyframes lotDraw{from{stroke-dashoffset:var(--len)}}
+@keyframes lotPlus{0%{transform:scale(.6);opacity:1}100%{transform:rotate(90deg) scale(.2);opacity:0}}
+@keyframes lotSpark{0%{transform:translate(0,0) scale(1);opacity:0}1%{opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(.3);opacity:0}}
+@keyframes lotFly{from{transform:translate(-18px,14px) scale(.7);opacity:0}to{transform:none;opacity:1}}
+.toast .lot{--s:24px;margin-left:-4px}
+.lotbig{display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+@media(prefers-reduced-motion:reduce){.lot *{animation:none!important}}
 </style>
 </head>
 <body>
@@ -1644,7 +1669,7 @@ input[type=file]::file-selector-button{border:1px solid var(--line2);border-radi
 
 <div class="callui" id="callUI" hidden role="dialog" aria-modal="true" aria-labelledby="callName"><div><div id="callAv"></div><h2 id="callName"></h2><div class="cs" id="callStatus"></div><div class="csec"><svg class="i"><use href="#i-lock"/></svg>Appel chiffré via Domo · numéros masqués</div></div><div class="cbtns" id="callBtns"></div></div>
 <audio id="remoteAudio" autoplay playsinline></audio>
-<div class="toast" id="toast" hidden role="status"><span id="toastT"></span><button type="button" id="undo">Annuler</button></div>
+<div class="toast" id="toast" hidden role="status"><span id="toastA"></span><span id="toastT"></span><button type="button" id="undo">Annuler</button></div>
 
 <script>
 /* Product switches. Paused or side products stay in the code but are hidden from users. */
@@ -1677,7 +1702,7 @@ const AR={
 'Décrivez votre demande.':'اكتب طلبك.','Ajoutez votre nom.':'أضف اسمك.','Numéro invalide : 8 chiffres tunisiens (ex. 22 123 456).':'رقم غير صحيح: 8 أرقام تونسية (مثال 22 123 456).',
 'Commande envoyée':'تم إرسال الطلبية','Gardez votre numéro de suivi :':'احتفظ برقم التتبّع:','Total à payer à la livraison :':'المجموع عند الاستلام:','Confirmer ma commande maintenant':'أكِّد طلبيتي الآن','Suivre ma commande':'تتبّع طلبيتي','Copier le numéro':'نسخ الرقم','Retour à la boutique':'العودة إلى المتجر',
 // buyer confirmation page
-'Je confirme ma commande':'أؤكد طلبيتي','Commande confirmée':'تم تأكيد الطلبية','Commande annulée':'تم إلغاء الطلبية','Annuler la commande':'إلغاء الطلبية','Merci pour votre commande !':'شكرًا على طلبيتك!','Commande chez':'طلبية من','Lien invalide':'رابط غير صالح','Adresse à préciser':'العنوان غير مكتمل','Prix à fixer':'السعر يُحدَّد لاحقًا',
+'Je confirme ma commande':'أؤكد طلبيتي','Commande confirmée':'تم تأكيد الطلبية','Compte créé, bienvenue !':'تم إنشاء الحساب، مرحبًا!','Merci ! Votre commande est confirmée. La boutique la prépare.':'شكرًا! تم تأكيد طلبيتك. المتجر يجهّزها.','Commande annulée':'تم إلغاء الطلبية','Annuler la commande':'إلغاء الطلبية','Merci pour votre commande !':'شكرًا على طلبيتك!','Commande chez':'طلبية من','Lien invalide':'رابط غير صالح','Adresse à préciser':'العنوان غير مكتمل','Prix à fixer':'السعر يُحدَّد لاحقًا',
 'Commande annulée. Merci de nous avoir prévenus.':'تم إلغاء الطلبية. شكرًا لإعلامنا.','À la livraison, vous pouvez ouvrir et vérifier le colis avant de payer.':'عند الاستلام يمكنك فتح الطرد والتثبت منه قبل الدفع.','La boutique a essayé de vous joindre. Répondez à son message WhatsApp pour confirmer.':'حاول المتجر الاتصال بك. ردّ على رسالته في واتساب للتأكيد.',
 'Position envoyée au livreur':'تم إرسال موقعك إلى عامل التوصيل','Recherche de votre position…':'جارٍ تحديد موقعك…','Votre téléphone ne partage pas la position':'هاتفك لا يشارك الموقع','Position refusée. Vous pouvez l’autoriser dans les réglages du navigateur.':'تم رفض الموقع. يمكنك السماح به من إعدادات المتصفح.',
 'Lier cette commande à votre compte':'اربط هذه الطلبية بحسابك','Lier à mon compte':'اربط بحسابي','Créer mon compte client':'إنشاء حساب زبون','Cela confirme que ce numéro est le vôtre et ajoute vos commandes à votre historique.':'هذا يؤكد أن الرقم رقمك ويضيف طلبياتك إلى سجلك.',
@@ -1874,7 +1899,28 @@ async function api(path,{method='GET',body}={}){
   if(!r.ok)throw new Error(d.error||'Erreur, réessayez.');
   return d;
 }
-function toast(t,fn){
+
+/* Lottie-style animated marks: kind = ok | new | sent | no */
+function anim(kind,size,inToast){
+  const C={ok:inToast?'var(--toastok)':'var(--good)',new:inToast?'var(--toastnew)':'var(--brand)',sent:inToast?'var(--toastnew)':'var(--brand)',no:inToast?'var(--toastno)':'var(--ink3)'}[kind]||'var(--brand)';
+  const M=inToast?'var(--ink)':'#fff';
+  const sparks=kind==='no'?'':[0,45,90,135,180,225,270,315].map(a=>{const r=a*Math.PI/180,x=32+30*Math.cos(r),y=32+30*Math.sin(r);return`<circle class="lspark" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="2.6" fill="${C}" style="--dx:${(9*Math.cos(r)).toFixed(1)}px;--dy:${(9*Math.sin(r)).toFixed(1)}px"/>`}).join('');
+  let inner;
+  if(kind==='sent')inner=`<circle class="lhalo" cx="32" cy="32" r="24" fill="none" stroke="${C}" stroke-width="3"/><circle class="lring" cx="32" cy="32" r="24" fill="${C}"/><path class="ltrail" d="M14 46 Q22 40 26 38" fill="none" stroke="${M}" stroke-width="3" stroke-linecap="round" style="--len:16"/><path class="lplane" d="M20 31 L44 21 L37 44 L31 35 Z M31 35 L44 21" fill="${M}" stroke="${M}" stroke-width="2.4" stroke-linejoin="round"/>`;
+  else if(kind==='no')inner=`<circle class="lring" cx="32" cy="32" r="24" fill="${C}"/><path class="lmark" d="M24 24 L40 40 M40 24 L24 40" fill="none" stroke="${M}" stroke-width="5" stroke-linecap="round" style="--len:46"/>`;
+  else inner=`<circle class="lhalo" cx="32" cy="32" r="24" fill="none" stroke="${C}" stroke-width="3"/><circle class="lring" cx="32" cy="32" r="24" fill="${C}"/>${kind==='new'?`<path class="lplus" d="M32 22 V42 M22 32 H42" stroke="${M}" stroke-width="5" stroke-linecap="round"/>`:''}<path class="lmark" d="M22 33 L29 40 L43 25" fill="none" stroke="${M}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" style="--len:32"/>${sparks}`;
+  return`<span class="lot" aria-hidden="true" style="--s:${size||96}px"><svg viewBox="0 0 64 64">${inner}</svg></span>`;
+}
+function toastKind(t){
+  if(/impossible|refus|indisponible|expir|erreur|échou|vide|Cochez|Choisissez|Sélectionnez|Touchez|Connectez|Connexion|vérifiez|Envoi de/i.test(t))return'';
+  if(/annul|supprim|révoqu|désactiv/i.test(t))return'no';
+  if(/ajouté|créé|nouvelle|bienvenue/i.test(t))return'new';
+  if(/envoy|transmis/i.test(t))return'sent';
+  if(/enregistr|modifi|changé|activé|mis à jour|confirm|vérifié|téléchargé|copi|déconnect/i.test(t))return'ok';
+  return'';
+}
+function toast(t,fn,kind){
+  const k=kind===undefined?toastKind(t):kind;$('#toastA').innerHTML=k?anim(k,24,true):'';
   $('#toastT').textContent=t;undoFn=fn||null;$('#undo').hidden=!fn;$('#toast').hidden=false;
   clearTimeout(toastTimer);toastTimer=setTimeout(()=>{$('#toast').hidden=true;undoFn=null},5000);
 }
@@ -1974,7 +2020,7 @@ function authView(claim){
         if(claim&&mode==='login'&&d.user.role==='customer'){try{await api(`/claim/${claim}/link`,{method:'POST'})}catch(x){toast(x.message)}}
         if(claim)history.replaceState(null,'','/#mes-commandes');
         if(d.linked)toast(`Numéro vérifié — ${pl(d.linked,'commande liée')}`);
-        boot();
+        boot();if(mode==='register'&&!d.linked)setTimeout(()=>toast('Compte créé, bienvenue !',null,'new'),400);
       }catch(x){$('#aErr').textContent=x.message;btn.disabled=false}
     };
   };
@@ -2054,7 +2100,7 @@ async function claimView(tk){
   $('#cAct').onclick=async e=>{
     const b=e.target.closest('[data-resp]');if(!b)return;$$('[data-resp]').forEach(x=>x.disabled=true);
     try{const r=await api(`/claim/${tk}/respond`,{method:'POST',body:{action:b.dataset.resp}});const[l,c]=ST[r.status];const s=$('#cStatus');s.innerHTML=`<i></i>${l}`;s.style.setProperty('--c',c);
-      $('#cAct').innerHTML=r.status==='confirmed'?`<div style="flex:1">${ill('confirmed','sm')}<div class="done">${ic('check')}Merci ! Votre commande est confirmée. La boutique la prépare.</div></div>`:`<div class="done no" style="flex:1">Commande annulée. Merci de nous avoir prévenus.</div>`}
+      $('#cAct').innerHTML=r.status==='confirmed'?`<div class="lotbig" style="flex:1">${anim('ok',104)}<div class="done">Merci ! Votre commande est confirmée. La boutique la prépare.</div></div>`:`<div class="lotbig" style="flex:1">${anim('no',72)}<div class="done no">Commande annulée. Merci de nous avoir prévenus.</div></div>`}
     catch(x){toast(x.message);$$('[data-resp]').forEach(y=>y.disabled=false)}
   };
 }
@@ -2632,7 +2678,7 @@ async function shopOrderView(slug,src,embed){
       const r=await api(`/shop/${encodeURIComponent(slug)}/orders`,{method:'POST',body:{idem:ckIdem,items,request:$('#oReq').value,name:$('#oName').value,phone:$('#oPhone').value,gov:$('#oGov').value,addr:$('#oAddr').value,notes:$('#oNotes').value,src,website:$('#oWeb').value}});
       cart={};save();secure=false;ckIdem='';$('#ckdlg').close();document.body.classList.remove('hascart');scrollTo(0,0);
       $('#app').innerHTML=`<div class="receipt"><div class="rc"><div class="rhead">${sellerAv(sh)}<h1>Commande envoyée</h1><p class="muted" style="margin:6px 0 0">Gardez votre numéro de suivi :</p><div class="refbig" id="refv">${esc(r.ref)}</div>${r.total?`<p class="faint" style="margin:0">Total à payer à la livraison : <b style="color:var(--ink)">${money(r.total)}</b></p>`:''}${r.secure?`<p style="margin:8px 0 0"><span class="shield">${ic('shield')}Achat sécurisé inclus</span></p>`:''}</div><div class="perf"></div>
-        <div class="rbody">${ill('handoff','sm')}<div style="display:grid;gap:8px"><a class="btn pri wide" href="/?o=${encodeURIComponent(r.claim)}" ${embed?'target="_blank" rel="noopener"':''} style="min-height:46px">${ic('check')}Confirmer ma commande maintenant</a><a class="btn wide" href="/?track=${encodeURIComponent(r.ref)}" ${embed?'target="_blank" rel="noopener"':''}>${ic('track')}Suivre ma commande</a><button class="btn ghost wide" type="button" data-copy="${esc(r.ref)}">${ic('copy')}Copier le numéro</button><a class="btn ghost wide" href="/?shop=${encodeURIComponent(slug)}${src?'&src='+encodeURIComponent(src):''}${embed?'&embed=1':''}">Retour à la boutique</a></div>
+        <div class="rbody"><div class="lotbig" style="margin:4px 0 12px">${anim('sent',88)}</div><div style="display:grid;gap:8px"><a class="btn pri wide" href="/?o=${encodeURIComponent(r.claim)}" ${embed?'target="_blank" rel="noopener"':''} style="min-height:46px">${ic('check')}Confirmer ma commande maintenant</a><a class="btn wide" href="/?track=${encodeURIComponent(r.ref)}" ${embed?'target="_blank" rel="noopener"':''}>${ic('track')}Suivre ma commande</a><button class="btn ghost wide" type="button" data-copy="${esc(r.ref)}">${ic('copy')}Copier le numéro</button><a class="btn ghost wide" href="/?shop=${encodeURIComponent(slug)}${src?'&src='+encodeURIComponent(src):''}${embed?'&embed=1':''}">Retour à la boutique</a></div>
         <p class="hint" style="text-align:center;margin-top:12px">${esc(sh.name)} vous contactera aussi sur WhatsApp.</p></div></div></div>`;
     }catch(x){$('#oErr').textContent=x.message;$('#oErr').scrollIntoView({block:'center',behavior:'smooth'})}
     busy=false;$('#ckGo').disabled=false;

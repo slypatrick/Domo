@@ -1,0 +1,6 @@
+<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Domo — animation</title>
+<style>body{margin:0;font:15px system-ui,sans-serif;background:#f4f1ea;color:#0e1630;display:grid;place-items:center;min-height:100vh;gap:20px}
+.stage{background:#fff;border-radius:24px;padding:48px;width:min(720px,92vw)}.stage img{width:100%}
+.row{display:flex;gap:16px;align-items:center}button{font:600 15px system-ui;background:#0e1630;color:#fff;border:0;border-radius:999px;padding:12px 22px;cursor:pointer}</style>
+<div class="stage"><img id="logo" src="domo-logo-animated.svg" alt="Domo"></div>
+<div class="row"><img src="domo-icon-animated.svg" width="96" alt="Domo icon"><button onclick="var i=document.getElementById('logo');i.src='domo-logo-animated.svg?'+Date.now()">Rejouer</button></div>
